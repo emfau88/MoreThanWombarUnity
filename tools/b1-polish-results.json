@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "duration": 8.66,
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "WombatLab.Tests.CombatPolishPlayTests.AttackStepCannotCrossArenaBoundary",
+      "Status": "Passed",
+      "Duration": 2.3573368,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.CombatPolishPlayTests.DeadEnemyFallsAsAWholeStopsBlockingAndFullyResets",
+      "Status": "Passed",
+      "Duration": 1.3208216,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.CombatPolishPlayTests.KickReachesBeyondJabButDoesNotHitOutsideItsVisibleReach",
+      "Status": "Passed",
+      "Duration": 3.1621347,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.CombatPolishPlayTests.TimedJumpKickActuallyHitsGroundEnemyAndLands",
+      "Status": "Passed",
+      "Duration": 1.7594398,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

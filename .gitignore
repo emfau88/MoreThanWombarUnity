@@ -1,0 +1,27 @@
+# Unity-generated files (works for a project at root or in UnityProject/).
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Ll]ogs/
+**/[Uu]ser[Ss]ettings/
+**/[Bb]uild/
+**/[Bb]uilds/
+**/[Mm]emoryCaptures/
+**/Recordings/
+**/.vs/
+**/.idea/
+**/*.csproj
+**/*.sln
+**/*.slnx
+**/*.user
+**/*.pidb
+**/*.pdb
+**/*.mdb
+.DS_Store
+Thumbs.db
+UnityProject/QA/
+UnityProject/Assets/QA/
+UnityProject/Assets/QA.meta
+
+# Local third-party download archives/cache; imported assets and licenses are in Assets/ThirdParty.
+art-source/third-party/

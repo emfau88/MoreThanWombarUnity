@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c61c0cff136a4e4e8706e7faad58c02, type: 3}
+  m_Name: Kick
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.AttackDefinition
+  clip: {fileID: 7400000, guid: edc4a7f5c3542a943a1eca920a3e5d88, type: 2}
+  stateName: Kick
+  rightHand: 1
+  heavy: 0
+  foot: 1
+  airborne: 0
+  forwardStep: 0.27
+  moveRelease: 0.82
+  hitChainStart: 0.48
+  damage: 18
+  radius: 0.3
+  knockback: 0.65
+  hitstun: 0.3
+  hitstop: 0.06
+  activeStart: 0.3
+  activeEnd: 0.5
+  chainStart: 0.58
+  chainEnd: 0.88
+  heavyCancelStart: 0.8

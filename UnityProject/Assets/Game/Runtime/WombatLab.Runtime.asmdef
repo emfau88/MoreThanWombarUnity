@@ -1,0 +1,5 @@
+{
+  "name": "WombatLab.Runtime",
+  "references": ["Unity.InputSystem", "Unity.ugui"],
+  "rootNamespace": "WombatLab"
+}

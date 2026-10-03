@@ -1,0 +1,13 @@
+{
+    "passed": true,
+    "validHumanoid": true,
+    "jumpWasAirborne": true,
+    "landed": true,
+    "reset": true,
+    "rootMotion": false,
+    "walkDistance": 1.484421730041504,
+    "footMotion": 0.23879562318325044,
+    "facingErrorDegrees": 0.07661668211221695,
+    "jumpRise": 1.1731094121932984,
+    "idleLowestVertexY": 0.02381773665547371
+}

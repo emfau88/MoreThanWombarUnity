@@ -1,0 +1,6 @@
+{
+  "name": "WombatLab.Tests",
+  "references": ["WombatLab.Runtime"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

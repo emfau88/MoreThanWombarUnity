@@ -1,0 +1,5 @@
+{
+  "name": "WombatLab.PlayTests",
+  "references": ["WombatLab.Runtime", "Unity.InputSystem", "Unity.InputSystem.TestFramework"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

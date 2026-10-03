@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5baf0c643e0d0aa4b98ab205e2739cb6, type: 3}
+  m_Name: Wombat
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.CharacterDefinition
+  moveSpeed: 4.2
+  airControl: 0.8
+  jumpSpeed: 8
+  gravity: 23
+  turnSpeed: 18
+  coyoteTime: 0.09
+  jumpBuffer: 0.12
+  landingRecovery: 0.08
+  arenaMin: {x: -7, y: -2.35}
+  arenaMax: {x: 7, y: 2.35}
