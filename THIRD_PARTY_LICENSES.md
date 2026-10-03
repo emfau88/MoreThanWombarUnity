@@ -22,7 +22,7 @@ Zwei Quaternius-Standardpakete sind für den separaten technischen B2-Importnach
 - Archiv: `art-source/third-party/Quaternius/AnimationLibrary-Standard.zip`; SHA256 `CC73FC4E495B82958207316596317A3F40B9FA38065BDE1027937452DA537724`.
 - Nachweis: enthaltene `License.txt` und `README.txt`, auch unter `UnityProject/Assets/ThirdParty/Quaternius/AnimationLibrary/`. CC0 1.0 Universal / Public Domain Dedication, kommerzielle Nutzung und Rohdateiweitergabe erlaubt; keine verpflichtende Attribution.
 - Original: `UAL1_Standard.fbx`, ausdrücklich Variante ohne Root Motion. Unter anderem Idle, Walk, Jog, Sprint, Jump_Start/Loop/Land, Punch_Jab/Cross, Hit_Head/Chest, Roll und Death01. Kein Kick im Standardarchiv; fehlende Aktionen später konkret ergänzen.
-- Ableitung: `Assets/Game/Characters/ImportProbe/MovementSource.fbx`; fünf Humanoid-Clipkopien `Idle`, `Walk`, `Jump`, `Fall`, `Land`. Root-Translation/-Rotation gebacken, Root Motion am Animator abgeschaltet; Motor bleibt Bewegungsautorität. Jump-/Land-Abspielgeschwindigkeit an bestehende Motorzustände angelehnt. Combat-Clips hier noch nicht eingebunden.
+- Ableitung: `Assets/Game/Characters/ImportProbe/MovementSource.fbx`; fünf Bewegungskopien sowie Jab/Cross als Humanoid importiert. Eigene Combat-Kopien unter `Assets/Game/Characters/HumanoidCombat/`: abschnittsweise retimte Jab-/Cross-Varianten, eigene AttackDefinitions und Avatar-Kontaktbahnen. Lokal ergänzte Source_Kick/Source_AirKick bauen auf eingefrorenen Humanoid-Idle-Kurven mit selbst gesetzten Bein-/Rumpfmuskelkurven auf. Kein zusätzlicher fremder Kick-Download. Root Motion bleibt aus; Motor ist Bewegungsautorität. Endgültige Finisher-/Heavy-/Air-Smash-Clips stehen aus.
 
 ## Kandidaten — noch nicht verwendet
 

@@ -1,14 +1,14 @@
 # Konkreter Arbeitsplan — Asset-Basis und vollständiges Charakterduell
 
-Stand: 3. Oktober 2026. B1 ist abgeschlossen. B2-Schritte 1/2 sind beauftragt und umgesetzt: begrenzte Auswahl und technische Importbasis mit vorhandener Steuerung. [B2_ASSET_SELECTION.md](B2_ASSET_SELECTION.md) enthält Auswahl und Befund. Wombat-Look bleibt ausdrücklich eine spätere Entscheidung. [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md) beschreibt Stil und Arbeitsweise, [ROADMAP.md](ROADMAP.md) die neun Bulks.
+Stand: 4. Oktober 2026. B1 ist abgeschlossen. B2-Schritte 1–3 liefern Auswahl, technischen Import und Humanoid-Combat mit vorhandenen Spielregeln. [B2_ASSET_SELECTION.md](B2_ASSET_SELECTION.md) enthält die Auswahl, [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md) die konkreten Zeiten und Kontaktanbindung. Wombat-Look bleibt ausdrücklich eine spätere Entscheidung. Nächste technische Arbeit ist B3a: Run, unterscheidbare Kernangriffe statt vorläufiger Cross-Varianten und sichtbare Trefferreaktionen. Danach B3b mit Knockdown/GetUp/Death und B3c mit Duell-Tuning/Buildnachweis; die Reihenfolge steht in ROADMAP.md. Diese weiteren Schritte wurden beim Commit nicht begonnen.
 
 ## 1. Bestand und Entscheidung
 
 | Vorhandener Stand | Entscheidung / konkrete Folge |
 | --- | --- |
 | LabInput, PlayerMotor, CharacterDefinition und MotorMath | Behalten; direkte Eingaben, Richtungswechsel, Luftkontrolle und später Run gezielt abstimmen |
-| CombatController, AttackDefinition, Buffer, Attack-Instanzen, Front-/Teamfilter | Behalten; für austauschbare Clips gewünschte Angriffszeiten ergänzen |
-| Animierte Faust-/Fuß-Sweeps auf getrennten Hurtboxes | Regel behalten; Pose-Ermittlung für Humanoid-Retargeting am echten Avatar prüfen und anpassen |
+| CombatController, AttackDefinition, Buffer, Attack-Instanzen, Front-/Teamfilter | Behalten; gewünschte Angriffszeiten und Humanoid-Clip-Mapping sind in B2 Schritt 3 integriert |
+| Animierte Faust-/Fuß-Sweeps auf getrennten Hurtboxes | Regel behalten; Humanoid-Kontaktbahnen sind am echten Avatar gebacken und gegen sichtbare Posen geprüft |
 | B1: Angriffsschritte, Kick, Air-Kick/Air-Smash, spätes Movement-Release | Behalten; einmal anhand echter Nutzersequenz fein abstimmen |
 | TrainingDummy, PlayerDefense, EnemyBrain, EngagementCoordinator | Wiederverwenden; animierte Trefferreaktion und lebendes Knockdown/GetUp fehlen noch |
 | Kamera, Testarena, gespeicherte Trainings-/Sparring-Szenen, HUD, Reset | Behalten als kurze Integrationsumgebung; Arena genügt für B2/B3 |
@@ -51,6 +51,8 @@ Aktuelle Lieferung: `CharacterImportLab.unity` mit temporärem Quaternius-Humano
 
 ### Schritt 3 — Combat-Zeiten und importierte Pose verbinden
 
+Umgesetzt in `HumanoidCombatLab`: eigene AttackDefinitions mit Startup-/Active-/Recovery-Sekunden, abschnittsweise retimte Humanoid-Clips und am Avatar ausgewertete Kontaktpunkte. Animator-Zeit bleibt die einzige Phasenquelle; Runtime-Sweeps verwenden die gespeicherte Bahn ohne Umposen des sichtbaren Humanoids. Jab/Cross, eigene Kick-/Luftkick-Ableitungen, vorläufige Cross-Finisher/Heavy/Air-Heavy, bestehende Defense/Gegner/Feedback und Reset sind angebunden. Zeit-/Clip-/Avataränderungen benötigen Neuableitung/Bake über HumanoidCombatBuilder. Details im Integrationsdokument.
+
 - AttackDefinition um gewünschte Startup-/Active-/Recovery-Dauern und notwendige Clip-Abspielbereiche ergänzen. Bestehende Schadens-/Buffer-/Cancel-/Filterregeln weiterverwenden.
 - Clip-Zuordnung an diese Zeiten anbinden; den Kontaktmoment des Punch/Kick im Active-Fenster zeigen. Ein schnellerer oder längerer Ersatzclip darf Angriffstiming nicht automatisch verändern.
 - Eine gemeinsame Phasenautorität bestimmen. Für gleichmäßig beschleunigbare Clips reicht eine passend konfigurierte State-Geschwindigkeit; wenn Kontaktpose und Timing damit nicht passen, Abspielbereich oder gezielte Ableitung korrigieren. Keine zwei unabhängig laufenden Phasenquellen hinzufügen.
@@ -90,6 +92,6 @@ Aktuelle Lieferung: `CharacterImportLab.unity` mit temporärem Quaternius-Humano
 | Run/Knockdown/GetUp | Bewegungswechsel, begrenzte Unterbrechung, Aufstehen/Schutz und Reset in der gespeicherten Szene |
 | Build | Kurzer tatsächlicher Durchlauf auf Windows und kleiner Browser-Smoke-Test |
 
-Eine vollständige vorhandene Regression nach Integration der Charakter-/Timingänderung; danach nur betroffene Fälle bei weiteren Änderungen. Keine Unit-Tests für Modellfarbe, Materialwahl oder Dokumentation. Visuelle Kontrolle und Nutzer-Spielgefühl ergänzen die Regeln-Tests.
+Ein relevanter bestehender Regressionblock nach Integration der Charakter-/Timingänderung; danach nur betroffene Fälle bei weiteren Änderungen. Für B2 sind das die fünf B1-Polish-Fälle zusätzlich zu gezielten Humanoid-Fällen. Keine Unit-Tests für Modellfarbe, Materialwahl oder Dokumentation. Visuelle Kontrolle und Nutzer-Spielgefühl ergänzen die Regeln-Tests.
 
 B2 liefert einen direkt spielbaren Zwischenstand mit Lizenz-/Quellennachweis. B3 liefert das vollständige Duell samt knapper deutscher Spielanleitung. Weitere Rollen und Level folgen danach gemäß Roadmap.

@@ -29,6 +29,7 @@ klicken, damit sie die Tastatureingaben erhält.
   kündigt einen Schlag an. R setzt Spieler und Gegner zurück.
 - `CombatLab.unity` bleibt als Training ohne Gegenangriffe verfügbar.
 - `CharacterImportLab.unity` zeigt den B2-Importnachweis: temporärer Quaternius-Humanoid mit WASD/Stick, Sprung und Reset. Bewegung ist angebunden; Combat spielt man weiterhin im SparringLab.
+- `HumanoidCombatLab.unity` verbindet diesen Humanoid jetzt mit dem vollständigen vorhandenen Sparring: Combo, Heavy, Kick, Luftangriffe, Shift-Ausweichen, 1/2 Gegner und Reset. Wombat-Look bleibt offen.
 - Gamepad-Bindings sind implementiert und mit simuliertem Gerät geprüft;
   ein echter Hardware-Spieltest steht noch aus.
 
@@ -45,6 +46,7 @@ animierbarer Funktionsplatzhalter, kein finales Charaktermodell.
 - [Status und nächster Auftrag](TEST_SLICE_STATUS.md)
 - [Externe Assets und Lizenznachweise](THIRD_PARTY_LICENSES.md)
 - [B2: drei Kandidaten und konkrete Importbasis](B2_ASSET_SELECTION.md)
+- [B2: Humanoid-Combat, Timing und Kontaktbahnen](B2_COMBAT_INTEGRATION.md)
 
 Gestaltungsziel ist der illustrative Cartoon-/Comic-Stil der 2D-Referenz:
 runde kräftige Formen, expressive Gesichter und gemalte Materialdetails.
@@ -54,7 +56,7 @@ konzentriert sich auf ein vollständiges Duell mit einem Spieler und einem
 Gegner; WebGL-Verträglichkeit wird an diesem kleinen Slice geprüft.
 
 Werkzeuganbindung, Bewegung und Combat-Polish sind umgesetzt; Nutzerfeedback
-dient dem gezielten Tuning. B2-Schritte 1/2 liefern jetzt einen regulären Humanoid-Import mit fünf Bewegungsclips. Combat-Retargeting und die Entscheidung zur Wombat-Gestaltung folgen gemäß NEXT_STEPS.
+dient dem gezielten Tuning. B2-Schritte 1–3 liefern regulären Humanoid-Import und spielbare Combat-Anbindung mit definierten Angriffszeiten und retargeteten Kontaktbahnen. Finisher/Heavy/Air-Heavy nutzen vorläufige Cross-Varianten. Nächste Arbeit sind die vollständigen B3-Kernclips und Trefferreaktionen; Wombat-Gestaltung bleibt separat offen.
 Keine Cloud-Dienste, kein Multiplayer, keine Asset-Käufe und keine Änderungen
 am Browsergame als implizite Arbeitsschritte.
 

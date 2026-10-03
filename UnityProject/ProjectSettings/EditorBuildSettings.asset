@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/CombatLab.unity
     guid: a7851683f8fe85e47adfb972943e2576
+  - enabled: 1
+    path: Assets/Game/Scenes/HumanoidCombatLab.unity
+    guid: ff2896b184f011f4997f7d2dd6ff2c3f
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

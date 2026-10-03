@@ -1,6 +1,6 @@
 # More Than Wombat — Roadmap mit neun Bulks
 
-Stand: 3. Oktober 2026, nach Richtungsänderung und Stilkorrektur. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
+Stand: 4. Oktober 2026, nach B2-Schritt 3. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
 
 ## Ziel und Schwerpunkt
 
@@ -14,15 +14,15 @@ Bestehendes Gameplay weiterentwickeln. Standardmodelle, Rigs, Animationen und Pr
 
 S0–S3 bilden das vorhandene Fundament. B1 ist technisch abgeschlossen: Startup-Drehgrenze korrigiert, fünf gezielte Polish-Fälle bestanden, aktuelle Spielposen kontrolliert und Combat-/Architekturbeschreibung aktualisiert. Nutzerfeedback zum Spielgefühl bleibt für weiteres Tuning willkommen. Ein eigener Blender-Entwurf wurde begonnen, ist aber noch nicht in Unity integriert. Dieser Pfad ist zurückgestellt, bis passende fertige Grundlagen geprüft sind.
 
-Mit „go b1“ wurde der B1-Abschluss erledigt. Danach sind B2-Schritte 1/2 umgesetzt: drei Kandidaten dokumentiert, Quaternius-Standardmodelle/-clips bezogen und ein separater Humanoid-Bewegungsnachweis mit vorhandenem Motor integriert. [B2_ASSET_SELECTION.md](B2_ASSET_SELECTION.md) beschreibt die Auswahl. Wombat-Look bleibt offen; B2 ist insgesamt noch nicht abgeschlossen. Nächste Entwicklungsarbeit wäre Schritt 3, Humanoid-Combat mit passenden Zeiten und Kontaktbahnen. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
+Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md) beschreibt den aktuellen Stand. Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. Nächste technische Arbeit ist B3: Run, Kernclips und sichtbare Trefferreaktionen, danach Knockdown/GetUp und Duell-Nachweis. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
 
 ## Übersicht
 
 | Bulk | Konkrete Maßnahmen | Ergebnis / Voraussetzung |
 | --- | --- | --- |
 | B1 | Abgeschlossen: Drehgrenze korrigiert, gezielte Polish-Prüfung/Sichtsequenz und Ist-Dokumentation | Spielbares Sparring zur Nutzerbeurteilung |
-| B2 | Passende Cartoon-Modell-/Rig-Basis und Animationen auswählen; Import, Avatar, Kontakte und explizites Attack-Timing integrieren | Spielbare passende Charakterbasis; Details in NEXT_STEPS |
-| B3 | Vollständiges Spieler-vs-Gegner-Duell: Run, Kernclips, Trefferreaktion, Knockdown/GetUp, Death; kleiner Buildnachweis | Überzeugender Character Slice vor Contentausbau |
+| B2 | Schritte 1–3 technisch geliefert: Auswahl, Humanoid-Import, Kontakte und Attack-Timing; Wombat-Gestaltung zurückgestellt | Spielbare technische Combat-Basis; stilistische Abnahme offen |
+| B3 | Als Nächstes: Run/Kernclips/Reaktionen → Knockdown/GetUp/Death → Duell-Tuning und kleiner Buildnachweis | Überzeugender Character Slice vor Contentausbau |
 | B4 | Einen charakteristischen Dash-/Schulterstoß und Moveset-Balance ausarbeiten | Mehr Kampftiefe auf Basis des fertigen Duells |
 | B5 | Standard, Agile und Heavy; gemischten Gruppendruck und gemeinsame Asset-Nutzung | Lesbare Gegnerfamilie auf Basis B3/B4 |
 | B6 | Junkyard-Strecke, drei Kampfbereiche, Interaktion, Checkpoints und Abschlusskampf | Vollständig durchspielbares Graybox-Kapitel |
@@ -49,7 +49,7 @@ Abschluss:
 
 Detaillierter Ablauf und technische Arbeitspakete stehen in [NEXT_STEPS.md](NEXT_STEPS.md).
 
-Schritte 1/2 geliefert: `CharacterImportLab` ist eine separate spielbare technische Testbasis mit Idle/Walk/Jump/Fall/Land. Der temporäre Mensch ist keine endgültige Charakterentscheidung. Wombat-Anpassung und Combat-Retargeting stehen aus; das kostenlose Standardanimationsarchiv liefert keinen Kick.
+Schritte 1–3 geliefert: `CharacterImportLab` bleibt als Bewegungstest erhalten; `HumanoidCombatLab` ergänzt bestehendes Sparring, eigene Timingdaten und echte Avatar-Kontaktbahnen. Der fehlende Kick/Luftkick wurde lokal am Humanoid ergänzt. Finisher/Heavy/Air-Heavy verwenden vorläufige Cross-Varianten. Der temporäre Mensch ist keine endgültige Charakterentscheidung; Wombat-Anpassung bleibt offen.
 
 - Höchstens drei rigged Cartoon-Kandidaten vergleichen: Wombat-Eignung, glatte Silhouette, Gesicht, Avatar/Retargeting, Clipumfang, Lizenz, Anpassungsaufwand und Laufzeitkosten.
 - Eine primäre Animationsbasis und höchstens eine Ergänzungsquelle wählen. Kostenlose Inhalte konkret prüfen; kostenlose Pack-Versionen nicht mit kompletter Bibliothek gleichsetzen.
@@ -65,6 +65,14 @@ Schritte 1/2 geliefert: `CharacterImportLab` ist eine separate spielbare technis
 ## B3 — vollständiges überzeugendes Charakterduell
 
 Run, animierte Trefferreaktion und lebendes Knockdown/GetUp werden gegenüber der früheren Planung vorgezogen.
+
+Konkrete Ausführungsreihenfolge, jeweils als spielbarer Zwischenstand:
+
+1. **B3a — Bewegung und Aktionen:** Run samt Eingabe/Übergängen integrieren; Walk-/Run-Tempo abstimmen; vorläufige Finisher-/Heavy-/Air-Heavy-Cross-Varianten durch unterscheidbare passende Aktionen ersetzen. Sichtbare Treffer-/Stagger-Reaktionen für Spieler und einen Gegner anbinden. Ergebnis: Bewegung und Schlagstärke sind klar erkennbar.
+2. **B3b — Fallen und Aufstehen:** Lebendes Knockdown, GetUp und endgültige Death/Reset-Darstellung integrieren; Unterbrechung, Körperkollision und Schutz beim Aufstehen klar regeln. Ergebnis: kräftige Treffer erzeugen einen vollständigen verständlichen Ablauf statt bloßer HP-Abzüge.
+3. **B3c — Duell und Übergabe:** Abstand, Combo-Anschlüsse, Luftkontakte, Recovery und Feedback gemeinsam tunen; kleinen Windows- und WebGL-Nachweis mit vorhandener Toolchain ausführen. Ergebnis: vollständig spielbarer Einzelkampf mit konkretem Build-/Laufzeitbefund.
+
+Wombat-Look bleibt eine separate offene Entscheidung. Die technische B3-Arbeit kann am temporären Humanoid fortgesetzt werden; die endgültige stilistische Character-Slice-Abnahme benötigt später die passende Tierdarstellung.
 
 - Ein Spieler, ein Gegnertyp; vorhandene Trainingsszene und Zwei-Gegner-Option erhalten.
 - Idle, Walk, Run, Jump, Fall, Land, drei Lights, Heavy, Kick, Air-Attacks, Evade, Flinch/Stagger, Knockdown, GetUp und Death integrieren.

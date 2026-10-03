@@ -39,7 +39,7 @@ fehlgeschlagene Script-Kompilierung. Hand-/Fußreferenzen und beide Luftclips
 vorhanden, Enemy_Heavy getrennt vom Spieler-Heavy. Play startet das Sparring mit
 einem Gegner; R reset, 2 aktiviert den Gruppentest.
 
-## B2 — Importbasis geliefert, Combat und Stil offen
+## B2 — Import und Humanoid-Combat geliefert, Stil offen
 
 B1 ist wie oben abgeschlossen. README, gespeicherte HUD-Steuerung,
 COMBAT_SYSTEM und ARCHITECTURE enthalten den aktuellen Stand mit Kick,
@@ -62,13 +62,18 @@ Auftrag B2-Schritte 1/2: drei konkrete Kandidaten in B2_ASSET_SELECTION.md vergl
 
 CharacterImportLab verwendet ein eigenes HumanoidProbe-Prefab und denselben PlayerMotor/LabInput. Gültiger Humanoid-Avatar, Idle/Walk/Jump/Fall/Land, Modellmaßstab/-bodenversatz, Hand-/Fußanker und eigene URP-Materialien sind eingerichtet. Root Motion ist aus. Temporärer menschlicher Charakter, Wombat-Look bewusst offen. Combat-Integration und verbindliche Phasen-/Kontaktanbindung gehören zu Schritt 3; B1-Sparring bleibt vollständig spielbar.
 
+Schritt 3 ist jetzt umgesetzt: HumanoidCombatLab nutzt bestehenden Combat/Defense, Gegner-KI und Feedback. Eigene AttackDefinitions enthalten gewünschte Phasendauern; HumanoidCombatBuilder retimt Jab/Cross und eigene Kick-/Luftkick-Ableitungen. Je Attacke 161 Avatar-Kontaktpunkte statt SampleAnimation auf dem sichtbaren Humanoid. Animator-Zeit bleibt die einzige laufende Phase. Finisher/Heavy/Air-Heavy sind vorläufige Cross-Varianten; eigene endgültige Kernclips und Reaktionen folgen in B3.
+
+Prüfung Schritt 3: **5/5 gezielte Humanoid-PlayMode-Fälle bestanden**, 0 Fehler/übersprungen, 11,80 s (`tools/b2-combat-results.json`). Startup/Einzeltreffer/Fehlschlag/Reset, gewünschte Dauer/Hitstop, Kontaktgenauigkeit aller sieben Attacken, übersprungenes Active ohne Umposen sowie Drei-Schlag-Kette/Luftkontakt mit erhaltenem Sprung. Nach konkretem Luftkick-/Interpolationsbefund korrigiert und betroffene Fälle wiederholt. Zusätzlich **5/5 bestehende B1-Polish-Fälle bestanden**, 11,32 s (`tools/b2-b1-regression-results.json`). Keine neue Vollsuite.
+
+Tatsächliche seitliche Kamerabilder Punch/Kick/Luftangriff unter `UnityProject/Assets/QA/b2-combat-*.png` angesehen. Nach regulärem Modell-Reimport bleiben gültiger Avatar, sieben zum Avatar/Clip passende Kontaktbahnen, vier Anker und Feedback erhalten. HumanoidCombatLab frisch geladen, Play gestoppt, Compile/Dirty false. Die Air-Heavy-Pose ist weiterhin ein vorläufiger Cross im Sprung; ein eigener überzeugender Air-Smash gehört zu den B3-Kernclips.
+
 Gezielter Bewegungsnachweis bestanden: Laufweg 1,48 m, maximale lokale Fußbewegung 0,24 m, Richtungsfehler 0,08°, Sprunghöhe 1,17 m, Landung/Reset erfolgreich, Idle-Bodenkontakt ca. 2,4 cm. Drei tatsächliche Kamerabilder angesehen. Resultat `tools/b2-import-results.json`; keine neue Vollsuite. Ein regulärer Modell-Reimport erhält Avatar, Controller, Definition, Visual und vier Kontaktanker. CharacterImportLab frisch geladen, Play gestoppt, Compile/Dirty false.
 
 Danach B3: vollständiges Einzelduell einschließlich Run, Trefferreaktion und lebendem Knockdown/GetUp. Gestaltungsziel bleibt illustrativer Cartoon-/Comic-Look mit glatten Formen.
 
 Der Nutzer hat nach der Dokumentations-/Planänderung mit „go b1“ den B1-Abschluss
-beauftragt; anschließend ausdrücklich B2-Schritte 1/2. Kein Commit, Push, Kauf oder Editor-
-Upgrade erfolgt. Der folgende S0–S3-Verlauf dokumentiert historische Nachweise.
+beauftragt; anschließend B2-Schritte 1/2 und danach Schritt 3. Schritte 1/2 samt Projektfundament wurden auf Nutzerauftrag als `c6a92ea` auf origin/main veröffentlicht. Schritt 3 ist aktuell lokal umgesetzt. Kein Kauf oder Editor-Upgrade erfolgt. Der folgende S0–S3-Verlauf dokumentiert historische Nachweise.
 
 ## Dieses Repository
 

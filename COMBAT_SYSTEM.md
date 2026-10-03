@@ -1,8 +1,8 @@
 # Combat und Sparring — aktueller B1-Stand
 
-Stand: 3. Oktober 2026. Diese Beschreibung entspricht dem implementierten B1-Spielstand. Die vorhandenen Grundform-Figuren und selbst erzeugten Transform-Clips sind Funktionsplatzhalter. Stilgerechte importierte Modelle/Rigs, Humanoid-Retargeting und unabhängig von der Cliplänge definierte Angriffszeiten folgen in B2; Run und lebendes Knockdown/GetUp in B3. Siehe [NEXT_STEPS.md](NEXT_STEPS.md).
+Stand: 3. Oktober 2026. Diese Beschreibung enthält die erhaltenen B1-Regeln und die technische B2-Humanoid-Anbindung. Grundform-Figuren und temporärer Human bleiben funktionale Platzhalter. Individuelle Kernclips, Run und lebendes Knockdown/GetUp folgen in B3; Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md).
 
-B2-Schritte 1/2 liefern zusätzlich CharacterImportLab mit gültigem Humanoid und fünf retargeteten Bewegungsclips an unserem Motor. Das ist eine technische Bewegungsszene; die hier beschriebenen Combat-Regeln gelten weiterhin für CombatLab/SparringLab. Retargetete Faust-/Fuß-Sweeps und neue Attack-Zeiten sind noch nicht implementiert. Der Wombat-Look bleibt offen.
+B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. Letztere verbindet den gültigen Humanoid mit denselben Kampfregeln, konkreten Angriffszeiten und retargeteten Faust-/Fußbahnen. Die Tabelle unten beschreibt die erhaltenen B1-Werte; Humanoid-Zeiten und vorläufige Clip-Varianten stehen in [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md). Der Wombat-Look bleibt offen.
 
 ## Spielen
 
@@ -44,7 +44,9 @@ Luftangriffe besitzen eigene Clips und Fuß-/Faustkontakte. Gravitation und X/Z-
 
 CombatController liest in LateUpdate den aktiven Animator-State und dessen normalisierte Zeit als einzige Angriffsphase. Startup und Recovery verursachen keinen Schaden. Ein externer State-Wechsel beendet den Angriff.
 
-Die aktuelle Graybox besitzt direkt animierte Transformkurven. Für das auf Active begrenzte Intervall wertet `AnimationClip.SampleAnimation` Zwischenposen aus; Capsules zwischen diesen Hand-/Fußpositionen erfassen auch ein übersprungenes Active-Fenster. Der Root-Versatz des Angreifers fließt in die Kontaktbahn ein. Danach wird die sichtbare aktuelle Clippose wiederhergestellt. Dieser Pfad ist nicht automatisch für importierte Humanoid-Clips geeignet; die retargetete Pose muss in B2 am echten Avatar geprüft und angebunden werden.
+Die B1-Graybox besitzt direkt animierte Transformkurven. Für das auf Active begrenzte Intervall wertet `AnimationClip.SampleAnimation` Zwischenposen aus; anschließend wird die sichtbare Clippose wiederhergestellt. Der Humanoid nutzt stattdessen je Attacke 161 am konkreten Avatar ausgewertete Hand-/Fußpunkte im lokalen Facing-Raum. Er interpoliert diese Bahn ohne Umposen des sichtbaren Rigs. Beide Pfade verwenden dieselben Capsules im tatsächlich gekreuzten Active-Intervall und berücksichtigen Rootbewegung; auch ein übersprungenes Active-Fenster wird abgefragt.
+
+Für neue Humanoid-Attacken enthält AttackDefinition gewünschte Startup-/Active-/Recovery-Sekunden. Der Builder retimt die eigenen Clipkurven abschnittsweise und richtet den tatsächlichen Kontakt darauf aus; die Animator-Geschwindigkeit berücksichtigt Gesamtdauer und Hitstop. Die normalisierte Animator-Zeit bleibt die einzige laufende Phasenquelle. Neue Clip-/Rigkombinationen benötigen einen neuen Bake. Falscher Avatar oder eine abweichende Clipreferenz verhindern den Start der Humanoid-Attacke.
 
 - Eine gepufferte Absicht bleibt höchstens 0,30 Combat-Sekunden erhalten. Eine neue Absicht ersetzt sie; bei gleichzeitigem Input gilt Heavy vor Kick vor Light.
 - Light 1 → Light 2 → Light 3: Anschluss ab 0,48 nach bestätigtem Treffer, ab 0,64 nach Fehlschlag, jeweils bis 0,88. Jede Stufe hat eine neue Attack-Instanz.

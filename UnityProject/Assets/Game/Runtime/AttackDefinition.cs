@@ -18,8 +18,27 @@ namespace WombatLab
         [Range(0, 1)] public float chainStart = .58f, chainEnd = .88f;
         [Range(0, 1)] public float heavyCancelStart = .80f;
 
+        [Header("Authored timing (zero keeps legacy clip timing)")]
+        public float startupSeconds, activeSeconds, recoverySeconds;
+        public float Duration => startupSeconds + activeSeconds + recoverySeconds;
+        public bool HasAuthoredTiming => startupSeconds > 0 && activeSeconds > 0 && recoverySeconds > 0;
+        public float ActiveStart => HasAuthoredTiming ? startupSeconds / Duration : activeStart;
+        public float ActiveEnd => HasAuthoredTiming ? (startupSeconds + activeSeconds) / Duration : activeEnd;
+
+        [Header("Contact path baked on this avatar and clip, in facing-root coordinates")]
+        public Avatar contactAvatar;
+        public AnimationClip contactClip;
+        public Vector3[] contactPoints;
+        public bool HasHumanoidContact => contactAvatar != null && contactClip == clip && contactPoints != null && contactPoints.Length > 1;
+        public Vector3 LocalContact(float phase)
+        {
+            float index = Mathf.Clamp01(phase) * (contactPoints.Length - 1);
+            int lower = Mathf.Min(Mathf.FloorToInt(index), contactPoints.Length - 2);
+            return Vector3.Lerp(contactPoints[lower], contactPoints[lower + 1], index - lower);
+        }
+
         public bool ActiveCrossed(float previous, float current)
-            => AttackRules.WindowCrossed(previous, current, activeStart, activeEnd);
+            => AttackRules.WindowCrossed(previous, current, ActiveStart, ActiveEnd);
     }
 
     public enum CombatIntent { None, Light, Heavy, Kick }

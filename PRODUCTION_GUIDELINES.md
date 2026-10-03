@@ -76,7 +76,7 @@ Angriffsdaten bestimmen gewünschte Startup-/Active-/Recovery-Zeiten, Damage, Hi
 
 Animation visualisiert diese Regeln und wird dazu passend zugeschnitten, beschleunigt oder in Abschnitten angepasst. Eine gemeinsame Phasenquelle verbindet Darstellung, Kontakte und Motorbewegung. Keine parallel driftenden Animation-/Schadenstimer und keine Treffer während bloßer Vorbereitung oder Erholung.
 
-Im bestehenden Transform-Prototyp stammt die Phase aus der normalisierten Animator-Zeit. Der Wechsel auf importierte Clips erfordert eine begrenzte Erweiterung: konkrete Attack-Zeiten und ein dazu passendes Clip-Mapping; die Phasenautorität bewusst an einer Stelle halten. Das ist geplante Arbeit, noch kein implementierter Stand.
+Die normalisierte Animator-Zeit bleibt auch im importierten Humanoid die einzige laufende Angriffsphase. B2 Schritt 3 speichert konkrete Startup-/Active-/Recovery-Zeiten, retimt die Clip-Ableitungen darauf und verwendet am Avatar gebackene Kontaktbahnen. Details in B2_COMBAT_INTEGRATION.md; endgültige individuelle Move-Animationen werden in B3 ausgebaut.
 
 Hurtbox, Angriffskontakt und Körperblockade bleiben getrennt. Faust-/Fußpositionen sind gute Anker für abgestimmte Kontakte; Mesh-Bounds werden nicht automatisch zur Schadensreichweite. Sichtbare Aktion und erreichbare Kontaktzone müssen trotzdem zusammenpassen.
 
@@ -92,4 +92,4 @@ Kurzer Befund → konkreter Verbesserungs-Bulk → integrierte spielbare Überga
 
 Gezielt die geänderte Fehlerklasse prüfen; eine Regression nach größeren Integrationen. Reversible Dokumentations-/Wertänderungen benötigen keine neuen Tests. Art und Animation visuell beurteilen. WebGL früh mit dem kleinen Slice praktisch prüfen, statt aus der Gestaltung auf Browserleistung zu schließen.
 
-Der B1-Abschluss und anschließend B2-Schritte 1/2 sind beauftragt und umgesetzt. Wombat-Look bleibt nach Nutzerwunsch offen. Combat-Retargeting (Schritt 3), Stil-Anpassung und spätere Bulks sind weitere Arbeitspakete; die alte Anweisung zum vollständigen B2-Eigenbau ist durch Stopp und Richtungsänderung überholt.
+Der B1-Abschluss und B2-Schritte 1–3 sind beauftragt und umgesetzt. Wombat-Look bleibt nach Nutzerwunsch offen. B3-Kernclips/Reaktionen, Stil-Anpassung und spätere Bulks sind weitere Arbeitspakete; die alte Anweisung zum vollständigen B2-Eigenbau ist durch Stopp und Richtungsänderung überholt.

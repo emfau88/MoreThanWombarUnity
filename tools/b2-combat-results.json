@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "duration": 11.8,
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "WombatLab.Tests.HumanoidCombatPlayTests.AuthoredDurationAndHitstopKeepOneAnimationClock",
+      "Status": "Passed",
+      "Duration": 2.9747653,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.HumanoidCombatPlayTests.ComboUsesThreeInstancesAndAirKickHitsWithoutStoppingFlight",
+      "Status": "Passed",
+      "Duration": 3.2072335,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.HumanoidCombatPlayTests.ContactPathsMatchRetargetedPoseForEveryAttack",
+      "Status": "Passed",
+      "Duration": 0.6989335,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.HumanoidCombatPlayTests.PunchAndKickHaveStartupOneHitMissAndReset",
+      "Status": "Passed",
+      "Duration": 3.942613,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.HumanoidCombatPlayTests.SkippedActiveHitsWithoutReposingVisibleHumanoid",
+      "Status": "Passed",
+      "Duration": 0.8888365,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

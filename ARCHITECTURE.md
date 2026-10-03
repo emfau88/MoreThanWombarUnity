@@ -2,7 +2,7 @@
 
 Stand: 3. Oktober 2026. S1-Bewegung, S2-Training, S3-Sparring und B1-Combat-Polish sind implementiert. Figuren und Clips bleiben funktionale Grundform-Platzhalter. Nutzerfeedback zum aktuellen B1-Spielgefühl steht noch aus. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
 
-B2-Schritte 1/2 ergänzen eine separate `CharacterImportLab`-Szene. Ein regulär importierter Quaternius-Humanoid nutzt denselben PlayerMotor/LabInput, einen eigenen Animator-Controller und fünf Humanoid-Bewegungsclips. Eigene Materialien, Skalierung/Bodenversatz und vier Hand-/Fußanker liegen im HumanoidProbe-Prefab. Root Motion ist deaktiviert. Die Editor-Helfer CharacterImportBuilder und CharacterImportReview bauen beziehungsweise prüfen nur diesen Importnachweis. CombatController/Defense und Gegner sind dort noch nicht integriert; Humanoid-Combat-Sweeps bleiben die folgende Arbeit. B1-Gameplaycode und Combat-Szenen wurden für den Import nicht geändert.
+B2-Schritte 1/2 ergänzen CharacterImportLab mit regulärem Quaternius-Humanoid und vorhandenem PlayerMotor/LabInput. Schritt 3 ergänzt separat HumanoidCombatLab mit CombatController/Defense, bestehenden Robot-Gegnern und Feedback. HumanoidCombatBuilder erzeugt eigene AttackDefinitions, retimte Clips und je 161 Avatar-Kontaktpunkte im lokalen Facing-Raum; CombatController interpoliert sie ohne SampleAnimation auf dem sichtbaren Humanoid. AttackDefinition enthält gewünschte Phasendauern sowie Avatar-/Clipreferenz für die konkrete Bahn. Animator-Zeit bleibt die einzige laufende Phase; B1-Transformclips behalten ihren alten SampleAnimation-Pfad. Root Motion bleibt aus. Die ursprünglichen Combat-Szenen sind erhalten. Details in B2_COMBAT_INTEGRATION.md.
 
 ## Verantwortlichkeiten
 
@@ -65,13 +65,13 @@ tools/               # Lokale CLI-Hilfe und Modell-Quellskript
 
 Runtime, Editor und Tests verwenden getrennte Assemblies. Die vorhandenen Builder bleiben Werkzeuge für bestimmte Stufen. Ältere Arena-/Combat-Builder nicht als allgemeinen Neuaufbau ausführen: Sie können später integrierte Assets/Szenen überschreiben. CombatPolishBuilder arbeitet B1 gezielt in vorhandene Assets, Prefab und beide Szenen ein. LabVisualReview nimmt echte Kameraposen auf und stellt nach der Sequenz Encounter und normalen Input wieder her.
 
-Neue Modelle/Clips werden über den normalen Unity-Import integriert. Originale Drittanbieter-Dateien erhalten künftig ihren eigenen ThirdParty-Bereich und einen Eintrag in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md); eigene Ableitungen bleiben unter Game. Kein pauschaler Ordnerumbau. Noch keine externen Content-Assets importiert.
+Neue Modelle/Clips werden über den normalen Unity-Import integriert. Quaternius-Originale stehen unter ThirdParty, eigene Bewegungs-/Combat-Ableitungen unter Game/Characters. Quellen und Lizenzbelege stehen in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md). Kein pauschaler Ordnerumbau.
 
-## B2-Anbindung — geplant, noch nicht implementiert
+## B2-Anbindung — implementierter technischer Stand
 
-Die Clip-basierte Phasenautorität funktioniert für die aktuelle Transform-Graybox. B2 ergänzt definierte Startup-/Active-/Recovery-Zeiten und eine passende Clipzuordnung, damit ein Ersatzclip die Combat-Regeln nicht automatisch verändert. Eine gemeinsame Phasenquelle soll sichtbare Kontaktpose und Trefferfenster verbinden; keine zwei unabhängig laufenden Attack-Timer.
+Die Animator-Phasenautorität gilt für Transform-Graybox und Humanoid. B2 ergänzt definierte Startup-/Active-/Recovery-Zeiten und retimte eigene Clip-Ableitungen, damit die ursprüngliche Bibliotheksdauer nicht die Combat-Regeln bestimmt. Eine gemeinsame Phase verbindet sichtbare Kontaktpose und Trefferfenster; kein zweiter laufender Attack-Timer. Zeit-/Clipänderungen benötigen Neuableitung/Bake durch HumanoidCombatBuilder.
 
-Humanoid-Retargeting muss die Hand-/Fußpose am ausgewählten echten Avatar auswerten. `SampleAnimation` mit direkten Transformkurven ist dafür kein bereits verifizierter Pfad. Zuerst ein Punch und ein Kick samt übersprungenem Active-Fenster; falls nötig eine kleine, zur Modell-/Clip-Kombination gehörende vorberechnete Kontaktbahn. Keine allgemeine Animations-Importarchitektur vor diesem konkreten Nachweis.
+Humanoid-Retargeting wertet die Hand-/Fußpose am ausgewählten echten Avatar über Animator aus und speichert eine kleine konkrete Bahn pro Attacke. Die Laufzeit verwendet diese Bahn mit derselben Phase wie die sichtbare Pose. Kontaktgenauigkeit und übersprungenes Active sind gezielt geprüft. Rig-/Clipänderungen benötigen eine Neuableitung; keine allgemeine Animations-Importarchitektur.
 
 Die eigene Blender-/JSON-Geometrie-Bibliothek ist erhalten, aber nicht in die Spielfigur integriert. Der frühere Plan, eine eigene JSON-Mesh-Importpipeline weiterzubauen, ist zurückgestellt. Passende vorhandene Cartoon-Modelle/Rigs und Animationen werden zuerst geprüft; vollständiges Duell folgt vor zusätzlichen Gegnertypen und Levelcontent.
 

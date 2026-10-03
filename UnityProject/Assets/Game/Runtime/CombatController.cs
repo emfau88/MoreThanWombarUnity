@@ -23,7 +23,7 @@ namespace WombatLab
         public int AttackInstance { get; private set; }
         public float Progress { get; private set; }
         public string Phase => !Attacking ? "READY" : Frozen ? "HITSTOP" :
-            Progress < Attack.activeStart ? "STARTUP" : Progress <= Attack.activeEnd ? "ACTIVE" : "RECOVERY";
+            Progress < Attack.ActiveStart ? "STARTUP" : Progress <= Attack.ActiveEnd ? "ACTIVE" : "RECOVERY";
 
         readonly CombatBuffer buffer = new CombatBuffer();
         readonly HashSet<TrainingDummy> hitTargets = new HashSet<TrainingDummy>();
@@ -45,7 +45,7 @@ namespace WombatLab
             if (frame.Heavy) Queue(CombatIntent.Heavy); else if (frame.Kick) Queue(CombatIntent.Kick); else if (frame.Light) Queue(CombatIntent.Light);
             bool wasFrozen = Frozen;
             freezeRemaining = Mathf.Max(0, freezeRemaining - Time.unscaledDeltaTime);
-            motor.animator.speed = Frozen ? 0 : 1;
+            motor.animator.speed = Frozen ? 0 : Attacking && Attack.HasAuthoredTiming ? Attack.clip.length / Attack.Duration : 1;
             buffer.Tick(wasFrozen ? 0 : Time.deltaTime);
             // A simultaneous Jump + attack starts after the motor takes off, not before it.
             if (!Frozen && !Attacking && !(frame.Jump && motor.Grounded) && buffer.Pending != CombatIntent.None)
@@ -62,6 +62,8 @@ namespace WombatLab
         void Begin(AttackDefinition attack, int index)
         {
             if (attack == null) return;
+            if (attack.clip.isHumanMotion && (!attack.HasHumanoidContact || attack.contactAvatar != motor.animator.avatar))
+            { Debug.LogError("Humanoid attack needs a contact path baked for its current clip and avatar", this); return; }
             Attack = attack; lightIndex = index; AttackInstance++;
             hitTargets.Clear(); previous = Progress = 0; HitboxOpen = false;
             previousRoot = transform.position;
@@ -95,7 +97,7 @@ namespace WombatLab
                             Quaternion.RotateTowards(startFacing, Quaternion.LookRotation(move), 25), 180 * Time.deltaTime);
                 }
             }
-            HitboxOpen = Progress >= Attack.activeStart && Progress <= Attack.activeEnd;
+            HitboxOpen = Progress >= Attack.ActiveStart && Progress <= Attack.ActiveEnd;
             if (Attack.ActiveCrossed(previous, Progress)) SweepActivePoses(previous, Progress);
             previous = Progress;
             previousRoot = transform.position;
@@ -115,21 +117,19 @@ namespace WombatLab
         void SweepActivePoses(float from, float to)
         {
             Physics.SyncTransforms(); // The dummy's controlled knockback is transform-driven.
-            float begin = Mathf.Max(from, Attack.activeStart), end = Mathf.Min(to, Attack.activeEnd);
+            float begin = Mathf.Max(from, Attack.ActiveStart), end = Mathf.Min(to, Attack.ActiveEnd);
             // Animator normalized time is the ONLY phase clock. Evaluate exact authored
             // poses at the clipped active interval, sweep between them, then restore the
             // visible current pose. This also handles a low-FPS frame skipping Active.
             var fist = ContactPoint;
             Vector3 rootNow = transform.position;
             Vector3 rootOffset = previousRoot - rootNow;
-            Attack.clip.SampleAnimation(motor.visual.gameObject, begin * Attack.clip.length);
-            Vector3 last = fist.position + rootOffset * (1 - Mathf.InverseLerp(from, to, begin));
+            Vector3 last = ContactAt(begin, fist) + rootOffset * (1 - Mathf.InverseLerp(from, to, begin));
             int steps = Mathf.Clamp(Mathf.CeilToInt((end - begin) / .025f), 1, 16);
             for (int step = 0; step <= steps; step++)
             {
                 float phase = Mathf.Lerp(begin, end, step / (float)steps);
-                Attack.clip.SampleAnimation(motor.visual.gameObject, phase * Attack.clip.length);
-                Vector3 next = fist.position + rootOffset * (1 - Mathf.InverseLerp(from, to, phase));
+                Vector3 next = ContactAt(phase, fist) + rootOffset * (1 - Mathf.InverseLerp(from, to, phase));
                 int count = Physics.OverlapCapsuleNonAlloc(last, next, Attack.radius, contacts, 1 << 8, QueryTriggerInteraction.Collide);
                 for (int i = 0; i < count; i++)
                 {
@@ -145,8 +145,18 @@ namespace WombatLab
                 }
                 last = next;
             }
-            Attack.clip.SampleAnimation(motor.visual.gameObject, Progress * Attack.clip.length);
+            if (!Attack.clip.isHumanMotion)
+                Attack.clip.SampleAnimation(motor.visual.gameObject, Progress * Attack.clip.length);
             if (Frozen) HitboxOpen = false;
+        }
+
+        Vector3 ContactAt(float phase, Transform contact)
+        {
+            // Humanoid paths were evaluated by Animator on this exact avatar.
+            // Querying them never rewrites the visible skeleton or its Animator state.
+            if (Attack.clip.isHumanMotion) return motor.visual.TransformPoint(Attack.LocalContact(phase));
+            Attack.clip.SampleAnimation(motor.visual.gameObject, phase * Attack.clip.length);
+            return contact.position;
         }
 
         public void Cancel()
