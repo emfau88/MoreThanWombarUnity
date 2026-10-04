@@ -47,8 +47,10 @@ namespace WombatLab
             Hitstun = attack.hitstun; flash = .12f;
             velocity = Vector3.ProjectOnPlane(direction, Vector3.up).normalized * attack.knockback * 6;
             GetComponent<EnemyBrain>()?.Interrupt();
+            if (Alive) GetComponent<AnimationReaction>()?.Play(attack.heavy || attack.damage >= 18, Hitstun);
             if (!Alive)
             {
+                GetComponent<AnimationReaction>()?.Clear();
                 if (enemyAnimator != null) { enemyAnimator.Play("Idle", 0, 0); enemyAnimator.Update(0); enemyAnimator.enabled = false; }
                 foreach (var collider in colliders) collider.enabled = false;
             }
@@ -80,6 +82,7 @@ namespace WombatLab
 
         public void ResetTraining()
         {
+            GetComponent<AnimationReaction>()?.Clear();
             Health = maxHealth; HitCount = 0; Hitstun = flash = 0;
             velocity = Vector3.zero; transform.position = spawn;
             deathProgress = 0;

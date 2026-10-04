@@ -18,6 +18,7 @@ namespace WombatLab
         LabInput input;
         CombatController combat;
         PlayerDefense defense;
+        AnimationReaction reaction;
         Vector3 spawn;
         Quaternion spawnFacing;
         float coyoteRemaining, bufferRemaining, landingRemaining;
@@ -30,6 +31,7 @@ namespace WombatLab
             controller = GetComponent<CharacterController>(); input = GetComponent<LabInput>();
             combat = GetComponent<CombatController>();
             defense = GetComponent<PlayerDefense>();
+            reaction = GetComponent<AnimationReaction>();
             spawn = transform.position;
             if (definition == null || animator == null || visual == null)
             { Debug.LogError("PlayerMotor requires definition, visual and Animator", this); enabled = false; return; }
@@ -39,13 +41,13 @@ namespace WombatLab
         void Update()
         {
             var frame = testInputEnabled ? testInput : input.Read();
-            if (testInputEnabled) testInput = new InputFrame(testInput.Move);
+            if (testInputEnabled) testInput = new InputFrame(testInput.Move, run: testInput.Run);
             if (frame.Restart) { ResetToSpawn(); return; }
             if (frame.Debug) ShowDebug = !ShowDebug;
             // Hitstop never suspends an airborne trajectory. Ground attacks still commit.
             if (combat != null && combat.Frozen && Grounded) return;
             if (combat != null && combat.Attacking)
-                frame = new InputFrame(Grounded && !combat.MovementReleased ? Vector2.zero : frame.Move);
+                frame = new InputFrame(Grounded && !combat.MovementReleased ? Vector2.zero : frame.Move, run: frame.Run);
             if (defense != null && (defense.Evading || defense.Locked)) frame = new InputFrame(Vector2.zero);
             Tick(frame, Time.deltaTime);
         }
@@ -67,7 +69,9 @@ namespace WombatLab
             else if (Grounded && VerticalVelocity < 0) VerticalVelocity = -2;
 
             var move = MotorMath.PlanarInput(frame.Move);
-            float speed = definition.moveSpeed * (Grounded ? 1 : definition.airControl);
+            bool running = frame.Run && definition.runSpeed > definition.moveSpeed && Grounded;
+            float groundSpeed = running ? definition.runSpeed : definition.moveSpeed;
+            float speed = Grounded ? groundSpeed : definition.moveSpeed * definition.airControl;
             var delta = move * speed * dt;
             if (defense != null) delta += defense.Motion * dt;
             var desired = MotorMath.ClampGround(transform.position + delta, definition.arenaMin, definition.arenaMax);
@@ -96,10 +100,11 @@ namespace WombatLab
                     1 - Mathf.Exp(-definition.turnSpeed * dt));
 
             State = !Grounded ? (VerticalVelocity > 0 ? "Jump" : "Fall")
-                : landingRemaining > 0 ? "Land" : actualSpeed > .1f ? "Walk" : "Idle";
-            if (combat == null || !combat.Attacking)
-                animator.speed = State == "Walk" ? Mathf.Clamp(actualSpeed / definition.moveSpeed, .3f, 1.35f) : 1;
-            if ((combat == null || !combat.Attacking) && requestedAnimation != State)
+                : landingRemaining > 0 ? "Land" : actualSpeed > .1f ? (running ? "Run" : "Walk") : "Idle";
+            bool locomotionOwnsPose = (combat == null || !combat.Attacking) && (reaction == null || !reaction.Active);
+            if (locomotionOwnsPose)
+                animator.speed = State == "Walk" || State == "Run" ? Mathf.Clamp(actualSpeed / groundSpeed, .1f, 1.35f) : 1;
+            if (locomotionOwnsPose && requestedAnimation != State)
             {
                 animator.CrossFadeInFixedTime(State, .065f); requestedAnimation = State;
             }
@@ -109,6 +114,7 @@ namespace WombatLab
         {
             combat?.ResetCombat();
             defense?.ResetDefense();
+            reaction?.Clear();
             controller.enabled = false; transform.position = spawn; controller.enabled = true;
             visual.localRotation = spawnFacing; VerticalVelocity = -2;
             coyoteRemaining = bufferRemaining = landingRemaining = 0;
@@ -118,8 +124,8 @@ namespace WombatLab
 
         // Deterministic test hook: injected intent goes through the same motor,
         // grounding, animation and boundary logic as real input.
-        public void SetTestInput(Vector2 move, bool jump = false)
-        { testInputEnabled = true; testInput = new InputFrame(move, jump); }
+        public void SetTestInput(Vector2 move, bool jump = false, bool run = false)
+        { testInputEnabled = true; testInput = new InputFrame(move, jump, run: run); }
         public void ReleaseTestInput() { testInputEnabled = false; }
         public void ClearJumpBuffer() { bufferRemaining = coyoteRemaining = 0; }
         public void ResumeLocomotion() { requestedAnimation = null; }

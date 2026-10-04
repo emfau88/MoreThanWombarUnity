@@ -138,7 +138,7 @@ namespace WombatLab.Editor
             return SaveClip(clip, airborne ? "Source_AirKick" : "Source_Kick");
         }
 
-        static void Muscle(AnimationClip clip, string name, float[] times, float[] values)
+        internal static void Muscle(AnimationClip clip, string name, float[] times, float[] values)
         {
             var keys = times.Select((t, i) => new Keyframe(t, values[i])).ToArray();
             var curve = new AnimationCurve(keys);
@@ -147,7 +147,7 @@ namespace WombatLab.Editor
             AnimationUtility.SetEditorCurve(clip, EditorCurveBinding.FloatCurve("", typeof(Animator), name), curve);
         }
 
-        static AnimatorState State(AnimatorController controller, string name, AnimationClip clip)
+        internal static AnimatorState State(AnimatorController controller, string name, AnimationClip clip)
         {
             var machine = controller.layers[0].stateMachine;
             var state = machine.states.Select(s => s.state).FirstOrDefault(s => s.name == name) ?? machine.AddState(name);
@@ -155,7 +155,7 @@ namespace WombatLab.Editor
             EditorUtility.SetDirty(state); EditorUtility.SetDirty(controller); return state;
         }
 
-        static (bool right, float phase) Peak(PlayerMotor motor, AnimatorController controller, AnimationClip source, bool foot)
+        internal static (bool right, float phase) Peak(PlayerMotor motor, AnimatorController controller, AnimationClip source, bool foot)
         {
             State(controller, "ContactBake", source);
             motor.animator.Rebind(); motor.animator.Update(0);
@@ -172,7 +172,7 @@ namespace WombatLab.Editor
             return (right, Mathf.Clamp(phase, .08f, .85f));
         }
 
-        static AttackDefinition Attack(PlayerMotor motor, AnimatorController controller, string name, string template,
+        internal static AttackDefinition Attack(PlayerMotor motor, AnimatorController controller, string name, string template,
             AnimationClip source, (bool right, float phase) peak, float startup, float active, float recovery)
         {
             string path = Root + name + ".asset";
@@ -225,7 +225,7 @@ namespace WombatLab.Editor
             return SaveClip(clip, name);
         }
 
-        static AnimationClip SaveClip(AnimationClip clip, string name)
+        internal static AnimationClip SaveClip(AnimationClip clip, string name)
         {
             clip.name = name;
             var old = AssetDatabase.LoadAssetAtPath<AnimationClip>(Root + name + ".anim");

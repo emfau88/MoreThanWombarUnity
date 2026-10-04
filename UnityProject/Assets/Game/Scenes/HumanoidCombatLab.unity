@@ -3540,7 +3540,7 @@ Animator:
   m_GameObject: {fileID: 494778422}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a82b72a1d01559c41a7d5295b6391030, type: 2}
+  m_Controller: {fileID: 9100000, guid: 03d4c703fedbebb4abc13c5347b27878, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4368,6 +4368,7 @@ GameObject:
   - component: {fileID: 585865475}
   - component: {fileID: 585865476}
   - component: {fileID: 585865473}
+  - component: {fileID: 585865477}
   m_Layer: 0
   m_Name: Sparring Robot 2
   m_TagString: Untagged
@@ -4454,6 +4455,22 @@ CapsuleCollider:
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!114 &585865477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585865472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a392f511ee362040b97a5c705ac4ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.AnimationReaction
+  animator: {fileID: 1050528613}
+  clock: {fileID: 2087446099}
+  hitClip: {fileID: 7400000, guid: be8b5eca3b919104e87c8f3a3968734c, type: 2}
+  staggerClip: {fileID: 7400000, guid: 003610e1381498f49aaa3f35327ec479, type: 2}
 --- !u!1 &586162371
 GameObject:
   m_ObjectHideFlags: 0
@@ -6483,8 +6500,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: WASD Move   SPACE Jump   J Light   K Heavy   L / RB Kick   SHIFT Evade  
-    1 / 2 Enemies   R Reset
+  m_Text: WASD Move  CTRL / LT Run  SPACE Jump  J Combo  K Heavy  L Kick  SHIFT Evade 
+    1/2 Opponents  R Reset
 --- !u!222 &827628313
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7280,6 +7297,7 @@ GameObject:
   - component: {fileID: 968047674}
   - component: {fileID: 968047675}
   - component: {fileID: 968047672}
+  - component: {fileID: 968047676}
   m_Layer: 0
   m_Name: Sparring Robot 1
   m_TagString: Untagged
@@ -7366,6 +7384,22 @@ CapsuleCollider:
   m_Height: 1.7
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!114 &968047676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968047671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a392f511ee362040b97a5c705ac4ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.AnimationReaction
+  animator: {fileID: 494778423}
+  clock: {fileID: 2087446099}
+  hitClip: {fileID: 7400000, guid: be8b5eca3b919104e87c8f3a3968734c, type: 2}
+  staggerClip: {fileID: 7400000, guid: 003610e1381498f49aaa3f35327ec479, type: 2}
 --- !u!1 &987788947
 GameObject:
   m_ObjectHideFlags: 0
@@ -7663,7 +7697,7 @@ Animator:
   m_GameObject: {fileID: 1050528612}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a82b72a1d01559c41a7d5295b6391030, type: 2}
+  m_Controller: {fileID: 9100000, guid: 03d4c703fedbebb4abc13c5347b27878, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -12588,7 +12622,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "MORE THAN WOMBAT / B2 HUMANOID COMBAT \u2014 TEMPORARY HUMAN"
+  m_Text: "MORE THAN WOMBAT / B3a ACTIONS \u2014 TEMPORARY HUMAN"
 --- !u!222 &1930794590
 CanvasRenderer:
   m_ObjectHideFlags: 0

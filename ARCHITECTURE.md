@@ -1,6 +1,6 @@
-# Architektur — implementierter B1-Stand
+# Architektur — implementierter B3a-Stand
 
-Stand: 3. Oktober 2026. S1-Bewegung, S2-Training, S3-Sparring und B1-Combat-Polish sind implementiert. Figuren und Clips bleiben funktionale Grundform-Platzhalter. Nutzerfeedback zum aktuellen B1-Spielgefühl steht noch aus. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
+Stand: 4. Oktober 2026. S1–S3, B1-Polish, B2-Humanoid-Integration und B3a-Aktionen/Reaktionen sind implementiert. Humanoid und Robot-Gegner bleiben Platzhalter für den späteren Wombat-/Cartoon-Look. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
 
 B2-Schritte 1/2 ergänzen CharacterImportLab mit regulärem Quaternius-Humanoid und vorhandenem PlayerMotor/LabInput. Schritt 3 ergänzt separat HumanoidCombatLab mit CombatController/Defense, bestehenden Robot-Gegnern und Feedback. HumanoidCombatBuilder erzeugt eigene AttackDefinitions, retimte Clips und je 161 Avatar-Kontaktpunkte im lokalen Facing-Raum; CombatController interpoliert sie ohne SampleAnimation auf dem sichtbaren Humanoid. AttackDefinition enthält gewünschte Phasendauern sowie Avatar-/Clipreferenz für die konkrete Bahn. Animator-Zeit bleibt die einzige laufende Phase; B1-Transformclips behalten ihren alten SampleAnimation-Pfad. Root Motion bleibt aus. Die ursprünglichen Combat-Szenen sind erhalten. Details in B2_COMBAT_INTEGRATION.md.
 
@@ -8,12 +8,13 @@ B2-Schritte 1/2 ergänzen CharacterImportLab mit regulärem Quaternius-Humanoid 
 
 | Komponente | Tatsächliche Aufgabe |
 | --- | --- |
-| LabInput / InputFrame | Unity Input System für Move, Jump, Light, Heavy, Kick, Evade, Reset und Debug; gemeinsame Intents für Tastatur/Maus/Gamepad |
+| LabInput / InputFrame | Unity Input System für Move, gehaltenes Run, Jump, Light, Heavy, Kick, Evade, Reset und Debug; gemeinsame Intents für Tastatur/Maus/Gamepad |
 | PlayerMotor / MotorMath | CharacterController, X/Z-Bewegung, Gravitation, Grounding, Coyote-/Jump-Buffer, Landung, Arenagrenzen und kontrollierte Angriffsschritte |
 | CombatController | Spieler-Attack-Instanzen, einzelner Input-Buffer, Combo/Cancel, begrenzte Startup-Ausrichtung, Animator-Phase, Hand-/Fuß-Sweeps, Trefferfilter und Hitstop |
 | AttackDefinition / CharacterDefinition | Gespeicherte Angriffs-/Kontakt-/Bewegungsdaten als ScriptableObjects; keine allgemeine Definition für jedes zukünftige System |
 | TrainingDummy | Gemeinsamer Schadens-/HP-/Hitstun-/Rückstoßempfänger für Trainingspuppe und Sparring-Gegner; Ganzkörper-Tod beim Gegner und Reset |
 | PlayerDefense | Spieler-HP, Treffer-Starre, Rückstoß, Bodenausweichen samt Zeitfenster und Cooldown |
+| AnimationReaction | Optionale Hit-/Stagger-Pose innerhalb vorhandener Treffer-Starre, passende Clip-Geschwindigkeit, Hitstop und Rückgabe an Locomotion/KI; kein zusätzlicher Gameplay-Lock |
 | EnemyBrain | Gegnerbewegung, Warnung, Animator-basierter Schlag, Recovery und unmittelbare Unterbrechung bei Treffer/Tod |
 | EngagementCoordinator | Eine Angriffsfreigabe, Wechsel zwischen einem/zwei Gegnern und vollständiger Encounter-Reset |
 | CombatFeedback / LabHud / ArenaCamera | Kontakt-Audio/VFX, HP-/Phasen-/Steuerungsanzeige und kontrollierte 2.5D-Perspektive |
@@ -36,9 +37,9 @@ Der einzelne Buffer altert in Combat-Zeit und ruht bei Hitstop. Treffer erlauben
 
 ## Bewegung, Pose und Tod
 
-PlayerMotor führt die freie Locomotion und setzt Walk-Abspieltempo nach gemessener Bewegung. Combat besitzt während eines Angriffs die Pose. Der Motor wechselt erst danach zurück zu Idle/Walk/Jump/Fall/Land; Landung beendet eine Luftattacke und stellt diese Zuständigkeit wieder her. Run ist für B3 vorgesehen.
+PlayerMotor führt die freie Locomotion und setzt Walk-/Run-Abspieltempo nach gemessener Bewegung. Gehaltenes Run benutzt nur am Boden die eigene runSpeed; ältere Definitions ohne Run behalten ihre bisherigen Werte. Combat besitzt während eines Angriffs die Pose, AnimationReaction während Hit/Stagger. Der Motor wechselt erst danach zurück zu Idle/Walk/Run/Jump/Fall/Land; Landung beendet eine Luftattacke und stellt diese Zuständigkeit wieder her.
 
-Die Gegner-KI benutzt denselben bewährten Schadensempfänger wie das Training. Bei 0 HP beendet sie Angriff/Warnung/Freigabe; TrainingDummy deaktiviert den Animator und Collider und kippt das gesamte Rig. Dadurch überschreiben Idle/Walk nicht die Todespose. Reset stellt den gespeicherten Ausgangszustand wieder her. Der Trainingskörper ohne EnemyBrain behält seine eigene lokale Kippreaktion. Lebendes Knockdown/GetUp, vollständige Flinch-Clips und eine eigene Spieler-Todesanimation sind noch nicht integriert.
+Die Gegner-KI benutzt denselben bewährten Schadensempfänger wie das Training. Bei 0 HP beendet sie Angriff/Warnung/Freigabe; TrainingDummy beendet die Reaktion, deaktiviert Animator/Collider und kippt das gesamte Rig. Reset stellt den gespeicherten Ausgangszustand wieder her. Der Trainingskörper ohne EnemyBrain behält seine eigene lokale Kippreaktion. Hit/Stagger ist in B3a angebunden; lebendes Knockdown/GetUp und eine eigene Spieler-Todesanimation folgen in B3b.
 
 Enemy_Heavy ist ein separates AttackDefinition-/Clip-Asset. Änderungen an Spieler-Heavy sollen weder gegnerische Pose noch Warn-/Trefferverhalten unbeabsichtigt ändern. EngagementCoordinator hält maximal eine Freigabe über Telegraph/Attack/Recovery und gibt sie bei Unterbrechung, Tod, Disable oder Reset frei. Gegnerbewegung bleibt kinematisch mit einfachen Wartepositionen und Repulsion; kein NavMesh.
 
@@ -64,6 +65,8 @@ tools/               # Lokale CLI-Hilfe und Modell-Quellskript
 ```
 
 Runtime, Editor und Tests verwenden getrennte Assemblies. Die vorhandenen Builder bleiben Werkzeuge für bestimmte Stufen. Ältere Arena-/Combat-Builder nicht als allgemeinen Neuaufbau ausführen: Sie können später integrierte Assets/Szenen überschreiben. CombatPolishBuilder arbeitet B1 gezielt in vorhandene Assets, Prefab und beide Szenen ein. LabVisualReview nimmt echte Kameraposen auf und stellt nach der Sequenz Encounter und normalen Input wieder her.
+
+CharacterActionBuilder ergänzt B3a gezielt am vorhandenen HumanoidCombat-Prefab/Controller und an der Szene. Er nutzt die B2-Retiming-/Kontaktfunktionen, ersetzt die drei bisherigen Cross-Platzhalter und arbeitet Nutzerfeedback zu Boden-/Sprung-Kick ein. Der Air-Smash hat einen bewusst gewählten niedrigen Kontaktmoment statt des Maximums der Vorwärtsreichweite. RobotReactions.controller ist eine eigene Kopie für die Humanoid-Szene; B1-Szenen behalten ihren ursprünglichen Controller. Beim bewussten Neuaufbau zuerst HumanoidCombatBuilder, danach CharacterActionBuilder ausführen; der B2-Builder allein stellt den älteren B2-Stand her.
 
 Neue Modelle/Clips werden über den normalen Unity-Import integriert. Quaternius-Originale stehen unter ThirdParty, eigene Bewegungs-/Combat-Ableitungen unter Game/Characters. Quellen und Lizenzbelege stehen in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md). Kein pauschaler Ordnerumbau.
 

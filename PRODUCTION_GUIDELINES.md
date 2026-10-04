@@ -76,7 +76,7 @@ Angriffsdaten bestimmen gewünschte Startup-/Active-/Recovery-Zeiten, Damage, Hi
 
 Animation visualisiert diese Regeln und wird dazu passend zugeschnitten, beschleunigt oder in Abschnitten angepasst. Eine gemeinsame Phasenquelle verbindet Darstellung, Kontakte und Motorbewegung. Keine parallel driftenden Animation-/Schadenstimer und keine Treffer während bloßer Vorbereitung oder Erholung.
 
-Die normalisierte Animator-Zeit bleibt auch im importierten Humanoid die einzige laufende Angriffsphase. B2 Schritt 3 speichert konkrete Startup-/Active-/Recovery-Zeiten, retimt die Clip-Ableitungen darauf und verwendet am Avatar gebackene Kontaktbahnen. Details in B2_COMBAT_INTEGRATION.md; endgültige individuelle Move-Animationen werden in B3 ausgebaut.
+Die normalisierte Animator-Zeit bleibt auch im importierten Humanoid die einzige laufende Angriffsphase. B2 Schritt 3 speichert konkrete Startup-/Active-/Recovery-Zeiten, retimt die Clip-Ableitungen darauf und verwendet am Avatar gebackene Kontaktbahnen. B3a ergänzt unterscheidbare Finisher-/Heavy-/Air-Smash-Ableitungen, Run und Hit/Stagger; Details in B2_COMBAT_INTEGRATION.md und B3A_ACTIONS.md. Weiteres Tuning erfolgt an dieser spielbaren Basis.
 
 Hurtbox, Angriffskontakt und Körperblockade bleiben getrennt. Faust-/Fußpositionen sind gute Anker für abgestimmte Kontakte; Mesh-Bounds werden nicht automatisch zur Schadensreichweite. Sichtbare Aktion und erreichbare Kontaktzone müssen trotzdem zusammenpassen.
 
@@ -92,4 +92,4 @@ Kurzer Befund → konkreter Verbesserungs-Bulk → integrierte spielbare Überga
 
 Gezielt die geänderte Fehlerklasse prüfen; eine Regression nach größeren Integrationen. Reversible Dokumentations-/Wertänderungen benötigen keine neuen Tests. Art und Animation visuell beurteilen. WebGL früh mit dem kleinen Slice praktisch prüfen, statt aus der Gestaltung auf Browserleistung zu schließen.
 
-Der B1-Abschluss und B2-Schritte 1–3 sind beauftragt und umgesetzt. Wombat-Look bleibt nach Nutzerwunsch offen. B3-Kernclips/Reaktionen, Stil-Anpassung und spätere Bulks sind weitere Arbeitspakete; die alte Anweisung zum vollständigen B2-Eigenbau ist durch Stopp und Richtungsänderung überholt.
+Der B1-Abschluss, B2-Schritte 1–3 und B3a sind beauftragt und umgesetzt. Wombat-Look bleibt nach Nutzerwunsch offen. B3b mit Knockdown/GetUp/Death, B3c mit Duell-Tuning/Buildnachweis, Stil-Anpassung und spätere Bulks sind weitere Arbeitspakete; die alte Anweisung zum vollständigen B2-Eigenbau ist durch Stopp und Richtungsänderung überholt.

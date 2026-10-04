@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2718239193146698223}
   - component: {fileID: 364653056583200235}
   - component: {fileID: 3725125825632131963}
+  - component: {fileID: 4107751675679091923}
   m_Layer: 0
   m_Name: HumanoidCombat
   m_TagString: Untagged
@@ -86,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74dfe302c59ed8a4c812de918effd8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.PlayerMotor
-  definition: {fileID: 11400000, guid: 2804ae2c2de82424b9ecfd15006ffb22, type: 2}
+  definition: {fileID: 11400000, guid: 65dc4a573b113a14d9f6c27ff16d3149, type: 2}
   visual: {fileID: 2056544066940500743}
   animator: {fileID: 74089101064753131}
 --- !u!114 &364653056583200235
@@ -129,6 +130,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.PlayerDefense
   maxHealth: 100
+--- !u!114 &4107751675679091923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403307395320657685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a392f511ee362040b97a5c705ac4ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.AnimationReaction
+  animator: {fileID: 74089101064753131}
+  clock: {fileID: 364653056583200235}
+  hitClip: {fileID: 7400000, guid: f97afadb8d156564b9ab444b3d8b289d, type: 2}
+  staggerClip: {fileID: 7400000, guid: 5742732e4c3a28d49ac515efe973b32e, type: 2}
 --- !u!1 &5994752987321490512
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,20 +4,21 @@ Eigenständiger Versuch eines stilisierten 3D-/2.5D-Arcade-Beat-'em-ups.
 Das bestehende [Browsergame](https://github.com/emfau88/MoreThanWombat) ist
 Designreferenz, keine technische Portierungsvorlage.
 
-**Aktueller Stand:** S0–S2 abgeschlossen und vorläufig positiv gespielt. S3/B1
-ergänzen Sparring, Ausweichen, Kick, eigene Luftangriffe, kontrollierte Angriffsschritte,
-frühere Light-Anschlüsse nach Treffer, begrenzte Startup-Ausrichtung, Bewegungsfreigabe
-in später Recovery und Ganzkörper-Tod/Reset. Wahlweise ein oder zwei Gegner mit
-abwechselnder Angriffsfreigabe. Die separate Trainingsszene bleibt erhalten.
-Noch kein eigenständiger Build. Figur und Animationen sind funktionale Platzhalter.
+**Aktueller Stand:** B3a ist im HumanoidCombatLab integriert: Gehen/Rennen,
+Jab → Cross → Haken, Overhand-Heavy, Kampfsport-Kicks und zweihändiger Luft-Smash sowie
+sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Vorhandenes
+Sparring, Ausweichen, Angriffsschritte, Combo-/Recovery-Regeln, Hitstop und Reset
+bleiben angebunden. Wahlweise ein oder zwei Gegner. Temporärer menschlicher
+Charakter; Wombat-Gestaltung bleibt offen. Noch kein eigenständiger Build.
 
 ## Prototyp spielen
 
 `UnityProject` mit Unity **6000.4.0f1** öffnen, die Szene
-`Assets/Game/Scenes/SparringLab.unity` laden und Play drücken. In die Game-Ansicht
+`Assets/Game/Scenes/HumanoidCombatLab.unity` laden und Play drücken. In die Game-Ansicht
 klicken, damit sie die Tastatureingaben erhält.
 
 - WASD oder Pfeiltasten: auf der X/Z-Bodenfläche bewegen.
+- Ctrl / linker Gamepad-Trigger gehalten: Rennen am Boden. Loslassen: Gehen.
 - Leertaste: springen; R: zurücksetzen; H: Debuganzeige umschalten.
 - J / linke Maustaste: Light; K / rechte Maustaste: Heavy; L / Gamepad RB: Kick.
   Im Sprung starten J/L einen diagonalen Air-Kick und K einen Air-Smash.
@@ -28,13 +29,13 @@ klicken, damit sie die Tastatureingaben erhält.
 - 1 / 2: einen beziehungsweise zwei Gegner aktivieren. Orange/roter Bodenmarker
   kündigt einen Schlag an. R setzt Spieler und Gegner zurück.
 - `CombatLab.unity` bleibt als Training ohne Gegenangriffe verfügbar.
-- `CharacterImportLab.unity` zeigt den B2-Importnachweis: temporärer Quaternius-Humanoid mit WASD/Stick, Sprung und Reset. Bewegung ist angebunden; Combat spielt man weiterhin im SparringLab.
-- `HumanoidCombatLab.unity` verbindet diesen Humanoid jetzt mit dem vollständigen vorhandenen Sparring: Combo, Heavy, Kick, Luftangriffe, Shift-Ausweichen, 1/2 Gegner und Reset. Wombat-Look bleibt offen.
+- `CharacterImportLab.unity` bleibt der separate B2-Importnachweis für Bewegung und Sprung.
+- `SparringLab.unity` bleibt die ursprüngliche B1-Vergleichsszene mit Grundform-Figur.
 - Gamepad-Bindings sind implementiert und mit simuliertem Gerät geprüft;
   ein echter Hardware-Spieltest steht noch aus.
 
-Die Figur besteht aus selbst erzeugten 3D-Grundformen und ist bewusst ein
-animierbarer Funktionsplatzhalter, kein finales Charaktermodell.
+Der Humanoid ist eine importierte technische Basis, die Robot-Gegner sind eigene
+Grundformen. Beide bleiben Platzhalter für die endgültige Cartoon-Gestaltung.
 
 ## Einstieg
 
@@ -47,6 +48,7 @@ animierbarer Funktionsplatzhalter, kein finales Charaktermodell.
 - [Externe Assets und Lizenznachweise](THIRD_PARTY_LICENSES.md)
 - [B2: drei Kandidaten und konkrete Importbasis](B2_ASSET_SELECTION.md)
 - [B2: Humanoid-Combat, Timing und Kontaktbahnen](B2_COMBAT_INTEGRATION.md)
+- [B3a: Rennen, Kernaktionen und Trefferreaktionen](B3A_ACTIONS.md)
 
 Gestaltungsziel ist der illustrative Cartoon-/Comic-Stil der 2D-Referenz:
 runde kräftige Formen, expressive Gesichter und gemalte Materialdetails.
@@ -56,7 +58,7 @@ konzentriert sich auf ein vollständiges Duell mit einem Spieler und einem
 Gegner; WebGL-Verträglichkeit wird an diesem kleinen Slice geprüft.
 
 Werkzeuganbindung, Bewegung und Combat-Polish sind umgesetzt; Nutzerfeedback
-dient dem gezielten Tuning. B2-Schritte 1–3 liefern regulären Humanoid-Import und spielbare Combat-Anbindung mit definierten Angriffszeiten und retargeteten Kontaktbahnen. Finisher/Heavy/Air-Heavy nutzen vorläufige Cross-Varianten. Nächste Arbeit sind die vollständigen B3-Kernclips und Trefferreaktionen; Wombat-Gestaltung bleibt separat offen.
+dient dem gezielten Tuning. B3a ersetzt die vorläufigen Cross-Varianten und ergänzt Rennen und Trefferreaktionen. Nächste Arbeit ist B3b mit lebendem Knockdown, GetUp und Death/Reset, danach B3c mit Duell-Tuning und Buildnachweis; Wombat-Gestaltung bleibt separat offen.
 Keine Cloud-Dienste, kein Multiplayer, keine Asset-Käufe und keine Änderungen
 am Browsergame als implizite Arbeitsschritte.
 

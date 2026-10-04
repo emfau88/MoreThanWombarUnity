@@ -1,6 +1,20 @@
 # Test-Slice-Status
 
-Stand: 3. Oktober 2026.
+Stand: 4. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
+
+## B3a — Run, Kernaktionen und Hit/Stagger geliefert
+
+HumanoidCombatLab ergänzt Ctrl/LT-Run, Haken-Finisher, Overhand-Heavy und zweihändigen Air-Smash statt der bisherigen Cross-Platzhalter. Die drei neuen Kontaktbahnen sind am Avatar neu gebacken. Sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner halten innerhalb bestehender Treffer-Starre, respektieren Hitstop und werden durch Reset beendet. Details in [B3A_ACTIONS.md](B3A_ACTIONS.md).
+
+Gezielt geprüft: **3/3 Action-Fälle**, 6,25 s (`tools/b3a-action-results.json`); **5/5 vorhandene Humanoid-Combat-Fälle**, 12,88 s nach Kick-Überarbeitung (`tools/b3a-contact-regression-results.json`); **1/1 Input-Fall**, 6,13 s (`tools/b3a-input-results.json`). Alle bestanden, keine übersprungenen Fälle. Keine Vollsuite; Gamepad simuliert.
+
+Nutzerfeedback: Mensch gegen den großen Bären-Dummy wird vorerst beibehalten. Boden-/Sprung-Kick und Luftschlag wurden als zu schwach dargestellt beurteilt und innerhalb B3a gezielt überarbeitet: Kammer-/Streck-/Rücknahmebewegung, Armdeckung, angewinkeltes freies Bein und zweihändiger Abwärtsschlag mit Körperneigung.
+
+Nach der letzten Luft-Smash-Korrektur **1/1 gezielter PlayMode-Fall bestanden**, 3,96 s: genau ein Treffer im Abstieg, weiterlaufende Flugbahn, Landung/Reset und Fehlschlag aus Distanz (`tools/b3a-air-smash-results.json`). **1/1 Kontaktgenauigkeitsfall erneut bestanden**, 1,94 s für alle sieben Attacken nach finaler Körperneigung (`tools/b3a-final-contact-results.json`). Die geänderten Kick-Posen wurden in echter Spielkamerasequenz angesehen; Boden- und Sprung-Kick treffen darin jeweils einmal.
+
+Finale Smash-Kameraposen mit Ausholen und Kontakt angesehen (`Assets/QA/b3a-final-smash-*.png`); tatsächliche Sequenz bestätigt einen Treffer. Run, Heavy, Haken und beide Hit-Reaktionen ebenfalls kontrolliert. HumanoidCombatLab frisch geladen; Play gestoppt und Script-Kompilierung ohne Fehler für die Übergabe.
+
+Nächster Bulk ist B3b: lebendes Knockdown/GetUp, Aufstehschutz und vollständige Death-/Reset-Darstellung. B3c folgt mit Duell-Tuning und Buildnachweis. Wombat-Gestaltung bleibt offen. B3b/B3c wurden nicht begonnen.
 
 ## B1 — Combat-Polish (technisch abgeschlossen)
 

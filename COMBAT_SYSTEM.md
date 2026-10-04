@@ -1,14 +1,15 @@
-# Combat und Sparring — aktueller B1-Stand
+# Combat und Sparring — aktueller B3a-Stand
 
-Stand: 3. Oktober 2026. Diese Beschreibung enthält die erhaltenen B1-Regeln und die technische B2-Humanoid-Anbindung. Grundform-Figuren und temporärer Human bleiben funktionale Platzhalter. Individuelle Kernclips, Run und lebendes Knockdown/GetUp folgen in B3; Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md).
+Stand: 4. Oktober 2026. Diese Beschreibung enthält die erhaltenen B1-Regeln, B2-Humanoid-Anbindung und B3a mit Run, unterscheidbaren Kernaktionen und Hit/Stagger. Grundform-Figuren und temporärer Human bleiben Platzhalter. Lebendes Knockdown/GetUp folgt in B3b; Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md).
 
-B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. Letztere verbindet den gültigen Humanoid mit denselben Kampfregeln, konkreten Angriffszeiten und retargeteten Faust-/Fußbahnen. Die Tabelle unten beschreibt die erhaltenen B1-Werte; Humanoid-Zeiten und vorläufige Clip-Varianten stehen in [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md). Der Wombat-Look bleibt offen.
+B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. Letztere verbindet den gültigen Humanoid mit denselben Kampfregeln, konkreten Angriffszeiten und retargeteten Faust-/Fußbahnen. Die Tabelle unten beschreibt die erhaltenen B1-Werte; Humanoid-Zeiten stehen in [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md), aktuelle Aktionen und Reaktionen in [B3A_ACTIONS.md](B3A_ACTIONS.md).
 
 ## Spielen
 
-`UnityProject/Assets/Game/Scenes/SparringLab.unity` öffnen, Play drücken und die Game-Ansicht fokussieren. `CombatLab.unity` bleibt das Training ohne Gegenangriffe.
+`UnityProject/Assets/Game/Scenes/HumanoidCombatLab.unity` öffnen, Play drücken und die Game-Ansicht fokussieren. `SparringLab.unity` bleibt B1-Vergleich, `CombatLab.unity` Training ohne Gegenangriffe.
 
 - WASD / Pfeiltasten / linker Gamepad-Stick: bewegen.
+- Ctrl / linker Gamepad-Trigger gehalten: Rennen im HumanoidCombatLab; beim Loslassen wieder Gehen.
 - Leertaste / Gamepad South (A bzw. Kreuz): springen.
 - J / linke Maustaste / Gamepad West (X bzw. Quadrat): Light; rhythmisch neu drücken für Jab → Cross → Finisher. Gedrückthalten erzeugt keine automatische Combo.
 - K / rechte Maustaste / Gamepad North (Y bzw. Dreieck): Heavy.
@@ -36,7 +37,7 @@ Die Werte stammen aus den gespeicherten AttackDefinition-Assets. Clipzeit ist oh
 
 Der CharacterController begrenzt Angriffsschritte an Körperkollision und Arenarand. Der Weg wird einmalig aus der fortgeschrittenen Clipphase zwischen 0,08 und 0,40 berechnet, ohne importierte Root Motion. Hitstop vervielfacht den Weg nicht.
 
-Am Boden bleiben freie Bewegung und ein neuer Sprung zunächst gesperrt. Ab Phase 0,82 erlaubt der laufende Bodenangriff wieder Bewegung und Drehen; seine Pose bleibt bis zum Ende unter Combat-Kontrolle. Ein Sprung wird während des Angriffs weiterhin nicht angenommen. Walk-Tempo richtet sich in freier Bewegung nach der tatsächlich zurückgelegten Strecke, einschließlich Blockade durch einen Körper. Run ist noch nicht vorhanden.
+Am Boden bleiben freie Bewegung und ein neuer Sprung zunächst gesperrt. Ab Phase 0,82 erlaubt der laufende Bodenangriff wieder Bewegung und Drehen; seine Pose bleibt bis zum Ende unter Combat-Kontrolle. Ein Sprung wird während des Angriffs weiterhin nicht angenommen. Walk-/Run-Tempo richtet sich in freier Bewegung nach der tatsächlich zurückgelegten Strecke, einschließlich Blockade durch einen Körper. HumanoidCombatLab nutzt 3 m/s Gehen und 6,2 m/s Rennen. Luftkontrolle bleibt moveSpeed × airControl; Run erzeugt keinen Luft-Sprint. Ältere CharacterDefinitions mit runSpeed = 0 behalten ihre bisherige Bewegung.
 
 Luftangriffe besitzen eigene Clips und Fuß-/Faustkontakte. Gravitation und X/Z-Luftkontrolle laufen weiter; die Schlagrichtung bleibt während der Luftattacke fest. Gleichzeitiges Jump + Attack startet zuerst den Sprung. Keine künstliche Zielhöhe, kein Doppelsprung und kein Schweben bei Hitstop. Landung beendet eine noch laufende Luftattacke und führt in die kurze Landepose. Ohne reale räumliche Überschneidung trifft ein zu hoher oder entfernter Angriff nicht.
 
@@ -60,7 +61,7 @@ Die Trainingspuppe hat 150 HP, der Sparring-Gegner 80 HP. Die frühen Lights hab
 
 Körperkollision und Trigger-Hurtbox auf Layer 8 `CombatHurtbox` sind getrennt. Faust oder Fuß sind explizite Kontaktpunkte mit Angriffsradius; keine aus Mesh-Bounds abgeleiteten Schadenszonen. Team, Lebensstatus, räumlicher Kontakt und Front-Richtung filtern Treffer. Jeder Gegner erhält pro Attack-Instanz höchstens einen Treffer, auch mit mehreren Hurtboxes. Der Spieler-Sweep verwendet einen festen Puffer mit 32 Kontakten.
 
-Treffer erzeugen Hitstun, Rückstoß, kurzen Flash, Kontaktblitz/Funken und eigene synthetisierte Kontaktklänge. Sie übernehmen keine Schadensentscheidung. Der Trainingskörper kippt lokal; eine vollständige animierte Flinch-/Knockdown-/GetUp-Folge für lebende Gegner gehört zu B3.
+Treffer erzeugen Hitstun, Rückstoß, kurzen Flash, Kontaktblitz/Funken und eigene synthetisierte Kontaktklänge. Sie übernehmen keine Schadensentscheidung. Im HumanoidCombatLab spielt AnimationReaction sichtbares Hit/Stagger innerhalb der vorhandenen Treffer-Starre: beim Gegner starke Reaktion für Heavy oder Schaden ≥ 18, beim Spieler für Schaden ≥ 20. Locomotion/KI überschreiben die Pose währenddessen nicht. Hitstop friert Gegnerreaktion samt Restdauer ein; danach kehrt die Zuständigkeit zu Bewegung/KI zurück. Reset räumt die Reaktion auf. Der Trainingskörper kippt weiterhin lokal. Lebendes Knockdown/GetUp folgt in B3b.
 
 Hitstop stoppt am Boden Spieler-Motor und Angriffspose sowie gegnerische Bewegung/Hitstun. Eine laufende Flugbahn bleibt aktiv. UI, Eingaben und Reset laufen weiter; kein globales `Time.timeScale`. Der kurze Ganzkörper-Fall eines bereits toten Gegners läuft nach Echtzeit weiter.
 

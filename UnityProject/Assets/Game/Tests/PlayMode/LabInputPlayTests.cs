@@ -61,5 +61,14 @@ namespace WombatLab.Tests
             Press(pad.startButton); Assert.That(input.Read().Restart, Is.True); Release(pad.startButton);
             Press(pad.buttonEast); Assert.That(input.Read().Evade, Is.True); Release(pad.buttonEast);
         }
+        [Test] public void RunIsHeldOnControlOrLeftTriggerWithoutChangingEvade()
+        {
+            Press(keyboard.leftCtrlKey); Assert.That(input.Read().Run, Is.True); Assert.That(input.Read().Evade, Is.False);
+            InputSystem.Update(); Assert.That(input.Read().Run, Is.True);
+            Release(keyboard.leftCtrlKey); Assert.That(input.Read().Run, Is.False);
+            Set(pad.leftTrigger, 1); Assert.That(input.Read().Run, Is.True);
+            Set(pad.leftTrigger, 0); Assert.That(input.Read().Run, Is.False);
+            Press(keyboard.leftShiftKey); Assert.That(input.Read().Evade, Is.True); Assert.That(input.Read().Run, Is.False);
+        }
     }
 }

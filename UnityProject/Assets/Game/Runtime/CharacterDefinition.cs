@@ -6,6 +6,7 @@ namespace WombatLab
     public sealed class CharacterDefinition : ScriptableObject
     {
         [Min(0)] public float moveSpeed = 4.2f;
+        [Min(0)] public float runSpeed; // Zero preserves movement-only/legacy scenes.
         [Range(0, 1)] public float airControl = .8f;
         [Min(0)] public float jumpSpeed = 8f;
         [Min(.1f)] public float gravity = 23f;

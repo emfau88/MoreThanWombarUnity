@@ -1,5 +1,7 @@
 # B2 Schritt 3 — Humanoid-Combat
 
+Dieser Abschnitt dokumentiert den B2-Zwischenstand. B3a hat die hier beschriebenen vorläufigen Cross-Varianten für Finisher/Heavy/Air-Heavy ersetzt und Run sowie Hit/Stagger ergänzt; aktueller Stand in [B3A_ACTIONS.md](B3A_ACTIONS.md).
+
 Stand: 3. Oktober 2026. Der Nutzer hat nach dem Commit von Schritten 1/2 den nächsten Schritt beauftragt. Die temporäre menschliche Figur bleibt unverändert; Wombat-Gestaltung ist weiterhin offen.
 
 ## Spielbarer Stand

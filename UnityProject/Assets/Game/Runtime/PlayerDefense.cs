@@ -46,9 +46,10 @@ namespace WombatLab
             Health = Mathf.Max(0, Health - damage); stun = .28f; dodgeRemaining = 0;
             knockback = Vector3.ProjectOnPlane(direction, Vector3.up).normalized * 3;
             combat.Cancel(); motor.ClearJumpBuffer();
+            if (Alive) GetComponent<AnimationReaction>()?.Play(damage >= 20, stun);
             return true;
         }
         public void ResetDefense()
-        { Health = maxHealth; dodgeRemaining = cooldown = stun = 0; knockback = Vector3.zero; }
+        { Health = maxHealth; dodgeRemaining = cooldown = stun = 0; knockback = Vector3.zero; GetComponent<AnimationReaction>()?.Clear(); }
     }
 }

@@ -1,21 +1,30 @@
 # Konkreter Arbeitsplan — Asset-Basis und vollständiges Charakterduell
 
-Stand: 4. Oktober 2026. B1 ist abgeschlossen. B2-Schritte 1–3 liefern Auswahl, technischen Import und Humanoid-Combat mit vorhandenen Spielregeln. [B2_ASSET_SELECTION.md](B2_ASSET_SELECTION.md) enthält die Auswahl, [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md) die konkreten Zeiten und Kontaktanbindung. Wombat-Look bleibt ausdrücklich eine spätere Entscheidung. Nächste technische Arbeit ist B3a: Run, unterscheidbare Kernangriffe statt vorläufiger Cross-Varianten und sichtbare Trefferreaktionen. Danach B3b mit Knockdown/GetUp/Death und B3c mit Duell-Tuning/Buildnachweis; die Reihenfolge steht in ROADMAP.md. Diese weiteren Schritte wurden beim Commit nicht begonnen.
+Stand: 4. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a ergänzt Run, unterscheidbare Kernangriffe und sichtbare Trefferreaktionen; konkrete Lieferung in [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt ausdrücklich eine spätere Entscheidung. Nächste technische Arbeit ist B3b mit Knockdown/GetUp/Death, anschließend B3c mit Duell-Tuning/Buildnachweis. B3b/B3c sind noch nicht begonnen.
+
+## Unmittelbar nächster Bulk: B3b
+
+1. **Fall und Aufstehen:** Eine vorhandene Fall-/Aufstehvorlage am Humanoid prüfen; nur fehlende Teile ergänzen. Erst Spieler und einen Robot-Gegner vollständig anbinden.
+2. **Klare Zustände:** Kräftige ausgewählte Treffer lösen Knockdown aus. Angriff/Buffer abbrechen, Bodenphase und GetUp sperren Aktionen; Körperkollision und Hurtbox bewusst behandeln. Begrenzter Aufstehschutz verhindert sofortiges erneutes Niederwerfen.
+3. **Tod und Reset:** Spieler-Tod sichtbar darstellen, Gegner-KO vervollständigen; R stellt HP, Position, Pose, Collider, Schutz, KI und Angriff vollständig wieder her.
+4. **Kurze Übergabe:** Einen echten Fall → Bodenphase → GetUp → weiterkämpfen und Tod → Reset durchspielen. Nur Unterbrechung, Schutz und Reset gezielt prüfen.
+
+**Effekt:** Heavy-Treffer bekommen einen vollständigen körperlichen Ablauf. Danach B3c: Abstände/Combos/Luftangriffe/Feedback zusammen tunen und den kleinen Windows-/WebGL-Nachweis ausführen. Größerer Contentausbau beginnt erst danach.
 
 ## 1. Bestand und Entscheidung
 
 | Vorhandener Stand | Entscheidung / konkrete Folge |
 | --- | --- |
-| LabInput, PlayerMotor, CharacterDefinition und MotorMath | Behalten; direkte Eingaben, Richtungswechsel, Luftkontrolle und später Run gezielt abstimmen |
+| LabInput, PlayerMotor, CharacterDefinition und MotorMath | Behalten; B3a ergänzt gehaltenes Rennen mit separater Bodengeschwindigkeit, ohne Luft-Sprint |
 | CombatController, AttackDefinition, Buffer, Attack-Instanzen, Front-/Teamfilter | Behalten; gewünschte Angriffszeiten und Humanoid-Clip-Mapping sind in B2 Schritt 3 integriert |
 | Animierte Faust-/Fuß-Sweeps auf getrennten Hurtboxes | Regel behalten; Humanoid-Kontaktbahnen sind am echten Avatar gebacken und gegen sichtbare Posen geprüft |
 | B1: Angriffsschritte, Kick, Air-Kick/Air-Smash, spätes Movement-Release | Behalten; einmal anhand echter Nutzersequenz fein abstimmen |
-| TrainingDummy, PlayerDefense, EnemyBrain, EngagementCoordinator | Wiederverwenden; animierte Trefferreaktion und lebendes Knockdown/GetUp fehlen noch |
+| TrainingDummy, PlayerDefense, EnemyBrain, EngagementCoordinator | Wiederverwenden; B3a-Trefferreaktion ist angebunden, lebendes Knockdown/GetUp folgt in B3b |
 | Kamera, Testarena, gespeicherte Trainings-/Sparring-Szenen, HUD, Reset | Behalten als kurze Integrationsumgebung; Arena genügt für B2/B3 |
 | Grundform-Figur und selbst erzeugte Standardclips | Spielbare Vergleichsbasis; durch passende importierte Basis ersetzen, kein weiterer großer Standardanimationsbau |
 | Blender-Wombat, eigener Skeleton-Entwurf und JSON-Mesh-Bibliothek | Erhalten und zurückstellen; noch nicht in die Spielfigur integriert, kein Grund für zusätzliche Importarchitektur |
 | Geplanter kompletter eigener Modell-/Rig-/Animationspfad | Ersetzen durch Asset-Auswahl, Retargeting und begrenzte Anpassung für die Wombat-Identität |
-| Run, animierter Flinch, lebendes Knockdown/GetUp | In B3 vorziehen; vor Ausbau auf weitere Rollen fertigstellen |
+| Run und animierter Flinch/Stagger | In B3a geliefert; lebendes Knockdown/GetUp vor weiteren Gegnerrollen in B3b fertigstellen |
 | Build/Browserleistung | Noch nicht nachgewiesen; kleinen WebGL-Nachweis im Character Slice einplanen |
 
 Der Bestand ist bereits fokussiert geprüft. Eine Fortsetzung beginnt an den geänderten Stellen. Quaternius liefert jetzt einen konkreten Humanoid-/Bewegungsnachweis; die Eignung einer tierischen Basis und die Wombat-Gestaltung bleiben offen.
@@ -51,7 +60,7 @@ Aktuelle Lieferung: `CharacterImportLab.unity` mit temporärem Quaternius-Humano
 
 ### Schritt 3 — Combat-Zeiten und importierte Pose verbinden
 
-Umgesetzt in `HumanoidCombatLab`: eigene AttackDefinitions mit Startup-/Active-/Recovery-Sekunden, abschnittsweise retimte Humanoid-Clips und am Avatar ausgewertete Kontaktpunkte. Animator-Zeit bleibt die einzige Phasenquelle; Runtime-Sweeps verwenden die gespeicherte Bahn ohne Umposen des sichtbaren Humanoids. Jab/Cross, eigene Kick-/Luftkick-Ableitungen, vorläufige Cross-Finisher/Heavy/Air-Heavy, bestehende Defense/Gegner/Feedback und Reset sind angebunden. Zeit-/Clip-/Avataränderungen benötigen Neuableitung/Bake über HumanoidCombatBuilder. Details im Integrationsdokument.
+Umgesetzt in `HumanoidCombatLab`: eigene AttackDefinitions mit Startup-/Active-/Recovery-Sekunden, abschnittsweise retimte Humanoid-Clips und am Avatar ausgewertete Kontaktpunkte. Animator-Zeit bleibt die einzige Phasenquelle; Runtime-Sweeps verwenden die gespeicherte Bahn ohne Umposen des sichtbaren Humanoids. Jab/Cross, eigene Kick-/Luftkick-Ableitungen, bestehende Defense/Gegner/Feedback und Reset sind angebunden. B3a ersetzt die ursprünglichen Cross-Finisher/Heavy/Air-Heavy durch eigene unterscheidbare Ableitungen. Zeit-/Clip-/Avataränderungen benötigen Neuableitung/Bake: beim vollständigen Neuaufbau HumanoidCombatBuilder, anschließend CharacterActionBuilder. Details in den Integrationsdokumenten.
 
 - AttackDefinition um gewünschte Startup-/Active-/Recovery-Dauern und notwendige Clip-Abspielbereiche ergänzen. Bestehende Schadens-/Buffer-/Cancel-/Filterregeln weiterverwenden.
 - Clip-Zuordnung an diese Zeiten anbinden; den Kontaktmoment des Punch/Kick im Active-Fenster zeigen. Ein schnellerer oder längerer Ersatzclip darf Angriffstiming nicht automatisch verändern.

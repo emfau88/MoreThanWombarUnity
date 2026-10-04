@@ -30,7 +30,7 @@ namespace WombatLab
             cooldown = Mathf.Max(0, cooldown - dt);
             if (!target.Alive) { coordinator.Release(this); SetState("DOWN"); return; }
             if (!player.GetComponent<PlayerDefense>().Alive) { Interrupt(); return; }
-            if (target.Hitstun > 0) { SetState("STAGGER"); return; }
+            if (target.Hitstun > 0 || GetComponent<AnimationReaction>()?.Active == true) { SetState("STAGGER"); return; }
             elapsed += dt;
             var toward = Vector3.ProjectOnPlane(player.transform.position - transform.position, Vector3.up);
             float distance = toward.magnitude;

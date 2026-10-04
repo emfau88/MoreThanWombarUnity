@@ -1,6 +1,6 @@
 # Externe Assets — Herkunft und Lizenznachweise
 
-Stand: 3. Oktober 2026. Dieses Register betrifft zusätzlich importierte Modelle, Rigs, Animationen, Props, Texturen, Audio und VFX. Unity-/Paketabhängigkeiten stehen separat in `UnityProject/Packages/manifest.json` und behalten ihre jeweiligen Bedingungen.
+Stand: 4. Oktober 2026. Dieses Register betrifft zusätzlich importierte Modelle, Rigs, Animationen, Props, Texturen, Audio und VFX. Unity-/Paketabhängigkeiten stehen separat in `UnityProject/Packages/manifest.json` und behalten ihre jeweiligen Bedingungen.
 
 Die vollständigen Downloadarchive und entpackten Recherchekopien unter `art-source/third-party/` bleiben lokal und sind vom Git-Commit ausgenommen. Alle tatsächlich benötigten Unity-Originale, Ableitungen und Lizenzdateien werden mit dem Projekt versioniert; die Archivhashes dokumentieren den lokalen Bezug.
 
@@ -22,7 +22,7 @@ Zwei Quaternius-Standardpakete sind für den separaten technischen B2-Importnach
 - Archiv: `art-source/third-party/Quaternius/AnimationLibrary-Standard.zip`; SHA256 `CC73FC4E495B82958207316596317A3F40B9FA38065BDE1027937452DA537724`.
 - Nachweis: enthaltene `License.txt` und `README.txt`, auch unter `UnityProject/Assets/ThirdParty/Quaternius/AnimationLibrary/`. CC0 1.0 Universal / Public Domain Dedication, kommerzielle Nutzung und Rohdateiweitergabe erlaubt; keine verpflichtende Attribution.
 - Original: `UAL1_Standard.fbx`, ausdrücklich Variante ohne Root Motion. Unter anderem Idle, Walk, Jog, Sprint, Jump_Start/Loop/Land, Punch_Jab/Cross, Hit_Head/Chest, Roll und Death01. Kein Kick im Standardarchiv; fehlende Aktionen später konkret ergänzen.
-- Ableitung: `Assets/Game/Characters/ImportProbe/MovementSource.fbx`; fünf Bewegungskopien sowie Jab/Cross als Humanoid importiert. Eigene Combat-Kopien unter `Assets/Game/Characters/HumanoidCombat/`: abschnittsweise retimte Jab-/Cross-Varianten, eigene AttackDefinitions und Avatar-Kontaktbahnen. Lokal ergänzte Source_Kick/Source_AirKick bauen auf eingefrorenen Humanoid-Idle-Kurven mit selbst gesetzten Bein-/Rumpfmuskelkurven auf. Kein zusätzlicher fremder Kick-Download. Root Motion bleibt aus; Motor ist Bewegungsautorität. Endgültige Finisher-/Heavy-/Air-Smash-Clips stehen aus.
+- Ableitung: `Assets/Game/Characters/ImportProbe/MovementSource.fbx`; fünf Bewegungskopien und Jab/Cross, in B3a zusätzlich Sprint_Loop, Hit_Chest, Hit_Head und Sword_Attack als Humanoid importiert. Eigene Combat-Kopien unter `Assets/Game/Characters/HumanoidCombat/` mit retimten Kurven, AttackDefinitions und Avatar-Kontaktbahnen. Source_Hook ist eine Cross-Ableitung mit geänderten Arm-/Rumpfmuskelkurven; Source_Overhand nutzt Sword_Attack ohne Waffe als Heavy-Grundlage. Lokal ergänzte Source_Kick/Source_AirKick und Source_AirSmash verwenden eingefrorene Humanoid-Idle-Kurven mit selbst gesetzten Muskelkurven. Robot_Hit/Robot_Stagger sind eigene Ableitungen unserer Grundform-Idle-Clips. Kein zusätzlicher Download in B3a; dieselben CC0-Originale/Lizenzbelege. Root Motion bleibt aus; Motor ist Bewegungsautorität.
 
 ## Kandidaten — noch nicht verwendet
 
