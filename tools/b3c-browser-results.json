@@ -1,0 +1,25 @@
+{
+  "verification": "Observed actual browser keyboard input and screenshots, not TestInput",
+  "url": "http://127.0.0.1:8765/?b3c=final",
+  "build": "WebGL release, final Linear filter configuration",
+  "movementAndFacing": "D taps",
+  "attack": "J taps against active AI",
+  "victory": true,
+  "playerHpAtVictory": 100,
+  "restart": "R restores player 100 / bear 80 and spawn positions",
+  "screenshots": [
+    "UnityProject/Assets/QA/b3c-browser-final.png",
+    "UnityProject/Assets/QA/b3c-browser-final-reset.png"
+  ],
+  "remainingWarnings": [
+    "AppUISettings default instance",
+    "FSR shader initialization; URP initializes unused passes too"
+  ],
+  "unverified": [
+    "Native Windows physical keyboard",
+    "Audible audio quality",
+    "Physical gamepad",
+    "FPS/frame time",
+    "WebGL memory"
+  ]
+}

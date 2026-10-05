@@ -9,6 +9,7 @@ namespace WombatLab
         public string stateName;
         public bool rightHand, heavy;
         public bool foot, airborne;
+        public bool knocksDown;
         public float forwardStep = .18f;
         [Range(0, 1)] public float moveRelease = .82f;
         [Range(0, 1)] public float hitChainStart = .48f;

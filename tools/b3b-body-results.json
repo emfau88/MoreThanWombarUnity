@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 12,
+      "summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "WombatLab.Tests.BodyRecoveryPlayTests.HeavyInterruptsEnemyFallsGetsUpAndCannotBeStunLocked",
+          "Status": "Passed",
+          "Duration": 4.4148948,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.BodyRecoveryPlayTests.LethalHitKeepsWholeBodiesDownAndResetRestoresCollisionAndInput",
+          "Status": "Passed",
+          "Duration": 2.1523859,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.BodyRecoveryPlayTests.PlayerKnockdownCancelsAttackBlocksInputAndReturnsControlWithProtection",
+          "Status": "Passed",
+          "Duration": 2.8338944,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.BodyRecoveryPlayTests.ResetDuringEveryRecoveryPhaseRestoresBodiesAndChangingOpponentCountClearsState",
+          "Status": "Passed",
+          "Duration": 2.4704094,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\madde\\Documents\\MoreThanWombarUnity\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

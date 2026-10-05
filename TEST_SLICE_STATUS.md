@@ -1,6 +1,42 @@
 # Test-Slice-Status
 
-Stand: 4. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
+Stand: 5. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
+
+## B3c — technisches Duell und Build-Übergabe
+
+KI-Abstand, Combo-Anschluss aus tatsächlichem Anlauf, Angriffsschutz während GetUp, Kontaktfeedback und deutsches Duell-HUD sind integriert. Zwei vorher reproduzierte Probleme sind korrigiert: Warnung bei 1,643 m mit nur einem Combo-Treffer; neue KI-Angriffserlaubnis während Aufstehschutz. Nach Tuning: 1,288 m Warnabstand, drei Treffer (80 → 37 HP), neue Warnung erst nach Schutzende. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md).
+
+**3/3 DuelPlayTests**, 20,43 s und **5/5 HumanoidCombatPlayTests**, 13,34 s bestehen. Resultate: `tools/b3c-duel-results.json` und `tools/b3c-contact-results.json`. Der Kontaktblock prüft unter anderem Hitstop/Luftflugbahn, alle sieben Kontaktbahnen und übersprungenes Active. Kein erneuter Gesamt-Testlauf.
+
+Windows- und WebGL-Releasebuild erfolgreich; bestehende Paket-/Shaderwarnungen sind in den Berichten erfasst. Windows meldet 0 Fehler; der letzte WebGL-Bericht meldet Succeeded und 1 Fehler des CLI-Wartezeitlimits während des Builds, keinen fehlgeschlagenen Playerbau. Details einschließlich Ladegrößen und Browser-Filterkorrektur stehen in der B3c-Übergabe. Windows startet und zeigt Map, KI, Knockdown und Niederlage. Der native Fokuszugriff des UI-Werkzeugs scheitert mit `foreground window did not report a process id`; nach einmaliger Wiederherstellung keine weitere native Tastaturprüfung. Nutzer hat diesen Spielstand noch nicht getestet. Im echten Browser funktionieren R, Bewegung/Richtung und die J-Combo; eine zusammenhängende Tastatursequenz gewinnt bei 100 Spieler-HP und R stellt 100/80 HP wieder her. Screenshot: `UnityProject/Assets/QA/b3c-browser-victory.png`. Keine hörbare Audioabnahme, kein physischer Gamepad-Nachweis und kein FPS-/WebGL-Speicherprofil daraus ableiten.
+
+B3c ist integriert; B3b, M1 und B3c werden auf Nutzerauftrag gemeinsam committed und nach origin/main gepusht. B4 (Schulterstoß/Moveset-Balance) ist der nächste Entwicklungsbulk und wurde noch nicht begonnen. Wombat-Look bleibt separat offen.
+
+## M1 — vorgezogene Junkyard-Testmap geliefert
+
+HumanoidCombatLab besitzt jetzt eine erste gestaltete Kampfumgebung: durchgehender Beton, dezente Arbeitsflächen-Markierungen, neu gruppierte Container, drei Schrottgruppen mit Reifen/Fahrzeugteilen, Zaun, Werkstatt-Hintergrund, Hofschild und abgestimmtes warmes/kühles Licht. Zehn gezielt ausgewählte Kenney-FBX und eine Poly-Haven-Betonbasis statt eigener kompletter Modell-/Texturproduktion. Originale/Lizenzen unter ThirdParty, eigene URP-Materialien und wiederverwendbares Environment-Prefab unter Game/Environment. Details: [M1_MAP_PREVIEW.md](M1_MAP_PREVIEW.md).
+
+Vorher/Nachher unter `Assets/QA/m1-before.png` und `m1-after.png` aus gleicher Kameraposition angesehen. Die erste zu sandfarbene Bodenfassung und zu große Hintergrundgebäude wurden korrigiert. Bodenmarkierungen berücksichtigen die tatsächlich gespeicherten Motorgrenzen und die Körperkapsel. Die Anfangs-Randmessung verglich irrtümlich mit älteren angenommenen Grenzen; abschließend gegen die gespeicherte CharacterDefinition kontrolliert.
+
+Kurzer tatsächlicher Play-Durchlauf: alle vier Ecken bei x = ±7 / z = ±2,35 erreichen, jeweils grounded und innerhalb der Grenzen; Sprung mit 1,17 m Höhe und Landung; sichtbare Gegnerwarnung; echter Gegner-Heavy (100 → 88 HP) mit Falling; GetUp mit Schutz; Spieler-Heavy trifft genau einmal und wirft Gegner nieder; Reset zu 100 HP und Standing bei beiden. Neue Environment-Collider: **0**, originale Boden-/Randkollision erhalten. Messungen in `tools/m1-map-results.txt`, Spielbilder unter `Assets/QA/m1-play-*.png` angesehen. Keine neue Unit-/Combat-Vollsuite, da Gameplay-Regeln unverändert.
+
+M1 ist eine aufgewertete kleine Testarena, kein finales Kapitel. Weitere Bereiche/Encounter/Checkpoints bleiben B6, finale Weltgestaltung B7. Als Nächstes B3c mit Duell-Tuning und Buildnachweis. M1 liegt lokal vor; kein neuer Commit/Push in diesem Auftrag.
+
+Finale Übergabe: HumanoidCombatLab frisch geladen, Szene gespeichert/clean, Play gestoppt, keine fehlgeschlagene Script-Kompilierung. Environment-Prefab vorhanden, 0 fehlende Materialien, ursprünglicher Floor-Collider aktiv und 0 neue Environment-Collider.
+
+## B3b — Knockdown, GetUp, Schutz und Tod geliefert
+
+B3a als `405bfb5` committed und nach origin/main gepusht. B3b liegt als neuer lokaler Spielstand vor: Spieler-Heavy/Luft-Smash und Bären-Heavy werfen nieder; Fall 0,42 s, Boden 0,40 s, GetUp 0,80 s, danach 0,45 s Schutz bei freier Steuerung. Tod hält beide Ganzkörper-Posen am Boden. R und Gegnerwechsel räumen den Ablauf samt Collider/Kapselhöhe, HP, Schutz und Angriff auf. Details: [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md).
+
+Gezielte B3b-Prüfung: **4/4 BodyRecovery-Fälle bestanden** (`tools/b3b-body-results.json`), für Unterbrechung während Warnung, Aktionssperre, Schutz und Schutzende, beide Tode sowie Reset in jeder Phase und Gegnerwechsel. Zwei feste Zeitannahmen im Test wurden durch Warten auf tatsächliche Zustandswechsel ersetzt. Eine bestehende Stagger-Prüfung verwendet nun Kick, weil Heavy ausdrücklich Knockdown auslöst.
+
+Einmalige relevante Regression: **4/4 CharacterAction-Fälle**, 8,82 s (`tools/b3b-action-regression-results.json`); **5/5 HumanoidCombat-Fälle**, 11,75 s (`tools/b3b-contact-regression-results.json`). Combo, Run, Hit/Stagger, Hitstop, sieben Kontaktbahnen, übersprungenes Active und Luft-Smash mit fortgesetzter Flugbahn bestehen. Keine neue Vollsuite.
+
+Tatsächliche Kamerasequenzen unter `Assets/QA/b3b-*.png` und `b3b-final-*.png`: Fall, Liegen, Seitstütz/Knien, Stehen mit Schutz, Tod und Reset angesehen. Ein echter KI-Heavy trifft den Spieler für 12 HP (100 → 88) und startet Falling; danach Reset zu Standing bei beiden Figuren (`Assets/QA/b3b-final-visual-report.txt`). Die GetUp-Zwischenpose wurde anhand des Bodenkontakts angepasst. Reset des inaktiven zweiten Gegners spielt keinen Animator-State mehr ab und erzeugt dadurch keine entsprechende Warnung.
+
+Nächster Bulk: B3c, zusammenhängendes Duell-Tuning und kleiner Windows-/WebGL-Buildnachweis. Noch nicht begonnen; Wombat-Look bleibt offen.
+
+Übergabe: HumanoidCombatLab frisch geladen und gespeichert, Play gestoppt, Script-Kompilierung ohne Fehler. Drei BodyRecovery-Komponenten und beide niederwerfenden Heavy-Definitionen vorhanden. Nach letzter reiner GetUp-Posekorrektur tatsächlichen Seitstütz erneut angesehen; Fuß-Bone-Höhen 0,162/0,120 m statt unter dem Boden (`Assets/QA/b3b-final-side-report.txt`). Phasenlänge bleibt 0,80 s; keine weitere Voll-/Regressionssuite für diese Poseänderung.
 
 ## B3a — Run, Kernaktionen und Hit/Stagger geliefert
 
@@ -14,7 +50,7 @@ Nach der letzten Luft-Smash-Korrektur **1/1 gezielter PlayMode-Fall bestanden**,
 
 Finale Smash-Kameraposen mit Ausholen und Kontakt angesehen (`Assets/QA/b3a-final-smash-*.png`); tatsächliche Sequenz bestätigt einen Treffer. Run, Heavy, Haken und beide Hit-Reaktionen ebenfalls kontrolliert. HumanoidCombatLab frisch geladen; Play gestoppt und Script-Kompilierung ohne Fehler für die Übergabe.
 
-Nächster Bulk ist B3b: lebendes Knockdown/GetUp, Aufstehschutz und vollständige Death-/Reset-Darstellung. B3c folgt mit Duell-Tuning und Buildnachweis. Wombat-Gestaltung bleibt offen. B3b/B3c wurden nicht begonnen.
+Zum damaligen B3a-Abschluss war B3b der nächste Bulk. Aktueller B3b-Stand und nächste Arbeit stehen oben; Wombat-Gestaltung bleibt offen.
 
 ## B1 — Combat-Polish (technisch abgeschlossen)
 

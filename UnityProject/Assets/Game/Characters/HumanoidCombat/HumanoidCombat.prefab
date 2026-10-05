@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 364653056583200235}
   - component: {fileID: 3725125825632131963}
   - component: {fileID: 4107751675679091923}
+  - component: {fileID: 6150109921080472908}
   m_Layer: 0
   m_Name: HumanoidCombat
   m_TagString: Untagged
@@ -146,6 +147,26 @@ MonoBehaviour:
   clock: {fileID: 364653056583200235}
   hitClip: {fileID: 7400000, guid: f97afadb8d156564b9ab444b3d8b289d, type: 2}
   staggerClip: {fileID: 7400000, guid: 5742732e4c3a28d49ac515efe973b32e, type: 2}
+--- !u!114 &6150109921080472908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403307395320657685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b6dc0b63e66a549afa43bef362ad7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.BodyRecovery
+  animator: {fileID: 74089101064753131}
+  clock: {fileID: 364653056583200235}
+  fallClip: {fileID: 7400000, guid: 827b0fdb6b50d704998ae9383356c7d2, type: 2}
+  getUpClip: {fileID: 7400000, guid: b141a51fdaa5af8419f829ec21229315, type: 2}
+  fallSeconds: 0.42
+  downSeconds: 0.4
+  getUpSeconds: 0.8
+  protectionSeconds: 0.45
 --- !u!1 &5994752987321490512
 GameObject:
   m_ObjectHideFlags: 0

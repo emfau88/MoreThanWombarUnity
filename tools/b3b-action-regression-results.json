@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 8.82,
+      "summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "WombatLab.Tests.CharacterActionPlayTests.AirSmashOnDescentHitsOnceAndKeepsFlight",
+          "Status": "Passed",
+          "Duration": 4.1294162,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.CharacterActionPlayTests.EnemyHitAndStaggerHoldThroughHitstopAndReturnToAI",
+          "Status": "Passed",
+          "Duration": 1.4713373,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.CharacterActionPlayTests.PlayerReactionInterruptsAttackResistsLocomotionAndResets",
+          "Status": "Passed",
+          "Duration": 1.1692927,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.CharacterActionPlayTests.RunTransitionsHoldSpeedButCannotBypassAttackOrCreateAirSprint",
+          "Status": "Passed",
+          "Duration": 1.948535,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\madde\\Documents\\MoreThanWombarUnity\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

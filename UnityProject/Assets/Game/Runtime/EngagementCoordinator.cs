@@ -26,6 +26,7 @@ namespace WombatLab
         public bool TryAcquire(EnemyBrain enemy)
         {
             if (Owner != null || rest > 0 || !enemy.target.Alive || !player.GetComponent<PlayerDefense>().Alive) return false;
+            if (player.GetComponent<BodyRecovery>()?.Protected == true) return false;
             // If another ready opponent exists, alternate rather than rewarding update order.
             if (lastOwner == enemy)
                 foreach (var other in enemies)

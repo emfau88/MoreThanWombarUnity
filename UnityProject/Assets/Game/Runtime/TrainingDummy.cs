@@ -23,6 +23,7 @@ namespace WombatLab
         Vector3 rigRestPosition;
         Quaternion rigRestRotation, padRestRotation;
         float deathProgress;
+        BodyRecovery body;
 
         void Awake()
         {
@@ -30,6 +31,7 @@ namespace WombatLab
             spawn = transform.position;
             baseColor = padRenderer.sharedMaterial.GetColor("_BaseColor");
             var brain = GetComponent<EnemyBrain>();
+            body = GetComponent<BodyRecovery>();
             fallenRig = brain != null ? brain.visual.Find("Rig") : null;
             enemyAnimator = brain != null ? brain.animator : null;
             if (fallenRig != null) { rigRestPosition = fallenRig.localPosition; rigRestRotation = fallenRig.localRotation; }
@@ -42,16 +44,18 @@ namespace WombatLab
 
         public bool ReceiveHit(AttackDefinition attack, Vector3 direction)
         {
-            if (!Alive) return false;
+            if (!Alive || body != null && body.Protected) return false;
             Health = Mathf.Max(0, Health - attack.damage); HitCount++;
             Hitstun = attack.hitstun; flash = .12f;
             velocity = Vector3.ProjectOnPlane(direction, Vector3.up).normalized * attack.knockback * 6;
             GetComponent<EnemyBrain>()?.Interrupt();
-            if (Alive) GetComponent<AnimationReaction>()?.Play(attack.heavy || attack.damage >= 18, Hitstun);
+            if (!Alive && body != null) body.Die();
+            else if (attack.knocksDown && body != null) body.KnockDown();
+            else if (Alive) GetComponent<AnimationReaction>()?.Play(attack.heavy || attack.damage >= 18, Hitstun);
             if (!Alive)
             {
                 GetComponent<AnimationReaction>()?.Clear();
-                if (enemyAnimator != null) { enemyAnimator.Play("Idle", 0, 0); enemyAnimator.Update(0); enemyAnimator.enabled = false; }
+                if (body == null && enemyAnimator != null) { enemyAnimator.Play("Idle", 0, 0); enemyAnimator.Update(0); enemyAnimator.enabled = false; }
                 foreach (var collider in colliders) collider.enabled = false;
             }
             return true;
@@ -64,7 +68,7 @@ namespace WombatLab
             transform.position = MotorMath.ClampGround(transform.position + velocity * dt,
                 new Vector2(-6.6f, -2.1f), new Vector2(6.6f, 2.1f));
             velocity *= Mathf.Exp(-9 * dt);
-            if (!Alive && fallenRig != null)
+            if (body == null && !Alive && fallenRig != null)
             {
                 deathProgress = Mathf.Min(1, deathProgress + Time.deltaTime / .42f);
                 float fall = Mathf.SmoothStep(0, 1, deathProgress);
@@ -83,11 +87,12 @@ namespace WombatLab
         public void ResetTraining()
         {
             GetComponent<AnimationReaction>()?.Clear();
+            GetComponent<BodyRecovery>()?.ResetBody();
             Health = maxHealth; HitCount = 0; Hitstun = flash = 0;
             velocity = Vector3.zero; transform.position = spawn;
             deathProgress = 0;
             if (fallenRig != null) { fallenRig.localPosition = rigRestPosition; fallenRig.localRotation = rigRestRotation; }
-            if (enemyAnimator != null) { enemyAnimator.enabled = true; enemyAnimator.speed = 1; enemyAnimator.Play("Idle", 0, 0); }
+            if (enemyAnimator != null) { enemyAnimator.enabled = true; enemyAnimator.speed = 1; if (gameObject.activeInHierarchy) enemyAnimator.Play("Idle", 0, 0); }
             for (int i = 0; i < colliders.Length; i++) colliders[i].enabled = colliderEnabled[i];
             pad.localRotation = padRestRotation;
             properties.SetColor("_BaseColor", baseColor); padRenderer.SetPropertyBlock(properties);

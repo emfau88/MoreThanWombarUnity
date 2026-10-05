@@ -18,6 +18,7 @@ MonoBehaviour:
   heavy: 1
   foot: 0
   airborne: 0
+  knocksDown: 1
   forwardStep: 0.22
   moveRelease: 0.82
   hitChainStart: 0.48

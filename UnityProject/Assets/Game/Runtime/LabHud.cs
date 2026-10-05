@@ -11,6 +11,7 @@ namespace WombatLab
         public Text healthText;
         public RectTransform healthFill;
         public EngagementCoordinator encounter;
+        public bool duelPresentation;
         CombatController combat;
         float nextRefresh;
         void Awake() { combat = player.GetComponent<CombatController>(); }
@@ -20,9 +21,23 @@ namespace WombatLab
             nextRefresh = Time.unscaledTime + .1f;
             var p = player.transform.position;
             string status = combat != null && combat.Attacking ? $"{combat.Attack.stateName} / {combat.Phase}" : player.State.ToUpperInvariant();
+            var body = player.GetComponent<BodyRecovery>();
+            if (body != null) status = body.Busy ? body.State.ToString().ToUpperInvariant() : body.Protected ? "GETUP PROTECTION" : status;
             if (encounter != null)
             {
                 var defense = player.GetComponent<PlayerDefense>();
+                if (duelPresentation)
+                {
+                    string hint = body != null && body.Busy ? "Aufstehen ..." : body != null && body.Protected ? "Aufstehschutz" :
+                        encounter.Owner != null && encounter.Owner.State == "TELEGRAPH" ? "Orange Warnung: ausweichen oder unterbrechen!" :
+                        defense.Evading ? "Ausweichen" : defense.Cooldown > 0 ? "Ausweichen erholt sich ..." : "SHIFT: Ausweichen bereit";
+                    string opponent = encounter.Mode == 1 ? $"BÄR {encounter.enemies[0].target.Health}/{encounter.enemies[0].target.maxHealth}" : $"{encounter.LivingCount} Gegner übrig";
+                    stateText.text = !defense.Alive ? "Besiegt · R: Neuer Versuch" : encounter.LivingCount == 0 ? "Gewonnen! · R: Nochmal · 2: Zwei Gegner" :
+                        player.ShowDebug ? $"{status} · {opponent} · {hint}" : $"{opponent} · {hint}";
+                    healthText.text = $"DU   {defense.Health} / {defense.maxHealth}";
+                    healthFill.anchorMax = new Vector2(defense.Health / (float)defense.maxHealth, 1);
+                    return;
+                }
                 stateText.text = !defense.Alive ? "PLAYER DOWN — R TO RETRY" : encounter.LivingCount == 0 ? "ARENA CLEAR — R TO RETRY / 2 FOR TWO OPPONENTS" :
                     $"S3 / {encounter.Mode} OPPONENT(S)   ·   {encounter.LivingCount} LEFT   ·   {(defense.Evading ? "EVADE" : status)}   ·   {(encounter.Owner != null ? encounter.Owner.State : "WATCH THE ORANGE WARNING")}";
                 healthText.text = $"YOU {defense.Health}/{defense.maxHealth} HP   ·   {(defense.Cooldown > 0 ? "EVADE WAIT" : "EVADE READY")}";

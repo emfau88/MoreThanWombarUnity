@@ -34,7 +34,7 @@ namespace WombatLab
         }
         public void Contact(Vector3 position, bool heavy)
         {
-            duration = remaining = heavy ? .17f : .11f; strength = heavy ? .42f : .27f;
+            duration = remaining = heavy ? .15f : .085f; strength = heavy ? .36f : .23f;
             flash.transform.position = position; spark.transform.position = position;
             flash.enabled = spark.enabled = true;
             spark.positionCount = 17;
@@ -43,7 +43,7 @@ namespace WombatLab
                 float angle = (i / 2) * Mathf.PI / 4;
                 spark.SetPosition(i, i % 2 == 0 ? Vector3.zero : new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * strength * 1.8f);
             }
-            audioSource.PlayOneShot(heavy ? heavySound : lightSound);
+            audioSource.PlayOneShot(heavy ? heavySound : lightSound, heavy ? 1 : .78f);
         }
         void LateUpdate()
         {

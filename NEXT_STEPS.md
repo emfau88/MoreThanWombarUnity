@@ -1,15 +1,35 @@
 # Konkreter Arbeitsplan — Asset-Basis und vollständiges Charakterduell
 
-Stand: 4. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a ergänzt Run, unterscheidbare Kernangriffe und sichtbare Trefferreaktionen; konkrete Lieferung in [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt ausdrücklich eine spätere Entscheidung. Nächste technische Arbeit ist B3b mit Knockdown/GetUp/Death, anschließend B3c mit Duell-Tuning/Buildnachweis. B3b/B3c sind noch nicht begonnen.
+Stand: 5. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. Nächster Entwicklungsbulk ist B4; noch nicht begonnen.
 
-## Unmittelbar nächster Bulk: B3b
+## M1 — Testmap aufgewertet
 
-1. **Fall und Aufstehen:** Eine vorhandene Fall-/Aufstehvorlage am Humanoid prüfen; nur fehlende Teile ergänzen. Erst Spieler und einen Robot-Gegner vollständig anbinden.
-2. **Klare Zustände:** Kräftige ausgewählte Treffer lösen Knockdown aus. Angriff/Buffer abbrechen, Bodenphase und GetUp sperren Aktionen; Körperkollision und Hurtbox bewusst behandeln. Begrenzter Aufstehschutz verhindert sofortiges erneutes Niederwerfen.
-3. **Tod und Reset:** Spieler-Tod sichtbar darstellen, Gegner-KO vervollständigen; R stellt HP, Position, Pose, Collider, Schutz, KI und Angriff vollständig wieder her.
-4. **Kurze Übergabe:** Einen echten Fall → Bodenphase → GetUp → weiterkämpfen und Tod → Reset durchspielen. Nur Unterbrechung, Schutz und Reset gezielt prüfen.
+Auf Nutzerwunsch vorgezogen und integriert: Betonboden, neu gruppierte Container, fertige Schrott-/Reifen-/Zaun-/Werkstattmodelle, Hofschild und abgestimmtes Licht. Freie Kampfmitte, weiterhin bestehende Kollision und Bewegungsgrenzen. Kurzer tatsächlicher Durchlauf mit Randbewegung, Sprung, Warnung, Heavy, Knockdown/GetUp und Reset. Details und Quellen: [M1_MAP_PREVIEW.md](M1_MAP_PREVIEW.md).
 
-**Effekt:** Heavy-Treffer bekommen einen vollständigen körperlichen Ablauf. Danach B3c: Abstände/Combos/Luftangriffe/Feedback zusammen tunen und den kleinen Windows-/WebGL-Nachweis ausführen. Größerer Contentausbau beginnt erst danach.
+M1 zieht einen kleinen Präsentationsanteil aus B7 vor; Levelstrecke und zusätzliche Kampfbereiche bleiben B6.
+
+## B3c geliefert
+
+1. **Duell-Abstände:** Jab/Cross/Haken aus normaler Spielentfernung verbinden; Vorwärtsschritt, Rückstoß und Fehlschlag-Recovery zusammen abstimmen. Heavy/Kick sollen einen klaren Zweck behalten.
+2. **Luft und Aufstehen:** Sprung-Kick/Smash beim Anflug und Abstieg spielen; Kontaktmoment, Landung und erneuten Kampfbeginn nach GetUp abstimmen. Bestehende Flugbahn und Aufstehschutz erhalten.
+3. **Treffergefühl:** Hitstop, Reaktion, Kontaktblitz und vorhandenen Sound auf leichte/starke Treffer abstimmen; Warnung und Ausweichen im Einzelduell beurteilen.
+4. **Spielbare Übergabe:** Vorhandene Windows-/WebGL-Buildmodule prüfen, mit vorhandener Toolchain kleine Builds erzeugen. Windows kurz durchspielen; im Browser Fokus, Eingaben, Audio und Restart prüfen. Fehlende Module konkret festhalten, keine ungefragte Installation.
+
+**Effekt:** Der vorhandene Mensch-gegen-Bären-Kampf wird als zusammenhängendes Duell abgestimmt und außerhalb des Editors überprüfbar. Größerer Contentausbau beginnt erst danach. Endgültiger Wombat-Look bleibt separat offen.
+
+Die vier Punkte beschreiben den gelieferten Umfang. Tatsächliche Nachweise und verbleibende Audio-/Performance-/Windows-Eingabeprüfungen stehen in der B3c-Übergabe; diese werden nicht als bestanden vorausgesetzt.
+
+## Als Nächstes: B4 — ein Schulterstoß und klare Move-Rollen
+
+1. **Ein Move festlegen:** geradliniger kurzer Schulterstoß, Eingabe zunächst E/RT als Vorschlag. Vorhandene Clips als Rohmaterial prüfen; nur nötige Schulter-/Körperpose ergänzen. Keine neue komplette Animationsbibliothek.
+2. **Bewegung integrieren:** feste Richtung beim Start, kurzer Anlauf, begrenzte Strecke über PlayerMotor und bestehende Kollision. Root Motion bleibt aus. Eine Wand beendet die Bewegung zuverlässig.
+3. **Kontakt anbinden:** eine AttackDefinition mit Startup/Active/Recovery, vorhandenen Team-/Frontfiltern, genau einem Treffer pro Ziel und bestehenden Stagger-/BodyRecovery-Regeln. Dash-Bewegung und Angriffsschritt nicht doppelt anwenden.
+4. **Spielentscheidung abstimmen:** Schulterstoß schließt Distanz, Light hält Druck, Kick schafft Platz, Heavy wirft nieder. Fehlschlag/Ende des Stoßes erhalten eine spürbare Erholung; kein unbegrenzt sicheres Durchrennen.
+5. **Kurze Übergabe:** tatsächliche Treffer-/Fehlschlagsequenz, Wandkontakt und Unterbrechung prüfen; dann Werte und Steuerung dokumentieren. Nur betroffene Fälle, keine neue Vollsuite und kein automatischer Plattformwechsel für jeden Tuningwert.
+
+**Vor dem nächsten Build:** das derzeit direkte Paket `com.unity.ai.inference` auf ungenutzte Abhängigkeiten prüfen und bei bestätigter Nichtnutzung entfernen. Im Game-Code wurden keine Inference-/ONNX-/Sentis-Verwendungen gefunden; Shaderwarnungen und zusätzliche Buildarbeit rechtfertigen diese begrenzte Bereinigung. In B3c wurde das Paket noch nicht entfernt. Release-Kompression und ein kurzes Framezeit-/Speicherprofil anschließend am tatsächlichen Spielstand entscheiden.
+
+**Effekt:** eine neue, erkennbare Kampfoption auf der bestehenden technischen Basis. B5 ergänzt danach Gegnerrollen/Gruppen, B6 die Strecke mit Kampfbereichen und Checkpoints. B4 benötigt einen neuen Auftrag.
 
 ## 1. Bestand und Entscheidung
 
@@ -19,13 +39,13 @@ Stand: 4. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a e
 | CombatController, AttackDefinition, Buffer, Attack-Instanzen, Front-/Teamfilter | Behalten; gewünschte Angriffszeiten und Humanoid-Clip-Mapping sind in B2 Schritt 3 integriert |
 | Animierte Faust-/Fuß-Sweeps auf getrennten Hurtboxes | Regel behalten; Humanoid-Kontaktbahnen sind am echten Avatar gebacken und gegen sichtbare Posen geprüft |
 | B1: Angriffsschritte, Kick, Air-Kick/Air-Smash, spätes Movement-Release | Behalten; einmal anhand echter Nutzersequenz fein abstimmen |
-| TrainingDummy, PlayerDefense, EnemyBrain, EngagementCoordinator | Wiederverwenden; B3a-Trefferreaktion ist angebunden, lebendes Knockdown/GetUp folgt in B3b |
+| TrainingDummy, PlayerDefense, EnemyBrain, EngagementCoordinator | Wiederverwendet; BodyRecovery ergänzt B3b mit Knockdown/GetUp/Tod und Schutz |
 | Kamera, Testarena, gespeicherte Trainings-/Sparring-Szenen, HUD, Reset | Behalten als kurze Integrationsumgebung; Arena genügt für B2/B3 |
 | Grundform-Figur und selbst erzeugte Standardclips | Spielbare Vergleichsbasis; durch passende importierte Basis ersetzen, kein weiterer großer Standardanimationsbau |
 | Blender-Wombat, eigener Skeleton-Entwurf und JSON-Mesh-Bibliothek | Erhalten und zurückstellen; noch nicht in die Spielfigur integriert, kein Grund für zusätzliche Importarchitektur |
 | Geplanter kompletter eigener Modell-/Rig-/Animationspfad | Ersetzen durch Asset-Auswahl, Retargeting und begrenzte Anpassung für die Wombat-Identität |
-| Run und animierter Flinch/Stagger | In B3a geliefert; lebendes Knockdown/GetUp vor weiteren Gegnerrollen in B3b fertigstellen |
-| Build/Browserleistung | Noch nicht nachgewiesen; kleinen WebGL-Nachweis im Character Slice einplanen |
+| Run, Flinch/Stagger und Knockdown/GetUp | In B3a/B3b integriert; vor weiteren Gegnerrollen das vollständige Duell abstimmen |
+| Build/Browserleistung | Windows-/WebGL-Builds vorhanden, Browser-Tastaturkampf nachgewiesen; Ladegrößen erfasst, Framezeit/WebGL-Speicher und hörbare Audioabnahme noch offen |
 
 Der Bestand ist bereits fokussiert geprüft. Eine Fortsetzung beginnt an den geänderten Stellen. Quaternius liefert jetzt einen konkreten Humanoid-/Bewegungsnachweis; die Eignung einer tierischen Basis und die Wombat-Gestaltung bleiben offen.
 
@@ -60,7 +80,7 @@ Aktuelle Lieferung: `CharacterImportLab.unity` mit temporärem Quaternius-Humano
 
 ### Schritt 3 — Combat-Zeiten und importierte Pose verbinden
 
-Umgesetzt in `HumanoidCombatLab`: eigene AttackDefinitions mit Startup-/Active-/Recovery-Sekunden, abschnittsweise retimte Humanoid-Clips und am Avatar ausgewertete Kontaktpunkte. Animator-Zeit bleibt die einzige Phasenquelle; Runtime-Sweeps verwenden die gespeicherte Bahn ohne Umposen des sichtbaren Humanoids. Jab/Cross, eigene Kick-/Luftkick-Ableitungen, bestehende Defense/Gegner/Feedback und Reset sind angebunden. B3a ersetzt die ursprünglichen Cross-Finisher/Heavy/Air-Heavy durch eigene unterscheidbare Ableitungen. Zeit-/Clip-/Avataränderungen benötigen Neuableitung/Bake: beim vollständigen Neuaufbau HumanoidCombatBuilder, anschließend CharacterActionBuilder. Details in den Integrationsdokumenten.
+Umgesetzt in `HumanoidCombatLab`: eigene AttackDefinitions mit Startup-/Active-/Recovery-Sekunden, abschnittsweise retimte Humanoid-Clips und am Avatar ausgewertete Kontaktpunkte. Animator-Zeit bleibt die einzige Phasenquelle; Runtime-Sweeps verwenden die gespeicherte Bahn ohne Umposen des sichtbaren Humanoids. Jab/Cross, eigene Kick-/Luftkick-Ableitungen, bestehende Defense/Gegner/Feedback und Reset sind angebunden. B3a ersetzt die ursprünglichen Cross-Finisher/Heavy/Air-Heavy durch eigene unterscheidbare Ableitungen. Zeit-/Clip-/Avataränderungen benötigen Neuableitung/Bake: beim vollständigen Neuaufbau HumanoidCombatBuilder, anschließend CharacterActionBuilder und zuletzt BodyRecoveryBuilder. Details in den Integrationsdokumenten.
 
 - AttackDefinition um gewünschte Startup-/Active-/Recovery-Dauern und notwendige Clip-Abspielbereiche ergänzen. Bestehende Schadens-/Buffer-/Cancel-/Filterregeln weiterverwenden.
 - Clip-Zuordnung an diese Zeiten anbinden; den Kontaktmoment des Punch/Kick im Active-Fenster zeigen. Ein schnellerer oder längerer Ersatzclip darf Angriffstiming nicht automatisch verändern.

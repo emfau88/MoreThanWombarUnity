@@ -4,14 +4,21 @@ Eigenständiger Versuch eines stilisierten 3D-/2.5D-Arcade-Beat-'em-ups.
 Das bestehende [Browsergame](https://github.com/emfau88/MoreThanWombat) ist
 Designreferenz, keine technische Portierungsvorlage.
 
-**Aktueller Stand:** B3a ist im HumanoidCombatLab integriert: Gehen/Rennen,
+**Aktueller Stand:** B3a/B3b sind im HumanoidCombatLab integriert: Gehen/Rennen,
 Jab → Cross → Haken, Overhand-Heavy, Kampfsport-Kicks und zweihändiger Luft-Smash sowie
-sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Vorhandenes
+sichtbare Hit-/Stagger-Reaktionen, Niederwerfen, Aufstehen und Tod für beide Figuren. Vorhandenes
 Sparring, Ausweichen, Angriffsschritte, Combo-/Recovery-Regeln, Hitstop und Reset
 bleiben angebunden. Wahlweise ein oder zwei Gegner. Temporärer menschlicher
-Charakter; Wombat-Gestaltung bleibt offen. Noch kein eigenständiger Build.
+Charakter; Wombat-Gestaltung bleibt offen. M1 ergänzt eine erste Junkyard-Kampfumgebung
+mit Betonboden, Schrott/Reifen, Zaun, Werkstatt-Hintergrund und abgestimmtem Licht.
+B3c stimmt KI-Abstand, Aufstehschutz und Feedback ab und ergänzt ein deutsches Duell-HUD.
+Eigenständige Windows-/WebGL-Spielstände sind vorhanden; der Browserkampf wurde bis zum Sieg gespielt.
 
 ## Prototyp spielen
+
+Direkt unter Windows: `Builds/B3c/Windows/MoreThanWombat.exe` starten.
+Im Browser: `tools/Serve-Duel.ps1` ausführen und [lokales Duell](http://127.0.0.1:8765) öffnen.
+Ins Spielfeld klicken. Builddetails und konkrete Prüfergebnisse: [B3c-Übergabe](B3C_DUEL_HANDOFF.md).
 
 `UnityProject` mit Unity **6000.4.0f1** öffnen, die Szene
 `Assets/Game/Scenes/HumanoidCombatLab.unity` laden und Play drücken. In die Game-Ansicht
@@ -28,6 +35,9 @@ klicken, damit sie die Tastatureingaben erhält.
 - Shift / Gamepad East: Ausweichen in Bewegungsrichtung (ohne Eingabe nach vorne).
 - 1 / 2: einen beziehungsweise zwei Gegner aktivieren. Orange/roter Bodenmarker
   kündigt einen Schlag an. R setzt Spieler und Gegner zurück.
+- Heavy und Luft-Smash werfen Gegner nieder; der Bären-Heavy kann dich niederwerfen.
+  Nach Fall/Boden/Aufstehen erhältst du die Steuerung mit 0,45 s Schutz zurück.
+  Bei 0 HP bleibt die Figur liegen; R startet das Duell neu.
 - `CombatLab.unity` bleibt als Training ohne Gegenangriffe verfügbar.
 - `CharacterImportLab.unity` bleibt der separate B2-Importnachweis für Bewegung und Sprung.
 - `SparringLab.unity` bleibt die ursprüngliche B1-Vergleichsszene mit Grundform-Figur.
@@ -49,6 +59,9 @@ Grundformen. Beide bleiben Platzhalter für die endgültige Cartoon-Gestaltung.
 - [B2: drei Kandidaten und konkrete Importbasis](B2_ASSET_SELECTION.md)
 - [B2: Humanoid-Combat, Timing und Kontaktbahnen](B2_COMBAT_INTEGRATION.md)
 - [B3a: Rennen, Kernaktionen und Trefferreaktionen](B3A_ACTIONS.md)
+- [B3b: Niederwerfen, Aufstehen, Tod und Reset](B3B_BODY_RECOVERY.md)
+- [B3c: abgestimmtes Duell und Windows-/WebGL-Übergabe](B3C_DUEL_HANDOFF.md)
+- [M1: vorgezogene Junkyard-Testmap](M1_MAP_PREVIEW.md)
 
 Gestaltungsziel ist der illustrative Cartoon-/Comic-Stil der 2D-Referenz:
 runde kräftige Formen, expressive Gesichter und gemalte Materialdetails.
@@ -58,7 +71,7 @@ konzentriert sich auf ein vollständiges Duell mit einem Spieler und einem
 Gegner; WebGL-Verträglichkeit wird an diesem kleinen Slice geprüft.
 
 Werkzeuganbindung, Bewegung und Combat-Polish sind umgesetzt; Nutzerfeedback
-dient dem gezielten Tuning. B3a ersetzt die vorläufigen Cross-Varianten und ergänzt Rennen und Trefferreaktionen. Nächste Arbeit ist B3b mit lebendem Knockdown, GetUp und Death/Reset, danach B3c mit Duell-Tuning und Buildnachweis; Wombat-Gestaltung bleibt separat offen.
+dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. Nächster Entwicklungsbulk ist B4 mit Schulterstoß und Moveset-Balance; Wombat-Gestaltung bleibt separat offen.
 Keine Cloud-Dienste, kein Multiplayer, keine Asset-Käufe und keine Änderungen
 am Browsergame als implizite Arbeitsschritte.
 

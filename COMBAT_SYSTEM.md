@@ -1,6 +1,6 @@
-# Combat und Sparring — aktueller B3a-Stand
+# Combat und Sparring — aktueller B3c-Stand
 
-Stand: 4. Oktober 2026. Diese Beschreibung enthält die erhaltenen B1-Regeln, B2-Humanoid-Anbindung und B3a mit Run, unterscheidbaren Kernaktionen und Hit/Stagger. Grundform-Figuren und temporärer Human bleiben Platzhalter. Lebendes Knockdown/GetUp folgt in B3b; Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md).
+Stand: 5. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung und B3c-Duell-Tuning. Grundform-Figuren und temporärer Human bleiben Platzhalter. Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md).
 
 B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. Letztere verbindet den gültigen Humanoid mit denselben Kampfregeln, konkreten Angriffszeiten und retargeteten Faust-/Fußbahnen. Die Tabelle unten beschreibt die erhaltenen B1-Werte; Humanoid-Zeiten stehen in [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md), aktuelle Aktionen und Reaktionen in [B3A_ACTIONS.md](B3A_ACTIONS.md).
 
@@ -61,23 +61,29 @@ Die Trainingspuppe hat 150 HP, der Sparring-Gegner 80 HP. Die frühen Lights hab
 
 Körperkollision und Trigger-Hurtbox auf Layer 8 `CombatHurtbox` sind getrennt. Faust oder Fuß sind explizite Kontaktpunkte mit Angriffsradius; keine aus Mesh-Bounds abgeleiteten Schadenszonen. Team, Lebensstatus, räumlicher Kontakt und Front-Richtung filtern Treffer. Jeder Gegner erhält pro Attack-Instanz höchstens einen Treffer, auch mit mehreren Hurtboxes. Der Spieler-Sweep verwendet einen festen Puffer mit 32 Kontakten.
 
-Treffer erzeugen Hitstun, Rückstoß, kurzen Flash, Kontaktblitz/Funken und eigene synthetisierte Kontaktklänge. Sie übernehmen keine Schadensentscheidung. Im HumanoidCombatLab spielt AnimationReaction sichtbares Hit/Stagger innerhalb der vorhandenen Treffer-Starre: beim Gegner starke Reaktion für Heavy oder Schaden ≥ 18, beim Spieler für Schaden ≥ 20. Locomotion/KI überschreiben die Pose währenddessen nicht. Hitstop friert Gegnerreaktion samt Restdauer ein; danach kehrt die Zuständigkeit zu Bewegung/KI zurück. Reset räumt die Reaktion auf. Der Trainingskörper kippt weiterhin lokal. Lebendes Knockdown/GetUp folgt in B3b.
+Treffer erzeugen Hitstun, Rückstoß, kurzen Flash, Kontaktblitz/Funken und eigene synthetisierte Kontaktklänge. Sie übernehmen keine Schadensentscheidung. Im HumanoidCombatLab spielt AnimationReaction sichtbares Hit/Stagger innerhalb der vorhandenen Treffer-Starre: beim Gegner starke Reaktion für Heavy oder Schaden ≥ 18, beim Spieler für Schaden ≥ 20. Knockdown oder Tod hat Vorrang. Locomotion/KI überschreiben die Pose währenddessen nicht. Hitstop friert Gegnerreaktion samt Restdauer ein; danach kehrt die Zuständigkeit zu Bewegung/KI zurück. Reset räumt die Reaktion auf. Der Trainingskörper kippt weiterhin lokal.
 
 Hitstop stoppt am Boden Spieler-Motor und Angriffspose sowie gegnerische Bewegung/Hitstun. Eine laufende Flugbahn bleibt aktiv. UI, Eingaben und Reset laufen weiter; kein globales `Time.timeScale`. Der kurze Ganzkörper-Fall eines bereits toten Gegners läuft nach Echtzeit weiter.
 
-Bei 0 HP verliert der Gegner sofort seine Angriffsfreigabe und Warnung, geht in DOWN, schaltet den Animator und seine Collider ab. Das gesamte Rig fällt in etwa 0,42 s um und bleibt liegen. Die separate Trainingspuppe behält ihre eigene Kippreaktion. Reset stellt HP, Position, Rig-Pose, Animator, ursprüngliche Collider-Aktivierung, Farbe, Warnung, Angriff, Puffer und Freigaben wieder her.
+Im HumanoidCombatLab werfen Spieler-Heavy/Luft-Smash und Gegner-Heavy ausdrücklich nieder (`knocksDown`), unabhängig vom Schadenswert. Fall 0,42 s → Boden 0,40 s → GetUp 0,80 s sperrt Aktionen und zusätzliche Treffer. Danach sind Steuerung und Collider wieder frei, mit 0,45 s weiterem Trefferschutz gegen sofortiges Dauerniederwerfen. Lebende Phasen respektieren Hitstop. Gegnercollider sind während Fall/Boden/GetUp aus; die Spieler-Kapsel bleibt niedrig für Boden, Gravitation und Arenagrenzen.
+
+Bei 0 HP spielen beide Figuren den Ganzkörper-Fall als Death und halten die liegende Endpose. Gegnerfreigabe/Warnung enden sofort; kein Aufstehen. Ältere B1-Szenen ohne BodyRecovery behalten ihren bisherigen Rig-Tod mit abgeschaltetem Animator/Collidern. Die separate Trainingspuppe behält ihre eigene Kippreaktion. R stellt HP, Position, Pose, Animator, ursprüngliche Collider, normale Kapselhöhe, Schutz, Farbe, Warnung, Angriff, Puffer und Freigaben wieder her. Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md).
 
 ## Sparring und Ausweichen
 
 EnemyBrain verwendet Approach, Telegraph, Attack, Recovery, Reposition, Stagger und Down. TrainingDummy bleibt der gemeinsame Schadens-/Rückstoßempfänger. Der Gegner besitzt ein eigenes `Enemy_Heavy`-Asset; Spielertuning verändert seine Animation und Daten nicht automatisch.
 
+B3c setzt die Angriffsdistanz im HumanoidCombatLab auf 1,30 m und den gewünschten Repositionsabstand auf 1,20 m. Aus dem tatsächlichen KI-Anlauf trifft damit die gesamte Light-Kette statt nur einer Stufe. Die älteren Szenen behalten ihre 1,65/1,25-m-Vorgaben. EngagementCoordinator vergibt während Spieler-Knockdown/GetUp und anschließendem Aufstehschutz keine neue Angriffserlaubnis; danach läuft der Kampf weiter.
+
 Ein orange/roter Bodenmarker kündigt 0,55 s lang den Schlag an. Die Richtung wird beim Warnstart festgelegt. Die anschließende Attack-Phase kommt aus dem Animator, mit Active 0,38–0,53. Pro Angriff kann der Spieler einmal 12 Schaden erhalten; der Gegner verwendet dafür seine eigene Damage-Auflösung, nicht den Spieler-Schadenswert 32 im gemeinsamen Asset-Typ.
 
 Genau ein Gegner besitzt die Freigabe für Telegraph/Attack/Recovery. Nach dem Clip folgen 0,45 s Recovery, anschließend 0,30 s Gruppenpause. Treffer, Tod, Disable, Animator-Abbruch und Encounter-Reset geben die Freigabe frei. Wartende Gegner bewegen sich seitlich; kurze Repulsion verhindert Stapelung. Kein NavMesh oder vollständiges Crowd-System.
 
-PlayerDefense verwaltet 100 HP, Treffer-Starre, Rückstoß und Bodenausweichen. Evade dauert 0,32 s bei 8 m/s, mit 0,65 s Cooldown und Unverwundbarkeit nur zwischen 0,05 und 0,24 s. Es cancelt den eigenen Angriff und nutzt ohne Richtungsinput die Blickrichtung. In der Luft ist es gesperrt. Spieler-Tod sperrt Aktionen; eine eigene animierte Spieler-Todesfolge gehört zum vollständigen Duell in B3. R startet auch nach Tod oder Sieg neu.
+PlayerDefense verwaltet 100 HP, Treffer-Starre, Rückstoß und Bodenausweichen. Evade dauert 0,32 s bei 8 m/s, mit 0,65 s Cooldown und Unverwundbarkeit nur zwischen 0,05 und 0,24 s. Es cancelt den eigenen Angriff und nutzt ohne Richtungsinput die Blickrichtung. In der Luft sowie während Fall/GetUp/Tod ist es gesperrt. Der Aufstehschutz verhindert Treffer bei bereits freier Steuerung. R startet auch nach Tod oder Sieg neu.
 
 ## Kurze Übergabe und Nachweise
+
+B3c nutzt kürzere leichte/starke Kontaktblitze (0,085/0,15 s), Stärken 0,23/0,36 und 78 % Light-Soundpegel gegenüber Heavy. Hitstop-Zeiten und Clip-/Kontaktbahnen bleiben erhalten. Das Humanoid-Duell zeigt deutsche Kampfhinweise, beide HP-Stände, Aufstehschutz, Sieg/Niederlage und R-Retry; H ergänzt technische Zustände. Builds und tatsächliche Prüfumfänge stehen in [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md).
 
 Zum Spielgefühl: anlaufen und stoppen, Richtungswechsel beim Schlag, J-Kette nach Treffer und Fehlschlag, K, L, Sprung + J/K, Shift, KO und R; anschließend mit 2 den wechselnden Gegnerdruck ansehen. Feintuning folgt konkretem Feedback an dieser spielbaren Basis.
 

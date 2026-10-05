@@ -69,7 +69,7 @@ namespace WombatLab.Tests
             Assert.That(reaction.Active,Is.True); Assert.That(enemy.animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"),Is.True);
             Assert.That(enemy.State,Is.EqualTo("STAGGER"));
             yield return new WaitForSeconds(.5f); Assert.That(reaction.Active,Is.False); Assert.That(enemy.State,Is.Not.EqualTo("STAGGER"));
-            enemy.enabled=false; encounter.ResetEncounter(); Place(1.0f); combat.Queue(CombatIntent.Heavy);
+            enemy.enabled=false; encounter.ResetEncounter(); Place(1.0f); combat.Queue(CombatIntent.Kick);
             float deadline=Time.time+1;
             while(!combat.Frozen && Time.time<deadline) yield return null;
             Assert.That(combat.Frozen,Is.True); Assert.That(reaction.State,Is.EqualTo("Stagger"));

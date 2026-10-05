@@ -19,6 +19,7 @@ namespace WombatLab
         CombatController combat;
         PlayerDefense defense;
         AnimationReaction reaction;
+        BodyRecovery body;
         Vector3 spawn;
         Quaternion spawnFacing;
         float coyoteRemaining, bufferRemaining, landingRemaining;
@@ -32,6 +33,7 @@ namespace WombatLab
             combat = GetComponent<CombatController>();
             defense = GetComponent<PlayerDefense>();
             reaction = GetComponent<AnimationReaction>();
+            body = GetComponent<BodyRecovery>();
             spawn = transform.position;
             if (definition == null || animator == null || visual == null)
             { Debug.LogError("PlayerMotor requires definition, visual and Animator", this); enabled = false; return; }
@@ -101,7 +103,7 @@ namespace WombatLab
 
             State = !Grounded ? (VerticalVelocity > 0 ? "Jump" : "Fall")
                 : landingRemaining > 0 ? "Land" : actualSpeed > .1f ? (running ? "Run" : "Walk") : "Idle";
-            bool locomotionOwnsPose = (combat == null || !combat.Attacking) && (reaction == null || !reaction.Active);
+            bool locomotionOwnsPose = (combat == null || !combat.Attacking) && (reaction == null || !reaction.Active) && (body == null || !body.Busy);
             if (locomotionOwnsPose)
                 animator.speed = State == "Walk" || State == "Run" ? Mathf.Clamp(actualSpeed / groundSpeed, .1f, 1.35f) : 1;
             if (locomotionOwnsPose && requestedAnimation != State)

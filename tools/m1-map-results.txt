@@ -1,0 +1,15 @@
+M1 gameplay probe — 2026-10-04
+First edge report used outdated assumed limits; final measurements below use the saved CharacterDefinition.
+Environment colliders=0
+Jump airborne=True height=1,170626
+Landed=True
+Warning visible=True
+Actual AI heavy hp=88 state=Falling
+GetUp protected=True grounded=True
+Player heavy hits=1 enemyBody=Falling
+Reset hp=100 player=Standing enemy=Standing
+Definition min=(-7.00, -2.35) max=(7.00, 2.35)
+Corner 0 position=(-7.00, 0.01, -2.35) inside=True grounded=True
+Corner 1 position=(7.00, 0.01, -2.35) inside=True grounded=True
+Corner 2 position=(-7.00, 0.01, 2.35) inside=True grounded=True
+Corner 3 position=(7.00, 0.01, 2.35) inside=True grounded=True

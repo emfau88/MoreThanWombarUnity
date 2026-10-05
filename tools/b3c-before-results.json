@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "duration": 7.25,
+  "summary": {
+    "total": 2,
+    "passed": 0,
+    "failed": 2,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "WombatLab.Tests.DuelPlayTests.EnemyWaitsForGetUpProtectionBeforeStartingNextWarning",
+      "Status": "Failed",
+      "Duration": 3.558093,
+      "Message": "  Do not pre-load a new attack while the player is getting up\r\n  Expected: null\r\n  But was:  <Sparring Robot 1 (WombatLab.EnemyBrain)>\r\n",
+      "StackTrace": "at WombatLab.Tests.DuelPlayTests+<EnemyWaitsForGetUpProtectionBeforeStartingNextWarning>d__1.MoveNext () [0x000a7] in C:\\Users\\madde\\Documents\\MoreThanWombarUnity\\UnityProject\\Assets\\Game\\Tests\\PlayMode\\DuelPlayTests.cs:46\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@629486125cfc\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n"
+    },
+    {
+      "FullName": "WombatLab.Tests.DuelPlayTests.LightChainConnectsAtEnemyEngagementDistance",
+      "Status": "Failed",
+      "Duration": 3.5760012,
+      "Message": "  The normal AI engagement distance must support the light chain\r\n  Expected: 3\r\n  But was:  1\r\n",
+      "StackTrace": "at WombatLab.Tests.DuelPlayTests+<LightChainConnectsAtEnemyEngagementDistance>d__0.MoveNext () [0x00320] in C:\\Users\\madde\\Documents\\MoreThanWombarUnity\\UnityProject\\Assets\\Game\\Tests\\PlayMode\\DuelPlayTests.cs:33\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@629486125cfc\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:44\r\n"
+    }
+  ]
+}

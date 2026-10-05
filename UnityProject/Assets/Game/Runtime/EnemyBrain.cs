@@ -12,10 +12,11 @@ namespace WombatLab
         public AttackDefinition attack;
         public Renderer warning;
         public int slot;
+        public float engagementDistance = 1.65f, preferredDistance = 1.25f;
         public string State { get; private set; } = "APPROACH";
-        public bool ReadyForAttack => target.Alive && target.Hitstun <= 0 && cooldown <= 0
+        public bool ReadyForAttack => target.Alive && target.Hitstun <= 0 && GetComponent<BodyRecovery>()?.Busy != true && cooldown <= 0
             && State != "TELEGRAPH" && State != "ATTACK" && State != "RECOVERY"
-            && Vector3.ProjectOnPlane(player.transform.position - transform.position, Vector3.up).magnitude < 1.65f;
+            && Vector3.ProjectOnPlane(player.transform.position - transform.position, Vector3.up).magnitude < engagementDistance;
         float elapsed, cooldown, previous;
         bool hit;
         Vector3 lastFist;
@@ -29,6 +30,8 @@ namespace WombatLab
             animator.speed = dt > 0 ? 1 : 0;
             cooldown = Mathf.Max(0, cooldown - dt);
             if (!target.Alive) { coordinator.Release(this); SetState("DOWN"); return; }
+            var body = GetComponent<BodyRecovery>();
+            if (body != null && body.Busy) { coordinator.Release(this); SetState(body.State.ToString().ToUpperInvariant()); return; }
             if (!player.GetComponent<PlayerDefense>().Alive) { Interrupt(); return; }
             if (target.Hitstun > 0 || GetComponent<AnimationReaction>()?.Active == true) { SetState("STAGGER"); return; }
             elapsed += dt;
@@ -50,7 +53,7 @@ namespace WombatLab
             { visual.rotation = Quaternion.LookRotation(toward); SetState("TELEGRAPH"); animator.Play("Idle"); return; }
             SetState(coordinator.Owner != null && coordinator.Owner != this ? "REPOSITION" : "APPROACH");
             // Separate waiting positions and a short-range repulsion avoid stacked opponents.
-            Vector3 desired = player.transform.position - toward.normalized * 1.25f;
+            Vector3 desired = player.transform.position - toward.normalized * preferredDistance;
             if (State == "REPOSITION") desired = player.transform.position + new Vector3(slot == 0 ? -1.8f : 1.8f, 0, .8f);
             Vector3 direction = Vector3.ProjectOnPlane(desired - transform.position, Vector3.up);
             Vector3 motion = direction.normalized * Mathf.Min(2.1f * dt, direction.magnitude);
@@ -85,7 +88,7 @@ namespace WombatLab
                     {
                         if (contacts[c].GetComponent<PlayerMotor>() != player) continue;
                         hit = true;
-                        if (player.GetComponent<PlayerDefense>().ReceiveDamage(12, visual.forward))
+                        if (player.GetComponent<PlayerDefense>().ReceiveDamage(12, visual.forward, attack.knocksDown))
                             player.GetComponent<CombatController>().feedback?.Contact(fist.position, true);
                         break;
                     }
@@ -106,7 +109,7 @@ namespace WombatLab
         public void Interrupt()
         { coordinator.Release(this); cooldown = .6f; SetState(target.Alive ? "STAGGER" : "DOWN"); if (animator != null && target.Alive) animator.Play("Idle"); }
         public void ResetEnemy()
-        { target.ResetTraining(); coordinator.Release(this); cooldown = .3f + slot * .2f; SetState("APPROACH"); warning.enabled = false; animator.speed = 1; animator.Play("Idle"); }
+        { target.ResetTraining(); coordinator.Release(this); cooldown = .3f + slot * .2f; SetState("APPROACH"); warning.enabled = false; animator.speed = 1; if (gameObject.activeInHierarchy) animator.Play("Idle"); }
         void OnDisable() { if (coordinator != null) coordinator.Release(this); }
     }
 }

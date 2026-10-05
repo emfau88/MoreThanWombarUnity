@@ -1,6 +1,6 @@
 # More Than Wombat — Roadmap mit neun Bulks
 
-Stand: 4. Oktober 2026, nach B3a. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
+Stand: 5. Oktober 2026, nach B3c. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
 
 ## Ziel und Schwerpunkt
 
@@ -14,15 +14,17 @@ Bestehendes Gameplay weiterentwickeln. Standardmodelle, Rigs, Animationen und Pr
 
 S0–S3 bilden das vorhandene Fundament. B1 ist technisch abgeschlossen: Startup-Drehgrenze korrigiert, fünf gezielte Polish-Fälle bestanden, aktuelle Spielposen kontrolliert und Combat-/Architekturbeschreibung aktualisiert. Nutzerfeedback zum Spielgefühl bleibt für weiteres Tuning willkommen. Ein eigener Blender-Entwurf wurde begonnen, ist aber noch nicht in Unity integriert. Dieser Pfad ist zurückgestellt, bis passende fertige Grundlagen geprüft sind.
 
-Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. Nächste technische Arbeit ist B3b: lebendes Knockdown, GetUp und Death/Reset, anschließend B3c mit Duell-Tuning und Buildnachweis. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
+Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. B3b ergänzt lebendes Knockdown, GetUp, Aufstehschutz und Tod/Reset für beide Figuren; Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md). Die vorgezogene kleine Map-Aufwertung M1 und B3c sind integriert. Das technische Duell ist als Windows-/WebGL-Spielstand verfügbar; Browserkampf bis zum Sieg und Neustart sind nachgewiesen. Als Nächstes B4 mit Schulterstoß und Moveset-Balance. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
 
 ## Übersicht
+
+**Vorgezogen auf Nutzerwunsch und geliefert:** **M1 — kleine Testmap-Aufwertung** nach B3b. Betonboden, wenige fertige Junkyard-Props, Zaun/Werkstatt-Hintergrund und Licht sind integriert. B3c ergänzt inzwischen das abgestimmte Duell und Buildnachweise. Details: [M1_MAP_PREVIEW.md](M1_MAP_PREVIEW.md). Die neun Hauptbulks bleiben erhalten; M1 übernimmt einen begrenzten Präsentationsanteil aus B7, die Levelstrecke bleibt B6.
 
 | Bulk | Konkrete Maßnahmen | Ergebnis / Voraussetzung |
 | --- | --- | --- |
 | B1 | Abgeschlossen: Drehgrenze korrigiert, gezielte Polish-Prüfung/Sichtsequenz und Ist-Dokumentation | Spielbares Sparring zur Nutzerbeurteilung |
 | B2 | Schritte 1–3 technisch geliefert: Auswahl, Humanoid-Import, Kontakte und Attack-Timing; Wombat-Gestaltung zurückgestellt | Spielbare technische Combat-Basis; stilistische Abnahme offen |
-| B3 | B3a geliefert: Run/Kernclips/Reaktionen. Als Nächstes B3b: Knockdown/GetUp/Death; danach B3c: Duell-Tuning und kleiner Buildnachweis | Überzeugender Character Slice vor Contentausbau |
+| B3 | B3a–B3c und M1 technisch geliefert: Duell-Tuning, Schutz/Feedback/HUD, Windows/WebGL, Browserkampf bis zum Sieg | Spielbarer technischer Character Slice; Wombat-Stil, Windows-Tastatur, hörbare Audioabnahme und Performanceprofil offen |
 | B4 | Einen charakteristischen Dash-/Schulterstoß und Moveset-Balance ausarbeiten | Mehr Kampftiefe auf Basis des fertigen Duells |
 | B5 | Standard, Agile und Heavy; gemischten Gruppendruck und gemeinsame Asset-Nutzung | Lesbare Gegnerfamilie auf Basis B3/B4 |
 | B6 | Junkyard-Strecke, drei Kampfbereiche, Interaktion, Checkpoints und Abschlusskampf | Vollständig durchspielbares Graybox-Kapitel |
@@ -69,8 +71,8 @@ Run, animierte Trefferreaktion und lebendes Knockdown/GetUp werden gegenüber de
 Konkrete Ausführungsreihenfolge, jeweils als spielbarer Zwischenstand:
 
 1. **B3a — Bewegung und Aktionen, geliefert:** Run über Ctrl/LT samt Übergängen und eigenem Clip; Walk-/Run-Tempo nach tatsächlicher Bewegung; Haken-Finisher, Overhand-Heavy und zweihändiger Luft-Smash mit neu gebackenen Kontaktbahnen. Sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Boden-/Sprung-Kick und Smash nach Nutzerfeedback in Richtung klarer Kampfsport-/Abwärtsschlagposen überarbeitet. Mensch gegen Bären-Dummy bleibt vorerst. Ergebnis: Bewegung und Schlagstärke sind unterscheidbar. Weiteres Pose-/Tempo-Tuning erfolgt am spielbaren Stand.
-2. **B3b — Fallen und Aufstehen:** Lebendes Knockdown, GetUp und endgültige Death/Reset-Darstellung integrieren; Unterbrechung, Körperkollision und Schutz beim Aufstehen klar regeln. Ergebnis: kräftige Treffer erzeugen einen vollständigen verständlichen Ablauf statt bloßer HP-Abzüge.
-3. **B3c — Duell und Übergabe:** Abstand, Combo-Anschlüsse, Luftkontakte, Recovery und Feedback gemeinsam tunen; kleinen Windows- und WebGL-Nachweis mit vorhandener Toolchain ausführen. Ergebnis: vollständig spielbarer Einzelkampf mit konkretem Build-/Laufzeitbefund.
+2. **B3b — Fallen und Aufstehen, geliefert:** Heavy/Luft-Smash und Gegner-Heavy werfen nieder. Fall, Bodenphase und GetUp sperren Aktionen/Treffer; anschließend 0,45 s Aufstehschutz bei freier Steuerung. Tod hält die ganze Figur unten; Reset stellt Pose, Collider und Kampfzustand wieder her. Details: [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md).
+3. **B3c — Duell und Übergabe, technisch geliefert:** KI-Warnabstand 1,30 m statt 1,65 m, Repositionierung 1,20 m; drei Combo-Treffer aus tatsächlichem KI-Abstand. Neue Gegnerangriffe warten bis zum Ende des Aufstehschutzes. Kontaktfeedback und deutsches Duell-HUD abgestimmt. 3/3 Duell- und 5/5 Kontakt-/Luftfälle bestehen; Windows- und WebGL-Builds erfolgreich. Browserbewegung, Combo, Sieg und Neustart über Tastatur geprüft. Details und offene praktische Prüfungen: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md).
 
 Wombat-Look bleibt eine separate offene Entscheidung. Die technische B3-Arbeit kann am temporären Humanoid fortgesetzt werden; die endgültige stilistische Character-Slice-Abnahme benötigt später die passende Tierdarstellung.
 
