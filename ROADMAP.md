@@ -18,6 +18,8 @@ Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei 
 
 ## Übersicht
 
+**Zusatzauftrag nach B3c:** Mobile Touch für Android im Querformat ist integriert: vorhandene Unity-Bildschirmcontrols, responsive WebGL-Ansicht und WLAN-Testanleitung. Drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht den fertigen WebGL-Spielstand über einen Release-Workflow; öffentlicher Play-Link im README. Ein physischer Android-Spieltest bleibt offen. B4 bleibt der nächste Entwicklungsbulk. Details: [MOBILE_TOUCH.md](MOBILE_TOUCH.md).
+
 **Vorgezogen auf Nutzerwunsch und geliefert:** **M1 — kleine Testmap-Aufwertung** nach B3b. Betonboden, wenige fertige Junkyard-Props, Zaun/Werkstatt-Hintergrund und Licht sind integriert. B3c ergänzt inzwischen das abgestimmte Duell und Buildnachweise. Details: [M1_MAP_PREVIEW.md](M1_MAP_PREVIEW.md). Die neun Hauptbulks bleiben erhalten; M1 übernimmt einen begrenzten Präsentationsanteil aus B7, die Levelstrecke bleibt B6.
 
 | Bulk | Konkrete Maßnahmen | Ergebnis / Voraussetzung |

@@ -8774,6 +8774,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210256171}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1225310906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1403307395320657685, guid: e7009b7b09524b944957a3f2d3c82a21, type: 3}
+  m_PrefabInstance: {fileID: 2087446098}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1230128457
 GameObject:
   m_ObjectHideFlags: 0
@@ -13954,14 +13959,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1403307395320657685, guid: e7009b7b09524b944957a3f2d3c82a21, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2087446107}
   m_SourcePrefab: {fileID: 100100000, guid: e7009b7b09524b944957a3f2d3c82a21, type: 3}
 --- !u!114 &2087446099 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 364653056583200235, guid: e7009b7b09524b944957a3f2d3c82a21, type: 3}
   m_PrefabInstance: {fileID: 2087446098}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1225310906}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3123f0314740073478ffeeddbc44cba0, type: 3}
@@ -13972,7 +13980,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2718239193146698223, guid: e7009b7b09524b944957a3f2d3c82a21, type: 3}
   m_PrefabInstance: {fileID: 2087446098}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1225310906}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74dfe302c59ed8a4c812de918effd8d7, type: 3}
@@ -13983,6 +13991,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3893279614374590184, guid: e7009b7b09524b944957a3f2d3c82a21, type: 3}
   m_PrefabInstance: {fileID: 2087446098}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2087446107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225310906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7bfb9fb65359446a5a2a7a1e6b0bd9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.MobileTouchControls
 --- !u!1 &2095051097
 GameObject:
   m_ObjectHideFlags: 0

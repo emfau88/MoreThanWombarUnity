@@ -1,0 +1,46 @@
+name: Publish playable WebGL duel
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Release containing webgl-duel.zip (empty uses latest)
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download built game
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          args=()
+          if [ -n "$RELEASE_TAG" ]; then args+=("$RELEASE_TAG"); fi
+          gh release download "${args[@]}" --pattern webgl-duel.zip
+          unzip -q webgl-duel.zip -d public
+          test -f public/index.html
+          test -d public/Build
+          touch public/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Publish game
+        id: deployment
+        uses: actions/deploy-pages@v4

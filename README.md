@@ -16,9 +16,18 @@ Eigenständige Windows-/WebGL-Spielstände sind vorhanden; der Browserkampf wurd
 
 ## Prototyp spielen
 
+**[▶ Jetzt spielen — Schrotthof-Duell](https://emfau88.github.io/MoreThanWombarUnity/)**
+
+Auf Android im Querformat öffnen: links bewegen, rechts kämpfen; oben **NEUSTART**.
+Am Desktop stehen Tastatur und Gamepad zur Verfügung; **TOUCH** blendet die Bildschirmsteuerung ein.
+Beim ersten Aufruf wird der Spielbuild heruntergeladen.
+
 Direkt unter Windows: `Builds/B3c/Windows/MoreThanWombat.exe` starten.
 Im Browser: `tools/Serve-Duel.ps1` ausführen und [lokales Duell](http://127.0.0.1:8765) öffnen.
 Ins Spielfeld klicken. Builddetails und konkrete Prüfergebnisse: [B3c-Übergabe](B3C_DUEL_HANDOFF.md).
+
+Die Browserfassung wird über GitHub Pages veröffentlicht. Der Workflow verwendet den fertigen
+WebGL-Build aus einem GitHub-Release; Anleitung: [Mobile Touch und Veröffentlichung](MOBILE_TOUCH.md).
 
 `UnityProject` mit Unity **6000.4.0f1** öffnen, die Szene
 `Assets/Game/Scenes/HumanoidCombatLab.unity` laden und Play drücken. In die Game-Ansicht
@@ -43,6 +52,9 @@ klicken, damit sie die Tastatureingaben erhält.
 - `SparringLab.unity` bleibt die ursprüngliche B1-Vergleichsszene mit Grundform-Figur.
 - Gamepad-Bindings sind implementiert und mit simuliertem Gerät geprüft;
   ein echter Hardware-Spieltest steht noch aus.
+- Mobile Touch: links Bewegungsstick (außen Rennen), rechts Combo/Heavy/Kick/Sprung/Ausweichen,
+  oben Neustart. Automatisch auf Touchgeräten; **TOUCH** schaltet die Anzeige auch am Desktop.
+  Android im Querformat ist das erste Nutzungsziel. Anleitung und Nachweise: [Mobile Touch](MOBILE_TOUCH.md).
 
 Der Humanoid ist eine importierte technische Basis, die Robot-Gegner sind eigene
 Grundformen. Beide bleiben Platzhalter für die endgültige Cartoon-Gestaltung.
@@ -61,6 +73,7 @@ Grundformen. Beide bleiben Platzhalter für die endgültige Cartoon-Gestaltung.
 - [B3a: Rennen, Kernaktionen und Trefferreaktionen](B3A_ACTIONS.md)
 - [B3b: Niederwerfen, Aufstehen, Tod und Reset](B3B_BODY_RECOVERY.md)
 - [B3c: abgestimmtes Duell und Windows-/WebGL-Übergabe](B3C_DUEL_HANDOFF.md)
+- [Mobile Touch: Steuerung und Test im selben WLAN](MOBILE_TOUCH.md)
 - [M1: vorgezogene Junkyard-Testmap](M1_MAP_PREVIEW.md)
 
 Gestaltungsziel ist der illustrative Cartoon-/Comic-Stil der 2D-Referenz:

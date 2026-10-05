@@ -15,6 +15,7 @@ namespace WombatLab
     {
         InputActionMap map;
         InputAction move, jump, restart, debug, lightAction, heavyAction, evade, kick, run;
+        public MobileTouchControls TouchControls { get; set; }
 
         void Awake()
         {
@@ -33,9 +34,9 @@ namespace WombatLab
             debug = map.AddAction("Debug", InputActionType.Button);
             debug.AddBinding("<Keyboard>/h"); debug.AddBinding("<Gamepad>/rightStickPress");
             lightAction = map.AddAction("Light", InputActionType.Button);
-            lightAction.AddBinding("<Keyboard>/j"); lightAction.AddBinding("<Mouse>/leftButton"); lightAction.AddBinding("<Gamepad>/buttonWest");
+            lightAction.AddBinding("<Keyboard>/j"); lightAction.AddBinding("<Gamepad>/buttonWest");
             heavyAction = map.AddAction("Heavy", InputActionType.Button);
-            heavyAction.AddBinding("<Keyboard>/k"); heavyAction.AddBinding("<Mouse>/rightButton"); heavyAction.AddBinding("<Gamepad>/buttonNorth");
+            heavyAction.AddBinding("<Keyboard>/k"); heavyAction.AddBinding("<Gamepad>/buttonNorth");
             evade = map.AddAction("Evade", InputActionType.Button);
             evade.AddBinding("<Keyboard>/leftShift"); evade.AddBinding("<Keyboard>/rightShift"); evade.AddBinding("<Gamepad>/buttonEast");
             kick = map.AddAction("Kick", InputActionType.Button);
@@ -47,7 +48,19 @@ namespace WombatLab
         void OnEnable() { map?.Enable(); }
         void OnDisable() { map?.Disable(); }
         void OnDestroy() { map?.Dispose(); }
-        public InputFrame Read() => new InputFrame(move.ReadValue<Vector2>(), jump.WasPressedThisFrame(),
-            restart.WasPressedThisFrame(), debug.WasPressedThisFrame(), lightAction.WasPressedThisFrame(), heavyAction.WasPressedThisFrame(), evade.WasPressedThisFrame(), kick.WasPressedThisFrame(), run.IsPressed());
+        public InputFrame Read()
+        {
+            // A UI touch can also arrive as a mouse click in WebGL. Only gameplay pointer
+            // clicks may attack; keyboard and physical/virtual gamepad bindings stay active.
+            bool pointerAllowed = (TouchControls == null || !TouchControls.BlocksPointerAttacks)
+                && (Touchscreen.current == null || !Touchscreen.current.primaryTouch.press.isPressed);
+            var mouse = Mouse.current;
+            return new InputFrame(move.ReadValue<Vector2>(), jump.WasPressedThisFrame(),
+                restart.WasPressedThisFrame(), debug.WasPressedThisFrame(),
+                lightAction.WasPressedThisFrame() || (pointerAllowed && mouse != null && mouse.leftButton.wasPressedThisFrame),
+                heavyAction.WasPressedThisFrame() || (pointerAllowed && mouse != null && mouse.rightButton.wasPressedThisFrame),
+                evade.WasPressedThisFrame(), kick.WasPressedThisFrame(),
+                run.IsPressed() || (TouchControls != null && TouchControls.Running));
+        }
     }
 }

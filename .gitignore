@@ -22,6 +22,9 @@ Thumbs.db
 UnityProject/QA/
 UnityProject/Assets/QA/
 UnityProject/Assets/QA.meta
+# Local scene backups preserved after an Editor crash.
+UnityProject/Assets/_Recovery/
+UnityProject/Assets/_Recovery.meta
 
 # Local third-party download archives/cache; imported assets and licenses are in Assets/ThirdParty.
 art-source/third-party/

@@ -28,11 +28,12 @@ namespace WombatLab
                 var defense = player.GetComponent<PlayerDefense>();
                 if (duelPresentation)
                 {
+                    bool touch = player.GetComponent<LabInput>().TouchControls?.Visible == true;
                     string hint = body != null && body.Busy ? "Aufstehen ..." : body != null && body.Protected ? "Aufstehschutz" :
                         encounter.Owner != null && encounter.Owner.State == "TELEGRAPH" ? "Orange Warnung: ausweichen oder unterbrechen!" :
-                        defense.Evading ? "Ausweichen" : defense.Cooldown > 0 ? "Ausweichen erholt sich ..." : "SHIFT: Ausweichen bereit";
+                        defense.Evading ? "Ausweichen" : defense.Cooldown > 0 ? "Ausweichen erholt sich ..." : touch ? "Ausweichen bereit" : "SHIFT: Ausweichen bereit";
                     string opponent = encounter.Mode == 1 ? $"BÄR {encounter.enemies[0].target.Health}/{encounter.enemies[0].target.maxHealth}" : $"{encounter.LivingCount} Gegner übrig";
-                    stateText.text = !defense.Alive ? "Besiegt · R: Neuer Versuch" : encounter.LivingCount == 0 ? "Gewonnen! · R: Nochmal · 2: Zwei Gegner" :
+                    stateText.text = !defense.Alive ? (touch ? "Besiegt · NEUSTART: Neuer Versuch" : "Besiegt · R: Neuer Versuch") : encounter.LivingCount == 0 ? (touch ? "Gewonnen! · NEUSTART: Nochmal" : "Gewonnen! · R: Nochmal · 2: Zwei Gegner") :
                         player.ShowDebug ? $"{status} · {opponent} · {hint}" : $"{opponent} · {hint}";
                     healthText.text = $"DU   {defense.Health} / {defense.maxHealth}";
                     healthFill.anchorMax = new Vector2(defense.Health / (float)defense.maxHealth, 1);

@@ -75,6 +75,7 @@ namespace WombatLab.Editor
             string product = PlayerSettings.productName;
             var compression = PlayerSettings.WebGL.compressionFormat;
             var fullscreen = PlayerSettings.fullScreenMode;
+            string template = PlayerSettings.WebGL.template;
             var started = DateTime.UtcNow;
             var result = new Result { platform = platform, status = "building", utc = started.ToString("O") };
             Write(platform, result);
@@ -84,6 +85,7 @@ namespace WombatLab.Editor
                 PlayerSettings.productName = "More Than Wombat — Duell";
                 PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
                 PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
+                PlayerSettings.WebGL.template = "PROJECT:TouchDuel";
                 string location = platform == "Windows" ? Path.Combine(Output, platform, "MoreThanWombat.exe") : Path.Combine(Output, platform);
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
                     scenes = new[] { HumanoidCombatBuilder.ScenePath }, locationPathName = location,
@@ -98,6 +100,7 @@ namespace WombatLab.Editor
             {
                 PlayerSettings.productName = product; PlayerSettings.WebGL.compressionFormat = compression;
                 PlayerSettings.fullScreenMode = fullscreen;
+                PlayerSettings.WebGL.template = template;
                 AssetDatabase.SaveAssets();
                 result.seconds = (DateTime.UtcNow - started).TotalSeconds; Write(platform, result);
             }

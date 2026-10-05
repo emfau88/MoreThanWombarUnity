@@ -21,6 +21,8 @@ Die vier Punkte beschreiben den gelieferten Umfang. Tatsächliche Nachweise und 
 
 ## Als Nächstes: B4 — ein Schulterstoß und klare Move-Rollen
 
+Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht die Browserfassung aus dem fertigen WebGL-Release; der Play-Link steht im README. Als Nutzercheck auf dem Android-Handy: bewegen und zugleich Combo/Kick auslösen, springen, ausweichen und nach Niederlage neu starten. Details und Prüfbefunde: [MOBILE_TOUCH.md](MOBILE_TOUCH.md). B4 bleibt separat.
+
 1. **Ein Move festlegen:** geradliniger kurzer Schulterstoß, Eingabe zunächst E/RT als Vorschlag. Vorhandene Clips als Rohmaterial prüfen; nur nötige Schulter-/Körperpose ergänzen. Keine neue komplette Animationsbibliothek.
 2. **Bewegung integrieren:** feste Richtung beim Start, kurzer Anlauf, begrenzte Strecke über PlayerMotor und bestehende Kollision. Root Motion bleibt aus. Eine Wand beendet die Bewegung zuverlässig.
 3. **Kontakt anbinden:** eine AttackDefinition mit Startup/Active/Recovery, vorhandenen Team-/Frontfiltern, genau einem Treffer pro Ziel und bestehenden Stagger-/BodyRecovery-Regeln. Dash-Bewegung und Angriffsschritt nicht doppelt anwenden.
