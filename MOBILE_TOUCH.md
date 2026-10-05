@@ -27,7 +27,7 @@ WebGL-Build über **Wombat Lab → B3c Build WebGL** erstellen. `tools/Serve-Due
 
 [Schrotthof-Duell spielen](https://emfau88.github.io/MoreThanWombarUnity/). Der Link steht auch oben im README. Android im Querformat ist das erste Ziel; es ist eine Browserfassung.
 
-GitHub Pages verwendet die bereits gewählte Quelle **GitHub Actions**. `.github/workflows/play.yml` lädt `webgl-duel.zip` aus einem veröffentlichten Release, entpackt den Spielstand und veröffentlicht ihn mit den offiziellen Pages-Actions. Unity wird lokal mit der vorhandenen Installation gebaut; keine Unity-Lizenz oder neue Build-Infrastruktur auf GitHub erforderlich. Builds bleiben außerhalb der Git-Historie.
+GitHub Pages verwendet die bereits gewählte Quelle **GitHub Actions**. `.github/workflows/play.yml` lädt die Teile `webgl-duel.zip.part-*` aus einem veröffentlichten Release, setzt das Archiv zusammen, entpackt den Spielstand und veröffentlicht ihn mit den offiziellen Pages-Actions. Die 5-MiB-Teile umgehen die hier beobachteten Timeouts beim großen Upload. Unity wird lokal mit der vorhandenen Installation gebaut; keine Unity-Lizenz oder neue Build-Infrastruktur auf GitHub erforderlich. Builds bleiben außerhalb der Git-Historie.
 
 Für ein Update: WebGL bauen, kurz prüfen, Änderungen committen und pushen. Danach `tools/Publish-Duel.ps1 -Tag <neue-version>` ausführen. Das Skript verpackt ausschließlich die WebGL-Ausgabe, ergänzt `version.json` mit Commit/Buildzeit und veröffentlicht einen Release samt Archiv. Anschließend startet es den Pages-Workflow auf `main` mit diesem Release-Tag. Bestehende Releases können über **Actions → Publish playable WebGL duel → Run workflow** mit dem Release-Tag erneut veröffentlicht werden.
 
