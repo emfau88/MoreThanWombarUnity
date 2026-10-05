@@ -1,0 +1,13 @@
+{
+  "url": "https://emfau88.github.io/MoreThanWombarUnity/",
+  "release": "duel-touch-2026-10-05",
+  "gameCommit": "5b2a273656d040056e97df399785ebbe5580d184",
+  "workflowRun": "https://github.com/emfau88/MoreThanWombarUnity/actions/runs/37365892811",
+  "deployment": "success",
+  "archiveSha256": "C3BE2FB80E1F9A25F01A582101432C88ACD6CB65E2F64AF84D2D68BC31B0C187",
+  "archivePartsMatch": true,
+  "browserViewport": { "width": 900, "height": 420 },
+  "publicGameRendered": true,
+  "browserConsoleErrors": 0,
+  "physicalAndroidTest": "pending"
+}
