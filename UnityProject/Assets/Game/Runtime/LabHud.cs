@@ -12,6 +12,7 @@ namespace WombatLab
         public RectTransform healthFill;
         public EngagementCoordinator encounter;
         public bool duelPresentation;
+        public JunkyardChapter chapter;
         CombatController combat;
         float nextRefresh;
         void Awake() { combat = player.GetComponent<CombatController>(); }
@@ -26,6 +27,14 @@ namespace WombatLab
             if (encounter != null)
             {
                 var defense = player.GetComponent<PlayerDefense>();
+                if (chapter != null)
+                {
+                    bool touch = player.GetComponent<LabInput>().TouchControls?.Visible == true;
+                    stateText.text = chapter.Hint(touch);
+                    healthText.text = $"DU   {defense.Health} / {defense.maxHealth}";
+                    healthFill.anchorMax = new Vector2(defense.Health / (float)defense.maxHealth, 1);
+                    return;
+                }
                 if (duelPresentation)
                 {
                     bool touch = player.GetComponent<LabInput>().TouchControls?.Visible == true;

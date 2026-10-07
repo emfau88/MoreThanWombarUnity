@@ -7,6 +7,9 @@ namespace WombatLab
     {
         public PlayerMotor player;
         public EnemyBrain[] enemies;
+        public EnemyBrain[] chapterTemplates;
+        public JunkyardChapter chapter;
+        public Vector2 arenaMin = new Vector2(-6.5f, -2), arenaMax = new Vector2(6.5f, 2);
         public EnemyBrain Owner { get; private set; }
         public int Mode { get; private set; } = 1;
         public int LivingCount
@@ -14,10 +17,11 @@ namespace WombatLab
         EnemyBrain lastOwner;
         float rest;
         readonly RaycastHit[] movementHits = new RaycastHit[16];
-        void Start() { SetMode(1); }
+        void Start() { if (chapter == null) SetMode(1); }
         void Update()
         {
             rest = Mathf.Max(0, rest - Time.deltaTime);
+            if (chapter != null) return;
             if (player.GetComponent<LabInput>().Read().Restart) { ResetEncounter(); return; }
             if (Gamepad.current?.dpad.up.wasPressedThisFrame == true) SetMode(Mode % Mathf.Min(4,enemies.Length) + 1);
             var keyboard = Keyboard.current;
@@ -65,12 +69,12 @@ namespace WombatLab
         {
             float angle = (45 + enemy.slot * 90 + (changeSide && enemy.role?.role == EnemyRole.Agile ? 180 : 0)) * Mathf.Deg2Rad;
             return MotorMath.ClampGround(player.transform.position + new Vector3(Mathf.Cos(angle) * 2.3f, 0, Mathf.Sin(angle) * 1.65f),
-                new Vector2(-6.3f, -1.9f), new Vector2(6.3f, 1.9f));
+                arenaMin + Vector2.one * .1f, arenaMax - Vector2.one * .1f);
         }
         public bool MoveEnemy(EnemyBrain enemy, Vector3 delta)
         {
             delta = Vector3.ProjectOnPlane(delta, Vector3.up);
-            var wanted = MotorMath.ClampGround(enemy.transform.position + delta, new Vector2(-6.5f, -2), new Vector2(6.5f, 2));
+            var wanted = MotorMath.ClampGround(enemy.transform.position + delta, arenaMin, arenaMax);
             Vector3 limited = wanted - enemy.transform.position;
             float distance = limited.magnitude;
             bool blocked = (limited - delta).sqrMagnitude > .000001f;
@@ -91,6 +95,35 @@ namespace WombatLab
                 if (allowed < distance) { limited *= allowed / distance; blocked = true; }
             }
             enemy.transform.position += limited; return blocked;
+        }
+        public void ClearWave()
+        {
+            Owner = lastOwner = null; rest = .9f;
+            foreach (var enemy in enemies)
+            {
+                if (enemy == null || System.Array.IndexOf(chapterTemplates, enemy) >= 0) continue;
+                enemy.gameObject.SetActive(false); Destroy(enemy.gameObject);
+            }
+            enemies = new EnemyBrain[0];
+        }
+        public void SpawnWave(ChapterEnemySpawn[] wave, Vector3 origin)
+        {
+            ClearWave(); Mode = wave.Length; enemies = new EnemyBrain[wave.Length];
+            for (int i = 0; i < wave.Length; i++)
+            {
+                var spawn = wave[i];
+                var template = System.Array.Find(chapterTemplates, e => e.role.role == spawn.role.role);
+                var enemy = Instantiate(template.gameObject, transform).GetComponent<EnemyBrain>();
+                enemy.role = spawn.role; enemy.attack = spawn.role.attack; enemy.player = player; enemy.coordinator = this;
+                enemy.slot = i; enemy.transform.position = origin + spawn.position;
+                enemy.target.maxHealth = spawn.role.health;
+                enemy.target.arenaMin = arenaMin; enemy.target.arenaMax = arenaMax;
+                enemy.name = spawn.role.displayName + " " + (i + 1);
+                if (enemy.roleLabel != null) enemy.roleLabel.GetComponent<TextMesh>().text = spawn.role.displayName;
+                enemies[i] = enemy; enemy.gameObject.SetActive(true); enemy.ResetEnemy();
+                enemy.visual.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(player.transform.position - enemy.transform.position, Vector3.up));
+            }
+            Physics.SyncTransforms();
         }
     }
 }

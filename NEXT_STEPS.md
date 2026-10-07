@@ -1,6 +1,6 @@
-# Konkreter Arbeitsplan — Gegnerrollen und Junkyard-Kapitel
+# Konkreter Arbeitsplan — Junkyard-Kapitel und Präsentation
 
-Stand: 7. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. B4/B5 sind lokal integriert; nächster Entwicklungsbulk ist B6.
+Stand: 7. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Bereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss; nächster Entwicklungsbulk ist B7.
 
 ## M1 — Testmap aufgewertet
 
@@ -44,7 +44,7 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 
 **Effekt:** unterschiedliche Gegner verlangen andere Prioritäten und Positionierung. Danach baut B6 daraus eine zusammenhängende Junkyard-Strecke mit drei Kampfbereichen und Checkpoints. B5 ist lokal geliefert; Details und Nachweise: [B5_ENEMY_ROLES.md](B5_ENEMY_ROLES.md).
 
-## Als Nächstes: B6 — zusammenhängende Junkyard-Strecke
+## B6 — zusammenhängende Junkyard-Strecke geliefert
 
 1. **Strecke und Bereiche:** Bestehende Schrotthof-Assets/Materialien und Kamera weiterverwenden. Drei verbundene Kampfbereiche mit kurzen Lauf-/Erholungsabschnitten und klar lesbaren Ausgängen aufbauen. Erst Layout und Ablauf, anschließend gezielte Dekoration.
 2. **Encounter-Daten und Übergänge:** Kleine bearbeitbare Konfiguration für Rollen, Spawnpunkte und Wellenfolge. Bereich nach Eintritt starten, nach Sieg freigeben; Gegner sichtbar innerhalb sinnvoller Kampfpositionen auftreten lassen. Bestehenden Coordinator und BodyRecovery benutzen.
@@ -52,7 +52,17 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 4. **Interaktion und Checkpoint:** Eine klare Environment-Aktion integrieren, etwa ein zu öffnender Durchgang. Nach jedem gewonnenen Bereich Checkpoint; Retry stellt nur den aktuellen Abschnitt und seinen Gegnerzustand wieder her. Vollständiger Neustart bleibt möglich.
 5. **Spielbare Übergabe:** Einen vollständigen Durchlauf sowie Niederlage/Checkpoint-Retry prüfen. Wege, Pausen und Gegnerfolge anschließend auf etwa 10–15 Minuten Designziel abstimmen. Menüausbau bleibt B8, finale Art-/Audioabstimmung B7.
 
-**Effekt:** Aus der kleinen Testarena wird erstmals ein zusammenhängendes, durchspielbares Kapitel mit Anfang, Steigerung und Abschluss. B6 beginnt auf gesonderten Auftrag. B4/B5 benötigen für den öffentlichen Play-Link einen neuen Build-/Veröffentlichungsschritt.
+**Effekt:** Aus der Testarena ist erstmals eine eigene zusammenhängende Kapitel-Szene entstanden: neun Wellen/23 Gegner auf drei Bereichen, ein Schaltertor, Checkpoint-Retry und Vorarbeiter-Finale. Ablauf und Übergabe sind lokal integriert/geprüft; das vollständige automatische Combat-Spiel gewann in 101,7 s mit 58 HP. Details: [B6_JUNKYARD_CHAPTER.md](B6_JUNKYARD_CHAPTER.md). Damit zunächst ein Kurzkapitel. Das 10–15-Minuten-Ziel ist offen und braucht anhand von Spielerfeedback zusätzliche abwechslungsreiche Situationen, keine reine HP-Verlängerung. B4–B6 benötigen für den öffentlichen Play-Link einen neuen Build-/Veröffentlichungsschritt.
+
+## Als Nächstes: B7 — Präsentation gezielt ausarbeiten
+
+1. **Kapitel spielen und konkrete Engstellen wählen:** Lesbarkeit der Gruppen, Kamera an Toren/Übergängen, störende Verdeckungen und gleichförmige Abschnitte am vorhandenen Kapitel beurteilen. Daten/Platzierung gezielt verbessern; keine neue KI-/Levelarchitektur.
+2. **Welt angleichen:** Vorhandene Props/Materialien zu konsistenter Schrotthof-Präsentation ausarbeiten. Bereichssilhouetten, gemalte Rost-/Schmutzdetails, warme Lichtinseln und Bodenkontakt verbessern. Bei einer konkreten Asset-Lücke eine kleine geeignete Auswahl statt breitem Neuimport.
+3. **Audio/VFX:** Vorhandene Kontakte erhalten und passende lizenzgeklärte Grundlagen für Schritte, Warnungen, Tor, Presse und Umgebung wählen. Heavy/Agile/Standard hörbar und sichtbar unterscheiden, ohne Kampfsignale zu überladen.
+4. **Figurenentscheidung separat halten:** Mensch-gegen-Bären bleibt spielbare Basis. Wombat-/Cartoon-Look gezielt aus geeigneten Rigs/Modellen ableiten, sobald die konkrete Gestaltung entschieden ist.
+5. **Kurze Übergabe:** Eine dichte Spielsequenz mit Audio und Kamera beurteilen; konkrete Performanceprobleme messen. Der nächste Release kann dann erstmals B4–B6 außerhalb des Editors liefern. Menüs/Einführung/Pause folgen B8.
+
+**Effekt:** Das durchspielbare Kapitel erhält eine zusammenhängende visuelle/akustische Richtung. B7 ist noch nicht begonnen.
 
 ## 1. Bestand und Entscheidung
 

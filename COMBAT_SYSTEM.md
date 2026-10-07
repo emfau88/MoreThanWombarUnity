@@ -1,6 +1,6 @@
-# Combat und Sparring — aktueller B5-Stand
+# Combat und Sparring — aktueller B6-Stand
 
-Stand: 7. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung, B3c-Duell-Tuning und B4-Schulterstoß/B5-Gegnerrollen. Grundform-Figuren und temporärer Human bleiben Platzhalter. Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B4_SHOULDER_CHARGE.md](B4_SHOULDER_CHARGE.md).
+Stand: 7. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung, B3c-Duell-Tuning und B4-Schulterstoß/B5-Gegnerrollen und B6-Kapitelablauf. Grundform-Figuren und temporärer Human bleiben Platzhalter. Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B4_SHOULDER_CHARGE.md](B4_SHOULDER_CHARGE.md).
 
 B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. Letztere verbindet den gültigen Humanoid mit denselben Kampfregeln, konkreten Angriffszeiten und retargeteten Faust-/Fußbahnen. Die Tabelle unten beschreibt die erhaltenen B1-Werte; Humanoid-Zeiten stehen in [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md), aktuelle Aktionen und Reaktionen in [B3A_ACTIONS.md](B3A_ACTIONS.md).
 
@@ -19,6 +19,8 @@ B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. 
 - E / rechter Gamepad-Trigger / Touch STOSS: Schulterstoß am Boden, bis zu 2 m in fester Startrichtung; stoppt am ersten gültigen Kontakt oder an Kollision. Details: [B4-Schulterstoß](B4_SHOULDER_CHARGE.md).
 - HumanoidCombatLab lokal: 1–4 Gegner; 3/4 sind Mischgruppen. D-Pad oben/Touch GEGNER schaltet weiter. Älteres Sparring bleibt bei 1/2.
 - R / Gamepad Start: vollständig zurücksetzen. H / rechter Stick-Klick: Debuganzeige mit Phase, Attack-Instanz und Faust-/Fußkontakt.
+
+B6 liefert eine eigene `JunkyardChapter.unity` mit denselben Aktionen: neun Wellen in drei Bereichen. F/LB öffnet das nahe Schaltertor nach Bereich 1; Touch TOR ÖFFNEN erscheint dort. R/Start/CHECKPOINT wiederholt den aktuellen Abschnitt mit den gespeicherten HP, Backspace/Select/VON VORN beginnt das Kapitel neu. Die Lab-Gegnerwahl 1–4 ist im Kapitel deaktiviert. Nach Bereichssieg 30 HP Heilung bis maximal 100. Der Vorarbeiter ist eine eigene Heavy-Rolle (100 HP, 20 Schaden), kein neues Kampfsystem. Details: [B6_JUNKYARD_CHAPTER.md](B6_JUNKYARD_CHAPTER.md).
 
 Normale Angriffe folgen der aktuellen Blickrichtung; keine automatische Zielerfassung. Bewegungsinput darf sie beim Start und im frühen Startup insgesamt um höchstens 25° korrigieren. Ab Active bleibt die Richtung bis zur Bewegungsfreigabe in später Recovery fest. Ein Folgeschlag erhält eine neue begrenzte Ausrichtung. Der Schulterstoß übernimmt die gewünschte Bewegungsrichtung vollständig beim Start und hält sie bis zum Ende fest; kein nachträgliches Lenken oder Ausweich-Cancel.
 

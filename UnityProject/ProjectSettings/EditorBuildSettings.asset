@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/HumanoidCombatLab.unity
     guid: ff2896b184f011f4997f7d2dd6ff2c3f
+  - enabled: 1
+    path: Assets/Game/Scenes/JunkyardChapter.unity
+    guid: 35136f93332119243a5b36ee0d6bac38
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41140b9598066c540aea11cb275f1eed, type: 3}
+  m_Name: JunkyardChapter
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.ChapterDefinition
+  start: {x: -6, y: 0.05, z: 0}
+  minimum: {x: -7, y: -2.35}
+  maximum: {x: 55, y: 2.35}
+  waveBreak: 2.2
+  areaHeal: 30
+  areas:
+  - title: ANLIEFERUNG
+    center: 0
+    waves:
+    - enemies:
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: 2.7, y: 0, z: -0.45}
+    - enemies:
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: 2.7, y: 0, z: -0.45}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: -2, y: 0, z: 1.35}
+    - enemies:
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: 2.7, y: 0, z: -0.45}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: -2, y: 0, z: 1.35}
+  - title: SORTIERHOF
+    center: 24
+    waves:
+    - enemies:
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: 2.7, y: 0, z: -0.45}
+      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
+        position: {x: -2, y: 0, z: 1.35}
+    - enemies:
+      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
+        position: {x: 2.7, y: 0, z: -0.45}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: -2, y: 0, z: 1.35}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: 4.6, y: 0, z: 1.1}
+    - enemies:
+      - role: {fileID: 11400000, guid: cd7f46fb51311a9429a653c53267d49d, type: 2}
+        position: {x: 2.7, y: 0, z: -0.45}
+      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
+        position: {x: -2, y: 0, z: 1.35}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: 4.6, y: 0, z: 1.1}
+  - title: PRESSWERK
+    center: 48
+    waves:
+    - enemies:
+      - role: {fileID: 11400000, guid: cd7f46fb51311a9429a653c53267d49d, type: 2}
+        position: {x: 2.7, y: 0, z: -0.45}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: -2, y: 0, z: 1.35}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: 4.6, y: 0, z: 1.1}
+    - enemies:
+      - role: {fileID: 11400000, guid: cd7f46fb51311a9429a653c53267d49d, type: 2}
+        position: {x: 2.7, y: 0, z: -0.45}
+      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
+        position: {x: -2, y: 0, z: 1.35}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: 4.6, y: 0, z: 1.1}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: -3.7, y: 0, z: -1.2}
+    - enemies:
+      - role: {fileID: 11400000, guid: 3312dd3d90721b840a0b68a3d8b8b563, type: 2}
+        position: {x: 2.7, y: 0, z: -0.45}
+      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
+        position: {x: -2, y: 0, z: 1.35}
+      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
+        position: {x: 4.6, y: 0, z: 1.1}

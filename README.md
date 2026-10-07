@@ -15,7 +15,7 @@ B3c stimmt KI-Abstand, Aufstehschutz und Feedback ab und ergänzt ein deutsches 
 Eigenständige Windows-/WebGL-Spielstände sind vorhanden; der Browserkampf wurde bis zum Sieg gespielt.
 
 B4 ergänzt lokal einen kurzen Schulterstoß auf E/RT/Touch STOSS und mehr Kick-Abstand.
-B5 ergänzt lokal Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. Nächster Bulk: B6 mit Levelstrecke und Checkpoints. Der Play-Link enthält vorerst die vorige Touch-Fassung.
+B5 ergänzt lokal Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. Nächster Bulk: B7 für Präsentation/Audio. Der Play-Link enthält vorerst die vorige Touch-Fassung.
 
 ## Prototyp spielen
 
@@ -35,6 +35,8 @@ WebGL-Build aus einem GitHub-Release; Anleitung: [Mobile Touch und Veröffentlic
 `UnityProject` mit Unity **6000.4.0f1** öffnen, die Szene
 `Assets/Game/Scenes/HumanoidCombatLab.unity` laden und Play drücken. In die Game-Ansicht
 klicken, damit sie die Tastatureingaben erhält.
+
+**Kapitel lokal spielen:** Statt der Lab-Szene `Assets/Game/Scenes/JunkyardChapter.unity` öffnen. Nach rechts spielen; F/Gamepad LB/Touch TOR ÖFFNEN bedient den nahen Schalter nach Bereich 1. R/Start/Touch CHECKPOINT wiederholt den Abschnitt; Backspace/Select/Touch VON VORN startet das Kapitel neu. [B6: Ablauf und Checkpoints](B6_JUNKYARD_CHAPTER.md).
 
 - WASD oder Pfeiltasten: auf der X/Z-Bodenfläche bewegen.
 - Ctrl / linker Gamepad-Trigger gehalten: Rennen am Boden. Loslassen: Gehen.
@@ -85,6 +87,7 @@ Grundformen. Beide bleiben Platzhalter für die endgültige Cartoon-Gestaltung.
 - [Mobile Touch: Steuerung und Test im selben WLAN](MOBILE_TOUCH.md)
 - [B4: Schulterstoß und Move-Rollen](B4_SHOULDER_CHARGE.md)
 - [B5: Gegnerrollen und Mischkampf](B5_ENEMY_ROLES.md)
+- [B6: Junkyard-Kapitel, Schalter und Checkpoints](B6_JUNKYARD_CHAPTER.md)
 - [M1: vorgezogene Junkyard-Testmap](M1_MAP_PREVIEW.md)
 
 Gestaltungsziel ist der illustrative Cartoon-/Comic-Stil der 2D-Referenz:
@@ -95,7 +98,7 @@ konzentriert sich auf ein vollständiges Duell mit einem Spieler und einem
 Gegner; WebGL-Verträglichkeit wird an diesem kleinen Slice geprüft.
 
 Werkzeuganbindung, Bewegung und Combat-Polish sind umgesetzt; Nutzerfeedback
-dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt lokal Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. Nächster Entwicklungsbulk ist B6 mit Junkyard-Strecke und Checkpoints; Wombat-Gestaltung bleibt separat offen.
+dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt lokal Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. B6 ergänzt das lokal durchspielbare Junkyard-Kapitel. Nächster Entwicklungsbulk ist B7 mit Welt-/Kamerapräsentation und Audio; Wombat-Gestaltung bleibt separat offen.
 Keine Cloud-Dienste, kein Multiplayer, keine Asset-Käufe und keine Änderungen
 am Browsergame als implizite Arbeitsschritte.
 

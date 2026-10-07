@@ -2,6 +2,18 @@
 
 Stand: 7. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
 
+## B6 — zusammenhängendes Kurzkapitel lokal geliefert
+
+Eigene `JunkyardChapter`-Szene: Anlieferung → Sortierhof → Presswerk, neun Wellen mit 23 Gegnern, drei wiederverwendete Rollen plus Vorarbeiter als Heavy-Ableitung. Bereichstore, mitlaufende Wegkamera/feste Kampfeinfassung, naher Torschalter, 30 HP Bereichsheilung und Checkpoints mit Einstieg-HP/Fortschritt integriert. R/Start/Touch CHECKPOINT wiederholt den Abschnitt; Backspace/Select/Touch VON VORN startet neu. F/LB/Touch TOR ÖFFNEN bedient den Schalter. Das Rollenlabor und seine Assets bleiben erhalten. Details: [B6_JUNKYARD_CHAPTER.md](B6_JUNKYARD_CHAPTER.md).
+
+**11/11 gezielte PlayMode-Fälle bestanden:** drei neue Kapitel-Fälle (85,01 s), vier gemeinsame Input-Fälle (1,21 s), drei Duell-Regressionsfälle (17,08 s) und ein Vier-Gegner-/Token-Regressionsfall (16,40 s). Ergebnisse: `tools/b6-chapter-results.json`, `b6-input-results.json`, `b6-duel-regression-results.json`, `b6-group-regression-results.json`. Die Ablaufprüfung verwendet die echten Schadensempfänger; ein separater Kapitel-Fall gewinnt Standard/Agile durch tatsächliche Combat-Kontakte. Retry nach Tod prüft Einstieg-HP, Fortschritt, Tor, frische Gruppe und bereinigten Körper-/Kampfzustand. Arrival-Retry-Grenze zusätzlich direkt im Play-Modus auf x≤7 kontrolliert. Keine Vollsuite.
+
+Ein zusätzlicher tatsächlicher kompletter Combat-Durchlauf mit normalen HP/Schaden/KI, Motor-/Combo-Befehlen, ohne Teleports oder direkte Schadensaufrufe gewinnt alle neun Wellen: `Complete`, drei Bereiche, 58 HP, 101,7 s. Kein menschlicher Erstspieler-Zeitwert. Damit ein funktionierendes Kurzkapitel; das ursprüngliche 10–15-Minuten-Ziel bleibt offen. Bericht `tools/b6-combat-run.txt`. Spielkamerabilder für Einstieg/Tor/Sortierhof/Presswerk/Vorarbeiter/Abschluss und Touch-HUD bei 1280×600 angesehen; Aufnahme-Einstellungen nur vorübergehend. Nachweis: `tools/b6-visual-review.md`, lokale Bilder `UnityProject/Assets/QA/b6-*.png`.
+
+Roadmap und konkreter Plan stehen auf **B7: Cartoon-Präsentation, Bereichsidentität, Kamera, Sound/VFX**. Umfang/Balance zum längeren Kapitel bleiben weiter abzustimmen. Der B6-Quellstand wird auf anschließenden Nutzerauftrag committed und nach origin/main gepusht. Öffentlicher Play-Link und bestehende Builds bleiben auf der bisherigen Touch-Fassung. Kein neuer Build; keine physische Android-/Gamepad- oder Performanceabnahme.
+
+Finale Übergabe: gespeicherte `JunkyardChapter` frisch geladen, Play/Compile/Dirty false, scriptCompilationFailed false; drei Bereiche, neun Wellen/23 Gegner, drei inaktive Rollen-Templates, sieben Tore und null fehlende Materialien. Verbindungstor geschlossen, temporäre Eingaben und Kamera-/Canvas-Aufnahmeeinstellungen beendet. Das gespeicherte Humanoid-Labor bleibt unverändert.
+
 ## B5 — Gegnerrollen und Mischkampf lokal geliefert
 
 Standard/Agile/Heavy als drei kleine Rollendefinitionen auf derselben Bären-/Animations-/Combat-Basis integriert. Kurzer Standardschlag (8 Schaden), angekündigter gerader Agile-Ansturm (10 Schaden, bis zu 2,35 m) und langsamer Heavy-Knockdown (18 Schaden). Handschuhfarbe, Silhouette und Namensmarker unterscheiden die Rollen; Agile besitzt eine feste Bodenspur. Lokal 1–4, D-Pad oben und Touch GEGNER wählen Gruppe und setzen den Kampf zurück. Drei/vier Gegner teilen eine rotierende Angriffsfreigabe, verteilen sich seitlich und beachten Körperkollision, Kamera und Aufstehschutz. Details: [B5_ENEMY_ROLES.md](B5_ENEMY_ROLES.md).

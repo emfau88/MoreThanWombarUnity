@@ -1,0 +1,20 @@
+{
+  "status": "completed",
+  "duration": 16.4,
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "WombatLab.Tests.EnemyRolesPlayTests.FourEnemiesShareOneTokenAndAllGetTurns",
+      "Status": "Passed",
+      "Duration": 16.3052723,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

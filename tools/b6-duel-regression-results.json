@@ -1,0 +1,34 @@
+{
+  "status": "completed",
+  "duration": 17.08,
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "WombatLab.Tests.DuelPlayTests.EnemyWaitsForGetUpProtectionBeforeStartingNextWarning",
+      "Status": "Passed",
+      "Duration": 3.6014371,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.DuelPlayTests.LightChainConnectsAtEnemyEngagementDistance",
+      "Status": "Passed",
+      "Duration": 4.9976984,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.DuelPlayTests.TelegraphCanBeDodgedAndActiveDuelCanBeWonAndRestarted",
+      "Status": "Passed",
+      "Duration": 8.4311,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

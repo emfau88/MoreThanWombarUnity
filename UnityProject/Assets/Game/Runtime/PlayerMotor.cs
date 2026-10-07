@@ -8,6 +8,7 @@ namespace WombatLab
         public CharacterDefinition definition;
         public Transform visual;
         public Animator animator;
+        public JunkyardChapter chapter;
         public string State { get; private set; } = "Idle";
         public bool Grounded { get; private set; }
         public float VerticalVelocity { get; private set; }
@@ -44,7 +45,7 @@ namespace WombatLab
         {
             var frame = testInputEnabled ? testInput : input.Read();
             if (testInputEnabled) testInput = new InputFrame(testInput.Move, run: testInput.Run);
-            if (frame.Restart) { ResetToSpawn(); return; }
+            if (frame.Restart) { if (chapter == null) ResetToSpawn(); return; }
             if (frame.Debug) ShowDebug = !ShowDebug;
             // Hitstop never suspends an airborne trajectory. Ground attacks still commit.
             if (combat != null && combat.Frozen && Grounded) return;
@@ -113,12 +114,15 @@ namespace WombatLab
         }
 
         public void ResetToSpawn()
+        { ResetAt(spawn, visual.parent.rotation * spawnFacing); }
+
+        public void ResetAt(Vector3 position, Quaternion facing)
         {
             combat?.ResetCombat();
             defense?.ResetDefense();
             reaction?.Clear();
-            controller.enabled = false; transform.position = spawn; controller.enabled = true;
-            visual.localRotation = spawnFacing; VerticalVelocity = -2;
+            controller.enabled = false; transform.position = position; controller.enabled = true;
+            visual.rotation = facing; VerticalVelocity = -2;
             coyoteRemaining = bufferRemaining = landingRemaining = 0;
             State = "Idle"; requestedAnimation = null;
             testInput = new InputFrame(Vector2.zero); animator.Play("Idle", 0, 0);

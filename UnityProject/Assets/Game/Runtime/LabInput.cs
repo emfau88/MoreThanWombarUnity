@@ -6,15 +6,15 @@ namespace WombatLab
     public readonly struct InputFrame
     {
         public readonly Vector2 Move;
-        public readonly bool Jump, Restart, Debug, Light, Heavy, Evade, Kick, Run, Charge;
-        public InputFrame(Vector2 move, bool jump = false, bool restart = false, bool debug = false, bool light = false, bool heavy = false, bool evade = false, bool kick = false, bool run = false, bool charge = false)
-        { Move = move; Jump = jump; Restart = restart; Debug = debug; Light = light; Heavy = heavy; Evade = evade; Kick = kick; Run = run; Charge = charge; }
+        public readonly bool Jump, Restart, Debug, Light, Heavy, Evade, Kick, Run, Charge, Interact, ChapterRestart;
+        public InputFrame(Vector2 move, bool jump = false, bool restart = false, bool debug = false, bool light = false, bool heavy = false, bool evade = false, bool kick = false, bool run = false, bool charge = false, bool interact = false, bool chapterRestart = false)
+        { Move = move; Jump = jump; Restart = restart; Debug = debug; Light = light; Heavy = heavy; Evade = evade; Kick = kick; Run = run; Charge = charge; Interact = interact; ChapterRestart = chapterRestart; }
     }
 
     public sealed class LabInput : MonoBehaviour
     {
         InputActionMap map;
-        InputAction move, jump, restart, debug, lightAction, heavyAction, evade, kick, run, charge;
+        InputAction move, jump, restart, debug, lightAction, heavyAction, evade, kick, run, charge, interact, chapterRestart;
         public MobileTouchControls TouchControls { get; set; }
 
         void Awake()
@@ -45,6 +45,10 @@ namespace WombatLab
             run.AddBinding("<Keyboard>/leftCtrl"); run.AddBinding("<Keyboard>/rightCtrl"); run.AddBinding("<Gamepad>/leftTrigger");
             charge = map.AddAction("Charge", InputActionType.Button);
             charge.AddBinding("<Keyboard>/e"); charge.AddBinding("<Gamepad>/rightTrigger");
+            interact = map.AddAction("Interact", InputActionType.Button);
+            interact.AddBinding("<Keyboard>/f"); interact.AddBinding("<Gamepad>/leftShoulder");
+            chapterRestart = map.AddAction("ChapterRestart", InputActionType.Button);
+            chapterRestart.AddBinding("<Keyboard>/backspace"); chapterRestart.AddBinding("<Gamepad>/select");
         }
 
         void OnEnable() { map?.Enable(); }
@@ -62,7 +66,8 @@ namespace WombatLab
                 lightAction.WasPressedThisFrame() || (pointerAllowed && mouse != null && mouse.leftButton.wasPressedThisFrame),
                 heavyAction.WasPressedThisFrame() || (pointerAllowed && mouse != null && mouse.rightButton.wasPressedThisFrame),
                 evade.WasPressedThisFrame(), kick.WasPressedThisFrame(),
-                run.IsPressed() || (TouchControls != null && TouchControls.Running), charge.WasPressedThisFrame());
+                run.IsPressed() || (TouchControls != null && TouchControls.Running), charge.WasPressedThisFrame(),
+                interact.WasPressedThisFrame(), chapterRestart.WasPressedThisFrame());
         }
     }
 }

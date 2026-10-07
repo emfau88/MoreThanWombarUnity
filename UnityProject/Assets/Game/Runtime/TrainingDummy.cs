@@ -8,6 +8,7 @@ namespace WombatLab
         public Transform pad;
         public Renderer padRenderer;
         public CombatController clock;
+        public Vector2 arenaMin = new Vector2(-6.6f, -2.1f), arenaMax = new Vector2(6.6f, 2.1f);
         public int Health { get; private set; }
         public int HitCount { get; private set; }
         public float Hitstun { get; private set; }
@@ -72,7 +73,7 @@ namespace WombatLab
             float dt = clock != null && clock.Frozen ? 0 : Time.deltaTime;
             Hitstun = Mathf.Max(0, Hitstun - dt); flash = Mathf.Max(0, flash - dt);
             transform.position = MotorMath.ClampGround(transform.position + velocity * dt,
-                new Vector2(-6.6f, -2.1f), new Vector2(6.6f, 2.1f));
+                arenaMin, arenaMax);
             velocity *= Mathf.Exp(-9 * dt);
             if (body == null && !Alive && fallenRig != null)
             {

@@ -1,6 +1,6 @@
 # More Than Wombat — Roadmap mit neun Bulks
 
-Stand: 7. Oktober 2026, B4/B5 lokal integriert. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
+Stand: 7. Oktober 2026, B4–B6 lokal integriert. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
 
 ## Ziel und Schwerpunkt
 
@@ -14,11 +14,11 @@ Bestehendes Gameplay weiterentwickeln. Standardmodelle, Rigs, Animationen und Pr
 
 S0–S3 bilden das vorhandene Fundament. B1 ist technisch abgeschlossen: Startup-Drehgrenze korrigiert, fünf gezielte Polish-Fälle bestanden, aktuelle Spielposen kontrolliert und Combat-/Architekturbeschreibung aktualisiert. Nutzerfeedback zum Spielgefühl bleibt für weiteres Tuning willkommen. Ein eigener Blender-Entwurf wurde begonnen, ist aber noch nicht in Unity integriert. Dieser Pfad ist zurückgestellt, bis passende fertige Grundlagen geprüft sind.
 
-Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. B3b ergänzt lebendes Knockdown, GetUp, Aufstehschutz und Tod/Reset für beide Figuren; Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md). Die vorgezogene kleine Map-Aufwertung M1 und B3c sind integriert. Das technische Duell ist als Windows-/WebGL-Spielstand verfügbar; Browserkampf bis zum Sieg und Neustart sind nachgewiesen. B4/B5 sind lokal integriert; als Nächstes B6 mit Levelstrecke, drei Kampfbereichen und Checkpoints. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
+Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. B3b ergänzt lebendes Knockdown, GetUp, Aufstehschutz und Tod/Reset für beide Figuren; Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md). Die vorgezogene kleine Map-Aufwertung M1 und B3c sind integriert. Das technische Duell ist als Windows-/WebGL-Spielstand verfügbar; Browserkampf bis zum Sieg und Neustart sind nachgewiesen. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Kampfbereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss. Als Nächstes B7 für Präsentation/Audio; Laufzeit und Balance werden anhand von Spielerfeedback weiter abgestimmt. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
 
 ## Übersicht
 
-**Zusatzauftrag nach B3c:** Mobile Touch für Android im Querformat ist integriert: vorhandene Unity-Bildschirmcontrols, responsive WebGL-Ansicht und WLAN-Testanleitung. Drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht den fertigen WebGL-Spielstand über einen Release-Workflow; öffentlicher Play-Link im README. Ein physischer Android-Spieltest bleibt offen. B4/B5 sind lokal integriert; der öffentliche Spielstand bleibt bis zum neuen Release unverändert. Details: [MOBILE_TOUCH.md](MOBILE_TOUCH.md).
+**Zusatzauftrag nach B3c:** Mobile Touch für Android im Querformat ist integriert: vorhandene Unity-Bildschirmcontrols, responsive WebGL-Ansicht und WLAN-Testanleitung. Drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht den fertigen WebGL-Spielstand über einen Release-Workflow; öffentlicher Play-Link im README. Ein physischer Android-Spieltest bleibt offen. B4–B6 sind lokal integriert; der öffentliche Spielstand bleibt bis zum neuen Release unverändert. Details: [MOBILE_TOUCH.md](MOBILE_TOUCH.md).
 
 **Vorgezogen auf Nutzerwunsch und geliefert:** **M1 — kleine Testmap-Aufwertung** nach B3b. Betonboden, wenige fertige Junkyard-Props, Zaun/Werkstatt-Hintergrund und Licht sind integriert. B3c ergänzt inzwischen das abgestimmte Duell und Buildnachweise. Details: [M1_MAP_PREVIEW.md](M1_MAP_PREVIEW.md). Die neun Hauptbulks bleiben erhalten; M1 übernimmt einen begrenzten Präsentationsanteil aus B7, die Levelstrecke bleibt B6.
 
@@ -29,7 +29,7 @@ Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei 
 | B3 | B3a–B3c und M1 technisch geliefert: Duell-Tuning, Schutz/Feedback/HUD, Windows/WebGL, Browserkampf bis zum Sieg | Spielbarer technischer Character Slice; Wombat-Stil, Windows-Tastatur, hörbare Audioabnahme und Performanceprofil offen |
 | B4 | Lokal integriert: Schulterstoß aus Sprint-Ableitung, feste Richtung, Kontakt-/Wandstopp, verwundbare Erholung; Kick schafft mehr Platz; E/RT/Touch STOSS | Vier gezielte Stoß-Fälle bestehen; neue Veröffentlichung separat |
 | B5 | Lokal integriert: Standard/Agile/Heavy, feste Rush-Spur, 1–4 Gegner, rotierende Freigabe, Wartepositionen/Körperkollision und Offscreen-Regeln | Mischkampf auf vorhandenen Figuren/Clips; neue Veröffentlichung separat |
-| B6 | Junkyard-Strecke, drei Kampfbereiche, Interaktion, Checkpoints und Abschlusskampf | Vollständig durchspielbares Graybox-Kapitel |
+| B6 | Lokal integriert: JunkyardChapter mit drei verbundenen Bereichen, neun Wellen/23 Gegnern, Schaltertor, Checkpoint-Retry und Vorarbeiter-Finale | Durchspielbares Kurzkapitel; automatischer Kampf 101,7 s, Ausbau zum 10–15-Minuten-Ziel offen |
 | B7 | Passende Environment-Packs ableiten; Comic-Materialien, Kamera, Licht, Sound/VFX abstimmen | Zusammenhängende Präsentation im Referenzstil |
 | B8 | Einführung, HUD, Menü/Pause, Optionen, Retry und Ergebnis | Vollständige selbst erklärende Spielschleife |
 | B9 | Balance, tatsächliche Performance, Windows-Demo und WebGL-Slice prüfen | Spielbare Demo mit konkreten Laufzeit-/Buildnachweisen |
@@ -102,7 +102,7 @@ Lokal integriert: Schulterstoß bis zu 2 m, Startup/Active/Recovery 0,16/0,20/0,
 
 ## B5 — Gegnerrollen und Gruppenkampf
 
-Lokal geliefert: drei Rollenwerte/Attack-Zuordnungen, Standard-Nahkampf, angekündigter gerader Agile-Ansturm und Heavy-Knockdown; Auswahl 1–4/D-Pad oben/Touch GEGNER. Vier Gegner teilen eine rotierende Angriffsfreigabe, verteilen Wartepositionen und berücksichtigen Körperkollision sowie Kamera-/Aufstehschutz. Vorhandene Figuren und Clips wiederverwendet. Details: [B5_ENEMY_ROLES.md](B5_ENEMY_ROLES.md). Vier neue gezielte Fälle bestehen; Übergabenachweise stehen im Status. B6 ist der nächste Entwicklungsbulk.
+Lokal geliefert: drei Rollenwerte/Attack-Zuordnungen, Standard-Nahkampf, angekündigter gerader Agile-Ansturm und Heavy-Knockdown; Auswahl 1–4/D-Pad oben/Touch GEGNER. Vier Gegner teilen eine rotierende Angriffsfreigabe, verteilen Wartepositionen und berücksichtigen Körperkollision sowie Kamera-/Aufstehschutz. Vorhandene Figuren und Clips wiederverwendet. Details: [B5_ENEMY_ROLES.md](B5_ENEMY_ROLES.md). Vier neue gezielte Fälle bestehen; Übergabenachweise stehen im Status. Darauf baut das inzwischen integrierte B6-Kapitel auf.
 
 - Standard mit kurzer Nahkampfaktion und offener Erholung; Agile mit angekündigtem geradlinigem Ansturm nach Seitenwechsel; Heavy mit größerer Silhouette und langsamem Knockdown-Schlag. Keine zusätzliche Rüstung in diesem Bulk.
 - Vorhandene Bären-Grundform und denselben geprüften Animationspfad nutzen, Rollen über Silhouette/Handschuhe/Markierung/Aktion unterscheiden. Finale Cartoon-Modelle separat auswählen.
@@ -112,6 +112,8 @@ Lokal geliefert: drei Rollenwerte/Attack-Zuordnungen, Standard-Nahkampf, angekü
 **Ergebnis:** Einzelduelle sind verständlich, gemischte Gruppen verändern Prioritäten und Positionierung. Wenige repräsentative Kombinationen und Token-/Unterbrechungsfälle genügen.
 
 ## B6 — Junkyard-Kapitel
+
+Lokal geliefert in eigener Szene `JunkyardChapter`: Anlieferung → Sortierhof → Presswerk, neun Wellen/23 Gegner, vorhandene Rollen/Assets, Bereichsgrenzen und Kamerawechsel, Schaltertor, 30 HP Bereichsheilung, Checkpoint-Retry und vollständiger Neustart. Vorarbeiter als Heavy-Ableitung mit Begleitern, keine neue Bossarchitektur. Elf gezielte Kapitel-/Input-/Regressionsfälle bestehen; ein kompletter tatsächlicher Combat-Durchlauf gewinnt in 101,7 s mit 58 HP. Details: [B6_JUNKYARD_CHAPTER.md](B6_JUNKYARD_CHAPTER.md). Zunächst ein Kurzkapitel: Das 10–15-Minuten-Ziel erfordert noch weitere abwechslungsreiche Situationen und Spielerfeedback. Als Nächstes B7; neue Veröffentlichung bleibt separat.
 
 - Kurze zusammenhängende Graybox-Strecke mit drei Kampfbereichen, Bewegungs-/Erholungsabschnitten und klaren Übergängen.
 - Standardgegner erklären den Einstieg; Agile/Gruppen steigern Druck; abschließend ein besonders inszenierter Heavy-Elitegegner.

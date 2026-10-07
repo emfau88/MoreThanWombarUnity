@@ -1,6 +1,6 @@
-# Architektur — implementierter B5-Stand
+# Architektur — implementierter B6-Stand
 
-Stand: 7. Oktober 2026. S1–S3, B1-Polish, B2-Humanoid-Integration, B3a-Aktionen/Reaktionen und B3b-Knockdown/GetUp/Tod, B3c-Duell, Mobile Touch, B4-Schulterstoß und B5-Gegnerrollen sind implementiert. Humanoid und Robot-Gegner bleiben Platzhalter für den späteren Wombat-/Cartoon-Look. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
+Stand: 7. Oktober 2026. S1–S3, B1-Polish, B2-Humanoid-Integration, B3a-Aktionen/Reaktionen und B3b-Knockdown/GetUp/Tod, B3c-Duell, Mobile Touch, B4-Schulterstoß, B5-Gegnerrollen und B6-Junkyard-Kapitel sind implementiert. Humanoid und Robot-Gegner bleiben Platzhalter für den späteren Wombat-/Cartoon-Look. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
 
 B2-Schritte 1/2 ergänzen CharacterImportLab mit regulärem Quaternius-Humanoid und vorhandenem PlayerMotor/LabInput. Schritt 3 ergänzt separat HumanoidCombatLab mit CombatController/Defense, bestehenden Robot-Gegnern und Feedback. HumanoidCombatBuilder erzeugt eigene AttackDefinitions, retimte Clips und je 161 Avatar-Kontaktpunkte im lokalen Facing-Raum; CombatController interpoliert sie ohne SampleAnimation auf dem sichtbaren Humanoid. AttackDefinition enthält gewünschte Phasendauern sowie Avatar-/Clipreferenz für die konkrete Bahn. Animator-Zeit bleibt die einzige laufende Phase; B1-Transformclips behalten ihren alten SampleAnimation-Pfad. Root Motion bleibt aus. Die ursprünglichen Combat-Szenen sind erhalten. Details in B2_COMBAT_INTEGRATION.md.
 
@@ -18,7 +18,8 @@ B2-Schritte 1/2 ergänzen CharacterImportLab mit regulärem Quaternius-Humanoid 
 | BodyRecovery | Optionaler Fall/Boden/GetUp/Tod mit Pose, Aufstehschutz, niedriger Spieler-Kapsel und Wiederherstellung der Collider; nur in HumanoidCombatLab angebunden |
 | EnemyBrain / EnemyRoleDefinition | Gemeinsame KI mit kleinen Rollendaten, Warnung/geradem Ansturm, Animator-Phase, Recovery und Unterbrechung bei Treffer/Tod |
 | EngagementCoordinator | Eine rotierende Angriffsfreigabe für bis zu vier Gegner, Kamera-/Aufstehschutz, Wartepositionen, Körperkapsel-Bewegung und Encounter-Reset |
-| CombatFeedback / LabHud / ArenaCamera | Kontakt-Audio/VFX, HP-/Phasen-/Steuerungsanzeige und kontrollierte 2.5D-Perspektive |
+| CombatFeedback / LabHud / ArenaCamera | Kontakt-Audio/VFX, Kapitel-/HP-/Phasenanzeige; im Kapitel scrollende Wege und rahmende Kampfkamera |
+| JunkyardChapter / ChapterDefinition / ChapterGate | Kleiner Ablauf für drei Bereiche/Wellen, sichtbare Tor-Interaktion, Checkpoint mit HP/Position und Neustart; vorhandene Combat-Komponenten weiterverwendet |
 
 Animationsbrücke und Spieler-Trefferauflösung sind in CombatController integriert. Es gibt keine eigenständigen Klassen namens AnimationBridge oder HitResolver. Weitere Trennung erfolgt erst bei echtem Bedarf.
 
@@ -90,6 +91,14 @@ Die Animator-Phasenautorität gilt für Transform-Graybox und Humanoid. B2 ergä
 Humanoid-Retargeting wertet die Hand-/Fußpose am ausgewählten echten Avatar über Animator aus und speichert eine kleine konkrete Bahn pro Attacke. Die Laufzeit verwendet diese Bahn mit derselben Phase wie die sichtbare Pose. Kontaktgenauigkeit und übersprungenes Active sind gezielt geprüft. Rig-/Clipänderungen benötigen eine Neuableitung; keine allgemeine Animations-Importarchitektur.
 
 Die eigene Blender-/JSON-Geometrie-Bibliothek ist erhalten, aber nicht in die Spielfigur integriert. Der frühere Plan, eine eigene JSON-Mesh-Importpipeline weiterzubauen, ist zurückgestellt. Passende vorhandene Cartoon-Modelle/Rigs und Animationen werden zuerst geprüft; vollständiges Duell folgt vor zusätzlichen Gegnertypen und Levelcontent.
+
+## B6 — eigene Kapitel-Szene
+
+JunkyardChapterBuilder kopiert das gespeicherte B5-Labor in die eigene Szene `JunkyardChapter.unity` und verbindet drei Ableitungen des vorhandenen Junkyard-Environment mit physischem Boden und Abschnittstoren. Die Lab-Szene bleibt erhalten. Keine neuen Downloads. ChapterDefinition hält Bereichsmittelpunkte, Wellen/Spawnpunkte, Heilung und Pause als kleine Daten; JunkyardChapter besitzt Fortschritt und den aktuellen Checkpoint. ChapterGate schaltet Torplatte/Kollision. Eintritt → Wellen → Bereichssieg → Weg/Schalter → nächster Eintritt → Finale.
+
+EngagementCoordinator erzeugt pro Welle höchstens vier Gegner aus drei inaktiven vorhandenen Rollen-Vorlagen und entfernt die alte Gruppe beim Wechsel/Retry. Er erhält Weltgrenzen des aktuellen Bereichs; TrainingDummy begrenzt Rückstoß im selben Bereich. Gemeinsame Token-/Kamera-/Schutzregeln bleiben erhalten. PlayerMotor.ResetAt verbindet bestehenden vollständigen Reset mit Checkpointposition/Facing; PlayerDefense kann die damaligen Checkpoint-HP zurückstellen. Die Bewegungsdefinition wird nur als Runtime-Kopie verändert. LabInput ergänzt F/LB und Backspace/Select, Touch ergänzt kontextabhängiges TOR ÖFFNEN und CHECKPOINT/VON VORN. B5-Gegnerwahl bleibt ausschließlich im Labor.
+
+Beim gezielten Neuaufbau B6 erst nach dem vollständigen B5-Labor anwenden. Der B6-Builder ersetzt die Kapitel-Szene; manuelle Kapiteländerungen vorher erhalten. Haupt-Builder bleiben keine allgemein beliebig wiederholbaren Migrationswerkzeuge. Nachweise/Steuerung: [B6_JUNKYARD_CHAPTER.md](B6_JUNKYARD_CHAPTER.md).
 
 ## Werkzeugstand 7. Oktober 2026
 

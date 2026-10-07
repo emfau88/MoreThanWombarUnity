@@ -1,6 +1,6 @@
 # Mobile Touch — Duell-Steuerung
 
-Stand: 7. Oktober 2026. Die veröffentlichte Touch-Fassung stammt vom 5. Oktober; B4 ergänzt lokal STOSS über dieselbe Eingabepipeline; B5 ergänzt die Gegnerzahlwahl.
+Stand: 7. Oktober 2026. Die veröffentlichte Touch-Fassung stammt vom 5. Oktober; B4 ergänzt lokal STOSS über dieselbe Eingabepipeline; B5 ergänzt die Gegnerzahlwahl; B6 ergänzt Kapitel-Retry und Torinteraktion.
 
 ## Bedienung
 
@@ -12,6 +12,10 @@ Stand: 7. Oktober 2026. Die veröffentlichte Touch-Fassung stammt vom 5. Oktober
 - Bewegung und Aktionsbuttons können gleichzeitig mit verschiedenen Fingern bedient werden. Sprung plus Combo/Kick verwendet weiterhin Air-Kick, Sprung plus Heavy Air-Smash.
 - **NEUSTART** setzt das Duell auch nach Niederlage zurück. Querformat ist die vorgesehene Spielansicht; Hochformat zeigt einen Drehhinweis.
 - Tastatur-/Gamepad-Regeln bleiben vorhanden. Bei eingeblendeter Touch-Oberfläche lösen Maus-/emulierte Touch-Mausklicks keine zusätzlichen Angriffe aus.
+
+## B6-Kapitel lokal
+
+In `JunkyardChapter` ersetzt **CHECKPOINT** das Lab-NEUSTART und **VON VORN** die Gegnerwahl. Der kontextabhängige Button **TOR ÖFFNEN** erscheint nach Bereich 1 nahe dem Schalter. Die Kampfbuttons und ihre bestehenden Bindings bleiben unverändert. Die alte öffentliche Touch-Fassung benötigt einen neuen Kapitel-Build, bevor diese Bedienung online verfügbar ist.
 
 ## Integration
 

@@ -54,5 +54,7 @@ namespace WombatLab
         }
         public void ResetDefense()
         { Health = maxHealth; dodgeRemaining = cooldown = stun = 0; knockback = Vector3.zero; GetComponent<AnimationReaction>()?.Clear(); GetComponent<BodyRecovery>()?.ResetBody(); }
+        public void ResetDefense(int health) { ResetDefense(); Health = Mathf.Clamp(health, 1, maxHealth); }
+        public void RestoreHealth(int amount) { if (Alive) Health = Mathf.Min(maxHealth, Health + amount); }
     }
 }

@@ -23,6 +23,8 @@ namespace WombatLab
         Text toggleText, stateText;
         Text opponentCountText;
         EngagementCoordinator modeEncounter;
+        JunkyardChapter chapter;
+        Button interactButton;
         Transform keyboardHelp, header;
         int originalStateFont;
         Sprite disc;
@@ -79,10 +81,18 @@ namespace WombatLab
             Action("Light", "COMBO", "buttonWest", new Vector2(-205, 69), 108, new Color(.25f, .72f, .61f, .90f));
             Action("Evade", "AUSWEICHEN", "buttonEast", new Vector2(-85, 61), 102, new Color(.32f, .44f, .53f, .85f));
             Action("Charge", "STOSS", "rightTrigger", new Vector2(-325, 66), 92, new Color(.68f, .48f, .22f, .9f));
-            var reset = Button("Restart", "NEUSTART", controls.transform, new Vector2(0, 1), new Vector2(85, -24), new Vector2(140, 42), false);
+            chapter = FindAnyObjectByType<JunkyardChapter>();
+            var reset = Button("Restart", chapter != null ? "CHECKPOINT" : "NEUSTART", controls.transform, new Vector2(0, 1), new Vector2(85, -24), new Vector2(140, 42), false);
             reset.gameObject.AddComponent<OnScreenButton>().controlPath = "<Gamepad>/start";
             var encounter = FindAnyObjectByType<EngagementCoordinator>();
-            if (encounter != null)
+            if (chapter != null)
+            {
+                var restartChapter = Button("Chapter restart", "VON VORN", controls.transform, new Vector2(0,1), new Vector2(255,-24), new Vector2(170,42), false);
+                restartChapter.gameObject.AddComponent<OnScreenButton>().controlPath = "<Gamepad>/select";
+                interactButton = Button("Interact", "TOR ÖFFNEN", controls.transform, new Vector2(.5f,0), new Vector2(0,64), new Vector2(190,52), false);
+                interactButton.onClick.AddListener(() => chapter.TryInteract());
+            }
+            else if (encounter != null)
             {
                 modeEncounter = encounter;
                 var mode = Button("Opponent count", "GEGNER: 1", controls.transform, new Vector2(0,1), new Vector2(255,-24), new Vector2(170,42), false);
@@ -144,6 +154,7 @@ namespace WombatLab
         }
         void Update()
         {
+            if (interactButton != null) interactButton.gameObject.SetActive(chapter != null && chapter.CanInteract);
             if (opponentCountText != null && modeEncounter != null) opponentCountText.text = "GEGNER: " + modeEncounter.Mode;
             if (!userSelected && !Visible && (Application.isMobilePlatform || Touchscreen.current != null)) SetVisible(true);
             UpdateSafeArea(); portraitHint.SetActive(Visible && Screen.height > Screen.width);

@@ -54,6 +54,8 @@ namespace WombatLab.Tests
             Press(keyboard.eKey); Assert.That(input.Read().Charge, Is.True); Release(keyboard.eKey);
             Press(keyboard.spaceKey); Assert.That(input.Read().Jump, Is.True); Release(keyboard.spaceKey);
             Press(keyboard.rKey); Assert.That(input.Read().Restart, Is.True); Release(keyboard.rKey);
+            Press(keyboard.fKey); Assert.That(input.Read().Interact, Is.True); Release(keyboard.fKey);
+            Press(keyboard.backspaceKey); Assert.That(input.Read().ChapterRestart, Is.True); Release(keyboard.backspaceKey);
             Press(keyboard.leftShiftKey); Assert.That(input.Read().Evade, Is.True); Release(keyboard.leftShiftKey);
             Press(pad.buttonWest); Assert.That(input.Read().Light, Is.True); Release(pad.buttonWest);
             Press(pad.buttonNorth); Assert.That(input.Read().Heavy, Is.True); Release(pad.buttonNorth);
@@ -61,6 +63,8 @@ namespace WombatLab.Tests
             Press(pad.rightTrigger); Assert.That(input.Read().Charge, Is.True); Release(pad.rightTrigger);
             Press(pad.buttonSouth); Assert.That(input.Read().Jump, Is.True); Release(pad.buttonSouth);
             Press(pad.startButton); Assert.That(input.Read().Restart, Is.True); Release(pad.startButton);
+            Press(pad.leftShoulder); Assert.That(input.Read().Interact, Is.True); Release(pad.leftShoulder);
+            Press(pad.selectButton); Assert.That(input.Read().ChapterRestart, Is.True); Release(pad.selectButton);
             Press(pad.buttonEast); Assert.That(input.Read().Evade, Is.True); Release(pad.buttonEast);
         }
         [Test] public void RunIsHeldOnControlOrLeftTriggerWithoutChangingEvade()
