@@ -44,11 +44,11 @@ namespace WombatLab.Tests
         [Test] public void OtherActionsDoNotAlsoTriggerMouseLightAndDesktopClicksReturnWhenHidden()
         {
             Press(mouse.leftButton); var finger = Pointer(33, Vector2.zero);
-            foreach (string name in new[] { "Heavy", "Kick", "Jump", "Evade", "Restart" })
+            foreach (string name in new[] { "Heavy", "Kick", "Jump", "Evade", "Restart", "Charge" })
             {
                 var button = Action(name); button.OnPointerDown(finger); InputSystem.Update(); var frame = input.Read();
                 Assert.That(frame.Light, Is.False, "UI/emulated mouse must not also enqueue a light attack");
-                Assert.That(name == "Heavy" ? frame.Heavy : name == "Kick" ? frame.Kick : name == "Jump" ? frame.Jump : name == "Evade" ? frame.Evade : frame.Restart, Is.True, name);
+                Assert.That(name == "Heavy" ? frame.Heavy : name == "Kick" ? frame.Kick : name == "Jump" ? frame.Jump : name == "Evade" ? frame.Evade : name == "Charge" ? frame.Charge : frame.Restart, Is.True, name);
                 button.OnPointerUp(finger); InputSystem.Update();
             }
             Release(mouse.leftButton); hud.SetVisible(false); Set(mouse.position, Vector2.zero);

@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "duration": 0.36,
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "WombatLab.Tests.LabInputPlayTests.GamepadBindingProducesGameplayIntent",
+      "Status": "Passed",
+      "Duration": 0.1644068,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.LabInputPlayTests.KeyboardAndGamepadExposeCombatJumpAndResetIntents",
+      "Status": "Passed",
+      "Duration": 0.047255,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.LabInputPlayTests.KeyboardBindingProducesGameplayIntent",
+      "Status": "Passed",
+      "Duration": 0.0282901,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.LabInputPlayTests.RunIsHeldOnControlOrLeftTriggerWithoutChangingEvade",
+      "Status": "Passed",
+      "Duration": 0.0232629,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

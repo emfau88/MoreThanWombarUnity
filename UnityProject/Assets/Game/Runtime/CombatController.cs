@@ -8,11 +8,13 @@ namespace WombatLab
     public sealed class CombatController : MonoBehaviour
     {
         public AttackDefinition[] lights;
-        public AttackDefinition heavy, kick, airKick, airHeavy;
-        public Transform leftFist, rightFist, leftFoot, rightFoot;
-        public Transform ContactPoint => Attack == null ? rightFist : Attack.foot
+        public AttackDefinition heavy, kick, airKick, airHeavy, shoulderCharge;
+        public Transform leftFist, rightFist, leftFoot, rightFoot, shoulder;
+        public Transform ContactPoint => ChargeCommitted ? shoulder : Attack == null ? rightFist : Attack.foot
             ? (Attack.rightHand ? rightFoot : leftFoot) : (Attack.rightHand ? rightFist : leftFist);
-        public bool MovementReleased => Attacking && !Attack.airborne && Progress >= Attack.moveRelease;
+        public bool ChargeCommitted => Attacking && Attack.chargeDistance > 0;
+        public bool ChargeStopped { get; private set; }
+        public bool MovementReleased => Attacking && !ChargeCommitted && !Attack.airborne && Progress >= Attack.moveRelease;
         public CombatFeedback feedback;
         public TrainingDummy dummy;
         public int team = 1;
@@ -35,6 +37,7 @@ namespace WombatLab
         int lightIndex;
         Vector3 previousRoot;
         Quaternion startFacing;
+        Vector3 chargeDirection;
 
         void Awake() { motor = GetComponent<PlayerMotor>(); input = GetComponent<LabInput>(); defense = GetComponent<PlayerDefense>(); }
         void Update()
@@ -42,7 +45,7 @@ namespace WombatLab
             var frame = input.Read();
             if (frame.Restart) { ResetCombat(); return; }
             if (defense != null && (defense.Evading || defense.Locked)) { buffer.Clear(); return; }
-            if (frame.Heavy) Queue(CombatIntent.Heavy); else if (frame.Kick) Queue(CombatIntent.Kick); else if (frame.Light) Queue(CombatIntent.Light);
+            if (frame.Charge) Queue(CombatIntent.Charge); else if (frame.Heavy) Queue(CombatIntent.Heavy); else if (frame.Kick) Queue(CombatIntent.Kick); else if (frame.Light) Queue(CombatIntent.Light);
             bool wasFrozen = Frozen;
             freezeRemaining = Mathf.Max(0, freezeRemaining - Time.unscaledDeltaTime);
             motor.animator.speed = Frozen ? 0 : Attacking && Attack.HasAuthoredTiming ? Attack.clip.length / Attack.Duration : 1;
@@ -51,13 +54,19 @@ namespace WombatLab
             if (!Frozen && !Attacking && !(frame.Jump && motor.Grounded) && buffer.Pending != CombatIntent.None)
             {
                 var intent = buffer.Consume();
-                Begin(!motor.Grounded ? (intent == CombatIntent.Heavy ? airHeavy : airKick)
+                if (intent == CombatIntent.Charge && !motor.Grounded) return;
+                Begin(intent == CombatIntent.Charge ? shoulderCharge : !motor.Grounded ? (intent == CombatIntent.Heavy ? airHeavy : airKick)
                     : intent == CombatIntent.Heavy ? heavy : intent == CombatIntent.Kick ? kick : lights[0],
                     intent == CombatIntent.Light && motor.Grounded ? 0 : -1);
             }
         }
 
-        public void Queue(CombatIntent intent) => buffer.Submit(intent);
+        public void Queue(CombatIntent intent)
+        {
+            // A shoulder charge neither chains out of another attack nor becomes an air kick.
+            if (intent == CombatIntent.Charge && (shoulderCharge == null || Attacking || !motor.Grounded)) return;
+            buffer.Submit(intent);
+        }
 
         void Begin(AttackDefinition attack, int index)
         {
@@ -66,13 +75,16 @@ namespace WombatLab
             { Debug.LogError("Humanoid attack needs a contact path baked for its current clip and avatar", this); return; }
             Attack = attack; lightIndex = index; AttackInstance++;
             hitTargets.Clear(); previous = Progress = 0; HitboxOpen = false;
+            ChargeStopped = false;
             previousRoot = transform.position;
             // Begin and early startup share one turn budget, measured from
             // the original facing rather than an already corrected pose.
             startFacing = motor.visual.rotation;
             var move = MotorMath.PlanarInput(motor.MovementIntent);
             if (move.sqrMagnitude > .01f)
-                motor.visual.rotation = Quaternion.RotateTowards(motor.visual.rotation, Quaternion.LookRotation(move), 25);
+                motor.visual.rotation = attack.chargeDistance > 0 ? Quaternion.LookRotation(move)
+                    : Quaternion.RotateTowards(motor.visual.rotation, Quaternion.LookRotation(move), 25);
+            chargeDirection = motor.visual.forward;
             motor.ClearJumpBuffer();
             motor.animator.Play(attack.stateName, 0, 0);
             motor.animator.Update(0);
@@ -84,7 +96,7 @@ namespace WombatLab
             var state = motor.animator.GetCurrentAnimatorStateInfo(0);
             if (!state.IsName(Attack.stateName)) { Cancel(); return; }
             Progress = Mathf.Clamp01(state.normalizedTime);
-            if (!Attack.airborne && motor.Grounded)
+            if (!ChargeCommitted && !Attack.airborne && motor.Grounded)
             {
                 float stepFrom = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.08f, .40f, previous));
                 float stepTo = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.08f, .40f, Progress));
@@ -98,7 +110,9 @@ namespace WombatLab
                 }
             }
             HitboxOpen = Progress >= Attack.ActiveStart && Progress <= Attack.ActiveEnd;
-            if (Attack.ActiveCrossed(previous, Progress)) SweepActivePoses(previous, Progress);
+            if (ChargeCommitted) TickCharge(previous, Progress);
+            else if (Attack.ActiveCrossed(previous, Progress)) SweepActivePoses(previous, Progress);
+            if (ChargeStopped) HitboxOpen = false;
             previous = Progress;
             previousRoot = transform.position;
 
@@ -112,6 +126,26 @@ namespace WombatLab
             if (!Frozen && lightIndex == 1 && buffer.Pending == CombatIntent.Kick && Progress >= chainStart && Progress <= Attack.chainEnd)
             { buffer.Consume(); Begin(kick, -1); return; }
             if (Progress >= .999f) Cancel();
+        }
+
+        void TickCharge(float from, float to)
+        {
+            if (ChargeStopped || !motor.Grounded || !Attack.ActiveCrossed(from, to)) return;
+            float begin = Mathf.Max(from, Attack.ActiveStart), end = Mathf.Min(to, Attack.ActiveEnd);
+            float interval = Attack.ActiveEnd - Attack.ActiveStart;
+            float distance = Attack.chargeDistance * (end - begin) / interval;
+            // Short spatial steps stop at the first valid contact even if a frame skips Active.
+            // Pose, motion and damage still use the single Animator phase clock.
+            int steps = Mathf.Max(1, Mathf.CeilToInt(distance / .09f));
+            for (int i = 0; i < steps && !ChargeStopped; i++)
+            {
+                float a = Mathf.Lerp(begin, end, i / (float)steps);
+                float b = Mathf.Lerp(begin, end, (i + 1) / (float)steps);
+                previousRoot = transform.position;
+                bool blocked = motor.MoveAttackStep(chargeDirection * (distance / steps));
+                SweepActivePoses(a, b);
+                if (blocked) ChargeStopped = true;
+            }
         }
 
         void SweepActivePoses(float from, float to)
@@ -142,8 +176,10 @@ namespace WombatLab
                     feedback?.Contact(next, Attack.heavy);
                     freezeRemaining = Mathf.Max(freezeRemaining, Attack.hitstop);
                     motor.animator.speed = 0;
+                    if (ChargeCommitted) { ChargeStopped = true; break; }
                 }
                 last = next;
+                if (ChargeStopped) break;
             }
             if (!Attack.clip.isHumanMotion)
                 Attack.clip.SampleAnimation(motor.visual.gameObject, Progress * Attack.clip.length);
@@ -163,6 +199,7 @@ namespace WombatLab
         {
             Attack = null; Progress = previous = 0; HitboxOpen = false;
             hitTargets.Clear(); freezeRemaining = 0; buffer.Clear();
+            ChargeStopped = false; chargeDirection = Vector3.zero;
             if (motor != null && motor.animator != null) { motor.animator.speed = 1; motor.ResumeLocomotion(); }
         }
         public void ResetCombat() { Cancel(); buffer.Clear(); dummy?.ResetTraining(); feedback?.Clear(); }

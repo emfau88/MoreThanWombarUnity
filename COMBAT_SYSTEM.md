@@ -1,6 +1,6 @@
-# Combat und Sparring — aktueller B3c-Stand
+# Combat und Sparring — aktueller B5-Stand
 
-Stand: 5. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung und B3c-Duell-Tuning. Grundform-Figuren und temporärer Human bleiben Platzhalter. Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md).
+Stand: 7. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung, B3c-Duell-Tuning und B4-Schulterstoß/B5-Gegnerrollen. Grundform-Figuren und temporärer Human bleiben Platzhalter. Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B4_SHOULDER_CHARGE.md](B4_SHOULDER_CHARGE.md).
 
 B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. Letztere verbindet den gültigen Humanoid mit denselben Kampfregeln, konkreten Angriffszeiten und retargeteten Faust-/Fußbahnen. Die Tabelle unten beschreibt die erhaltenen B1-Werte; Humanoid-Zeiten stehen in [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md), aktuelle Aktionen und Reaktionen in [B3A_ACTIONS.md](B3A_ACTIONS.md).
 
@@ -16,10 +16,11 @@ B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. 
 - L / rechte Schultertaste (RB / R1): Kick; aus neutral oder als Abschluss nach Light 2.
 - Im Sprung starten J und L einen Air-Kick, K einen Air-Smash.
 - Shift / Gamepad East (B bzw. Kreis): am Boden ausweichen.
-- 1 / 2: im Sparring einen oder zwei Gegner aktivieren.
+- E / rechter Gamepad-Trigger / Touch STOSS: Schulterstoß am Boden, bis zu 2 m in fester Startrichtung; stoppt am ersten gültigen Kontakt oder an Kollision. Details: [B4-Schulterstoß](B4_SHOULDER_CHARGE.md).
+- HumanoidCombatLab lokal: 1–4 Gegner; 3/4 sind Mischgruppen. D-Pad oben/Touch GEGNER schaltet weiter. Älteres Sparring bleibt bei 1/2.
 - R / Gamepad Start: vollständig zurücksetzen. H / rechter Stick-Klick: Debuganzeige mit Phase, Attack-Instanz und Faust-/Fußkontakt.
 
-Angriffe folgen der aktuellen Blickrichtung; keine automatische Zielerfassung. Bewegungsinput darf sie beim Start und im frühen Startup insgesamt um höchstens 25° korrigieren. Ab Active bleibt die Richtung bis zur Bewegungsfreigabe in später Recovery fest. Ein Folgeschlag erhält eine neue begrenzte Ausrichtung.
+Normale Angriffe folgen der aktuellen Blickrichtung; keine automatische Zielerfassung. Bewegungsinput darf sie beim Start und im frühen Startup insgesamt um höchstens 25° korrigieren. Ab Active bleibt die Richtung bis zur Bewegungsfreigabe in später Recovery fest. Ein Folgeschlag erhält eine neue begrenzte Ausrichtung. Der Schulterstoß übernimmt die gewünschte Bewegungsrichtung vollständig beim Start und hält sie bis zum Ende fest; kein nachträgliches Lenken oder Ausweich-Cancel.
 
 ## Angriffe und Bewegung
 
@@ -49,7 +50,7 @@ Die B1-Graybox besitzt direkt animierte Transformkurven. Für das auf Active beg
 
 Für neue Humanoid-Attacken enthält AttackDefinition gewünschte Startup-/Active-/Recovery-Sekunden. Der Builder retimt die eigenen Clipkurven abschnittsweise und richtet den tatsächlichen Kontakt darauf aus; die Animator-Geschwindigkeit berücksichtigt Gesamtdauer und Hitstop. Die normalisierte Animator-Zeit bleibt die einzige laufende Phasenquelle. Neue Clip-/Rigkombinationen benötigen einen neuen Bake. Falscher Avatar oder eine abweichende Clipreferenz verhindern den Start der Humanoid-Attacke.
 
-- Eine gepufferte Absicht bleibt höchstens 0,30 Combat-Sekunden erhalten. Eine neue Absicht ersetzt sie; bei gleichzeitigem Input gilt Heavy vor Kick vor Light.
+- Eine gepufferte Absicht bleibt höchstens 0,30 Combat-Sekunden erhalten. Eine neue Absicht ersetzt sie; bei gleichzeitigem Input gilt Stoß vor Heavy vor Kick vor Light. Stoß wird während einer laufenden Attacke und in der Luft verworfen.
 - Light 1 → Light 2 → Light 3: Anschluss ab 0,48 nach bestätigtem Treffer, ab 0,64 nach Fehlschlag, jeweils bis 0,88. Jede Stufe hat eine neue Attack-Instanz.
 - Nach Light 2 ist Kick im gleichen Treffer-/Fehlschlagfenster ein alternativer Abschluss. Kick setzt die Light-Kette nicht fort.
 - Heavy darf eine Light-Recovery ab 0,80 abbrechen. Kein entsprechender Heavy-Cancel aus Kick oder Luftangriff.
@@ -57,7 +58,7 @@ Für neue Humanoid-Attacken enthält AttackDefinition gewünschte Startup-/Activ
 
 ## Treffer, Reaktion und Tod
 
-Die Trainingspuppe hat 150 HP, der Sparring-Gegner 80 HP. Die frühen Lights haben weniger Rückstoß (0,17 / 0,22), der Finisher (0,75) und Heavy (1,25) schaffen Abstand. Diese Daten steuern einen kinematischen Geschwindigkeitsimpuls mit Dämpfung, keine exakt garantierte Rückstoßstrecke.
+Die Trainingspuppe hat 150 HP; alte Sparring-Gegner haben 80 HP. B5-Rollen im HumanoidCombatLab: Standard 65, Agile 55, Heavy 80 HP. Die frühen Lights haben weniger Rückstoß (0,17 / 0,22), der Finisher (0,75) und Heavy (1,25) schaffen Abstand. Diese Daten steuern einen kinematischen Geschwindigkeitsimpuls mit Dämpfung, keine exakt garantierte Rückstoßstrecke.
 
 Körperkollision und Trigger-Hurtbox auf Layer 8 `CombatHurtbox` sind getrennt. Faust oder Fuß sind explizite Kontaktpunkte mit Angriffsradius; keine aus Mesh-Bounds abgeleiteten Schadenszonen. Team, Lebensstatus, räumlicher Kontakt und Front-Richtung filtern Treffer. Jeder Gegner erhält pro Attack-Instanz höchstens einen Treffer, auch mit mehreren Hurtboxes. Der Spieler-Sweep verwendet einen festen Puffer mit 32 Kontakten.
 
@@ -75,9 +76,9 @@ EnemyBrain verwendet Approach, Telegraph, Attack, Recovery, Reposition, Stagger 
 
 B3c setzt die Angriffsdistanz im HumanoidCombatLab auf 1,30 m und den gewünschten Repositionsabstand auf 1,20 m. Aus dem tatsächlichen KI-Anlauf trifft damit die gesamte Light-Kette statt nur einer Stufe. Die älteren Szenen behalten ihre 1,65/1,25-m-Vorgaben. EngagementCoordinator vergibt während Spieler-Knockdown/GetUp und anschließendem Aufstehschutz keine neue Angriffserlaubnis; danach läuft der Kampf weiter.
 
-Ein orange/roter Bodenmarker kündigt 0,55 s lang den Schlag an. Die Richtung wird beim Warnstart festgelegt. Die anschließende Attack-Phase kommt aus dem Animator, mit Active 0,38–0,53. Pro Angriff kann der Spieler einmal 12 Schaden erhalten; der Gegner verwendet dafür seine eigene Damage-Auflösung, nicht den Spieler-Schadenswert 32 im gemeinsamen Asset-Typ.
+B5-Rollen definieren eigene Warnung/Schaden: Standard 0,45 s/8 HP, Agile 0,80 s/10 HP, Heavy 0,75 s/18 HP mit Knockdown. Ein orange/roter Bodenmarker kündigt den Angriff an. Agile zeigt zusätzlich seine feste Ansturmspur und läuft im Active maximal 2,35 m; Kontakt, Körper-/Wandkollision und Arenarand stoppen den Weg. Die Richtung steht ab Warnstart fest. Die Attack-Phase kommt weiterhin ausschließlich aus dem Animator; pro Angriff höchstens ein Spielertreffer. Ältere Rollen ohne Definition behalten 0,55 s Warnung und 12 Schaden. Details/Werte: [B5_ENEMY_ROLES.md](B5_ENEMY_ROLES.md).
 
-Genau ein Gegner besitzt die Freigabe für Telegraph/Attack/Recovery. Nach dem Clip folgen 0,45 s Recovery, anschließend 0,30 s Gruppenpause. Treffer, Tod, Disable, Animator-Abbruch und Encounter-Reset geben die Freigabe frei. Wartende Gegner bewegen sich seitlich; kurze Repulsion verhindert Stapelung. Kein NavMesh oder vollständiges Crowd-System.
+Genau ein sichtbarer bereiter Gegner besitzt die Freigabe für Telegraph/Attack/Recovery. Die Vergabe rotiert über alle aktiven Rollen. Nach dem Clip folgen rollenabhängig 0,35/0,60 s zusätzliche Recovery und 0,30 s Gruppenpause; alte Rollen behalten 0,45 s Recovery. Treffer, Tod, Disable, Animator-Abbruch und Encounter-Reset geben die Freigabe frei. Außerhalb der Kamera startet kein Angriff; laufende Warnung/Attack wird dort abgebrochen. Wartende Rollen verteilen sich seitlich, weichen in unmittelbarer Nähe zurück und nutzen Repulsion und Körperkapsel-Kollision. Kein NavMesh oder vollständiges Crowd-System.
 
 PlayerDefense verwaltet 100 HP, Treffer-Starre, Rückstoß und Bodenausweichen. Evade dauert 0,32 s bei 8 m/s, mit 0,65 s Cooldown und Unverwundbarkeit nur zwischen 0,05 und 0,24 s. Es cancelt den eigenen Angriff und nutzt ohne Richtungsinput die Blickrichtung. In der Luft sowie während Fall/GetUp/Tod ist es gesperrt. Der Aufstehschutz verhindert Treffer bei bereits freier Steuerung. R startet auch nach Tod oder Sieg neu.
 

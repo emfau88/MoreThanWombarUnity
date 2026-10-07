@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "duration": 11.92,
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "WombatLab.Tests.ShoulderChargePlayTests.ContactStopsChargeAndKeepsVulnerableRecovery",
+      "Status": "Passed",
+      "Duration": 5.1331367,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.ShoulderChargePlayTests.MissTravelsLimitedDistanceInLockedDirection",
+      "Status": "Passed",
+      "Duration": 2.2049528,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.ShoulderChargePlayTests.SkippedActiveStillStopsAtFirstContactWithoutReposing",
+      "Status": "Passed",
+      "Duration": 1.2722895,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.ShoulderChargePlayTests.WallStopsMotionAndDamageInterruptsCharge",
+      "Status": "Passed",
+      "Duration": 3.1886706,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

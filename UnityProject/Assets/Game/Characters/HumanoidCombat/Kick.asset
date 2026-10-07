@@ -18,12 +18,14 @@ MonoBehaviour:
   heavy: 0
   foot: 1
   airborne: 0
+  knocksDown: 0
   forwardStep: 0.27
+  chargeDistance: 0
   moveRelease: 0.82
   hitChainStart: 0.48
   damage: 18
   radius: 0.3
-  knockback: 0.65
+  knockback: 1.05
   hitstun: 0.3
   hitstop: 0.06
   activeStart: 0.3

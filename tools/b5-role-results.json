@@ -1,0 +1,12 @@
+{
+  "source": "unity command test_status, 2026-10-07",
+  "status": "completed",
+  "duration": 30.17,
+  "summary": { "total": 4, "passed": 4, "failed": 0, "skipped": 0, "inconclusive": 0 },
+  "results": [
+    { "FullName": "WombatLab.Tests.EnemyRolesPlayTests.FourEnemiesShareOneTokenAndAllGetTurns", "Status": "Passed", "Duration": 15.4369076 },
+    { "FullName": "WombatLab.Tests.EnemyRolesPlayTests.OffscreenAndGetUpProtectionRefusePermissionAndRushCanBeInterrupted", "Status": "Passed", "Duration": 3.5347051 },
+    { "FullName": "WombatLab.Tests.EnemyRolesPlayTests.RolesWarnThenDealTheirOwnSingleHitAndHeavyKnocksDown", "Status": "Passed", "Duration": 6.2149392 },
+    { "FullName": "WombatLab.Tests.EnemyRolesPlayTests.RushLocksWarningLaneCanBeSidesteppedAndStopsAtWall", "Status": "Passed", "Duration": 4.9286574 }
+  ]
+}

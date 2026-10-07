@@ -131,10 +131,12 @@ namespace WombatLab
         public void ReleaseTestInput() { testInputEnabled = false; }
         public void ClearJumpBuffer() { bufferRemaining = coyoteRemaining = 0; }
         public void ResumeLocomotion() { requestedAnimation = null; }
-        public void MoveAttackStep(Vector3 delta)
+        public bool MoveAttackStep(Vector3 delta)
         {
             var desired = MotorMath.ClampGround(transform.position + delta, definition.arenaMin, definition.arenaMax);
-            controller.Move(Vector3.ProjectOnPlane(desired - transform.position, Vector3.up));
+            var limited = Vector3.ProjectOnPlane(desired - transform.position, Vector3.up);
+            var flags = controller.Move(limited);
+            return (flags & CollisionFlags.Sides) != 0 || (limited - Vector3.ProjectOnPlane(delta, Vector3.up)).sqrMagnitude > .000001f;
         }
     }
 }

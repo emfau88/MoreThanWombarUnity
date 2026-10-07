@@ -21,6 +21,8 @@ namespace WombatLab
         RectTransform safeArea, toggle;
         GameObject canvasObject, controls, portraitHint;
         Text toggleText, stateText;
+        Text opponentCountText;
+        EngagementCoordinator modeEncounter;
         Transform keyboardHelp, header;
         int originalStateFont;
         Sprite disc;
@@ -68,7 +70,7 @@ namespace WombatLab
             var knob = Image("Move stick", baseDisc.transform, Vector2.one * .5f, Vector2.zero, new Vector2(96, 96), new Color(.32f, .82f, .72f, .85f));
             Stick = knob.gameObject.AddComponent<OnScreenStick>(); Stick.controlPath = "<Gamepad>/leftStick";
             Stick.movementRange = 62; Stick.behaviour = OnScreenStick.Behaviour.RelativePositionWithStaticOrigin;
-            Label(baseDisc.transform, "BEWEGEN", 18, new Vector2(0, -112), new Vector2(190, 30));
+            Label(baseDisc.transform, "BEWEGEN", 18, new Vector2(0, -93), new Vector2(190, 30));
             Label(baseDisc.transform, "Außen: Rennen", 16, new Vector2(0, 112), new Vector2(200, 28));
 
             Action("Heavy", "HEAVY", "buttonNorth", new Vector2(-266, 174), 88, new Color(.80f, .40f, .24f, .85f));
@@ -76,8 +78,17 @@ namespace WombatLab
             Action("Jump", "SPRUNG", "buttonSouth", new Vector2(-66, 172), 88, new Color(.32f, .44f, .53f, .85f));
             Action("Light", "COMBO", "buttonWest", new Vector2(-205, 69), 108, new Color(.25f, .72f, .61f, .90f));
             Action("Evade", "AUSWEICHEN", "buttonEast", new Vector2(-85, 61), 102, new Color(.32f, .44f, .53f, .85f));
+            Action("Charge", "STOSS", "rightTrigger", new Vector2(-325, 66), 92, new Color(.68f, .48f, .22f, .9f));
             var reset = Button("Restart", "NEUSTART", controls.transform, new Vector2(0, 1), new Vector2(85, -24), new Vector2(140, 42), false);
             reset.gameObject.AddComponent<OnScreenButton>().controlPath = "<Gamepad>/start";
+            var encounter = FindAnyObjectByType<EngagementCoordinator>();
+            if (encounter != null)
+            {
+                modeEncounter = encounter;
+                var mode = Button("Opponent count", "GEGNER: 1", controls.transform, new Vector2(0,1), new Vector2(255,-24), new Vector2(170,42), false);
+                opponentCountText = mode.GetComponentInChildren<Text>();
+                mode.onClick.AddListener(() => encounter.SetMode(encounter.Mode % Mathf.Min(4,encounter.enemies.Length) + 1));
+            }
             var hint = Rect("Portrait hint", controls.transform); Stretch(hint);
             portraitHint = hint.gameObject;
             Label(hint, "Für den Kampf bitte quer halten", 26, Vector2.zero, new Vector2(540, 64));
@@ -104,7 +115,7 @@ namespace WombatLab
             var button = image.gameObject.AddComponent<Button>();
             button.navigation = new Navigation { mode = Navigation.Mode.None };
             var colors = button.colors; colors.pressedColor = new Color(.62f, 1, .88f); colors.highlightedColor = Color.white; button.colors = colors;
-            Label(image.transform, label, label == "AUSWEICHEN" ? 14 : 19, Vector2.zero, size - Vector2.one * 8);
+            Label(image.transform, label, label == "AUSWEICHEN" ? 14 : label == "SPRUNG" ? 17 : 19, Vector2.zero, size - Vector2.one * 8);
             return button;
         }
         Image Image(string name, Transform parent, Vector2 anchor, Vector2 position, Vector2 size, Color color)
@@ -133,6 +144,7 @@ namespace WombatLab
         }
         void Update()
         {
+            if (opponentCountText != null && modeEncounter != null) opponentCountText.text = "GEGNER: " + modeEncounter.Mode;
             if (!userSelected && !Visible && (Application.isMobilePlatform || Touchscreen.current != null)) SetVisible(true);
             UpdateSafeArea(); portraitHint.SetActive(Visible && Screen.height > Screen.width);
         }

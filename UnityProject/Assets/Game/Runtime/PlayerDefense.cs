@@ -35,7 +35,7 @@ namespace WombatLab
         }
         public bool TryEvade(Vector2 direction)
         {
-            if (Locked || cooldown > 0 || !motor.Grounded) return false;
+            if (Locked || combat.ChargeCommitted || cooldown > 0 || !motor.Grounded) return false;
             dodgeDirection = direction.sqrMagnitude > .01f ? MotorMath.PlanarInput(direction).normalized : motor.visual.forward;
             combat.Cancel(); motor.ClearJumpBuffer(); knockback = Vector3.zero;
             dodgeRemaining = .32f; cooldown = .65f;

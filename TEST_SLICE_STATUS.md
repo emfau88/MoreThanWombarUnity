@@ -1,6 +1,26 @@
 # Test-Slice-Status
 
-Stand: 5. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
+Stand: 7. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
+
+## B5 — Gegnerrollen und Mischkampf lokal geliefert
+
+Standard/Agile/Heavy als drei kleine Rollendefinitionen auf derselben Bären-/Animations-/Combat-Basis integriert. Kurzer Standardschlag (8 Schaden), angekündigter gerader Agile-Ansturm (10 Schaden, bis zu 2,35 m) und langsamer Heavy-Knockdown (18 Schaden). Handschuhfarbe, Silhouette und Namensmarker unterscheiden die Rollen; Agile besitzt eine feste Bodenspur. Lokal 1–4, D-Pad oben und Touch GEGNER wählen Gruppe und setzen den Kampf zurück. Drei/vier Gegner teilen eine rotierende Angriffsfreigabe, verteilen sich seitlich und beachten Körperkollision, Kamera und Aufstehschutz. Details: [B5_ENEMY_ROLES.md](B5_ENEMY_ROLES.md).
+
+**12/12 gezielte PlayMode-Fälle bestanden:** vier neue Rollen-/Rush-/Token-/Schutz-/Reset-/Touch-Gruppenfälle (30,17 s), drei alte Duellfälle (16,21 s), vier Stoßfälle (7,31 s), ein bisheriger Zwei-Gegner-Fall (8,65 s). Ergebnisse unter `tools/b5-role-results.json`, `b5-duel-regression-results.json`, `b5-charge-regression-results.json`, `b5-group-regression-results.json`. Kein Gesamt-Testlauf. Initialisierungsfehler bei Reset zunächst inaktiver Klone behoben; alle vier Gegner kommen im Gruppentest zum Zug.
+
+Tatsächliche Spielkamerasequenz für Gruppe sowie Agile-Warnung, Lauf und Fehlschlag-Erholung angesehen. Seitliche Spielerbewegung endet mit 100 HP. Touch-Canvas mit Gegnerzahl und vorhandenen Aktionen bei 1280×600 angesehen; die UI-Aufnahme nutzt vorübergehend die Spielkamera, da CLI-Screen-Capture teilweise alte/fehlerhafte UI-Frames liefert. Alle Capture-Anpassungen waren nur zur Laufzeit. Nachweis: `tools/b5-visual-review.md`; Bilder lokal unter `UnityProject/Assets/QA/b5-*.png`. Keine physische Android-/Gamepad- oder Performanceabnahme.
+
+B4/B5 liegen lokal vor; eigenständige Builds und der öffentliche Play-Link bleiben auf der vorherigen Touch-Fassung. Roadmap und konkreter Arbeitsplan sind auf **B6: zusammenhängende Junkyard-Strecke, drei Kampfbereiche, Checkpoint-Retry und Abschluss** aktualisiert. Wombat-/Cartoon-Gestaltung bleibt offen. Unity CLI 1.0.0-beta.13 ist installiert/geprüft; Editor 6000.4.0f1 und Pipeline 0.8.0-exp.1 unverändert.
+
+Finale Übergabe: gespeicherte HumanoidCombatLab frisch geladen, Play/Compile/Dirty false, scriptCompilationFailed false; vier Gegner, null fehlende Rollen-/Attack-/Spieler-/Zielreferenzen und ein aktiver Startgegner. Temporäre Sichtprüfungszustände beendet.
+
+## B4 — Schulterstoß lokal integriert
+
+E/RT/Touch STOSS: bis zu 2 m gerader Stoß, 16 Schaden, leichter Stagger ohne Knockdown; 0,16/0,20/0,40 s Startup/Active/Recovery. Richtung bleibt fest, erster Kontakt oder Kollision beendet den Weg. Verwundbar und unterbrechbar, volle Erholung ohne Bewegungs-/Sprung-/Ausweich-Cancel. Kick-Rückstoß von 0,65 auf 1,05 erhöht. Bestehender Sprint, Avatar-Bake, CharacterController und Combat-Regeln weiterverwendet. Details: [B4_SHOULDER_CHARGE.md](B4_SHOULDER_CHARGE.md).
+
+Gezielt bestanden: 4/4 Schulterstoß-Fälle (11,92 s), 4/4 gemeinsame Eingabefälle (0,36 s), 3/3 Touch-Fälle (0,70 s), 3/3 Duell-Regressionsfälle (15,40 s). Resultate unter `tools/b4-charge-results.json`, `b4-input-results.json`, `b4-touch-results.json` und `b4-duel-regression-results.json`. Keine Vollsuite. Die Stoß-Fälle prüfen Startup, einen Kontakt mit Stopp, volle verwundbare Erholung, begrenzten Fehlschlag in fester Richtung, Wandkontakt, Unterbrechung, Luftsperre und übersprungenes Active ohne Umposen.
+
+Tatsächliche Spielkamerasequenz mit Windup, Schulterkontakt samt Effekt und Fehlschlag-Erholung sowie Touch-Canvas mit STOSS angesehen (`UnityProject/Assets/QA/b4-*.png`). Bestehenden SPRUNG-Zeilenumbruch und den angeschnittenen BEWEGEN-Schriftzug korrigiert. Lokal in Unity spielbar; eigenständige Builds und öffentlicher Play-Link enthalten bisher die vorherige Touch-Fassung. Keine physische Android-/Gamepad-Prüfung daraus ableiten. Nächster Bulk: B5 mit Gegnerrollen und gemischten Gruppen. Wombat-Gestaltung bleibt separat offen.
 
 ## B3c — technisches Duell und Build-Übergabe
 

@@ -8,11 +8,14 @@ Designreferenz, keine technische Portierungsvorlage.
 Jab → Cross → Haken, Overhand-Heavy, Kampfsport-Kicks und zweihändiger Luft-Smash sowie
 sichtbare Hit-/Stagger-Reaktionen, Niederwerfen, Aufstehen und Tod für beide Figuren. Vorhandenes
 Sparring, Ausweichen, Angriffsschritte, Combo-/Recovery-Regeln, Hitstop und Reset
-bleiben angebunden. Wahlweise ein oder zwei Gegner. Temporärer menschlicher
+bleiben angebunden. Lokal wahlweise ein bis vier Gegner. Temporärer menschlicher
 Charakter; Wombat-Gestaltung bleibt offen. M1 ergänzt eine erste Junkyard-Kampfumgebung
 mit Betonboden, Schrott/Reifen, Zaun, Werkstatt-Hintergrund und abgestimmtem Licht.
 B3c stimmt KI-Abstand, Aufstehschutz und Feedback ab und ergänzt ein deutsches Duell-HUD.
 Eigenständige Windows-/WebGL-Spielstände sind vorhanden; der Browserkampf wurde bis zum Sieg gespielt.
+
+B4 ergänzt lokal einen kurzen Schulterstoß auf E/RT/Touch STOSS und mehr Kick-Abstand.
+B5 ergänzt lokal Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. Nächster Bulk: B6 mit Levelstrecke und Checkpoints. Der Play-Link enthält vorerst die vorige Touch-Fassung.
 
 ## Prototyp spielen
 
@@ -42,8 +45,14 @@ klicken, damit sie die Tastatureingaben erhält.
   bestimmt die Schlagrichtung. Früher Startup erlaubt eine kleine eingabegesteuerte
   Richtungskorrektur; Angriffe setzen kontrollierte Schritte nach vorne.
 - Shift / Gamepad East: Ausweichen in Bewegungsrichtung (ohne Eingabe nach vorne).
-- 1 / 2: einen beziehungsweise zwei Gegner aktivieren. Orange/roter Bodenmarker
-  kündigt einen Schlag an. R setzt Spieler und Gegner zurück.
+- E / rechter Gamepad-Trigger / Touch **STOSS**: kurzer Schulterstoß am Boden.
+  Schließt bis zu 2 m Distanz, stoppt am ersten Treffer oder an einer Wand und
+  hat eine feste Erholung. Richtung beim Start wählen; Gegner können dich unterbrechen.
+  B4 ist lokal in Unity enthalten; der öffentliche Play-Link und die bisherigen
+  Builds enthalten zunächst die vorherige Touch-Fassung.
+- Lokal 1–4: Gegnerzahl wählen; 3/4 starten den Mischkampf mit Standard, Agile und Heavy.
+  Gamepad D-Pad oben oder Touch **GEGNER** schaltet weiter. Orange/roter Bodenmarker
+  kündigt einen Schlag an; Agile zeigt zusätzlich seine feste Ansturmspur. R setzt die Gruppe zurück.
 - Heavy und Luft-Smash werfen Gegner nieder; der Bären-Heavy kann dich niederwerfen.
   Nach Fall/Boden/Aufstehen erhältst du die Steuerung mit 0,45 s Schutz zurück.
   Bei 0 HP bleibt die Figur liegen; R startet das Duell neu.
@@ -52,8 +61,8 @@ klicken, damit sie die Tastatureingaben erhält.
 - `SparringLab.unity` bleibt die ursprüngliche B1-Vergleichsszene mit Grundform-Figur.
 - Gamepad-Bindings sind implementiert und mit simuliertem Gerät geprüft;
   ein echter Hardware-Spieltest steht noch aus.
-- Mobile Touch: links Bewegungsstick (außen Rennen), rechts Combo/Heavy/Kick/Sprung/Ausweichen,
-  oben Neustart. Automatisch auf Touchgeräten; **TOUCH** schaltet die Anzeige auch am Desktop.
+- Mobile Touch: links Bewegungsstick (außen Rennen), rechts Combo/Heavy/Kick/Sprung/Ausweichen/Stoß,
+  oben Neustart und lokal ab B5 Gegnerzahl. Automatisch auf Touchgeräten; **TOUCH** schaltet die Anzeige auch am Desktop.
   Android im Querformat ist das erste Nutzungsziel. Anleitung und Nachweise: [Mobile Touch](MOBILE_TOUCH.md).
 
 Der Humanoid ist eine importierte technische Basis, die Robot-Gegner sind eigene
@@ -74,6 +83,8 @@ Grundformen. Beide bleiben Platzhalter für die endgültige Cartoon-Gestaltung.
 - [B3b: Niederwerfen, Aufstehen, Tod und Reset](B3B_BODY_RECOVERY.md)
 - [B3c: abgestimmtes Duell und Windows-/WebGL-Übergabe](B3C_DUEL_HANDOFF.md)
 - [Mobile Touch: Steuerung und Test im selben WLAN](MOBILE_TOUCH.md)
+- [B4: Schulterstoß und Move-Rollen](B4_SHOULDER_CHARGE.md)
+- [B5: Gegnerrollen und Mischkampf](B5_ENEMY_ROLES.md)
 - [M1: vorgezogene Junkyard-Testmap](M1_MAP_PREVIEW.md)
 
 Gestaltungsziel ist der illustrative Cartoon-/Comic-Stil der 2D-Referenz:
@@ -84,7 +95,7 @@ konzentriert sich auf ein vollständiges Duell mit einem Spieler und einem
 Gegner; WebGL-Verträglichkeit wird an diesem kleinen Slice geprüft.
 
 Werkzeuganbindung, Bewegung und Combat-Polish sind umgesetzt; Nutzerfeedback
-dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. Nächster Entwicklungsbulk ist B4 mit Schulterstoß und Moveset-Balance; Wombat-Gestaltung bleibt separat offen.
+dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt lokal Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. Nächster Entwicklungsbulk ist B6 mit Junkyard-Strecke und Checkpoints; Wombat-Gestaltung bleibt separat offen.
 Keine Cloud-Dienste, kein Multiplayer, keine Asset-Käufe und keine Änderungen
 am Browsergame als implizite Arbeitsschritte.
 

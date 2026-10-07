@@ -1,12 +1,14 @@
 # Mobile Touch — Duell-Steuerung
 
-Stand: 5. Oktober 2026. Ergänzung des vorhandenen Duells; kein B4-Ausbau und keine neue Combat-Pipeline.
+Stand: 7. Oktober 2026. Die veröffentlichte Touch-Fassung stammt vom 5. Oktober; B4 ergänzt lokal STOSS über dieselbe Eingabepipeline; B5 ergänzt die Gegnerzahlwahl.
 
 ## Bedienung
 
 - Auf Touchgeräten automatisch sichtbar; **TOUCH** oben rechts schaltet die Oberfläche auch am Desktop ein/aus.
 - Links Stick ziehen: Richtung und analoges Gehen. Am äußeren Rand wird gerannt; loslassen beendet Bewegung und Rennen.
 - Rechts **COMBO**, **HEAVY**, **KICK**, **SPRUNG**, **AUSWEICHEN**. Antippen startet eine Aktion; gehaltene Attack-Buttons wiederholen nicht automatisch. Für die Light-Kette wiederholt tippen.
+- Lokal ab B4 zusätzlich **STOSS** (rechter Trigger): kurzer gerader Schulterstoß am Boden. Ein neuer WebGL-Build mit Veröffentlichung ist nötig, damit die Erweiterung am öffentlichen Play-Link erscheint.
+- Lokal ab B5 **GEGNER: 1–4** oben: schaltet Gruppe weiter und setzt den Kampf zurück. Der Modus bleibt auch bei Tastaturwahl synchron; 3/4 aktivieren den Mischkampf. Der öffentliche Play-Link benötigt dafür ebenfalls einen neuen Build.
 - Bewegung und Aktionsbuttons können gleichzeitig mit verschiedenen Fingern bedient werden. Sprung plus Combo/Kick verwendet weiterhin Air-Kick, Sprung plus Heavy Air-Smash.
 - **NEUSTART** setzt das Duell auch nach Niederlage zurück. Querformat ist die vorgesehene Spielansicht; Hochformat zeigt einen Drehhinweis.
 - Tastatur-/Gamepad-Regeln bleiben vorhanden. Bei eingeblendeter Touch-Oberfläche lösen Maus-/emulierte Touch-Mausklicks keine zusätzlichen Angriffe aus.
@@ -17,7 +19,7 @@ Stand: 5. Oktober 2026. Ergänzung des vorhandenen Duells; kein B4-Ausbau und ke
 
 Der Canvas berücksichtigt Screen.safeArea und skaliert nach Höhe im Querformat. `Assets/WebGLTemplates/TouchDuel/index.html` passt das Spielfeld an den Browser an, berücksichtigt CSS-Safe-Area und verhindert Scroll-/Kontextmenügesten auf dem Spielfeld. Pixeldichte ist auf mobilen Browsern auf 1,5 begrenzt. Der bestehende Builder nutzt das Template vorübergehend und stellt die Projekteinstellung anschließend zurück.
 
-Nach komplettem Szenen-Neuaufbau: HumanoidCombatBuilder → CharacterActionBuilder → BodyRecoveryBuilder → JunkyardPreviewBuilder → DuelSliceBuilder.Apply → **MobileTouchBuilder.Apply**. Editor-Menü: **Wombat Lab → Apply Mobile Touch**.
+Nach komplettem Szenen-Neuaufbau: HumanoidCombatBuilder → CharacterActionBuilder → BodyRecoveryBuilder → JunkyardPreviewBuilder → DuelSliceBuilder.Apply → **MobileTouchBuilder.Apply** → **ShoulderChargeBuilder.Apply** → **EnemyRolesBuilder.Apply**. Editor-Menü für Touch: **Wombat Lab → Apply Mobile Touch**.
 
 ## Handy im selben WLAN
 

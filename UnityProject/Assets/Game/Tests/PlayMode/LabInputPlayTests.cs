@@ -51,12 +51,14 @@ namespace WombatLab.Tests
             Press(keyboard.jKey); Assert.That(input.Read().Light, Is.True); Release(keyboard.jKey);
             Press(keyboard.kKey); Assert.That(input.Read().Heavy, Is.True); Release(keyboard.kKey);
             Press(keyboard.lKey); Assert.That(input.Read().Kick, Is.True); Release(keyboard.lKey);
+            Press(keyboard.eKey); Assert.That(input.Read().Charge, Is.True); Release(keyboard.eKey);
             Press(keyboard.spaceKey); Assert.That(input.Read().Jump, Is.True); Release(keyboard.spaceKey);
             Press(keyboard.rKey); Assert.That(input.Read().Restart, Is.True); Release(keyboard.rKey);
             Press(keyboard.leftShiftKey); Assert.That(input.Read().Evade, Is.True); Release(keyboard.leftShiftKey);
             Press(pad.buttonWest); Assert.That(input.Read().Light, Is.True); Release(pad.buttonWest);
             Press(pad.buttonNorth); Assert.That(input.Read().Heavy, Is.True); Release(pad.buttonNorth);
             Press(pad.rightShoulder); Assert.That(input.Read().Kick, Is.True); Release(pad.rightShoulder);
+            Press(pad.rightTrigger); Assert.That(input.Read().Charge, Is.True); Release(pad.rightTrigger);
             Press(pad.buttonSouth); Assert.That(input.Read().Jump, Is.True); Release(pad.buttonSouth);
             Press(pad.startButton); Assert.That(input.Read().Restart, Is.True); Release(pad.startButton);
             Press(pad.buttonEast); Assert.That(input.Read().Evade, Is.True); Release(pad.buttonEast);

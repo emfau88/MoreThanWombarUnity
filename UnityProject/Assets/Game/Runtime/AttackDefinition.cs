@@ -11,6 +11,8 @@ namespace WombatLab
         public bool foot, airborne;
         public bool knocksDown;
         public float forwardStep = .18f;
+        [Tooltip("Ground-only shoulder charge distance. Zero retains normal attack steps.")]
+        public float chargeDistance;
         [Range(0, 1)] public float moveRelease = .82f;
         [Range(0, 1)] public float hitChainStart = .48f;
         public int damage = 10;
@@ -42,7 +44,7 @@ namespace WombatLab
             => AttackRules.WindowCrossed(previous, current, ActiveStart, ActiveEnd);
     }
 
-    public enum CombatIntent { None, Light, Heavy, Kick }
+    public enum CombatIntent { None, Light, Heavy, Kick, Charge }
 
     public static class AttackRules
     {

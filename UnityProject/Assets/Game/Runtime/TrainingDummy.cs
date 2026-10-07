@@ -27,6 +27,13 @@ namespace WombatLab
 
         void Awake()
         {
+            Cache();
+            ResetTraining();
+        }
+
+        void Cache()
+        {
+            if (properties != null) return;
             properties = new MaterialPropertyBlock();
             spawn = transform.position;
             baseColor = padRenderer.sharedMaterial.GetColor("_BaseColor");
@@ -39,7 +46,6 @@ namespace WombatLab
             colliders = GetComponentsInChildren<Collider>(true);
             colliderEnabled = new bool[colliders.Length];
             for (int i = 0; i < colliders.Length; i++) colliderEnabled[i] = colliders[i].enabled;
-            ResetTraining();
         }
 
         public bool ReceiveHit(AttackDefinition attack, Vector3 direction)
@@ -86,6 +92,7 @@ namespace WombatLab
 
         public void ResetTraining()
         {
+            Cache();
             GetComponent<AnimationReaction>()?.Clear();
             GetComponent<BodyRecovery>()?.ResetBody();
             Health = maxHealth; HitCount = 0; Hitstun = flash = 0;

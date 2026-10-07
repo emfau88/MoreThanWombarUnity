@@ -6,15 +6,15 @@ namespace WombatLab
     public readonly struct InputFrame
     {
         public readonly Vector2 Move;
-        public readonly bool Jump, Restart, Debug, Light, Heavy, Evade, Kick, Run;
-        public InputFrame(Vector2 move, bool jump = false, bool restart = false, bool debug = false, bool light = false, bool heavy = false, bool evade = false, bool kick = false, bool run = false)
-        { Move = move; Jump = jump; Restart = restart; Debug = debug; Light = light; Heavy = heavy; Evade = evade; Kick = kick; Run = run; }
+        public readonly bool Jump, Restart, Debug, Light, Heavy, Evade, Kick, Run, Charge;
+        public InputFrame(Vector2 move, bool jump = false, bool restart = false, bool debug = false, bool light = false, bool heavy = false, bool evade = false, bool kick = false, bool run = false, bool charge = false)
+        { Move = move; Jump = jump; Restart = restart; Debug = debug; Light = light; Heavy = heavy; Evade = evade; Kick = kick; Run = run; Charge = charge; }
     }
 
     public sealed class LabInput : MonoBehaviour
     {
         InputActionMap map;
-        InputAction move, jump, restart, debug, lightAction, heavyAction, evade, kick, run;
+        InputAction move, jump, restart, debug, lightAction, heavyAction, evade, kick, run, charge;
         public MobileTouchControls TouchControls { get; set; }
 
         void Awake()
@@ -43,6 +43,8 @@ namespace WombatLab
             kick.AddBinding("<Keyboard>/l"); kick.AddBinding("<Gamepad>/rightShoulder");
             run = map.AddAction("Run", InputActionType.Button);
             run.AddBinding("<Keyboard>/leftCtrl"); run.AddBinding("<Keyboard>/rightCtrl"); run.AddBinding("<Gamepad>/leftTrigger");
+            charge = map.AddAction("Charge", InputActionType.Button);
+            charge.AddBinding("<Keyboard>/e"); charge.AddBinding("<Gamepad>/rightTrigger");
         }
 
         void OnEnable() { map?.Enable(); }
@@ -60,7 +62,7 @@ namespace WombatLab
                 lightAction.WasPressedThisFrame() || (pointerAllowed && mouse != null && mouse.leftButton.wasPressedThisFrame),
                 heavyAction.WasPressedThisFrame() || (pointerAllowed && mouse != null && mouse.rightButton.wasPressedThisFrame),
                 evade.WasPressedThisFrame(), kick.WasPressedThisFrame(),
-                run.IsPressed() || (TouchControls != null && TouchControls.Running));
+                run.IsPressed() || (TouchControls != null && TouchControls.Running), charge.WasPressedThisFrame());
         }
     }
 }

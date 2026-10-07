@@ -111,10 +111,12 @@ MonoBehaviour:
   kick: {fileID: 11400000, guid: 8f68561eff009c0479b35b2ff4f4ad57, type: 2}
   airKick: {fileID: 11400000, guid: b1be1bf91135ce24d89fbd1c65c6778c, type: 2}
   airHeavy: {fileID: 11400000, guid: 934b794ba8001b944bd5b36cfe20faa3, type: 2}
+  shoulderCharge: {fileID: 11400000, guid: 3ba46781e2c3d254ba7bc38e9e05268b, type: 2}
   leftFist: {fileID: 4978477432137935797}
   rightFist: {fileID: 2040753520871300061}
   leftFoot: {fileID: 394295758641212253}
   rightFoot: {fileID: 2942106170557638213}
+  shoulder: {fileID: 283642378257618667}
   feedback: {fileID: 0}
   dummy: {fileID: 0}
   team: 1
@@ -1884,6 +1886,11 @@ Animator:
 --- !u!4 &230095601311401707 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3216462155264412527, guid: ae57f0d0a23cc48448c38c6489cee2bb, type: 3}
+  m_PrefabInstance: {fileID: 5795466471902671482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &283642378257618667 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3205981080129952623, guid: ae57f0d0a23cc48448c38c6489cee2bb, type: 3}
   m_PrefabInstance: {fileID: 5795466471902671482}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1989468529316857443 stripped

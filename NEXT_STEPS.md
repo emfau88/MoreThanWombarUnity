@@ -1,6 +1,6 @@
-# Konkreter Arbeitsplan — Asset-Basis und vollständiges Charakterduell
+# Konkreter Arbeitsplan — Gegnerrollen und Junkyard-Kapitel
 
-Stand: 5. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. Nächster Entwicklungsbulk ist B4; noch nicht begonnen.
+Stand: 7. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. B4/B5 sind lokal integriert; nächster Entwicklungsbulk ist B6.
 
 ## M1 — Testmap aufgewertet
 
@@ -19,7 +19,9 @@ M1 zieht einen kleinen Präsentationsanteil aus B7 vor; Levelstrecke und zusätz
 
 Die vier Punkte beschreiben den gelieferten Umfang. Tatsächliche Nachweise und verbleibende Audio-/Performance-/Windows-Eingabeprüfungen stehen in der B3c-Übergabe; diese werden nicht als bestanden vorausgesetzt.
 
-## Als Nächstes: B4 — ein Schulterstoß und klare Move-Rollen
+## B4 — Schulterstoß lokal integriert
+
+Auf „go b4“ umgesetzt: 2-m-Schulterstoß aus dem vorhandenen Sprint, gebackene Schulterbahn, feste Richtung, Stopp am ersten Kontakt/Kollision und volle verwundbare Erholung. E/RT/Touch STOSS. Kick schafft mit Rückstoß 1,05 mehr Platz; Combo und Heavy behalten ihre bewährten Rollen. Vier gezielte Stoß-Fälle bestehen. Details und abschließende Nachweise: [B4_SHOULDER_CHARGE.md](B4_SHOULDER_CHARGE.md). Öffentliche und eigenständige Builds bleiben bis zum nächsten Build-/Veröffentlichungsschritt auf dem vorherigen Stand.
 
 Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht die Browserfassung aus dem fertigen WebGL-Release; der Play-Link steht im README. Als Nutzercheck auf dem Android-Handy: bewegen und zugleich Combo/Kick auslösen, springen, ausweichen und nach Niederlage neu starten. Details und Prüfbefunde: [MOBILE_TOUCH.md](MOBILE_TOUCH.md). B4 bleibt separat.
 
@@ -31,7 +33,26 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 
 **Vor dem nächsten Build:** das derzeit direkte Paket `com.unity.ai.inference` auf ungenutzte Abhängigkeiten prüfen und bei bestätigter Nichtnutzung entfernen. Im Game-Code wurden keine Inference-/ONNX-/Sentis-Verwendungen gefunden; Shaderwarnungen und zusätzliche Buildarbeit rechtfertigen diese begrenzte Bereinigung. In B3c wurde das Paket noch nicht entfernt. Release-Kompression und ein kurzes Framezeit-/Speicherprofil anschließend am tatsächlichen Spielstand entscheiden.
 
-**Effekt:** eine neue, erkennbare Kampfoption auf der bestehenden technischen Basis. B5 ergänzt danach Gegnerrollen/Gruppen, B6 die Strecke mit Kampfbereichen und Checkpoints. B4 benötigt einen neuen Auftrag.
+**Effekt:** eine neue, erkennbare Kampfoption auf der bestehenden technischen Basis. B4 ist beauftragt und lokal integriert.
+
+## B5 — Gegnerrollen und gemischte Gruppen geliefert
+
+1. **Drei Rollen auf der bestehenden Basis:** Standard hält kurze Nahkampfschläge; Agile kündigt einen geraden Ansturm an; Heavy greift langsamer und kräftiger an. Vorhandene Assets/Animationen wiederverwenden, Haltung und gut lesbare Markierungen zunächst zur Unterscheidung nutzen.
+2. **Kleine Encounter-Konfiguration:** Werte/Attack-Zuordnung der Rollen als einfache Daten hinterlegen; denselben EnemyBrain, Schadensempfänger und BodyRecovery verwenden. Kein neues paralleles KI-System.
+3. **Gruppendruck:** EngagementCoordinator für drei bis vier Gegner erweitern; Positionen verteilen, Angriffsfreigaben begrenzen, Kamerabereich berücksichtigen. Ruhige Gegner dürfen den Spieler nicht einkesseln, ohne auszuweichen.
+4. **Spielbarer Mischkampf:** Zwei repräsentative Gruppen abstimmen. Schulterstoß zum Annähern, Kick zum Befreien und Heavy zum Unterbrechen praktisch nutzen; Warnungen und Erholung fair halten. Nur neue Rollen-/Token-/Unterbrechungsfälle gezielt prüfen.
+
+**Effekt:** unterschiedliche Gegner verlangen andere Prioritäten und Positionierung. Danach baut B6 daraus eine zusammenhängende Junkyard-Strecke mit drei Kampfbereichen und Checkpoints. B5 ist lokal geliefert; Details und Nachweise: [B5_ENEMY_ROLES.md](B5_ENEMY_ROLES.md).
+
+## Als Nächstes: B6 — zusammenhängende Junkyard-Strecke
+
+1. **Strecke und Bereiche:** Bestehende Schrotthof-Assets/Materialien und Kamera weiterverwenden. Drei verbundene Kampfbereiche mit kurzen Lauf-/Erholungsabschnitten und klar lesbaren Ausgängen aufbauen. Erst Layout und Ablauf, anschließend gezielte Dekoration.
+2. **Encounter-Daten und Übergänge:** Kleine bearbeitbare Konfiguration für Rollen, Spawnpunkte und Wellenfolge. Bereich nach Eintritt starten, nach Sieg freigeben; Gegner sichtbar innerhalb sinnvoller Kampfpositionen auftreten lassen. Bestehenden Coordinator und BodyRecovery benutzen.
+3. **Steigerung:** Einstieg mit Standard, anschließend Agile/Mischgruppe; Abschluss als inszenierter Heavy-Elitekampf aus derselben Technik. Schwierigkeit über Zusammensetzung/Positionen statt bloß zusätzliche HP abstimmen.
+4. **Interaktion und Checkpoint:** Eine klare Environment-Aktion integrieren, etwa ein zu öffnender Durchgang. Nach jedem gewonnenen Bereich Checkpoint; Retry stellt nur den aktuellen Abschnitt und seinen Gegnerzustand wieder her. Vollständiger Neustart bleibt möglich.
+5. **Spielbare Übergabe:** Einen vollständigen Durchlauf sowie Niederlage/Checkpoint-Retry prüfen. Wege, Pausen und Gegnerfolge anschließend auf etwa 10–15 Minuten Designziel abstimmen. Menüausbau bleibt B8, finale Art-/Audioabstimmung B7.
+
+**Effekt:** Aus der kleinen Testarena wird erstmals ein zusammenhängendes, durchspielbares Kapitel mit Anfang, Steigerung und Abschluss. B6 beginnt auf gesonderten Auftrag. B4/B5 benötigen für den öffentlichen Play-Link einen neuen Build-/Veröffentlichungsschritt.
 
 ## 1. Bestand und Entscheidung
 

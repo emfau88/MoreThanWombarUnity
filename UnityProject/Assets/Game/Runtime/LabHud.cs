@@ -30,10 +30,12 @@ namespace WombatLab
                 {
                     bool touch = player.GetComponent<LabInput>().TouchControls?.Visible == true;
                     string hint = body != null && body.Busy ? "Aufstehen ..." : body != null && body.Protected ? "Aufstehschutz" :
-                        encounter.Owner != null && encounter.Owner.State == "TELEGRAPH" ? "Orange Warnung: ausweichen oder unterbrechen!" :
+                        encounter.Owner != null && encounter.Owner.State == "TELEGRAPH" ?
+                            (encounter.Owner.role?.role == EnemyRole.Agile ? "AGILE: aus der Spur!" : encounter.Owner.role?.role == EnemyRole.Heavy ? "HEAVY: ausweichen oder unterbrechen!" : "Warnung: ausweichen oder unterbrechen!") :
+                        combat.ChargeCommitted ? (combat.Progress <= combat.Attack.ActiveEnd && !combat.ChargeStopped ? "Schulterstoß" : "Stoß erholt sich ...") :
                         defense.Evading ? "Ausweichen" : defense.Cooldown > 0 ? "Ausweichen erholt sich ..." : touch ? "Ausweichen bereit" : "SHIFT: Ausweichen bereit";
-                    string opponent = encounter.Mode == 1 ? $"BÄR {encounter.enemies[0].target.Health}/{encounter.enemies[0].target.maxHealth}" : $"{encounter.LivingCount} Gegner übrig";
-                    stateText.text = !defense.Alive ? (touch ? "Besiegt · NEUSTART: Neuer Versuch" : "Besiegt · R: Neuer Versuch") : encounter.LivingCount == 0 ? (touch ? "Gewonnen! · NEUSTART: Nochmal" : "Gewonnen! · R: Nochmal · 2: Zwei Gegner") :
+                    string opponent = encounter.Mode == 1 ? $"{encounter.enemies[0].RoleName} {encounter.enemies[0].target.Health}/{encounter.enemies[0].target.maxHealth}" : $"{encounter.LivingCount} Gegner übrig";
+                    stateText.text = !defense.Alive ? (touch ? "Besiegt · NEUSTART: Neuer Versuch" : "Besiegt · R: Neuer Versuch") : encounter.LivingCount == 0 ? (touch ? "Gewonnen! · NEUSTART: Nochmal" : "Gewonnen! · R: Nochmal · 3/4: Mischkampf") :
                         player.ShowDebug ? $"{status} · {opponent} · {hint}" : $"{opponent} · {hint}";
                     healthText.text = $"DU   {defense.Health} / {defense.maxHealth}";
                     healthFill.anchorMax = new Vector2(defense.Health / (float)defense.maxHealth, 1);

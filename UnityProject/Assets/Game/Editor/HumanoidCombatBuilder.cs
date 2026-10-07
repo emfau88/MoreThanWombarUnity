@@ -173,7 +173,7 @@ namespace WombatLab.Editor
         }
 
         internal static AttackDefinition Attack(PlayerMotor motor, AnimatorController controller, string name, string template,
-            AnimationClip source, (bool right, float phase) peak, float startup, float active, float recovery)
+            AnimationClip source, (bool right, float phase) peak, float startup, float active, float recovery, HumanBodyBones? contactBone = null)
         {
             string path = Root + name + ".asset";
             var definition = AssetDatabase.LoadAssetAtPath<AttackDefinition>(path);
@@ -192,7 +192,8 @@ namespace WombatLab.Editor
             for (int i = 0; i < definition.contactPoints.Length; i++)
             {
                 motor.animator.Play(name, 0, i / (float)(definition.contactPoints.Length - 1)); motor.animator.Update(0);
-                definition.contactPoints[i] = motor.visual.InverseTransformPoint(Contact(motor, contact).position);
+                var point = contactBone.HasValue ? motor.animator.GetBoneTransform(contactBone.Value) : Contact(motor, contact);
+                definition.contactPoints[i] = motor.visual.InverseTransformPoint(point.position);
             }
             motor.animator.Play("Idle", 0, 0); motor.animator.Update(0);
             EditorUtility.SetDirty(definition); return definition;

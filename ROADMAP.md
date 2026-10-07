@@ -1,6 +1,6 @@
 # More Than Wombat — Roadmap mit neun Bulks
 
-Stand: 5. Oktober 2026, nach B3c. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
+Stand: 7. Oktober 2026, B4/B5 lokal integriert. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
 
 ## Ziel und Schwerpunkt
 
@@ -14,11 +14,11 @@ Bestehendes Gameplay weiterentwickeln. Standardmodelle, Rigs, Animationen und Pr
 
 S0–S3 bilden das vorhandene Fundament. B1 ist technisch abgeschlossen: Startup-Drehgrenze korrigiert, fünf gezielte Polish-Fälle bestanden, aktuelle Spielposen kontrolliert und Combat-/Architekturbeschreibung aktualisiert. Nutzerfeedback zum Spielgefühl bleibt für weiteres Tuning willkommen. Ein eigener Blender-Entwurf wurde begonnen, ist aber noch nicht in Unity integriert. Dieser Pfad ist zurückgestellt, bis passende fertige Grundlagen geprüft sind.
 
-Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. B3b ergänzt lebendes Knockdown, GetUp, Aufstehschutz und Tod/Reset für beide Figuren; Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md). Die vorgezogene kleine Map-Aufwertung M1 und B3c sind integriert. Das technische Duell ist als Windows-/WebGL-Spielstand verfügbar; Browserkampf bis zum Sieg und Neustart sind nachgewiesen. Als Nächstes B4 mit Schulterstoß und Moveset-Balance. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
+Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. B3b ergänzt lebendes Knockdown, GetUp, Aufstehschutz und Tod/Reset für beide Figuren; Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md). Die vorgezogene kleine Map-Aufwertung M1 und B3c sind integriert. Das technische Duell ist als Windows-/WebGL-Spielstand verfügbar; Browserkampf bis zum Sieg und Neustart sind nachgewiesen. B4/B5 sind lokal integriert; als Nächstes B6 mit Levelstrecke, drei Kampfbereichen und Checkpoints. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
 
 ## Übersicht
 
-**Zusatzauftrag nach B3c:** Mobile Touch für Android im Querformat ist integriert: vorhandene Unity-Bildschirmcontrols, responsive WebGL-Ansicht und WLAN-Testanleitung. Drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht den fertigen WebGL-Spielstand über einen Release-Workflow; öffentlicher Play-Link im README. Ein physischer Android-Spieltest bleibt offen. B4 bleibt der nächste Entwicklungsbulk. Details: [MOBILE_TOUCH.md](MOBILE_TOUCH.md).
+**Zusatzauftrag nach B3c:** Mobile Touch für Android im Querformat ist integriert: vorhandene Unity-Bildschirmcontrols, responsive WebGL-Ansicht und WLAN-Testanleitung. Drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht den fertigen WebGL-Spielstand über einen Release-Workflow; öffentlicher Play-Link im README. Ein physischer Android-Spieltest bleibt offen. B4/B5 sind lokal integriert; der öffentliche Spielstand bleibt bis zum neuen Release unverändert. Details: [MOBILE_TOUCH.md](MOBILE_TOUCH.md).
 
 **Vorgezogen auf Nutzerwunsch und geliefert:** **M1 — kleine Testmap-Aufwertung** nach B3b. Betonboden, wenige fertige Junkyard-Props, Zaun/Werkstatt-Hintergrund und Licht sind integriert. B3c ergänzt inzwischen das abgestimmte Duell und Buildnachweise. Details: [M1_MAP_PREVIEW.md](M1_MAP_PREVIEW.md). Die neun Hauptbulks bleiben erhalten; M1 übernimmt einen begrenzten Präsentationsanteil aus B7, die Levelstrecke bleibt B6.
 
@@ -27,8 +27,8 @@ Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei 
 | B1 | Abgeschlossen: Drehgrenze korrigiert, gezielte Polish-Prüfung/Sichtsequenz und Ist-Dokumentation | Spielbares Sparring zur Nutzerbeurteilung |
 | B2 | Schritte 1–3 technisch geliefert: Auswahl, Humanoid-Import, Kontakte und Attack-Timing; Wombat-Gestaltung zurückgestellt | Spielbare technische Combat-Basis; stilistische Abnahme offen |
 | B3 | B3a–B3c und M1 technisch geliefert: Duell-Tuning, Schutz/Feedback/HUD, Windows/WebGL, Browserkampf bis zum Sieg | Spielbarer technischer Character Slice; Wombat-Stil, Windows-Tastatur, hörbare Audioabnahme und Performanceprofil offen |
-| B4 | Einen charakteristischen Dash-/Schulterstoß und Moveset-Balance ausarbeiten | Mehr Kampftiefe auf Basis des fertigen Duells |
-| B5 | Standard, Agile und Heavy; gemischten Gruppendruck und gemeinsame Asset-Nutzung | Lesbare Gegnerfamilie auf Basis B3/B4 |
+| B4 | Lokal integriert: Schulterstoß aus Sprint-Ableitung, feste Richtung, Kontakt-/Wandstopp, verwundbare Erholung; Kick schafft mehr Platz; E/RT/Touch STOSS | Vier gezielte Stoß-Fälle bestehen; neue Veröffentlichung separat |
+| B5 | Lokal integriert: Standard/Agile/Heavy, feste Rush-Spur, 1–4 Gegner, rotierende Freigabe, Wartepositionen/Körperkollision und Offscreen-Regeln | Mischkampf auf vorhandenen Figuren/Clips; neue Veröffentlichung separat |
 | B6 | Junkyard-Strecke, drei Kampfbereiche, Interaktion, Checkpoints und Abschlusskampf | Vollständig durchspielbares Graybox-Kapitel |
 | B7 | Passende Environment-Packs ableiten; Comic-Materialien, Kamera, Licht, Sound/VFX abstimmen | Zusammenhängende Präsentation im Referenzstil |
 | B8 | Einführung, HUD, Menü/Pause, Optionen, Retry und Ergebnis | Vollständige selbst erklärende Spielschleife |
@@ -91,6 +91,8 @@ Wombat-Look bleibt eine separate offene Entscheidung. Die technische B3-Arbeit k
 
 ## B4 — Kampftiefe und Wombat-Move
 
+Lokal integriert: Schulterstoß bis zu 2 m, Startup/Active/Recovery 0,16/0,20/0,40 s, 16 Schaden, Stagger ohne Knockdown; feste Startrichtung, erster Kontakt/Kollision stoppt den Weg, keine freie Bewegung oder Ausweich-Cancel bis Attack-Ende. Kick-Rückstoß 1,05 schafft mehr Abstand. Importierter Sprint als Rohmaterial, bestehender Avatar-Bake und CombatController weiterverwendet. E/RT/Touch STOSS. Details: [B4_SHOULDER_CHARGE.md](B4_SHOULDER_CHARGE.md). B5 ist ebenfalls lokal integriert; der öffentliche Play-Link enthält vorerst die bisherige Touch-Fassung.
+
 - Einen kontrollierten Dash-Angriff beziehungsweise Schulter-/Kopfstoß aus einer passenden Basis ableiten. Klare Reichweite, Kollisionsbegrenzung und bestrafbare Recovery.
 - Rollen abstimmen: Light für Druck/Combo, Heavy für kräftigen Abschluss, Kick für Abstand, Air-Attack für Sprungangriff, Evade für Positionierung.
 - Trefferstärke/Knockdown-Wirkung differenzieren. Dauerstun und endlose Cancel-Schleifen vermeiden.
@@ -100,8 +102,10 @@ Wombat-Look bleibt eine separate offene Entscheidung. Die technische B3-Arbeit k
 
 ## B5 — Gegnerrollen und Gruppenkampf
 
-- Standard mit kurzer Nahkampfaktion und offener Erholung; Agile mit angekündigtem geradlinigem Ansturm nach Seitenwechsel; Heavy mit breiter langsamer Attacke und gegebenenfalls sichtbarer brechbarer Rüstung.
-- Passende fertige Modelle und denselben geprüften Rig-/Animationspfad nutzen, Rollen über Silhouette/Haltung/Aktion unterscheiden.
+Lokal geliefert: drei Rollenwerte/Attack-Zuordnungen, Standard-Nahkampf, angekündigter gerader Agile-Ansturm und Heavy-Knockdown; Auswahl 1–4/D-Pad oben/Touch GEGNER. Vier Gegner teilen eine rotierende Angriffsfreigabe, verteilen Wartepositionen und berücksichtigen Körperkollision sowie Kamera-/Aufstehschutz. Vorhandene Figuren und Clips wiederverwendet. Details: [B5_ENEMY_ROLES.md](B5_ENEMY_ROLES.md). Vier neue gezielte Fälle bestehen; Übergabenachweise stehen im Status. B6 ist der nächste Entwicklungsbulk.
+
+- Standard mit kurzer Nahkampfaktion und offener Erholung; Agile mit angekündigtem geradlinigem Ansturm nach Seitenwechsel; Heavy mit größerer Silhouette und langsamem Knockdown-Schlag. Keine zusätzliche Rüstung in diesem Bulk.
+- Vorhandene Bären-Grundform und denselben geprüften Animationspfad nutzen, Rollen über Silhouette/Handschuhe/Markierung/Aktion unterscheiden. Finale Cartoon-Modelle separat auswählen.
 - EngagementCoordinator um sinnvolle Positionen und begrenzte Angriffserlaubnisse für drei bis vier sichtbare Gegner erweitern.
 - Klare Eintritte, Abstand, Repositionierung und faire Offscreen-Regeln.
 

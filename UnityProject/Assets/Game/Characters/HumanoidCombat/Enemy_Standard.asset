@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c61c0cff136a4e4e8706e7faad58c02, type: 3}
+  m_Name: Enemy_Standard
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.AttackDefinition
+  clip: {fileID: 7400000, guid: 907120b1d90c9544bbc10cbaf2ebe25b, type: 2}
+  stateName: Enemy_Standard
+  rightHand: 1
+  heavy: 0
+  foot: 0
+  airborne: 0
+  knocksDown: 0
+  forwardStep: 0.23
+  chargeDistance: 0
+  moveRelease: 0.82
+  hitChainStart: 0.48
+  damage: 8
+  radius: 0.38
+  knockback: 0.22
+  hitstun: 0.22
+  hitstop: 0.05
+  activeStart: 0.25
+  activeEnd: 0.46
+  chainStart: 0.64
+  chainEnd: 0.88
+  heavyCancelStart: 0.8
+  startupSeconds: 0
+  activeSeconds: 0
+  recoverySeconds: 0
+  contactAvatar: {fileID: 0}
+  contactClip: {fileID: 0}
+  contactPoints: []
