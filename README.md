@@ -1,5 +1,7 @@
 # More Than Wombat — Unity Lab
 
+**Jetzt online: B12 — eine Stage, fünf Begegnungen, 30 Gegner.** Boden-AOE, Durchbruch, Druckwelle und MP sowie drei Gegnerrollen. [▶ Auf Desktop oder Android spielen](https://emfau88.github.io/MoreThanWombarUnity/) · [Release und Nachweise](B12_WEBGL_RELEASE.md). Android im Querformat; physischer Gerätecheck bleibt offen.
+
 Eigenständiger Versuch eines stilisierten 3D-/2.5D-Arcade-Beat-'em-ups.
 Das bestehende [Browsergame](https://github.com/emfau88/MoreThanWombat) ist
 Designreferenz, keine technische Portierungsvorlage.
@@ -15,7 +17,7 @@ B3c stimmt KI-Abstand, Aufstehschutz und Feedback ab und ergänzt ein deutsches 
 Eigenständige Windows-/WebGL-Spielstände sind vorhanden; der Browserkampf wurde bis zum Sieg gespielt.
 
 B4 ergänzt einen kurzen Schulterstoß auf E/RT/Touch STOSS und mehr Kick-Abstand.
-B5 ergänzt Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. B7 ergänzt unterschiedliche Bereichsgestaltung, gemalten Boden, Material-/Licht-/Kamerapass, warme Bärengesichter, kompakte HP-/Boden-/Tor-Marker und zwölf CC0-Audiosignale. B8 ergänzt Startmenü/Fortsetzen, Pause, Einführung, gespeicherte Optionen und Niederlage-/Sieg-/Replay-Anzeige. **B9–B11 sind zusätzlich lokal integriert:** Boden-AOE, MP mit drei Spezialaktionen, Raufbold/Werfer/Schläger und ein Acht-/Zehn-Gegner-Labor. [Spielanleitung und Nachweise](B9_B11_LF2_COMBAT.md). **B12 ist ebenfalls lokal integriert:** fünf Begegnungen mit genau 30 Gegnern, angekündigten Verstärkungen und überarbeiteten Checkpoints. [Stage und Nachweise](B12_LF2_STAGE.md). Nächster Bulk ist B13: Präsentationspolitur. Diese lokalen Änderungen sind noch nicht im öffentlichen Play-Link enthalten. Der Play-Link enthält jetzt das B8-Kapitel mit Hauptmenü, Anlieferung, Sortierhof und Presswerk. [Release-Nachweis](B8_WEBGL_RELEASE.md).
+B5 ergänzt Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. B7 ergänzt unterschiedliche Bereichsgestaltung, gemalten Boden, Material-/Licht-/Kamerapass, warme Bärengesichter, kompakte HP-/Boden-/Tor-Marker und zwölf CC0-Audiosignale. B8 ergänzt Startmenü/Fortsetzen, Pause, Einführung, gespeicherte Optionen und Niederlage-/Sieg-/Replay-Anzeige. **B9–B11 sind zusätzlich lokal integriert:** Boden-AOE, MP mit drei Spezialaktionen, Raufbold/Werfer/Schläger und ein Acht-/Zehn-Gegner-Labor. [Spielanleitung und Nachweise](B9_B11_LF2_COMBAT.md). **B12 ist ebenfalls lokal integriert:** fünf Begegnungen mit genau 30 Gegnern, angekündigten Verstärkungen und überarbeiteten Checkpoints. [Stage und Nachweise](B12_LF2_STAGE.md). Nächster Bulk ist B13: Präsentationspolitur. B9–B12 sind jetzt im öffentlichen Play-Link enthalten: Hauptmenü, Anlieferung, Sortierhof und Presswerk mit fünf Begegnungen und 30 Gegnern. [Release-Nachweis](B12_WEBGL_RELEASE.md).
 
 ## Prototyp spielen
 
@@ -56,7 +58,7 @@ Die gespeicherte Kapitel-Szene enthält auch B7. [B7: Gestaltung, Audio und Nach
   Richtungskorrektur; Angriffe setzen kontrollierte Schritte nach vorne.
 - Shift / Gamepad East: Ausweichen in Bewegungsrichtung (ohne Eingabe nach vorne).
 - E / rechter Gamepad-Trigger / Touch **STOSS**: kurzer Schulterstoß am Boden.
-  Schließt bis zu 2 m Distanz, stoppt am ersten Treffer oder an einer Wand und
+  Schließt bis zu 3,2 m Distanz, passiert leichte Gegner, stoppt an schweren Gegnern oder einer Wand und
   hat eine feste Erholung. Richtung beim Start wählen; Gegner können dich unterbrechen.
   Der öffentliche Kapitelbuild enthält den Schulterstoß und die drei Gegnerrollen.
 - Lokal 1–4: Gegnerzahl wählen; 3/4 starten den Mischkampf mit Standard, Agile und Heavy.

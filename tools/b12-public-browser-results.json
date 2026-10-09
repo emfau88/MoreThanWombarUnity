@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-09",
+  "url": "https://emfau88.github.io/MoreThanWombarUnity/",
+  "release": "chapter-b12-2026-10-09",
+  "gameCommit": "25b293fda4aa21b18cca93a10bfcfb79ae078cae",
+  "browser": "Codex in-app PC browser",
+  "viewport": { "width": 915, "height": 412 },
+  "observed": [
+    "Home menu shows 3 areas and 30 enemies",
+    "Play enters JunkyardChapter",
+    "Touch actions including Wave are visible and reachable",
+    "Clicking Wave changes MP from 100 to 74",
+    "D movement enters first encounter",
+    "Both HUD lines and orange reinforcement access warning are visible",
+    "Pause shows area and defeated count out of 30",
+    "Return to home menu works"
+  ],
+  "observedConsoleErrors": [],
+  "physicalAndroidTested": false,
+  "physicalMultitouchTested": false,
+  "viewportOverrideReset": true
+}

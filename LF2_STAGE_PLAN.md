@@ -1,6 +1,6 @@
 # LF2-inspirierte Stage — verbindliches Ausbauziel
 
-Stand: 9. Oktober 2026. **B9–B12 sind lokal implementiert**, B13–B15 stehen aus. B12-Ablauf und Nachweise: [B12_LF2_STAGE.md](B12_LF2_STAGE.md). Nachweise und offene Geräte-/Spielgefühlabnahmen: [B9_B11_LF2_COMBAT.md](B9_B11_LF2_COMBAT.md). Der öffentliche Play-Link bleibt auf B8. Grundlage sind die Nutzerentscheidung für Little-Fighter-2-Spielgefühl und der vorhandene B8-Spielstand. Dieser Plan ersetzt die bisherige Vorwärtsplanung „B9 = nur Balance/Performance/Demo“. B1–B8 bleiben das nutzbare Fundament.
+Stand: 9. Oktober 2026. **B9–B12 sind implementiert und als WebGL-Stage veröffentlicht**, B13–B15 stehen aus. B12-Ablauf und Nachweise: [B12_LF2_STAGE.md](B12_LF2_STAGE.md). Nachweise und offene Geräte-/Spielgefühlabnahmen: [B9_B11_LF2_COMBAT.md](B9_B11_LF2_COMBAT.md). Der öffentliche Play-Link enthält B12; [Release-Nachweis](B12_WEBGL_RELEASE.md). Grundlage sind die Nutzerentscheidung für Little-Fighter-2-Spielgefühl und der vorhandene B8-Spielstand. Dieser Plan ersetzt die bisherige Vorwärtsplanung „B9 = nur Balance/Performance/Demo“. B1–B8 bleiben das nutzbare Fundament.
 
 ## 1. Ziel und Einschätzung
 

@@ -6,7 +6,7 @@ Stand: 9. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historis
 
 Fünf Begegnungen auf drei bestehenden Bereichen; genau 21 Raufbolde, fünf Werfer und vier schwere Gegner einschließlich Vorarbeiter. Endlicher angekündigter Nachschub, Positionsauslöser, acht aktive Gegner/zwei Werfer als Grenzen. **2/2 gezielte Ablauf-/Retry-Fälle bestanden in 79,65 s**, einschließlich Sieg erst nach allen Gegnern, Trigger-Rückkehr, Pause, HP/MP und Tor. Direkter Schaden dient dabei ausschließlich der Ablaufprüfung. [Rohbericht](tools/b12-stage-results.json).
 
-Tatsächlicher Eingabe-/Kontaktkampf mit unveränderten HP und KI: 19 Gegner besiegt, Niederlage im Sortierhof nach 61,5 s; kein behaupteter vollständiger Combat-Sieg. [Kampfbefund](tools/b12-combat-run.txt), [B12-Übergabe](B12_LF2_STAGE.md). Als Nächstes B13; öffentlicher Play-Link weiterhin B8.
+Tatsächlicher Eingabe-/Kontaktkampf mit unveränderten HP und KI: 19 Gegner besiegt, Niederlage im Sortierhof nach 61,5 s; kein behaupteter vollständiger Combat-Sieg. [Kampfbefund](tools/b12-combat-run.txt), [B12-Übergabe](B12_LF2_STAGE.md). Als Nächstes B13. B12 ist veröffentlicht; [öffentlicher Browsernachweis](B12_WEBGL_RELEASE.md).
 
 ## B9–B11 — LF2-Kampf lokal umgesetzt
 

@@ -1,6 +1,6 @@
 # Konkreter Arbeitsplan — LF2-inspirierte Stage
 
-**Aktuelle Übergabe:** B4–B8 sind am öffentlichen Play-Link verfügbar. **B9–B11 sind lokal implementiert:** Boden-AOE, MP/Durchbruch/Druckwelle, drei Gegnerrollen und dichter Gruppenkampf. Sechs unterschiedliche gezielte PlayMode-Fälle bestehen; Geräte-/Spielgefühlgrenzen und Spielanleitung: [B9_B11_LF2_COMBAT.md](B9_B11_LF2_COMBAT.md). Verbindlicher Ausbauplan: [LF2_STAGE_PLAN.md](LF2_STAGE_PLAN.md). Ziel bleibt ein vollständiger Charakter, eine Stage, ungefähr 30 Gegner aus höchstens drei Typen. B12 ergänzt lokal den vollständigen Ablauf mit fünf Begegnungen und genau 30 Gegnern; [Übergabe](B12_LF2_STAGE.md).
+**Aktuelle Übergabe:** Die vollständige B12-Stage mit B9–B11-Fähigkeiten ist am öffentlichen Play-Link verfügbar; [Release](B12_WEBGL_RELEASE.md). **B9–B11 sind integriert und veröffentlicht:** Boden-AOE, MP/Durchbruch/Druckwelle, drei Gegnerrollen und dichter Gruppenkampf. Sechs unterschiedliche gezielte PlayMode-Fälle bestehen; Geräte-/Spielgefühlgrenzen und Spielanleitung: [B9_B11_LF2_COMBAT.md](B9_B11_LF2_COMBAT.md). Verbindlicher Ausbauplan: [LF2_STAGE_PLAN.md](LF2_STAGE_PLAN.md). Ziel bleibt ein vollständiger Charakter, eine Stage, ungefähr 30 Gegner aus höchstens drei Typen. B12 ergänzt lokal den vollständigen Ablauf mit fünf Begegnungen und genau 30 Gegnern; [Übergabe](B12_LF2_STAGE.md).
 
 ## Als Nächstes: B13 — gemeinsame Präsentationspolitur
 

@@ -1,6 +1,6 @@
 # More Than Wombat — Roadmap zur ersten LF2-inspirierten Stage
 
-Stand: 9. Oktober 2026, B4–B8 integriert und gepusht; das B8-Kapitel ist über GitHub Pages veröffentlicht. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
+Stand: 9. Oktober 2026, B9–B12 integriert und gepusht; die 30-Gegner-Stage ist über GitHub Pages veröffentlicht. [Release-Nachweis](B12_WEBGL_RELEASE.md). Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
 
 ## Ziel und Schwerpunkt
 
@@ -158,7 +158,7 @@ Kapitelgestaltung, gemalter Boden, Kamera/Marker, Material-/Licht-/Volume-Ableit
 
 ## Aktuelle Vorwärtsplanung B9–B15
 
-Der [LF2-Stage-Plan](LF2_STAGE_PLAN.md) beschreibt den Ausbau. B9–B11 sind lokal implementiert; [Übergabe und Nachweise](B9_B11_LF2_COMBAT.md). B12 ergänzt lokal die 30-Gegner-Stage; [Übergabe](B12_LF2_STAGE.md). **Als Nächstes B13:** Präsentationspolitur. Präsentation, Balance und Übergabe folgen in B13–B15. Der öffentliche Play-Link bleibt bis zu einem neuen Release auf B8. Ein physischer Android-Check und menschliches Feedback zum dichteren Kampf sind weiterhin offen.
+Der [LF2-Stage-Plan](LF2_STAGE_PLAN.md) beschreibt den Ausbau. B9–B11 sind lokal implementiert; [Übergabe und Nachweise](B9_B11_LF2_COMBAT.md). B12 ergänzt lokal die 30-Gegner-Stage; [Übergabe](B12_LF2_STAGE.md). **Als Nächstes B13:** Präsentationspolitur. Präsentation, Balance und Übergabe folgen in B13–B15. Der öffentliche Play-Link enthält jetzt B9–B12; [Release und Nachweise](B12_WEBGL_RELEASE.md). Ein physischer Android-Check und menschliches Feedback zum dichteren Kampf sind weiterhin offen.
 
 ## Ausführung und Grenzen
 

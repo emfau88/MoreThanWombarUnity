@@ -1,6 +1,6 @@
 # B12 — zusammenhängende 30-Gegner-Stage
 
-Stand: 9. Oktober 2026. Ausbau der vorhandenen `JunkyardChapter`-Szene; keine neue Map und kein neues KI-System. B9–B11-Kampfregeln, Menschenfigur, drei Bärenrollen und bestehende B7/B8-Präsentation/Sitzungsoberfläche werden weiterverwendet. Anschließender Commit, Push und Pages-Release sind ausdrücklich beauftragt; der Veröffentlichungsschritt folgt auf den lokalen Abschluss.
+Stand: 9. Oktober 2026. Ausbau der vorhandenen `JunkyardChapter`-Szene; keine neue Map und kein neues KI-System. B9–B11-Kampfregeln, Menschenfigur, drei Bärenrollen und bestehende B7/B8-Präsentation/Sitzungsoberfläche werden weiterverwendet. Commit, Push und Pages-Release sind abgeschlossen; [öffentlicher Spielstand und Nachweis](B12_WEBGL_RELEASE.md).
 
 ## Ablauf
 
@@ -33,7 +33,7 @@ Bereichsabschluss stellt bis zum jeweiligen Maximum 30 HP und 30 MP wieder her. 
 
 Im Editor `Assets/Game/Scenes/JunkyardChapter.unity` öffnen und Play → SPIELEN. Bewegung WASD, Grundkampf J/K/L, Boden-Smash Sprung + K, Durchbruch E, Druckwelle Q, Ausweichen SHIFT, Schalter F. R wiederholt den Checkpoint, BACKSPACE die Stage. Touch- und Gamepad-Bedienung bleiben angebunden.
 
-Separater lokaler Buildpfad: Menü **Wombat Lab/B12 Build Stage WebGL**, Ausgabe `Builds/B12/WebGL`. Server: `tools/Serve-Duel.ps1 -Build B12 -Port 8767`. Keine Änderung am öffentlichen B8-Spielstand.
+Separater lokaler Buildpfad: Menü **Wombat Lab/B12 Build Stage WebGL**, Ausgabe `Builds/B12/WebGL`. Server: `tools/Serve-Duel.ps1 -Build B12 -Port 8767`. Der öffentliche Play-Link enthält inzwischen ebenfalls B12; Veröffentlichung separat in B12_WEBGL_RELEASE.md dokumentiert.
 
 ## Nachweise
 
@@ -43,7 +43,7 @@ Separater lokaler Buildpfad: Menü **Wombat Lab/B12 Build Stage WebGL**, Ausgabe
 
 Der erste Browsercheck bestätigte Startmenü, überspringbare Einführung und tastaturgesteuerten Kampfeinstieg mit angekündigtem Nachschub. Dabei wurden noch der historische Menütext „9 Wellen“ und die größere Touch-Schrift korrigiert. Die abschließenden Editor-Spielbilder zeigen nun „30 Gegner“ im Menü und beide Zeilen des Kampf-HUD mit acht aktiven Gegnern. Lokale Aufnahmen: `UnityProject/Assets/QA/b12-final-menu.png`, `b12-final-touch.png`.
 
-Lokaler WebGL-Kandidat nach diesen Korrekturen: **Succeeded, 256,28 s, 19.853.081 Bytes, null Fehler/eine Warnung**. Die Warnung betrifft die absichtlich nicht konfigurierte Pipeline-Steuerung im Player; die Unity-CLI bleibt ein Editor-Werkzeug. [Buildbericht](tools/b12-webgl-build.json). Der Publisher unterstützt B12 und verlangt wie beim bisherigen Kapitelrelease einen Build der veröffentlichten Git-Revision.
+Lokaler WebGL-Kandidat nach diesen Korrekturen: **Succeeded, 256,28 s, 19.853.081 Bytes, null Fehler/eine Warnung**. Die Warnung betrifft die absichtlich nicht konfigurierte Pipeline-Steuerung im Player; die Unity-CLI bleibt ein Editor-Werkzeug. Der anschließende Release-Build der gepushten Revision benötigte mit unverändertem Buildcache 6,53 s; [dessen Buildbericht](tools/b12-webgl-build.json). Der Publisher unterstützt B12 und verlangt wie beim bisherigen Kapitelrelease einen Build der veröffentlichten Git-Revision.
 
 ## Nächster Bulk
 
