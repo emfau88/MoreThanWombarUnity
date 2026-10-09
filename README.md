@@ -14,19 +14,19 @@ mit Betonboden, Schrott/Reifen, Zaun, Werkstatt-Hintergrund und abgestimmtem Lic
 B3c stimmt KI-Abstand, Aufstehschutz und Feedback ab und ergänzt ein deutsches Duell-HUD.
 Eigenständige Windows-/WebGL-Spielstände sind vorhanden; der Browserkampf wurde bis zum Sieg gespielt.
 
-B4 ergänzt lokal einen kurzen Schulterstoß auf E/RT/Touch STOSS und mehr Kick-Abstand.
-B5 ergänzt lokal Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. B7 ergänzt lokal unterschiedliche Bereichsgestaltung, gemalten Boden, Material-/Licht-/Kamerapass, warme Bärengesichter, kompakte HP-/Boden-/Tor-Marker und zwölf CC0-Audiosignale. B8 ergänzt lokal Startmenü/Fortsetzen, Pause, Einführung, gespeicherte Optionen und Niederlage-/Sieg-/Replay-Anzeige. Nächster Bulk: B9 für Balance, Performance und Demo. Der Play-Link enthält vorerst die vorige Touch-Fassung.
+B4 ergänzt einen kurzen Schulterstoß auf E/RT/Touch STOSS und mehr Kick-Abstand.
+B5 ergänzt Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. B7 ergänzt unterschiedliche Bereichsgestaltung, gemalten Boden, Material-/Licht-/Kamerapass, warme Bärengesichter, kompakte HP-/Boden-/Tor-Marker und zwölf CC0-Audiosignale. B8 ergänzt Startmenü/Fortsetzen, Pause, Einführung, gespeicherte Optionen und Niederlage-/Sieg-/Replay-Anzeige. Nächster Bulk: B9 für Balance, Performance und Demo. Der Play-Link enthält jetzt das B8-Kapitel mit Hauptmenü, Anlieferung, Sortierhof und Presswerk. [Release-Nachweis](B8_WEBGL_RELEASE.md).
 
 ## Prototyp spielen
 
-**[▶ Jetzt spielen — Schrotthof-Duell](https://emfau88.github.io/MoreThanWombarUnity/)**
+**[▶ Jetzt spielen — Schrotthof-Kapitel](https://emfau88.github.io/MoreThanWombarUnity/)**
 
-Auf Android im Querformat öffnen: links bewegen, rechts kämpfen; oben **NEUSTART**.
+Auf Android im Querformat öffnen und im Hauptmenü **SPIELEN** wählen: links bewegen, rechts kämpfen. **PAUSE** öffnet das Sitzungsmenü; **CHECKPOINT** wiederholt den Abschnitt.
 Am Desktop stehen Tastatur und Gamepad zur Verfügung; **TOUCH** blendet die Bildschirmsteuerung ein.
 Beim ersten Aufruf wird der Spielbuild heruntergeladen.
 
-Direkt unter Windows: `Builds/B3c/Windows/MoreThanWombat.exe` starten.
-Im Browser: `tools/Serve-Duel.ps1` ausführen und [lokales Duell](http://127.0.0.1:8765) öffnen.
+Früherer Windows-Duellbuild: `Builds/B3c/Windows/MoreThanWombat.exe`. Ein Windows-Kapitelbuild ist noch offen.
+Aktuelles Kapitel im Browser: `tools/Serve-Duel.ps1 -Build B8` ausführen und [lokales Kapitel](http://127.0.0.1:8765) öffnen. Ohne `-Build B8` startet der Server den älteren Duell-Build.
 Ins Spielfeld klicken. Builddetails und konkrete Prüfergebnisse: [B3c-Übergabe](B3C_DUEL_HANDOFF.md).
 
 Die Browserfassung wird über GitHub Pages veröffentlicht. Der Workflow verwendet den fertigen
@@ -36,7 +36,7 @@ WebGL-Build aus einem GitHub-Release; Anleitung: [Mobile Touch und Veröffentlic
 `Assets/Game/Scenes/HumanoidCombatLab.unity` laden und Play drücken. In die Game-Ansicht
 klicken, damit sie die Tastatureingaben erhält.
 
-**Kapitel lokal spielen:** Statt der Lab-Szene `Assets/Game/Scenes/JunkyardChapter.unity` öffnen, Play und **SPIELEN** wählen. ESC/P/Gamepad Start/PAUSE pausiert. F/Gamepad LB/Touch TOR ÖFFNEN bedient den nahen Schalter nach Bereich 1. R/Touch CHECKPOINT wiederholt den Abschnitt; Backspace/Select/Touch VON VORN startet das Kapitel neu. Nach Niederlage/Sieg erscheinen Retry/Replay und Startmenü. [B8: Sitzung, Einführung und Optionen](B8_SESSION.md), [B6: Ablauf und Checkpoints](B6_JUNKYARD_CHAPTER.md).
+**Kapitel im Editor spielen:** Statt der Lab-Szene `Assets/Game/Scenes/JunkyardChapter.unity` öffnen, Play und **SPIELEN** wählen. ESC/P/Gamepad Start/PAUSE pausiert. F/Gamepad LB/Touch TOR ÖFFNEN bedient den nahen Schalter nach Bereich 1. R/Touch CHECKPOINT wiederholt den Abschnitt; Backspace/Select/Touch VON VORN startet das Kapitel neu. Nach Niederlage/Sieg erscheinen Retry/Replay und Startmenü. [B8: Sitzung, Einführung und Optionen](B8_SESSION.md), [B6: Ablauf und Checkpoints](B6_JUNKYARD_CHAPTER.md).
 
 Die gespeicherte Kapitel-Szene enthält auch B7. [B7: Gestaltung, Audio und Nachweise](B7_PRESENTATION.md). Bestehendes Modell/Rig des Menschen und der Bären erhalten; endgültiger Wombat-Stil und längeres Kapitel bleiben offen.
 
@@ -52,8 +52,7 @@ Die gespeicherte Kapitel-Szene enthält auch B7. [B7: Gestaltung, Audio und Nach
 - E / rechter Gamepad-Trigger / Touch **STOSS**: kurzer Schulterstoß am Boden.
   Schließt bis zu 2 m Distanz, stoppt am ersten Treffer oder an einer Wand und
   hat eine feste Erholung. Richtung beim Start wählen; Gegner können dich unterbrechen.
-  B4 ist lokal in Unity enthalten; der öffentliche Play-Link und die bisherigen
-  Builds enthalten zunächst die vorherige Touch-Fassung.
+  Der öffentliche Kapitelbuild enthält den Schulterstoß und die drei Gegnerrollen.
 - Lokal 1–4: Gegnerzahl wählen; 3/4 starten den Mischkampf mit Standard, Agile und Heavy.
   Gamepad D-Pad oben oder Touch **GEGNER** schaltet weiter. Orange/roter Bodenmarker
   kündigt einen Schlag an; Agile zeigt zusätzlich seine feste Ansturmspur. R setzt die Gruppe zurück.
@@ -66,7 +65,7 @@ Die gespeicherte Kapitel-Szene enthält auch B7. [B7: Gestaltung, Audio und Nach
 - Gamepad-Bindings sind implementiert und mit simuliertem Gerät geprüft;
   ein echter Hardware-Spieltest steht noch aus.
 - Mobile Touch: links Bewegungsstick (außen Rennen), rechts Combo/Heavy/Kick/Sprung/Ausweichen/Stoß,
-  oben Neustart und lokal ab B5 Gegnerzahl. Automatisch auf Touchgeräten; **TOUCH** schaltet die Anzeige auch am Desktop.
+  im Kapitel oben Pause, Checkpoint und Von vorn; Gegnerzahlwahl bleibt im Labor. Automatisch auf Touchgeräten; **TOUCH** schaltet die Anzeige auch am Desktop.
   Android im Querformat ist das erste Nutzungsziel. Anleitung und Nachweise: [Mobile Touch](MOBILE_TOUCH.md).
 
 Der Humanoid ist eine importierte technische Basis, die Robot-Gegner sind eigene
@@ -101,7 +100,7 @@ erweitert das überprüfte Duell um drei Bereiche und mehrere Gegnerrollen.
 B8 verbindet Startmenü und Kapitelabschluss; als Nächstes folgen Balance und Demo-Übergabe.
 
 Werkzeuganbindung, Bewegung und Combat-Polish sind umgesetzt; Nutzerfeedback
-dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. B6 ergänzt das durchspielbare Junkyard-Kapitel. B7 liefert lokal Welt-/Kamerapräsentation und Audio. B8 liefert lokal Startmenü, Pause, Intro und Optionen. Nächster Entwicklungsbulk ist B9 mit Balance, Performance und Kapitel-Demo; Wombat-Gestaltung bleibt separat offen.
+dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. B6 ergänzt das durchspielbare Junkyard-Kapitel. B7 liefert Welt-/Kamerapräsentation und Audio. B8 liefert Startmenü, Pause, Intro und Optionen; das Kapitel ist jetzt als WebGL-Release öffentlich spielbar. Nächster Entwicklungsbulk ist B9 mit Balance, Performance und Kapitel-Demo; Wombat-Gestaltung bleibt separat offen.
 Keine Cloud-Dienste, kein Multiplayer, keine Asset-Käufe und keine Änderungen
 am Browsergame als implizite Arbeitsschritte.
 

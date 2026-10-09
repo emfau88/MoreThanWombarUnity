@@ -2,6 +2,10 @@
 
 Stand: 9. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
 
+## B8 — Kapitel öffentlich veröffentlicht
+
+B4–B8 sind auf main gepusht und als `chapter-b8-2026-10-09` am [Play-Link](https://emfau88.github.io/MoreThanWombarUnity/) verfügbar. Kapitelbuild: 19.818.574 Bytes, 367,52 s, 0 Fehler/2 Warnungen. Hauptmenü, Einführung/Überspringen, Bewegung/erste Welle, Touch-Oberfläche, Pause/Optionen/Fortsetzen und Rückkehr zum Startmenü im tatsächlich veröffentlichten Player geprüft. Pages-Lauf erfolgreich; öffentliche Version entspricht Kapitel-Szene und Spielcommit. Keine weitere Vollsuite. [Release und Nachweisgrenzen](B8_WEBGL_RELEASE.md), `tools/b8-webgl-build.json`, `tools/b8-public-browser-results.json`. B9 bleibt für Spielerfeedback, Umfang und reale Geräte-/Leistungsmessung.
+
 ## B8 — Sitzungsoberfläche lokal integriert
 
 Kapitel-Startmenü/Fortsetzen, drei überspringbare Einführungskarten, passende Tastatur-/Gamepad-/Touch-Hinweise, Pause/Fokusverlust, gespeicherte Lautstärke/Kamerablick/Nachführung/Touch/Hinweise und Niederlage-/Sieg-/Replay-Aktionen. Ein ChapterSession-Adapter nutzt vorhandene Kapitel-/Checkpoint-/UI-/Input-Technik; Kampfwerte, Kontakte und Wellenfolge bleiben erhalten. Der bestehende Buildpfad kann zusätzlich das Kapitel nach Builds/B8 ausgeben. Kein neuer Build oder Release. Details: [B8_SESSION.md](B8_SESSION.md).

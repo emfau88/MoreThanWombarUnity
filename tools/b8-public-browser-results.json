@@ -1,0 +1,31 @@
+{
+  "checkedUtc": "2026-10-09T11:53:47.840Z",
+  "url": "https://emfau88.github.io/MoreThanWombarUnity/?chapter=b8-r2",
+  "release": "chapter-b8-2026-10-09",
+  "gameCommit": "1869b0601b5c405c9a3c249c2c3a2defb21da12b",
+  "pagesRun": "https://github.com/emfau88/MoreThanWombarUnity/actions/runs/37926174430",
+  "observed": [
+    "Hauptmenü mit 3 Bereiche / 9 Wellen",
+    "SPIELEN öffnet Einführung",
+    "ÜBERSPRINGEN öffnet Anlieferung mit Touch-Controls",
+    "D bewegt Spieler und startet erste Standard-Gegnerwelle",
+    "PAUSE öffnet Sitzungsmenü",
+    "Optionen zeigt Lautstärke/Kamera/Touch/Hinweise",
+    "Zurück und Weiterkämpfen funktionieren, P pausiert erneut",
+    "Startmenü kehrt aus Pause zurück"
+  ],
+  "consoleErrorsSinceFixedLoad": 0,
+  "warnings": [
+    "Shader 'Hidden/Universal Render Pipeline/Edge Adaptive Spatial Upsampling' is not supported (in 'Blit FSR Upscaling'). PostProcessing render passes will not execute.\n",
+    "Manual synchronization of Unity Application.persistentDataPath via JS_FileSystem_Sync() is deprecated and will be later removed in a future Unity version. The persistent data directory will be automatically synchronized instead on file modification. Pass config.autoSyncPersistentDataPath = true; to configuration in createUnityInstance() to opt in to the new behavior."
+  ],
+  "limits": [
+    "Kurzer Browser-Smoke; kein kompletter öffentlicher Durchlauf",
+    "Keine physische Android-/Gamepad-Prüfung oder hörbare Audioabnahme",
+    "Keine FPS-/Speichermessung"
+  ],
+  "screenshots": [
+    "UnityProject/Assets/QA/b8-public-home.png",
+    "UnityProject/Assets/QA/b8-public-pause.png"
+  ]
+}

@@ -1,6 +1,6 @@
 # B8 — vollständige Spielsitzung
 
-Stand: 9. Oktober 2026. Lokal in der gespeicherten `JunkyardChapter` integriert. B7 ist bereits auf `main` gepusht; B8 hat noch keinen eigenen Commit oder veröffentlichten Build.
+Stand: 9. Oktober 2026. B7/B8 sind auf `main` gepusht. Der WebGL-Release `chapter-b8-2026-10-09` startet die gespeicherte `JunkyardChapter` am [öffentlichen Play-Link](https://emfau88.github.io/MoreThanWombarUnity/). Build-/Veröffentlichungsnachweis: [B8_WEBGL_RELEASE.md](B8_WEBGL_RELEASE.md).
 
 ## Spielen
 
@@ -35,4 +35,4 @@ Zur Übergabe ist der normale GUI-Editor wieder mit der gespeicherten Kapitel-Sz
 
 Der bestehende `DuelSliceBuilder` hat zusätzlich **B8 Build Chapter Windows/WebGL**. Er verwendet dieselbe Build-/Status-/Template-Technik, startet aber `JunkyardChapter` und schreibt nach `Builds/B8`. Die bisherigen B3c-Menüs starten weiterhin das Labor. WebGL-Ladeüberschrift/Canvas-Beschreibung verwenden jetzt den jeweiligen Produktnamen. Kein Build oder Release wird durch Anwenden von B8 ausgelöst.
 
-Als Nächstes B9: Spielerfeedback für Schwierigkeit, Gruppen und Wege; abwechslungsreichen Umfang entscheiden; tatsächliche Framezeiten/Speicher auf Windows und Android-WebGL messen; gezielt ungenutzte Build-Abhängigkeiten prüfen und einen Kapitel-Build über den vorhandenen Veröffentlichungsworkflow ausliefern. Das 10–15-Minuten-Ziel, finale Figuren-/Modelle und hörbare Audioabnahme bleiben offen.
+Als Nächstes B9: Spielerfeedback für Schwierigkeit, Gruppen und Wege; abwechslungsreichen Umfang entscheiden; tatsächliche Framezeiten/Speicher auf Windows und Android-WebGL messen und anhand konkreter Engstellen optimieren. Der erste Kapitel-WebGL-Release ist bereits ausgeliefert; ein neuer Windows-Kapitelbuild bleibt offen. Das 10–15-Minuten-Ziel, finale Figuren-/Modelle und hörbare Audioabnahme bleiben offen.

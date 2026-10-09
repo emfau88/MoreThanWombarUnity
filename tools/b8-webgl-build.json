@@ -1,0 +1,15 @@
+{
+    "platform": "WebGL",
+    "status": "Succeeded",
+    "utc": "2026-10-09T11:36:36.7993788Z",
+    "commit": "1869b0601b5c405c9a3c249c2c3a2defb21da12b",
+    "scene": "Assets/Game/Scenes/JunkyardChapter.unity",
+    "seconds": 367.5234528,
+    "bytes": 19818574,
+    "errors": 0,
+    "warnings": 2,
+    "messages": [
+        "Pipeline: No RuntimePipelineConfig asset found (Project Settings > Pipeline > Runtime). Pipeline will be disabled in Player builds.",
+        "You are building a player, but you have uncompiled code changes. This means that any post-processing or importing code you may have changed will not affect this player build."
+    ]
+}

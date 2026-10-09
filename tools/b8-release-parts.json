@@ -1,0 +1,26 @@
+[
+  {
+    "name": "webgl-duel.zip.part-000",
+    "bytes": 5242880,
+    "sha256": "bc095ad34fbbea16844926444ba983dacd2bc4b1b92ae8094e5fd0c0e5cb1aef",
+    "matchesRelease": true
+  },
+  {
+    "name": "webgl-duel.zip.part-001",
+    "bytes": 5242880,
+    "sha256": "11433d2a78dc78bdafd8e26c8ecd6544b15b4022283de7ef733661f1c1189f3d",
+    "matchesRelease": true
+  },
+  {
+    "name": "webgl-duel.zip.part-002",
+    "bytes": 5242880,
+    "sha256": "5b4a018f23a5ac22d99134f1a53d8b053e83c555c6519398c16c5ce0e8187f39",
+    "matchesRelease": true
+  },
+  {
+    "name": "webgl-duel.zip.part-003",
+    "bytes": 3549385,
+    "sha256": "95b86574dd741774465bc7b131953f921d1640d1eca2aded0e4bf97ec5e7f7c3",
+    "matchesRelease": true
+  }
+]

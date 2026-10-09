@@ -1,5 +1,7 @@
 # Konkreter Arbeitsplan — Junkyard-Kapitel und Präsentation
 
+**Aktuelle Übergabe:** B4–B8 sind gepusht und als WebGL-Kapitel am öffentlichen Play-Link verfügbar. Veröffentlichung und kurzer Browsercheck sind erledigt; [Release-Nachweis](B8_WEBGL_RELEASE.md). Nächster Entwicklungsbulk bleibt B9 mit Spielerfeedback, Umfang und realer Geräte-/Leistungsmessung.
+
 Stand: 9. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Bereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss; B7 ergänzt lokal Bereichsgestaltung, gemalten Boden, warme Bärengesichter, Kamera/Marker und Audio; B8 ergänzt lokal Menü/Pause/Einführung/Optionen/Ergebnis; nächster Entwicklungsbulk ist B9.
 
 ## M1 — Testmap aufgewertet
@@ -31,7 +33,7 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 4. **Spielentscheidung abstimmen:** Schulterstoß schließt Distanz, Light hält Druck, Kick schafft Platz, Heavy wirft nieder. Fehlschlag/Ende des Stoßes erhalten eine spürbare Erholung; kein unbegrenzt sicheres Durchrennen.
 5. **Kurze Übergabe:** tatsächliche Treffer-/Fehlschlagsequenz, Wandkontakt und Unterbrechung prüfen; dann Werte und Steuerung dokumentieren. Nur betroffene Fälle, keine neue Vollsuite und kein automatischer Plattformwechsel für jeden Tuningwert.
 
-**Vor dem nächsten Build:** das derzeit direkte Paket `com.unity.ai.inference` auf ungenutzte Abhängigkeiten prüfen und bei bestätigter Nichtnutzung entfernen. Im Game-Code wurden keine Inference-/ONNX-/Sentis-Verwendungen gefunden; Shaderwarnungen und zusätzliche Buildarbeit rechtfertigen diese begrenzte Bereinigung. In B3c wurde das Paket noch nicht entfernt. Release-Kompression und ein kurzes Framezeit-/Speicherprofil anschließend am tatsächlichen Spielstand entscheiden.
+**Vorbereitung des Kapitel-Releases erledigt:** `com.unity.ai.inference` nach bestätigter Nichtnutzung entfernt; App-UI entfällt als transitive Abhängigkeit. WebGL wird mit Gzip und Unity-Dekompressionsfallback gebaut; Pages versioniert die Asset-Adressen gegen alte Loader im Browsercache. Der Kapitelbuild umfasst 19,8 MB. Ein tatsächliches Framezeit-/Speicherprofil bleibt B9.
 
 **Effekt:** eine neue, erkennbare Kampfoption auf der bestehenden technischen Basis. B4 ist beauftragt und lokal integriert.
 
@@ -78,8 +80,8 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 
 1. **Kurzes Spielerfeedback:** Kapitel mit Einführung spielen, konkrete Stellen für unfaire Gruppen, dominante Moves, leere Wege und Checkpoint-Frust sammeln. Der einfache Light-Bot wurde beim B8-Batchdurchlauf im zweiten Bereich besiegt; kein Anlass, pauschal HP/Schaden zu ändern.
 2. **Umfang entscheiden:** Das vorhandene Kurzkapitel gezielt abwechslungsreicher machen oder zunächst als kurze Demo ausliefern. Für 10–15 Minuten zusätzliche Situationen statt bloß HP-Verlängerung planen.
-3. **Tatsächliche Leistung messen:** Framezeiten/Speicher im Kapitel auf Test-PC und Android-WebGL; nur nach konkreten Engstellen Schatten, Effekte, Texturen und Importkosten optimieren. Ungenutztes Inference-Paket vor Build anhand bestätigter Nichtnutzung entfernen.
-4. **Kapitel-Build ausliefern:** vorhandene B8-Windows-/WebGL-Menüs und Release-/Pages-Workflow verwenden; Produkt/Startmenü, Browserfokus/Audiofreigabe, Touch und Restart am tatsächlichen Build prüfen. Der öffentliche Link enthält weiterhin das alte Duell.
+3. **Tatsächliche Leistung messen:** Framezeiten/Speicher im Kapitel auf Test-PC und Android-WebGL; nur nach konkreten Engstellen Schatten, Effekte, Texturen und Importkosten optimieren. Ungenutztes Inference-Paket bereits vor dem Kapitelbuild entfernt.
+4. **Kapitel-Build beurteilen:** Der öffentliche Play-Link enthält jetzt B8 einschließlich Hauptmenü und drei Bereichen. Veröffentlichung erledigt; als Nächstes tatsächliche Android-Bedienung/Leistung und hörbare Audioqualität beurteilen. Ein neuer Windows-Kapitelbuild bleibt separat offen.
 5. **Demo übergeben:** kurze deutsche Anleitung, Quellen/Lizenzen, konkrete Gerätegrenzen und priorisierte nächste Inhalte. Finale Wombat-Figur/hochwertige Modelle und hörbare Audioabstimmung bleiben eigenständige konkrete Entscheidungen.
 
 ## 1. Bestand und Entscheidung

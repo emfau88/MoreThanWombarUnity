@@ -1,6 +1,6 @@
 # More Than Wombat — Roadmap mit neun Bulks
 
-Stand: 9. Oktober 2026, B4–B7 integriert und gepusht; B8 lokal integriert. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
+Stand: 9. Oktober 2026, B4–B8 integriert und gepusht; das B8-Kapitel ist über GitHub Pages veröffentlicht. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
 
 ## Ziel und Schwerpunkt
 
@@ -18,7 +18,7 @@ Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei 
 
 ## Übersicht
 
-**Zusatzauftrag nach B3c:** Mobile Touch für Android im Querformat ist integriert: vorhandene Unity-Bildschirmcontrols, responsive WebGL-Ansicht und WLAN-Testanleitung. Drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht den fertigen WebGL-Spielstand über einen Release-Workflow; öffentlicher Play-Link im README. Ein physischer Android-Spieltest bleibt offen. B4–B7 sind integriert; der öffentliche Spielstand bleibt bis zum neuen Release unverändert. Details: [MOBILE_TOUCH.md](MOBILE_TOUCH.md).
+**Zusatzauftrag nach B3c:** Mobile Touch für Android im Querformat ist integriert: vorhandene Unity-Bildschirmcontrols, responsive WebGL-Ansicht und WLAN-Testanleitung. Drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht den fertigen WebGL-Spielstand über einen Release-Workflow; öffentlicher Play-Link im README. Ein physischer Android-Spieltest bleibt offen. B4–B8 sind integriert und als Kapitel am öffentlichen Play-Link verfügbar. [Release-Nachweis](B8_WEBGL_RELEASE.md). Details: [MOBILE_TOUCH.md](MOBILE_TOUCH.md).
 
 **Vorgezogen auf Nutzerwunsch und geliefert:** **M1 — kleine Testmap-Aufwertung** nach B3b. Betonboden, wenige fertige Junkyard-Props, Zaun/Werkstatt-Hintergrund und Licht sind integriert. B3c ergänzt inzwischen das abgestimmte Duell und Buildnachweise. Details: [M1_MAP_PREVIEW.md](M1_MAP_PREVIEW.md). Die neun Hauptbulks bleiben erhalten; M1 übernimmt einen begrenzten Präsentationsanteil aus B7, die Levelstrecke bleibt B6.
 
@@ -27,11 +27,11 @@ Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei 
 | B1 | Abgeschlossen: Drehgrenze korrigiert, gezielte Polish-Prüfung/Sichtsequenz und Ist-Dokumentation | Spielbares Sparring zur Nutzerbeurteilung |
 | B2 | Schritte 1–3 technisch geliefert: Auswahl, Humanoid-Import, Kontakte und Attack-Timing; Wombat-Gestaltung zurückgestellt | Spielbare technische Combat-Basis; stilistische Abnahme offen |
 | B3 | B3a–B3c und M1 technisch geliefert: Duell-Tuning, Schutz/Feedback/HUD, Windows/WebGL, Browserkampf bis zum Sieg | Spielbarer technischer Character Slice; Wombat-Stil, Windows-Tastatur, hörbare Audioabnahme und Performanceprofil offen |
-| B4 | Lokal integriert: Schulterstoß aus Sprint-Ableitung, feste Richtung, Kontakt-/Wandstopp, verwundbare Erholung; Kick schafft mehr Platz; E/RT/Touch STOSS | Vier gezielte Stoß-Fälle bestehen; neue Veröffentlichung separat |
-| B5 | Lokal integriert: Standard/Agile/Heavy, feste Rush-Spur, 1–4 Gegner, rotierende Freigabe, Wartepositionen/Körperkollision und Offscreen-Regeln | Mischkampf auf vorhandenen Figuren/Clips; neue Veröffentlichung separat |
+| B4 | Lokal integriert: Schulterstoß aus Sprint-Ableitung, feste Richtung, Kontakt-/Wandstopp, verwundbare Erholung; Kick schafft mehr Platz; E/RT/Touch STOSS | Vier gezielte Stoß-Fälle bestehen; im öffentlichen Kapitel enthalten |
+| B5 | Lokal integriert: Standard/Agile/Heavy, feste Rush-Spur, 1–4 Gegner, rotierende Freigabe, Wartepositionen/Körperkollision und Offscreen-Regeln | Mischkampf auf vorhandenen Figuren/Clips; im öffentlichen Kapitel enthalten |
 | B6 | Lokal integriert: JunkyardChapter mit drei verbundenen Bereichen, neun Wellen/23 Gegnern, Schaltertor, Checkpoint-Retry und Vorarbeiter-Finale | Durchspielbares Kurzkapitel; automatischer Kampf 101,7 s, Ausbau zum 10–15-Minuten-Ziel offen |
 | B7 | Lokal integriert: Bereichssilhouetten, gemalter Boden, Material-/Licht-/Farbpass, höhere Kamera, Bodenring/HP/Torstatus, warme Bärengesichter und zwölf CC0-Signale | Erste gemeinsame illustrative Präsentation; finale Figuren-/Modelle und hörbare Audioabnahme offen |
-| B8 | Lokal integriert: Start/Fortsetzen, Pause für Tastatur/Gamepad/Touch, drei überspringbare Einführungskarten, kompakteres HUD, gespeicherte Lautstärke/Kamera/Touch/Hinweise, Checkpoint-/Replay-Ergebnis | Vollständige Sitzungsoberfläche; Kapitel-Buildpfad vorbereitet, Veröffentlichung und Gerätebeurteilung separat |
+| B8 | Integriert und als WebGL-Kapitel veröffentlicht: Start/Fortsetzen, Pause für Tastatur/Gamepad/Touch, drei überspringbare Einführungskarten, kompakteres HUD, gespeicherte Lautstärke/Kamera/Touch/Hinweise, Checkpoint-/Replay-Ergebnis | Vollständige Sitzungsoberfläche online; physischer Android-/Gamepad- und Performance-Nachweis offen |
 | B9 | Balance, tatsächliche Performance, Windows-Demo und WebGL-Slice prüfen | Spielbare Demo mit konkreten Laufzeit-/Buildnachweisen |
 
 Jeder Bulk endet integriert und spielbar. Grundlegendes Feedback, Kamera und Bedienbarkeit wachsen ab dem Duell mit; B7/B8 arbeiten sie aus. Fertige Pakete werden nur für die tatsächlich benötigten Teile übernommen.
