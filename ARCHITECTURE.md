@@ -1,10 +1,12 @@
-# Architektur — implementierter B7-Stand
+# Architektur — implementierter B8-Stand
 
-Stand: 8. Oktober 2026. S1–S3, B1-Polish, B2-Humanoid-Integration, B3a-Aktionen/Reaktionen und B3b-Knockdown/GetUp/Tod, B3c-Duell, Mobile Touch, B4-Schulterstoß, B5-Gegnerrollen, B6-Junkyard-Kapitel und B7-Präsentation sind implementiert. Humanoid und Grundform-Bären bleiben die technische Figurenbasis; B7 trennt ihre Gesichts-/Körperfarben. Wombat und finale Modelle bleiben offen. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
+Stand: 9. Oktober 2026. S1–S3, B1-Polish, B2-Humanoid-Integration, B3a-Aktionen/Reaktionen und B3b-Knockdown/GetUp/Tod, B3c-Duell, Mobile Touch, B4-Schulterstoß, B5-Gegnerrollen, B6-Junkyard-Kapitel und B7-Präsentation sind implementiert. Humanoid und Grundform-Bären bleiben die technische Figurenbasis; B7 trennt ihre Gesichts-/Körperfarben. Wombat und finale Modelle bleiben offen. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
 
 B2-Schritte 1/2 ergänzen CharacterImportLab mit regulärem Quaternius-Humanoid und vorhandenem PlayerMotor/LabInput. Schritt 3 ergänzt separat HumanoidCombatLab mit CombatController/Defense, bestehenden Robot-Gegnern und Feedback. HumanoidCombatBuilder erzeugt eigene AttackDefinitions, retimte Clips und je 161 Avatar-Kontaktpunkte im lokalen Facing-Raum; CombatController interpoliert sie ohne SampleAnimation auf dem sichtbaren Humanoid. AttackDefinition enthält gewünschte Phasendauern sowie Avatar-/Clipreferenz für die konkrete Bahn. Animator-Zeit bleibt die einzige laufende Phase; B1-Transformclips behalten ihren alten SampleAnimation-Pfad. Root Motion bleibt aus. Die ursprünglichen Combat-Szenen sind erhalten. Details in B2_COMBAT_INTEGRATION.md.
 
 ## Verantwortlichkeiten
+
+B8 ergänzt `ChapterSession`: bestehende Kapitel-Szene als Einstieg, Start-/Pause-/Steuerungs-/Options-/Intro-/Ergebnisseiten, skalierte Spielzeit und gespeicherte Optionen. Kapitelaktionen nutzen weiterhin JunkyardChapter. Input-/Sweep-/KI-Guards erhalten den pausierten Angriff, bereinigen Eingabepuffer und verhindern Menü-Klicks im Combat; beim Szenenwechsel werden Zeit/Audio restauriert. Vorhandene Unity-UI/Input-System-Komponenten, keine weitere Gameplay- oder Savegame-Architektur. Details: [B8_SESSION.md](B8_SESSION.md).
 
 | Komponente | Tatsächliche Aufgabe |
 | --- | --- |

@@ -1,6 +1,6 @@
 # Konkreter Arbeitsplan — Junkyard-Kapitel und Präsentation
 
-Stand: 8. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Bereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss; B7 ergänzt lokal Bereichsgestaltung, gemalten Boden, warme Bärengesichter, Kamera/Marker und Audio; nächster Entwicklungsbulk ist B8.
+Stand: 9. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Bereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss; B7 ergänzt lokal Bereichsgestaltung, gemalten Boden, warme Bärengesichter, Kamera/Marker und Audio; B8 ergänzt lokal Menü/Pause/Einführung/Optionen/Ergebnis; nächster Entwicklungsbulk ist B9.
 
 ## M1 — Testmap aufgewertet
 
@@ -64,7 +64,7 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 
 **Effekt:** Das Kurzkapitel besitzt unterschiedliche Bereichssilhouetten und eine erste zusammenhängende illustrative Bild-/Audiofassung. B7 ist lokal integriert; Details und zwei gezielte Prüfergebnisse: [B7_PRESENTATION.md](B7_PRESENTATION.md). Finale Figuren-/Modelle, hörbare Audioabnahme, Geräte-/Performanceprofil und längerer abwechslungsreicher Umfang bleiben offen.
 
-## Als Nächstes: B8 — vollständige Spielsitzung
+## B8 — vollständige Spielsitzung lokal geliefert
 
 1. **Start und Ergebnis:** Kleines Startmenü mit Spielen/Steuerung/Optionen; nach Sieg oder Niederlage klare Checkpoint-/Von-vorn-Aktionen. Die bestehende Kapitel-Szene und ihre Zustände verwenden.
 2. **Pause sauber integrieren:** Tastatur, Gamepad und Touch; Spielzeit/Kampf einfrieren, Menüs weiter bedienen und beim Fortsetzen Eingabepuffer/virtuelle gehaltene Controls bereinigen.
@@ -72,7 +72,15 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 4. **HUD und Optionen:** Bereich/Welle/HP kompakt halten, Lautstärke und Bildschirm-/Kameradarstellung einstellen und speichern. Bestehendes Input System und Unity-UI verwenden.
 5. **Sitzungsnachweis:** Start → Kampf → Pause/Fortsetzen → Niederlage/Checkpoint → Abschluss durchspielen. Ein neuer Build muss die Kapitel-/Menü-Einstiegsszene verwenden; der bisherige Duell-Buildpfad startet noch das Labor. Veröffentlichungsworkflow weiterverwenden.
 
-**Effekt:** Die vorhandenen Kämpfe und Checkpoints bilden eine selbst erklärende Spielsitzung. B8 ist noch nicht begonnen. B9 stimmt danach Balance, Umfang und tatsächliche Performance ab und liefert die Demo. Das 10–15-Minuten-Ziel braucht weiterhin zusätzliche abwechslungsreiche Situationen statt bloß mehr HP.
+**Effekt:** Start/Fortsetzen, Pause, drei überspringbare Einführungskarten, passende Steuerung, gespeicherte Lautstärke/Kamerablick/Nachführung/Touch/Hinweise und Niederlage-/Sieg-/Replay-Aktionen sind lokal integriert. Eingabepuffer und gehaltene virtuelle Controls werden an Menüübergängen bereinigt. Zwei gezielte Sitzungsfälle bestehen; vorhandener Kapitel-Ablauffall ergänzt Sieg/Replay. Der neue Buildpfad startet JunkyardChapter, die B3c-Buildmenüs behalten das Labor. Details: [B8_SESSION.md](B8_SESSION.md).
+
+## Als Nächstes: B9 — Balance, Performance und Kapitel-Demo
+
+1. **Kurzes Spielerfeedback:** Kapitel mit Einführung spielen, konkrete Stellen für unfaire Gruppen, dominante Moves, leere Wege und Checkpoint-Frust sammeln. Der einfache Light-Bot wurde beim B8-Batchdurchlauf im zweiten Bereich besiegt; kein Anlass, pauschal HP/Schaden zu ändern.
+2. **Umfang entscheiden:** Das vorhandene Kurzkapitel gezielt abwechslungsreicher machen oder zunächst als kurze Demo ausliefern. Für 10–15 Minuten zusätzliche Situationen statt bloß HP-Verlängerung planen.
+3. **Tatsächliche Leistung messen:** Framezeiten/Speicher im Kapitel auf Test-PC und Android-WebGL; nur nach konkreten Engstellen Schatten, Effekte, Texturen und Importkosten optimieren. Ungenutztes Inference-Paket vor Build anhand bestätigter Nichtnutzung entfernen.
+4. **Kapitel-Build ausliefern:** vorhandene B8-Windows-/WebGL-Menüs und Release-/Pages-Workflow verwenden; Produkt/Startmenü, Browserfokus/Audiofreigabe, Touch und Restart am tatsächlichen Build prüfen. Der öffentliche Link enthält weiterhin das alte Duell.
+5. **Demo übergeben:** kurze deutsche Anleitung, Quellen/Lizenzen, konkrete Gerätegrenzen und priorisierte nächste Inhalte. Finale Wombat-Figur/hochwertige Modelle und hörbare Audioabstimmung bleiben eigenständige konkrete Entscheidungen.
 
 ## 1. Bestand und Entscheidung
 

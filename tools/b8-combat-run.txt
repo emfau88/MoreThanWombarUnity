@@ -1,0 +1,7 @@
+Actual chapter run: standard input injection, unchanged HP/damage/AI, no direct damage or teleports.
+Area=0 wave=0 HP=100 position=(-4.80, 0.01, 0.00)
+Area=0 wave=1 HP=92 position=(-1.83, 0.01, 1.08)
+Area=0 wave=2 HP=52 position=(-1.78, 0.01, 1.59)
+Gate opened via nearby interaction; HP=42
+Area=1 wave=0 HP=42 position=(19.20, 0.01, 1.41)
+End=Fighting completed=1 HP=0 elapsed=44,2

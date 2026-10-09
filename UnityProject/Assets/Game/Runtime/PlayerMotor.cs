@@ -43,6 +43,7 @@ namespace WombatLab
 
         void Update()
         {
+            if (input.GameplayBlocked) return;
             var frame = testInputEnabled ? testInput : input.Read();
             if (testInputEnabled) testInput = new InputFrame(testInput.Move, run: testInput.Run);
             if (frame.Restart) { if (chapter == null) ResetToSpawn(); return; }

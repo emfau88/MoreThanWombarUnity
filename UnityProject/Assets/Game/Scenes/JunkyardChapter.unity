@@ -2914,6 +2914,7 @@ GameObject:
   - component: {fileID: 371866332}
   - component: {fileID: 371866331}
   - component: {fileID: 371866333}
+  - component: {fileID: 371866334}
   m_Layer: 0
   m_Name: B6 Junkyard chapter
   m_TagString: Untagged
@@ -2948,6 +2949,7 @@ MonoBehaviour:
   switchPosition: {fileID: 512159789}
   checkpointMarker: {fileID: 1809688377}
   switchLamp: {fileID: 381876691}
+  session: {fileID: 371866334}
 --- !u!4 &371866332
 Transform:
   m_ObjectHideFlags: 0
@@ -3004,6 +3006,20 @@ MonoBehaviour:
   - {fileID: 979202345}
   - {fileID: 2145354945}
   - {fileID: 281129417}
+--- !u!114 &371866334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371866330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2116d7c0ac5b5541bfbddb9f6a3ec62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.ChapterSession
+  chapter: {fileID: 371866331}
+  hud: {fileID: 118753954}
 --- !u!1 &372304406
 GameObject:
   m_ObjectHideFlags: 0
@@ -14077,7 +14093,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -20684,7 +20700,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -20695,7 +20711,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MORE THAN WOMBAT / SCHROTTHOF-KAPITEL
+  m_Text: SCHROTTHOF / KAPITEL 01
 --- !u!222 &1930794590
 CanvasRenderer:
   m_ObjectHideFlags: 0

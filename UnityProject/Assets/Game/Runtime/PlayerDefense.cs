@@ -26,6 +26,7 @@ namespace WombatLab
         { motor = GetComponent<PlayerMotor>(); combat = GetComponent<CombatController>(); input = GetComponent<LabInput>(); body = GetComponent<BodyRecovery>(); ResetDefense(); }
         void Update()
         {
+            if (input.GameplayBlocked) return;
             float dt = Time.deltaTime;
             dodgeRemaining = Mathf.Max(0, dodgeRemaining - dt);
             cooldown = Mathf.Max(0, cooldown - dt); stun = Mathf.Max(0, stun - dt);
@@ -35,7 +36,7 @@ namespace WombatLab
         }
         public bool TryEvade(Vector2 direction)
         {
-            if (Locked || combat.ChargeCommitted || cooldown > 0 || !motor.Grounded) return false;
+            if (input.GameplayBlocked || Locked || combat.ChargeCommitted || cooldown > 0 || !motor.Grounded) return false;
             dodgeDirection = direction.sqrMagnitude > .01f ? MotorMath.PlanarInput(direction).normalized : motor.visual.forward;
             combat.Cancel(); motor.ClearJumpBuffer(); knockback = Vector3.zero;
             dodgeRemaining = .32f; cooldown = .65f;

@@ -50,6 +50,7 @@ namespace WombatLab
         }
         void LateUpdate()
         {
+            if (chapter.session != null && chapter.session.Blocked) return;
             var p = player.transform.position;
             float distance = Vector3.ProjectOnPlane(p - previous, Vector3.up).magnitude; previous = p;
             bool walking = defense.Alive && player.Grounded && !body.Busy && !combat.Attacking && !combat.Frozen

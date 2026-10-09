@@ -78,33 +78,55 @@ namespace WombatLab.Editor
                 Object.DestroyImmediate(tex); rt.Release(); Object.DestroyImmediate(rt);
             }
         }
-        public static string CaptureHud(string name)
+        public static string CaptureHud(string name, int width = 1280, int height = 600)
         {
             // The Pipeline screen source can contain stale GameView UI. Render current
             // canvases once through the play camera and restore all runtime settings.
             var camera = Camera.main;
             var canvases = Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None);
             var modes = new RenderMode[canvases.Length]; var cameras = new Camera[canvases.Length]; var distances = new float[canvases.Length];
+            var scalerEnabled = new bool[canvases.Length]; var scales = new float[canvases.Length];
+            var extra = camera.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
+            bool post = extra != null && extra.renderPostProcessing;
+            float aspect = camera.aspect;
             var previous = camera.targetTexture; var active = RenderTexture.active;
-            var rt = new RenderTexture(1280, 600, 24); var tex = new Texture2D(1280, 600, TextureFormat.RGB24, false);
+            var rt = new RenderTexture(width, height, 24); var tex = new Texture2D(width, height, TextureFormat.RGB24, false);
             try
             {
                 camera.targetTexture = rt;
+                camera.aspect = width / (float)height;
+                if (extra != null) extra.renderPostProcessing = false; // Overlay UI normally bypasses camera postprocessing.
                 for (int i = 0; i < canvases.Length; i++)
                 {
                     modes[i] = canvases[i].renderMode; cameras[i] = canvases[i].worldCamera; distances[i] = canvases[i].planeDistance;
                     canvases[i].renderMode = RenderMode.ScreenSpaceCamera; canvases[i].worldCamera = camera; canvases[i].planeDistance = 1;
+                    scales[i] = canvases[i].scaleFactor;
+                    var scaler = canvases[i].GetComponent<UnityEngine.UI.CanvasScaler>();
+                    if (scaler != null)
+                    {
+                        scalerEnabled[i] = scaler.enabled; scaler.enabled = false;
+                        var reference = scaler.referenceResolution;
+                        float match = canvases[i].name == "B8 Chapter Session UI" ? (width / (float)height >= 1.5f ? 1 : 0)
+                            : canvases[i].name == "Mobile Touch HUD" ? (width >= height ? 1 : 0) : scaler.matchWidthOrHeight;
+                        canvases[i].scaleFactor = Mathf.Pow(2, Mathf.Lerp(Mathf.Log(width / reference.x, 2), Mathf.Log(height / reference.y, 2), match));
+                    }
                     foreach (var text in canvases[i].GetComponentsInChildren<UnityEngine.UI.Text>(true)) text.SetAllDirty();
                 }
                 Canvas.ForceUpdateCanvases(); camera.Render(); RenderTexture.active = rt;
-                tex.ReadPixels(new Rect(0, 0, 1280, 600), 0, 0); tex.Apply();
+                tex.ReadPixels(new Rect(0, 0, width, height), 0, 0); tex.Apply();
                 string folder = Path.Combine(Application.dataPath, "QA"); Directory.CreateDirectory(folder);
                 string path = Path.Combine(folder, name + ".png"); File.WriteAllBytes(path, tex.EncodeToPNG()); return path;
             }
             finally
             {
                 for (int i = 0; i < canvases.Length; i++)
-                { canvases[i].renderMode = modes[i]; canvases[i].worldCamera = cameras[i]; canvases[i].planeDistance = distances[i]; }
+                {
+                    canvases[i].renderMode = modes[i]; canvases[i].worldCamera = cameras[i]; canvases[i].planeDistance = distances[i];
+                    canvases[i].scaleFactor = scales[i];
+                    var scaler = canvases[i].GetComponent<UnityEngine.UI.CanvasScaler>(); if (scaler != null) scaler.enabled = scalerEnabled[i];
+                }
+                if (extra != null) extra.renderPostProcessing = post;
+                camera.aspect = aspect;
                 camera.targetTexture = previous; RenderTexture.active = active;
                 Object.DestroyImmediate(tex); rt.Release(); Object.DestroyImmediate(rt);
             }

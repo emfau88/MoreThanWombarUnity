@@ -14,7 +14,8 @@ namespace WombatLab.Editor
     public static class DuelSliceBuilder
     {
         const string Pending = "WombatLab.DuelBuild";
-        static string Output => Path.GetFullPath(Path.Combine(Application.dataPath, "../../Builds/B3c"));
+        const string ChapterBuild = "WombatLab.ChapterBuild";
+        static string Output => Path.GetFullPath(Path.Combine(Application.dataPath, SessionState.GetBool(ChapterBuild, false) ? "../../Builds/B8" : "../../Builds/B3c"));
         static DuelSliceBuilder() { EditorApplication.update += ResumeBuild; }
 
         [MenuItem("Wombat Lab/B3c Apply Duel Tuning")]
@@ -46,7 +47,11 @@ namespace WombatLab.Editor
         public static void Windows() => Start("Windows");
         [MenuItem("Wombat Lab/B3c Build WebGL")]
         public static void WebGL() => Start("WebGL");
-        public static string Start(string platform)
+        [MenuItem("Wombat Lab/B8 Build Chapter Windows")]
+        public static void ChapterWindows() => Start("Windows", true);
+        [MenuItem("Wombat Lab/B8 Build Chapter WebGL")]
+        public static void ChapterWebGL() => Start("WebGL", true);
+        public static string Start(string platform, bool chapterBuild = false)
         {
             if (platform != "Windows" && platform != "WebGL") throw new ArgumentException(platform);
             if (EditorApplication.isPlaying || EditorApplication.isCompiling || EditorUtility.scriptCompilationFailed || BuildPipeline.isBuildingPlayer)
@@ -54,6 +59,7 @@ namespace WombatLab.Editor
             if (SessionState.GetString(Pending, "") != "") throw new InvalidOperationException("A duel build is already queued.");
             var target = Target(platform); var group = BuildPipeline.GetBuildTargetGroup(target);
             if (!BuildPipeline.IsBuildTargetSupported(group, target)) throw new InvalidOperationException(platform + " module missing.");
+            SessionState.SetBool(ChapterBuild, chapterBuild);
             Directory.CreateDirectory(Output);
             Write(platform, new Result { status = "queued", platform = platform });
             SessionState.SetString(Pending, platform);
@@ -82,13 +88,14 @@ namespace WombatLab.Editor
             try
             {
                 if (EditorUtility.scriptCompilationFailed) throw new InvalidOperationException("Script compilation failed.");
-                PlayerSettings.productName = "More Than Wombat — Duell";
+                bool chapterBuild = SessionState.GetBool(ChapterBuild, false);
+                PlayerSettings.productName = chapterBuild ? "More Than Wombat — Schrotthof" : "More Than Wombat — Duell";
                 PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
                 PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
                 PlayerSettings.WebGL.template = "PROJECT:TouchDuel";
                 string location = platform == "Windows" ? Path.Combine(Output, platform, "MoreThanWombat.exe") : Path.Combine(Output, platform);
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
-                    scenes = new[] { HumanoidCombatBuilder.ScenePath }, locationPathName = location,
+                    scenes = new[] { chapterBuild ? JunkyardChapterBuilder.ScenePath : HumanoidCombatBuilder.ScenePath }, locationPathName = location,
                     target = Target(platform), options = BuildOptions.None });
                 result.status = report.summary.result.ToString(); result.bytes = (long)report.summary.totalSize;
                 result.errors = report.summary.totalErrors; result.warnings = report.summary.totalWarnings;

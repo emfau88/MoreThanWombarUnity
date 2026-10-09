@@ -53,6 +53,7 @@ namespace WombatLab
         }
         void Update()
         {
+            if (clock != null && clock.GameplayBlocked) return;
             bool frozen = State != RecoveryState.Dead && clock != null && clock.Frozen;
             float dt = frozen ? 0 : Time.deltaTime;
             if (!Busy) { protection = Mathf.Max(0, protection - dt); return; }

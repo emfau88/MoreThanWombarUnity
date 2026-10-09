@@ -15,7 +15,7 @@ B3c stimmt KI-Abstand, Aufstehschutz und Feedback ab und ergänzt ein deutsches 
 Eigenständige Windows-/WebGL-Spielstände sind vorhanden; der Browserkampf wurde bis zum Sieg gespielt.
 
 B4 ergänzt lokal einen kurzen Schulterstoß auf E/RT/Touch STOSS und mehr Kick-Abstand.
-B5 ergänzt lokal Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. B7 ergänzt lokal unterschiedliche Bereichsgestaltung, gemalten Boden, Material-/Licht-/Kamerapass, warme Bärengesichter, kompakte HP-/Boden-/Tor-Marker und zwölf CC0-Audiosignale. Nächster Bulk: B8 für Menü, Pause, Einführung und Optionen. Der Play-Link enthält vorerst die vorige Touch-Fassung.
+B5 ergänzt lokal Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. B7 ergänzt lokal unterschiedliche Bereichsgestaltung, gemalten Boden, Material-/Licht-/Kamerapass, warme Bärengesichter, kompakte HP-/Boden-/Tor-Marker und zwölf CC0-Audiosignale. B8 ergänzt lokal Startmenü/Fortsetzen, Pause, Einführung, gespeicherte Optionen und Niederlage-/Sieg-/Replay-Anzeige. Nächster Bulk: B9 für Balance, Performance und Demo. Der Play-Link enthält vorerst die vorige Touch-Fassung.
 
 ## Prototyp spielen
 
@@ -36,7 +36,7 @@ WebGL-Build aus einem GitHub-Release; Anleitung: [Mobile Touch und Veröffentlic
 `Assets/Game/Scenes/HumanoidCombatLab.unity` laden und Play drücken. In die Game-Ansicht
 klicken, damit sie die Tastatureingaben erhält.
 
-**Kapitel lokal spielen:** Statt der Lab-Szene `Assets/Game/Scenes/JunkyardChapter.unity` öffnen. Nach rechts spielen; F/Gamepad LB/Touch TOR ÖFFNEN bedient den nahen Schalter nach Bereich 1. R/Start/Touch CHECKPOINT wiederholt den Abschnitt; Backspace/Select/Touch VON VORN startet das Kapitel neu. [B6: Ablauf und Checkpoints](B6_JUNKYARD_CHAPTER.md).
+**Kapitel lokal spielen:** Statt der Lab-Szene `Assets/Game/Scenes/JunkyardChapter.unity` öffnen, Play und **SPIELEN** wählen. ESC/P/Gamepad Start/PAUSE pausiert. F/Gamepad LB/Touch TOR ÖFFNEN bedient den nahen Schalter nach Bereich 1. R/Touch CHECKPOINT wiederholt den Abschnitt; Backspace/Select/Touch VON VORN startet das Kapitel neu. Nach Niederlage/Sieg erscheinen Retry/Replay und Startmenü. [B8: Sitzung, Einführung und Optionen](B8_SESSION.md), [B6: Ablauf und Checkpoints](B6_JUNKYARD_CHAPTER.md).
 
 Die gespeicherte Kapitel-Szene enthält auch B7. [B7: Gestaltung, Audio und Nachweise](B7_PRESENTATION.md). Bestehendes Modell/Rig des Menschen und der Bären erhalten; endgültiger Wombat-Stil und längeres Kapitel bleiben offen.
 
@@ -90,6 +90,7 @@ Grundformen. Beide bleiben Platzhalter für die endgültige Cartoon-Gestaltung.
 - [B4: Schulterstoß und Move-Rollen](B4_SHOULDER_CHARGE.md)
 - [B5: Gegnerrollen und Mischkampf](B5_ENEMY_ROLES.md)
 - [B6: Junkyard-Kapitel, Schalter und Checkpoints](B6_JUNKYARD_CHAPTER.md)
+- [B8: Menü, Pause, Einführung und Optionen](B8_SESSION.md)
 - [M1: vorgezogene Junkyard-Testmap](M1_MAP_PREVIEW.md)
 
 Gestaltungsziel ist der illustrative Cartoon-/Comic-Stil der 2D-Referenz:
@@ -97,10 +98,10 @@ runde kräftige Formen, expressive Gesichter und gemalte Materialdetails.
 Passende fertige Rigs, Animationen und Props werden zuerst geprüft. Der
 begonnene eigene Blender-/Rig-Pfad ist zurückgestellt. Das lokale Junkyard-Kapitel
 erweitert das überprüfte Duell um drei Bereiche und mehrere Gegnerrollen.
-Der nächste Ausbau ergänzt den Ablauf vom Startmenü bis zum Kapitelabschluss.
+B8 verbindet Startmenü und Kapitelabschluss; als Nächstes folgen Balance und Demo-Übergabe.
 
 Werkzeuganbindung, Bewegung und Combat-Polish sind umgesetzt; Nutzerfeedback
-dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. B6 ergänzt das durchspielbare Junkyard-Kapitel. B7 liefert lokal Welt-/Kamerapräsentation und Audio. Nächster Entwicklungsbulk ist B8 mit Startmenü, Pause, kurzem Intro und Optionen; Wombat-Gestaltung bleibt separat offen.
+dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. B6 ergänzt das durchspielbare Junkyard-Kapitel. B7 liefert lokal Welt-/Kamerapräsentation und Audio. B8 liefert lokal Startmenü, Pause, Intro und Optionen. Nächster Entwicklungsbulk ist B9 mit Balance, Performance und Kapitel-Demo; Wombat-Gestaltung bleibt separat offen.
 Keine Cloud-Dienste, kein Multiplayer, keine Asset-Käufe und keine Änderungen
 am Browsergame als implizite Arbeitsschritte.
 

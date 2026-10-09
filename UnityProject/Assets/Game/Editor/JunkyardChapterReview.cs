@@ -26,7 +26,8 @@ namespace WombatLab.Editor
             if(!EditorApplication.isPlaying)throw new InvalidOperationException("Start JunkyardChapter Play first.");
             Cancel(); prefix=capturePrefix; chapter=Object.FindAnyObjectByType<JunkyardChapter>();player=chapter.encounter.player;
             combat=player.GetComponent<CombatController>();defense=player.GetComponent<PlayerDefense>();
-            chapter.RestartChapter(); player.SetTestInput(Vector2.zero); started=EditorApplication.timeSinceStartup;
+            if (chapter.session != null) chapter.session.StartRun(false); else chapter.RestartChapter();
+            player.SetTestInput(Vector2.zero); started=EditorApplication.timeSinceStartup;
             nextTap=0;capturedArea=capturedWave=-1;capturedGate=false;report.Clear();
             report.AppendLine("Actual chapter run: standard input injection, unchanged HP/damage/AI, no direct damage or teleports.");
             LabVisualReview.Capture(prefix+"-arrival");EditorApplication.update+=Tick;return "Actual nine-wave chapter run started.";

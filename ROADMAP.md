@@ -1,6 +1,6 @@
 # More Than Wombat — Roadmap mit neun Bulks
 
-Stand: 8. Oktober 2026, B4–B7 integriert; B7 noch lokal. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
+Stand: 9. Oktober 2026, B4–B7 integriert und gepusht; B8 lokal integriert. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
 
 ## Ziel und Schwerpunkt
 
@@ -14,7 +14,7 @@ Bestehendes Gameplay weiterentwickeln. Standardmodelle, Rigs, Animationen und Pr
 
 S0–S3 bilden das vorhandene Fundament. B1 ist technisch abgeschlossen: Startup-Drehgrenze korrigiert, fünf gezielte Polish-Fälle bestanden, aktuelle Spielposen kontrolliert und Combat-/Architekturbeschreibung aktualisiert. Nutzerfeedback zum Spielgefühl bleibt für weiteres Tuning willkommen. Ein eigener Blender-Entwurf wurde begonnen, ist aber noch nicht in Unity integriert. Dieser Pfad ist zurückgestellt, bis passende fertige Grundlagen geprüft sind.
 
-Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. B3b ergänzt lebendes Knockdown, GetUp, Aufstehschutz und Tod/Reset für beide Figuren; Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md). Die vorgezogene kleine Map-Aufwertung M1 und B3c sind integriert. Das technische Duell ist als Windows-/WebGL-Spielstand verfügbar; Browserkampf bis zum Sieg und Neustart sind nachgewiesen. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Kampfbereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss. B7 ergänzt lokal unterschiedliche Bereichssilhouetten, gemalten Boden, Kamera/Marker, warme Bärengesichter und zwölf CC0-Audiosignale. Als Nächstes B8 für Bedienung und Sitzung; Laufzeit und Balance werden anhand von Spielerfeedback weiter abgestimmt. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
+Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. B3b ergänzt lebendes Knockdown, GetUp, Aufstehschutz und Tod/Reset für beide Figuren; Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md). Die vorgezogene kleine Map-Aufwertung M1 und B3c sind integriert. Das technische Duell ist als Windows-/WebGL-Spielstand verfügbar; Browserkampf bis zum Sieg und Neustart sind nachgewiesen. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Kampfbereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss. B7 ergänzt lokal unterschiedliche Bereichssilhouetten, gemalten Boden, Kamera/Marker, warme Bärengesichter und zwölf CC0-Audiosignale. B8 ergänzt lokal Menü, Pause, Einführung, Optionen und Ergebnis; als Nächstes B9 für Balance, Performance und Demo; Laufzeit und Balance werden anhand von Spielerfeedback weiter abgestimmt. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
 
 ## Übersicht
 
@@ -31,7 +31,7 @@ Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei 
 | B5 | Lokal integriert: Standard/Agile/Heavy, feste Rush-Spur, 1–4 Gegner, rotierende Freigabe, Wartepositionen/Körperkollision und Offscreen-Regeln | Mischkampf auf vorhandenen Figuren/Clips; neue Veröffentlichung separat |
 | B6 | Lokal integriert: JunkyardChapter mit drei verbundenen Bereichen, neun Wellen/23 Gegnern, Schaltertor, Checkpoint-Retry und Vorarbeiter-Finale | Durchspielbares Kurzkapitel; automatischer Kampf 101,7 s, Ausbau zum 10–15-Minuten-Ziel offen |
 | B7 | Lokal integriert: Bereichssilhouetten, gemalter Boden, Material-/Licht-/Farbpass, höhere Kamera, Bodenring/HP/Torstatus, warme Bärengesichter und zwölf CC0-Signale | Erste gemeinsame illustrative Präsentation; finale Figuren-/Modelle und hörbare Audioabnahme offen |
-| B8 | Einführung, HUD, Menü/Pause, Optionen, Retry und Ergebnis | Vollständige selbst erklärende Spielschleife |
+| B8 | Lokal integriert: Start/Fortsetzen, Pause für Tastatur/Gamepad/Touch, drei überspringbare Einführungskarten, kompakteres HUD, gespeicherte Lautstärke/Kamera/Touch/Hinweise, Checkpoint-/Replay-Ergebnis | Vollständige Sitzungsoberfläche; Kapitel-Buildpfad vorbereitet, Veröffentlichung und Gerätebeurteilung separat |
 | B9 | Balance, tatsächliche Performance, Windows-Demo und WebGL-Slice prüfen | Spielbare Demo mit konkreten Laufzeit-/Buildnachweisen |
 
 Jeder Bulk endet integriert und spielbar. Grundlegendes Feedback, Kamera und Bedienbarkeit wachsen ab dem Duell mit; B7/B8 arbeiten sie aus. Fertige Pakete werden nur für die tatsächlich benötigten Teile übernommen.
@@ -136,7 +136,7 @@ Kapitelgestaltung, gemalter Boden, Kamera/Marker, Material-/Licht-/Volume-Ableit
 
 **Ergebnis:** ein konsistentes Comic-Kapitel, lesbar auch im Gruppenkampf. Eine dichte Sequenz mit Ton/Präsentation ansehen und konkrete Engpässe messen.
 
-## B8 — Bedienung und vollständige Sitzung
+## B8 — Bedienung und vollständige Sitzung lokal geliefert
 
 - Startmenü, Pause, Optionen, Niederlage/Retry, Kapitelabschluss; klare Tastatur-/Gamepad-Navigation.
 - Kompaktes HUD, passende Eingabehinweise, kurze überspringbare Einführung in Grundaktionen.
@@ -144,7 +144,7 @@ Kapitelgestaltung, gemalter Boden, Kamera/Marker, Material-/Licht-/Volume-Ableit
 - Checkpoint- und vollständigen Neustart anbieten; wenige verständliche Ergebniswerte.
 - Browserfokus und Audiofreigabe in den WebGL-Ablauf einpassen, ohne die Spieloberfläche mit Implementierungsdetails zu belasten.
 
-**Ergebnis:** Start → Lernen → Kampf → Pause/Retry → Abschluss funktioniert ohne Entwicklererklärung. Ein Durchlauf aus Sicht eines neuen Spielers.
+**Ergebnis:** Die vorhandene Kapitel-Szene besitzt Start-/Einführungs-/Pause-/Options-/Ergebnisoberfläche und benutzt weiterhin dieselben Kampf-/Checkpoint-Regeln. Zwei gezielte Sitzungsfälle und der bestehende Kapitel-Ablauffall mit Sieg/Replay bestehen. Ein einfacher tatsächlicher Combat-Bot wurde im zweiten Bereich besiegt; echte Niederlage und Retry erhalten Bereich/Tor/42 Einstieg-HP. Das ist keine menschliche Schwierigkeits- oder Geräteabnahme. Details: [B8_SESSION.md](B8_SESSION.md). Als Nächstes B9 für Balance/Umfang, tatsächliche Performance und Kapitel-Demo.
 
 ## B9 — Balance, Performance und Demo
 

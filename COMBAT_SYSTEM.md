@@ -1,10 +1,12 @@
-# Combat und Sparring — aktueller B7-Stand
+# Combat und Sparring — aktueller B8-Stand
 
-Stand: 8. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung, B3c-Duell-Tuning, B4-Schulterstoß/B5-Gegnerrollen, B6-Kapitelablauf und B7-Präsentation. B7 verändert keine Kampfwerte, Kontaktzeiten, Wellen oder Checkpoint-Regeln; Kapitel ergänzt lesbarere Gesichtsfarben/HP-Marker und importierte Kontakt-/Warn-/Schritt-/Signalsounds. Figuren-Rigs bleiben erhalten, Wombat-Gestaltung bleibt offen. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B7_PRESENTATION.md](B7_PRESENTATION.md).
+Stand: 9. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung, B3c-Duell-Tuning, B4-Schulterstoß/B5-Gegnerrollen, B6-Kapitelablauf und B7-Präsentation. B7 verändert keine Kampfwerte, Kontaktzeiten, Wellen oder Checkpoint-Regeln; Kapitel ergänzt lesbarere Gesichtsfarben/HP-Marker und importierte Kontakt-/Warn-/Schritt-/Signalsounds. Figuren-Rigs bleiben erhalten, Wombat-Gestaltung bleibt offen. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B7_PRESENTATION.md](B7_PRESENTATION.md).
 
 B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. Letztere verbindet den gültigen Humanoid mit denselben Kampfregeln, konkreten Angriffszeiten und retargeteten Faust-/Fußbahnen. Die Tabelle unten beschreibt die erhaltenen B1-Werte; Humanoid-Zeiten stehen in [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md), aktuelle Aktionen und Reaktionen in [B3A_ACTIONS.md](B3A_ACTIONS.md).
 
 ## Spielen
+
+Ab B8 startet `JunkyardChapter` im Startmenü. ESC/P, Gamepad Start oder PAUSE frieren Sitzung, Angriff und Gegner ein; beim Fortsetzen sind vorgemerkte Eingaben bereinigt. Ergebnisanzeige verwendet vorhandenes Checkpoint-Retry. Im separaten Labor bleiben R/Start und die bisherigen Bindings erhalten. Kampfwerte, Kontakte und Wellenfolge sind unverändert. Details: [B8_SESSION.md](B8_SESSION.md).
 
 `UnityProject/Assets/Game/Scenes/HumanoidCombatLab.unity` öffnen, Play drücken und die Game-Ansicht fokussieren. `SparringLab.unity` bleibt B1-Vergleich, `CombatLab.unity` Training ohne Gegenangriffe.
 

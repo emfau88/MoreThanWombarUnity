@@ -1,6 +1,16 @@
 # Test-Slice-Status
 
-Stand: 8. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
+Stand: 9. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
+
+## B8 — Sitzungsoberfläche lokal integriert
+
+Kapitel-Startmenü/Fortsetzen, drei überspringbare Einführungskarten, passende Tastatur-/Gamepad-/Touch-Hinweise, Pause/Fokusverlust, gespeicherte Lautstärke/Kamerablick/Nachführung/Touch/Hinweise und Niederlage-/Sieg-/Replay-Aktionen. Ein ChapterSession-Adapter nutzt vorhandene Kapitel-/Checkpoint-/UI-/Input-Technik; Kampfwerte, Kontakte und Wellenfolge bleiben erhalten. Der bestehende Buildpfad kann zusätzlich das Kapitel nach Builds/B8 ausgeben. Kein neuer Build oder Release. Details: [B8_SESSION.md](B8_SESSION.md).
+
+**2/2 gezielte B8-Sitzungsfälle bestanden (4,89 s):** tatsächlicher Angriff und gehaltene virtuelle Controls während Pause, eingefrorene Spieler-/Gegner-/HP-/Zeitwerte ohne zusätzliche Attack-Instanz nach Resume; Gamepad Start, Optionsspeicherung, Spielertod → Ergebnisbutton → Retry und Zeit-/Audio-Cleanup beim Szenenwechsel. `tools/b8-session-results.json`. Der bestehende FullRoute-Fall besteht zusätzlich (39,87 s), insgesamt 3/3 gezielte Fälle; `tools/b8-chapter-flow-results.json` prüft Sieg/Replay; sein scripted Damage-Pfad wird ausdrücklich vom tatsächlichen Combat getrennt.
+
+Aktuelle Menüs/Einführung/Touch-Pause/Niederlage/Sieg-UI bei 1280×600 angesehen. Tatsächlicher einfacher Light-Bot: Anlieferung gewonnen, Schalter geöffnet, Niederlage im Sortierhof nach 44,2 s. Ergebnisbutton-Retry stellt Bereich 2 mit 42 Einstieg-HP, einem abgeschlossenen Bereich und geöffnetem Tor wieder her. Kein vollständiger Combat-Sieg daraus behauptet. `tools/b8-combat-run.txt`, `tools/b8-visual-review.md`.
+
+B7 ist auf main gepusht; B8 bleibt lokal. Als Nächstes B9: Spielerfeedback/Balance und Umfang, echte Framezeit-/Speicher-/Audio-/Android-Beurteilung und Kapitel-Demo/Veröffentlichung. Die öffentlich verlinkte Touch-Duellfassung und das 10–15-Minuten-Ziel sind weiterhin separat offen.
 
 ## B7 — Kapitel-Präsentation und Audio lokal geliefert
 

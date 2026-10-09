@@ -30,7 +30,7 @@ namespace WombatLab
                 if (chapter != null)
                 {
                     bool touch = player.GetComponent<LabInput>().TouchControls?.Visible == true;
-                    stateText.text = chapter.Hint(touch);
+                    stateText.text = chapter.Hint(touch, chapter.session?.UsingGamepad == true);
                     healthText.text = $"DU   {defense.Health} / {defense.maxHealth}";
                     healthFill.anchorMax = new Vector2(defense.Health / (float)defense.maxHealth, 1);
                     return;

@@ -14,6 +14,7 @@ namespace WombatLab
         public ChapterGate switchGate;
         public Transform switchPosition, checkpointMarker;
         public Renderer switchLamp;
+        public ChapterSession session;
         public ChapterPhase Phase { get; private set; }
         public int AreaIndex { get; private set; }
         public int WaveIndex { get; private set; }
@@ -49,6 +50,7 @@ namespace WombatLab
         void Start() { RestartChapter(); }
         void Update()
         {
+            if (input.GameplayBlocked) return;
             var frame = input.Read();
             if (frame.ChapterRestart) { RestartChapter(); return; }
             if (frame.Restart) { RetryCheckpoint(); return; }
@@ -173,15 +175,15 @@ namespace WombatLab
             cameraRig.Snap(); SaveCheckpoint(ChapterPhase.Arrival, definition.start);
             Physics.SyncTransforms();
         }
-        public string Hint(bool touch)
+        public string Hint(bool touch, bool gamepad = false)
         {
-            string retry = touch ? "CHECKPOINT" : "R: Checkpoint";
+            string retry = touch ? "CHECKPOINT" : gamepad ? "Checkpoint im Menü" : "R: Checkpoint";
             if (!defense.Alive) return "Besiegt · " + retry + " · " + (touch ? "VON VORN" : "BACKSPACE: Von vorn");
             if (Phase == ChapterPhase.Complete) return "Schrotthof geschafft! · " + (touch ? "VON VORN: Nochmal" : "BACKSPACE: Nochmal");
             string prefix = (AreaIndex + 1) + "/3 " + definition.areas[AreaIndex].title + " · ";
             if (Phase == ChapterPhase.Arrival) return prefix + "Zum gelben Kampffeld →";
             if (Phase == ChapterPhase.Travel) return prefix + (AreaIndex == 0 && !GateOpened
-                ? CanInteract ? (touch ? "TOR ÖFFNEN" : "F: Schalter — Tor öffnen") : "Zum gelben Schalter →"
+                ? CanInteract ? (touch ? "TOR ÖFFNEN" : gamepad ? "LB: Schalter — Tor öffnen" : "F: Schalter — Tor öffnen") : "Zum gelben Schalter →"
                 : "Checkpoint gesetzt · Weiter nach rechts →");
             if (Phase == ChapterPhase.BetweenWaves) return prefix + "Nächste Welle ...";
             string warning = encounter.Owner?.State == "TELEGRAPH" ? (encounter.Owner.role.role == EnemyRole.Agile ? "Aus der Spur!" : "Ausweichen / unterbrechen!") : "";

@@ -48,6 +48,7 @@ namespace WombatLab
         }
         void LateUpdate()
         {
+            if (combat != null && combat.GameplayBlocked) return;
             remaining = Mathf.Max(0, remaining - Time.unscaledDeltaTime);
             float fraction = duration > 0 ? remaining / duration : 0;
             flash.enabled = spark.enabled = fraction > 0;

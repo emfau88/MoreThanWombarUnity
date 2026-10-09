@@ -54,6 +54,7 @@ namespace WombatLab
         }
         void Update()
         {
+            if (clock.GameplayBlocked) return;
             float dt = clock.Frozen ? 0 : Time.deltaTime;
             animator.speed = dt > 0 ? State == "ATTACK" && attack.HasAuthoredTiming ? attack.clip.length / attack.Duration : 1 : 0;
             cooldown = Mathf.Max(0, cooldown - dt);
@@ -120,6 +121,7 @@ namespace WombatLab
         }
         void LateUpdate()
         {
+            if (clock.GameplayBlocked) return;
             if (State != "ATTACK" || clock.Frozen) return;
             var state = animator.GetCurrentAnimatorStateInfo(0);
             if (!state.IsName(attack.stateName)) { Interrupt(); return; }

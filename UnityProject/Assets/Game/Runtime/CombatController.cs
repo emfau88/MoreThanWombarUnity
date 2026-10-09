@@ -21,6 +21,8 @@ namespace WombatLab
         public AttackDefinition Attack { get; private set; }
         public bool Attacking => Attack != null;
         public bool Frozen => freezeRemaining > 0;
+        public bool GameplayBlocked => input != null && input.GameplayBlocked;
+        public void ClearBufferedInput() { buffer.Clear(); }
         public bool HitboxOpen { get; private set; }
         public int AttackInstance { get; private set; }
         public float Progress { get; private set; }
@@ -42,6 +44,7 @@ namespace WombatLab
         void Awake() { motor = GetComponent<PlayerMotor>(); input = GetComponent<LabInput>(); defense = GetComponent<PlayerDefense>(); }
         void Update()
         {
+            if (GameplayBlocked) return;
             var frame = input.Read();
             if (frame.Restart) { ResetCombat(); return; }
             if (defense != null && (defense.Evading || defense.Locked)) { buffer.Clear(); return; }
@@ -92,6 +95,7 @@ namespace WombatLab
 
         void LateUpdate()
         {
+            if (GameplayBlocked) return;
             if (!Attacking || Frozen) { HitboxOpen = false; return; }
             var state = motor.animator.GetCurrentAnimatorStateInfo(0);
             if (!state.IsName(Attack.stateName)) { Cancel(); return; }

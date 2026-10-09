@@ -17,6 +17,7 @@ namespace WombatLab.Tests
         {
             SceneManager.LoadScene("JunkyardChapter"); yield return null;
             chapter=Object.FindAnyObjectByType<JunkyardChapter>(); encounter=chapter.encounter; player=encounter.player;
+            if (chapter.session != null) chapter.session.StartRun(false);
             defense=player.GetComponent<PlayerDefense>(); combat=player.GetComponent<CombatController>();
             player.SetTestInput(Vector2.zero); yield return null;
         }
@@ -35,14 +36,14 @@ namespace WombatLab.Tests
         {
             // Progression check uses the real damage/death receiver. Gameplay contact is
             // covered separately by ActualMixedGroup... and the existing duel cases.
+            foreach(var enemy in encounter.enemies) enemy.enabled=false;
             foreach(var enemy in encounter.enemies)
             {
-                enemy.enabled=false;
                 float end=Time.time+8;
                 while(enemy.target.Alive && Time.time<end)
                 {
                     if(!enemy.GetComponent<BodyRecovery>().Protected)enemy.target.ReceiveHit(combat.lights[2],Vector3.zero);
-                    yield return new WaitForSeconds(.18f);
+                    yield return new WaitForSecondsRealtime(.18f); // Final result pauses scaled time.
                 }
                 Assert.That(enemy.target.Alive,Is.False);
             }
@@ -85,7 +86,17 @@ namespace WombatLab.Tests
             }
             Assert.That(chapter.Phase,Is.EqualTo(ChapterPhase.Complete)); Assert.That(encounter.LivingCount,Is.Zero);
             Assert.That(chapter.Hint(false),Does.Contain("geschafft"));
-            chapter.RestartChapter(); yield return null;
+            if (chapter.session != null)
+            {
+                Assert.That(chapter.session.Page,Is.EqualTo(SessionPage.Result));
+                Assert.That(Time.timeScale,Is.Zero);
+                var replay=GameObject.Find("B8 Chapter Session UI").transform.Find("Safe area/Menu overlay/Menu card/Primary").GetComponent<UnityEngine.UI.Button>();
+                Assert.That(replay.GetComponentInChildren<UnityEngine.UI.Text>().text,Is.EqualTo("NOCHMAL SPIELEN"));
+                replay.onClick.Invoke();
+                Assert.That(chapter.session.Page,Is.EqualTo(SessionPage.Playing));
+            }
+            else chapter.RestartChapter();
+            yield return null;
             Assert.That(chapter.Phase,Is.EqualTo(ChapterPhase.Arrival)); Assert.That(chapter.CompletedAreas,Is.Zero);
             Assert.That(chapter.switchGate.Closed,Is.True); Assert.That(defense.Health,Is.EqualTo(100));
             Assert.That(player.transform.position.x,Is.EqualTo(chapter.definition.start.x).Within(.05f));
@@ -101,7 +112,8 @@ namespace WombatLab.Tests
             var abandoned=encounter.enemies[0]; abandoned.target.ReceiveHit(combat.lights[0],Vector3.right);
             Assert.That(defense.ReceiveDamage(1000,Vector3.zero,true),Is.True);
             Assert.That(defense.Alive,Is.False); Assert.That(player.GetComponent<BodyRecovery>().Busy,Is.True);
-            chapter.RetryCheckpoint(); player.SetTestInput(Vector2.zero); yield return null;
+            if (chapter.session != null) chapter.session.Retry(); else chapter.RetryCheckpoint();
+            player.SetTestInput(Vector2.zero); yield return null;
             Assert.That(chapter.CompletedAreas,Is.EqualTo(1)); Assert.That(chapter.AreaIndex,Is.EqualTo(1));
             Assert.That(chapter.WaveIndex,Is.Zero); Assert.That(chapter.GateOpened,Is.True);
             Assert.That(chapter.Phase,Is.EqualTo(ChapterPhase.Fighting)); Assert.That(encounter.Owner,Is.Null);

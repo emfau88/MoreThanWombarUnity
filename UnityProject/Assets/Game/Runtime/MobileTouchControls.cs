@@ -13,7 +13,7 @@ namespace WombatLab
     public sealed class MobileTouchControls : MonoBehaviour
     {
         public bool Visible => controls != null && controls.activeSelf;
-        public bool Running => Visible && Stick.control is Vector2Control axis && axis.ReadValue().magnitude >= .9f;
+        public bool Running => controls != null && controls.activeInHierarchy && Stick.control is Vector2Control axis && axis.ReadValue().magnitude >= .9f;
         public bool BlocksPointerAttacks => Visible || (Mouse.current != null && toggle != null &&
             RectTransformUtility.RectangleContainsScreenPoint(toggle, Mouse.current.position.ReadValue()));
         public OnScreenStick Stick { get; private set; }
@@ -83,12 +83,13 @@ namespace WombatLab
             Action("Charge", "STOSS", "rightTrigger", new Vector2(-325, 66), 92, new Color(.68f, .48f, .22f, .9f));
             chapter = FindAnyObjectByType<JunkyardChapter>();
             var reset = Button("Restart", chapter != null ? "CHECKPOINT" : "NEUSTART", controls.transform, new Vector2(0, 1), new Vector2(85, -24), new Vector2(140, 42), false);
-            reset.gameObject.AddComponent<OnScreenButton>().controlPath = "<Gamepad>/start";
+            if (chapter != null) reset.onClick.AddListener(() => { if (chapter.session != null) chapter.session.Retry(); else chapter.RetryCheckpoint(); });
+            else reset.gameObject.AddComponent<OnScreenButton>().controlPath = "<Gamepad>/start";
             var encounter = FindAnyObjectByType<EngagementCoordinator>();
             if (chapter != null)
             {
                 var restartChapter = Button("Chapter restart", "VON VORN", controls.transform, new Vector2(0,1), new Vector2(255,-24), new Vector2(170,42), false);
-                restartChapter.gameObject.AddComponent<OnScreenButton>().controlPath = "<Gamepad>/select";
+                restartChapter.onClick.AddListener(() => { if (chapter.session != null) chapter.session.StartRun(false); else chapter.RestartChapter(); });
                 interactButton = Button("Interact", "TOR ÖFFNEN", controls.transform, new Vector2(.5f,0), new Vector2(0,64), new Vector2(190,52), false);
                 interactButton.onClick.AddListener(() => chapter.TryInteract());
             }
@@ -170,6 +171,8 @@ namespace WombatLab
         }
         // Disabling the official controls releases/removes their virtual device, including held pointers.
         public void ReleasePointers() { if (Visible) { controls.SetActive(false); controls.SetActive(true); } }
+        public void SetGameplayEnabled(bool enabled)
+        { ReleasePointers(); if (canvasObject != null) canvasObject.SetActive(enabled); }
         void OnApplicationFocus(bool focused) { if (!focused) ReleasePointers(); }
         void OnApplicationPause(bool paused) { if (paused) ReleasePointers(); }
         void OnDisable() { if (controls != null) SetVisible(false); }

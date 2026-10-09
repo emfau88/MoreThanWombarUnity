@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "duration": 4.89,
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "WombatLab.Tests.ChapterSessionPlayTests.DefeatRetryOptionsAndGamepadPauseUseSameSession",
+      "Status": "Passed",
+      "Duration": 2.3284533,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "WombatLab.Tests.ChapterSessionPlayTests.MenuPauseFreezesRealAttackAndReleasesHeldTouch",
+      "Status": "Passed",
+      "Duration": 2.5220231,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

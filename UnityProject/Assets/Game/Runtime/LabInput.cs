@@ -16,6 +16,10 @@ namespace WombatLab
         InputActionMap map;
         InputAction move, jump, restart, debug, lightAction, heavyAction, evade, kick, run, charge, interact, chapterRestart;
         public MobileTouchControls TouchControls { get; set; }
+        public ChapterSession Session { get; set; }
+        public bool GameplayBlocked => Session != null && Session.Blocked;
+        bool awaitRelease;
+        public void ClearForMenu() { awaitRelease = true; TouchControls?.ReleasePointers(); }
 
         void Awake()
         {
@@ -56,18 +60,28 @@ namespace WombatLab
         void OnDestroy() { map?.Dispose(); }
         public InputFrame Read()
         {
+            if (GameplayBlocked) return new InputFrame(Vector2.zero);
+            if (awaitRelease)
+            {
+                bool held = move.ReadValue<Vector2>().sqrMagnitude > .01f || jump.IsPressed() || restart.IsPressed()
+                    || lightAction.IsPressed() || heavyAction.IsPressed() || evade.IsPressed() || kick.IsPressed()
+                    || run.IsPressed() || charge.IsPressed() || interact.IsPressed() || chapterRestart.IsPressed()
+                    || Mouse.current?.leftButton.isPressed == true || Mouse.current?.rightButton.isPressed == true;
+                if (!held) awaitRelease = false;
+                return new InputFrame(Vector2.zero);
+            }
             // A UI touch can also arrive as a mouse click in WebGL. Only gameplay pointer
             // clicks may attack; keyboard and physical/virtual gamepad bindings stay active.
             bool pointerAllowed = (TouchControls == null || !TouchControls.BlocksPointerAttacks)
                 && (Touchscreen.current == null || !Touchscreen.current.primaryTouch.press.isPressed);
             var mouse = Mouse.current;
             return new InputFrame(move.ReadValue<Vector2>(), jump.WasPressedThisFrame(),
-                restart.WasPressedThisFrame(), debug.WasPressedThisFrame(),
+                Session == null && restart.WasPressedThisFrame(), debug.WasPressedThisFrame(),
                 lightAction.WasPressedThisFrame() || (pointerAllowed && mouse != null && mouse.leftButton.wasPressedThisFrame),
                 heavyAction.WasPressedThisFrame() || (pointerAllowed && mouse != null && mouse.rightButton.wasPressedThisFrame),
                 evade.WasPressedThisFrame(), kick.WasPressedThisFrame(),
                 run.IsPressed() || (TouchControls != null && TouchControls.Running), charge.WasPressedThisFrame(),
-                interact.WasPressedThisFrame(), chapterRestart.WasPressedThisFrame());
+                interact.WasPressedThisFrame(), Session == null && chapterRestart.WasPressedThisFrame());
         }
     }
 }

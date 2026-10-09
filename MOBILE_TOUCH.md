@@ -1,6 +1,6 @@
 # Mobile Touch — Duell-Steuerung
 
-Stand: 8. Oktober 2026. Die veröffentlichte Touch-Fassung stammt vom 5. Oktober; B4 ergänzt lokal STOSS über dieselbe Eingabepipeline; B5 ergänzt die Gegnerzahlwahl; B6 ergänzt Kapitel-Retry und Torinteraktion. B7 ergänzt lokale Welt-/Kamera-/Audio-Präsentation; Touch-Bindings bleiben unverändert.
+Stand: 9. Oktober 2026. Die veröffentlichte Touch-Fassung stammt vom 5. Oktober; B4 ergänzt lokal STOSS über dieselbe Eingabepipeline; B5 ergänzt die Gegnerzahlwahl; B6 ergänzt Kapitel-Retry und Torinteraktion. B7 ergänzt lokale Welt-/Kamera-/Audio-Präsentation; Touch-Bindings bleiben unverändert.
 
 ## Bedienung
 
@@ -20,6 +20,8 @@ In `JunkyardChapter` ersetzt **CHECKPOINT** das Lab-NEUSTART und **VON VORN** di
 B7: Touch-HUD in einer gestellten finalen Presswerk-Ansicht bei 1280×600 kontrolliert, Kamera-/Canvas-Aufnahme-Einstellungen danach wiederhergestellt. Vorhandener tatsächlicher Mischkampf-/Touch-Tor-Fall besteht erneut. Kein physischer Android-Spieltest; der öffentliche Link benötigt weiterhin einen neuen Build. Details: [B7_PRESENTATION.md](B7_PRESENTATION.md).
 
 ## Integration
+
+B8 ergänzt lokal PAUSE und die gemeinsame Start-/Einführungs-/Options-/Ergebnisoberfläche. Während Menüs sind Gameplay-Controls ausgeblendet und virtuelle gehaltene Eingaben freigegeben; Fortsetzen wartet zusätzlich auf neutralen Gameplay-Input. CHECKPOINT/VON VORN rufen im Kapitel vorhandene Session-/Checkpoint-Aktionen auf; der Duell-Neustart bleibt erhalten. Zwei gezielte Sitzungsfälle bestehen, darunter Pause mit gehaltenem Touch-Stick/Combo. Einführung und Pause im Touch-Layout angesehen; weiterhin kein physischer Android-Nachweis und keine neue öffentliche Fassung. Details: [B8_SESSION.md](B8_SESSION.md).
 
 `MobileTouchControls` im gespeicherten HumanoidCombatLab erstellt einen kleinen Canvas mit Unitys vorhandenen `OnScreenStick`/`OnScreenButton`, `GraphicRaycaster`, `EventSystem` und `InputSystemUIInputModule`. Alle Aktionsbuttons speisen bereits vorhandene Gamepad-Bindings. Keine zweite Phasen-/Schadenslogik. LabInput führt nur die Pointer-Sperre und den äußeren Stickbereich als Rennen hinzu. Fokusverlust, Pause und Ausblenden geben virtuelle Eingaben frei.
 
