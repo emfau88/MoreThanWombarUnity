@@ -7,6 +7,7 @@ namespace WombatLab
         public Renderer flash;
         public LineRenderer spark, debugSphere;
         public CombatController combat;
+        public AudioClip lightContact, heavyContact;
         AudioSource audioSource;
         AudioClip lightSound, heavySound;
         float remaining, duration, strength;
@@ -17,8 +18,8 @@ namespace WombatLab
             properties = new MaterialPropertyBlock();
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.playOnAwake = false; audioSource.spatialBlend = 0; audioSource.volume = .22f;
-            lightSound = Tone("Original synthesized light contact", .08f, 175);
-            heavySound = Tone("Original synthesized heavy contact", .14f, 90);
+            lightSound = lightContact != null ? lightContact : Tone("Original synthesized light contact", .08f, 175);
+            heavySound = heavyContact != null ? heavyContact : Tone("Original synthesized heavy contact", .14f, 90);
             Clear();
         }
         static AudioClip Tone(string name, float seconds, float frequency)
@@ -66,6 +67,6 @@ namespace WombatLab
         }
         public void Clear()
         { remaining = 0; if (flash != null) flash.enabled = false; if (spark != null) spark.enabled = false; if (debugSphere != null) debugSphere.enabled = false; audioSource?.Stop(); }
-        void OnDestroy() { if (lightSound != null) Destroy(lightSound); if (heavySound != null) Destroy(heavySound); }
+        void OnDestroy() { if (lightContact == null && lightSound != null) Destroy(lightSound); if (heavyContact == null && heavySound != null) Destroy(heavySound); }
     }
 }

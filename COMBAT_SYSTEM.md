@@ -1,6 +1,6 @@
-# Combat und Sparring — aktueller B6-Stand
+# Combat und Sparring — aktueller B7-Stand
 
-Stand: 7. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung, B3c-Duell-Tuning und B4-Schulterstoß/B5-Gegnerrollen und B6-Kapitelablauf. Grundform-Figuren und temporärer Human bleiben Platzhalter. Wombat-Gestaltung bleibt eine spätere Entscheidung. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B4_SHOULDER_CHARGE.md](B4_SHOULDER_CHARGE.md).
+Stand: 8. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung, B3c-Duell-Tuning, B4-Schulterstoß/B5-Gegnerrollen, B6-Kapitelablauf und B7-Präsentation. B7 verändert keine Kampfwerte, Kontaktzeiten, Wellen oder Checkpoint-Regeln; Kapitel ergänzt lesbarere Gesichtsfarben/HP-Marker und importierte Kontakt-/Warn-/Schritt-/Signalsounds. Figuren-Rigs bleiben erhalten, Wombat-Gestaltung bleibt offen. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B7_PRESENTATION.md](B7_PRESENTATION.md).
 
 B2-Schritte 1–3 liefern zusätzlich CharacterImportLab und HumanoidCombatLab. Letztere verbindet den gültigen Humanoid mit denselben Kampfregeln, konkreten Angriffszeiten und retargeteten Faust-/Fußbahnen. Die Tabelle unten beschreibt die erhaltenen B1-Werte; Humanoid-Zeiten stehen in [B2_COMBAT_INTEGRATION.md](B2_COMBAT_INTEGRATION.md), aktuelle Aktionen und Reaktionen in [B3A_ACTIONS.md](B3A_ACTIONS.md).
 

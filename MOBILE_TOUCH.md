@@ -1,6 +1,6 @@
 # Mobile Touch — Duell-Steuerung
 
-Stand: 7. Oktober 2026. Die veröffentlichte Touch-Fassung stammt vom 5. Oktober; B4 ergänzt lokal STOSS über dieselbe Eingabepipeline; B5 ergänzt die Gegnerzahlwahl; B6 ergänzt Kapitel-Retry und Torinteraktion.
+Stand: 8. Oktober 2026. Die veröffentlichte Touch-Fassung stammt vom 5. Oktober; B4 ergänzt lokal STOSS über dieselbe Eingabepipeline; B5 ergänzt die Gegnerzahlwahl; B6 ergänzt Kapitel-Retry und Torinteraktion. B7 ergänzt lokale Welt-/Kamera-/Audio-Präsentation; Touch-Bindings bleiben unverändert.
 
 ## Bedienung
 
@@ -16,6 +16,8 @@ Stand: 7. Oktober 2026. Die veröffentlichte Touch-Fassung stammt vom 5. Oktober
 ## B6-Kapitel lokal
 
 In `JunkyardChapter` ersetzt **CHECKPOINT** das Lab-NEUSTART und **VON VORN** die Gegnerwahl. Der kontextabhängige Button **TOR ÖFFNEN** erscheint nach Bereich 1 nahe dem Schalter. Die Kampfbuttons und ihre bestehenden Bindings bleiben unverändert. Die alte öffentliche Touch-Fassung benötigt einen neuen Kapitel-Build, bevor diese Bedienung online verfügbar ist.
+
+B7: Touch-HUD in einer gestellten finalen Presswerk-Ansicht bei 1280×600 kontrolliert, Kamera-/Canvas-Aufnahme-Einstellungen danach wiederhergestellt. Vorhandener tatsächlicher Mischkampf-/Touch-Tor-Fall besteht erneut. Kein physischer Android-Spieltest; der öffentliche Link benötigt weiterhin einen neuen Build. Details: [B7_PRESENTATION.md](B7_PRESENTATION.md).
 
 ## Integration
 

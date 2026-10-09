@@ -19,16 +19,17 @@ namespace WombatLab.Editor
         static float nextTap;
         static int capturedArea=-1, capturedWave=-1;
         static bool capturedGate;
+        static string prefix;
         static readonly StringBuilder report=new StringBuilder();
-        public static string Start()
+        public static string Start(string capturePrefix = "b6")
         {
             if(!EditorApplication.isPlaying)throw new InvalidOperationException("Start JunkyardChapter Play first.");
-            Cancel(); chapter=Object.FindAnyObjectByType<JunkyardChapter>();player=chapter.encounter.player;
+            Cancel(); prefix=capturePrefix; chapter=Object.FindAnyObjectByType<JunkyardChapter>();player=chapter.encounter.player;
             combat=player.GetComponent<CombatController>();defense=player.GetComponent<PlayerDefense>();
             chapter.RestartChapter(); player.SetTestInput(Vector2.zero); started=EditorApplication.timeSinceStartup;
             nextTap=0;capturedArea=capturedWave=-1;capturedGate=false;report.Clear();
             report.AppendLine("Actual chapter run: standard input injection, unchanged HP/damage/AI, no direct damage or teleports.");
-            LabVisualReview.Capture("b6-arrival");EditorApplication.update+=Tick;return "Actual nine-wave chapter run started.";
+            LabVisualReview.Capture(prefix+"-arrival");EditorApplication.update+=Tick;return "Actual nine-wave chapter run started.";
         }
         static void Tick()
         {
@@ -44,7 +45,7 @@ namespace WombatLab.Editor
                         if(chapter.CanInteract)
                         {
                             player.SetTestInput(Vector2.zero);
-                            if(!capturedGate){LabVisualReview.Capture("b6-switch");capturedGate=true;}
+                            if(!capturedGate){LabVisualReview.Capture(prefix+"-switch");capturedGate=true;}
                             chapter.TryInteract();report.AppendLine("Gate opened via nearby interaction; HP="+defense.Health);
                         }
                         else
@@ -61,7 +62,7 @@ namespace WombatLab.Editor
                 {
                     capturedArea=chapter.AreaIndex;capturedWave=chapter.WaveIndex;
                     report.AppendLine("Area="+capturedArea+" wave="+capturedWave+" HP="+defense.Health+" position="+player.transform.position);
-                    LabVisualReview.Capture("b6-area-"+(capturedArea+1)+"-wave-"+(capturedWave+1));
+                    LabVisualReview.Capture(prefix+"-area-"+(capturedArea+1)+"-wave-"+(capturedWave+1));
                 }
                 var enemies=chapter.encounter.enemies;
                 var target=enemies.Where(e=>e.target.Alive && !e.GetComponent<BodyRecovery>().Protected)
@@ -78,8 +79,8 @@ namespace WombatLab.Editor
         {
             report.AppendLine("End="+chapter.Phase+" completed="+chapter.CompletedAreas+" HP="+defense.Health
                 +" elapsed="+(EditorApplication.timeSinceStartup-started).ToString("F1"));
-            LabVisualReview.Capture(defense.Alive ? "b6-run-end" : "b6-run-defeat");
-            File.WriteAllText(Path.Combine(Application.dataPath,"QA/b6-run-report.txt"),report.ToString());
+            LabVisualReview.Capture(defense.Alive ? prefix+"-run-end" : prefix+"-run-defeat");
+            File.WriteAllText(Path.Combine(Application.dataPath,"QA/"+prefix+"-run-report.txt"),report.ToString());
             player.ReleaseTestInput(); EditorApplication.update-=Tick;EditorApplication.isPaused=true;
         }
         public static void Cancel()

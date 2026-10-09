@@ -15,7 +15,7 @@ B3c stimmt KI-Abstand, Aufstehschutz und Feedback ab und ergänzt ein deutsches 
 Eigenständige Windows-/WebGL-Spielstände sind vorhanden; der Browserkampf wurde bis zum Sieg gespielt.
 
 B4 ergänzt lokal einen kurzen Schulterstoß auf E/RT/Touch STOSS und mehr Kick-Abstand.
-B5 ergänzt lokal Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. Nächster Bulk: B7 für Präsentation/Audio. Der Play-Link enthält vorerst die vorige Touch-Fassung.
+B5 ergänzt lokal Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. B7 ergänzt lokal unterschiedliche Bereichsgestaltung, gemalten Boden, Material-/Licht-/Kamerapass, warme Bärengesichter, kompakte HP-/Boden-/Tor-Marker und zwölf CC0-Audiosignale. Nächster Bulk: B8 für Menü, Pause, Einführung und Optionen. Der Play-Link enthält vorerst die vorige Touch-Fassung.
 
 ## Prototyp spielen
 
@@ -37,6 +37,8 @@ WebGL-Build aus einem GitHub-Release; Anleitung: [Mobile Touch und Veröffentlic
 klicken, damit sie die Tastatureingaben erhält.
 
 **Kapitel lokal spielen:** Statt der Lab-Szene `Assets/Game/Scenes/JunkyardChapter.unity` öffnen. Nach rechts spielen; F/Gamepad LB/Touch TOR ÖFFNEN bedient den nahen Schalter nach Bereich 1. R/Start/Touch CHECKPOINT wiederholt den Abschnitt; Backspace/Select/Touch VON VORN startet das Kapitel neu. [B6: Ablauf und Checkpoints](B6_JUNKYARD_CHAPTER.md).
+
+Die gespeicherte Kapitel-Szene enthält auch B7. [B7: Gestaltung, Audio und Nachweise](B7_PRESENTATION.md). Bestehendes Modell/Rig des Menschen und der Bären erhalten; endgültiger Wombat-Stil und längeres Kapitel bleiben offen.
 
 - WASD oder Pfeiltasten: auf der X/Z-Bodenfläche bewegen.
 - Ctrl / linker Gamepad-Trigger gehalten: Rennen am Boden. Loslassen: Gehen.
@@ -93,12 +95,12 @@ Grundformen. Beide bleiben Platzhalter für die endgültige Cartoon-Gestaltung.
 Gestaltungsziel ist der illustrative Cartoon-/Comic-Stil der 2D-Referenz:
 runde kräftige Formen, expressive Gesichter und gemalte Materialdetails.
 Passende fertige Rigs, Animationen und Props werden zuerst geprüft. Der
-begonnene eigene Blender-/Rig-Pfad ist zurückgestellt. Der nächste Ausbau
-konzentriert sich auf ein vollständiges Duell mit einem Spieler und einem
-Gegner; WebGL-Verträglichkeit wird an diesem kleinen Slice geprüft.
+begonnene eigene Blender-/Rig-Pfad ist zurückgestellt. Das lokale Junkyard-Kapitel
+erweitert das überprüfte Duell um drei Bereiche und mehrere Gegnerrollen.
+Der nächste Ausbau ergänzt den Ablauf vom Startmenü bis zum Kapitelabschluss.
 
 Werkzeuganbindung, Bewegung und Combat-Polish sind umgesetzt; Nutzerfeedback
-dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt lokal Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. B6 ergänzt das lokal durchspielbare Junkyard-Kapitel. Nächster Entwicklungsbulk ist B7 mit Welt-/Kamerapräsentation und Audio; Wombat-Gestaltung bleibt separat offen.
+dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. B6 ergänzt das durchspielbare Junkyard-Kapitel. B7 liefert lokal Welt-/Kamerapräsentation und Audio. Nächster Entwicklungsbulk ist B8 mit Startmenü, Pause, kurzem Intro und Optionen; Wombat-Gestaltung bleibt separat offen.
 Keine Cloud-Dienste, kein Multiplayer, keine Asset-Käufe und keine Änderungen
 am Browsergame als implizite Arbeitsschritte.
 

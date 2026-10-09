@@ -1,6 +1,16 @@
 # Test-Slice-Status
 
-Stand: 7. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
+Stand: 8. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
+
+## B7 — Kapitel-Präsentation und Audio lokal geliefert
+
+Anlieferung, Regal-Sortierhof und zentrales Presswerk besitzen unterschiedliche Silhouetten auf bestehenden M1-/Kenney-Modellen. Eigener gemalter Boden, lokale Material-/Licht-/URP-Volume-Ableitungen, tiefere Lagerhallenstaffelung, höhere Kamera und kürzere vordere Torpfosten. Bärengrundformen erhalten warme getrennte Körper-/Bauch-/Schnauzen-/Augen-/Pupillenfarben; Handschuhe erhalten die Rollenfarben. Spieler-Bodenring, kompakte Gegner-HP/Labels und orange/grüne Torlampen. Presse bewegt sich dekorativ. Zwölf CC0-Kenney-Clips ergänzen Kontakt, Schritte, Rollenwarnung, Fallen, Welle, Bereich, Tor und Abschluss. Modelle/Rigs und Kampfwerte/-kontakte/-wellen/-checkpoints bleiben erhalten. Details: [B7_PRESENTATION.md](B7_PRESENTATION.md).
+
+**2/2 gezielte bestehende PlayMode-Fälle bestanden:** tatsächlicher Standard-/Agile-Kontaktkampf im zweiten Bereich samt Touch-Torbedienung (28,36 s), Checkpoint-Retry nach Tod mit HP/Fortschritt/Tor/frischer Gruppe (14,80 s). `tools/b7-contact-regression-results.json`, `tools/b7-checkpoint-regression-results.json`. Ein tatsächlicher vollständiger Motor-/Combo-Durchlauf gewinnt alle neun Wellen mit 90 HP in 94,8 s, ohne Teleports oder direkte Schadensaufrufe; `tools/b7-first-combat-run.txt`. Die abschließenden Boden-/Hintergrund-/Bärenmaterialänderungen sind rein visuell. Keine neue Testsuite für Farben oder Dekoration.
+
+Vorher/erster Pass/finale Kameraansichten aller Bereiche und Touch bei 1280×600 angesehen. Finale Ansichten sind gestellte Layoutbilder, kein zusätzlicher Combat-Sieg; Aufnahmeeinstellungen nur vorübergehend. Kurzer tatsächlicher Stereo-Audioausgabeausschnitt: 0,512 s, Peak 0,516, RMS 0,0853, null geclippte Samples. Keine durchgehende 12-s- oder hörbare Qualitätsabnahme daraus behaupten. Details und Grenzen: `tools/b7-visual-review.md`, `tools/b7-audio-output.txt`. Lokale Bilder/WAV unter `Assets/QA/b7-*`. Keine neue Build-, Geräte- oder Performanceabnahme.
+
+Finale Übergabe: gespeicherte JunkyardChapter frisch geladen, Play/Compile/Dirty false, scriptCompilationFailed false; null fehlende Materialien, null Collider in B7-Dressing, sieben Torlampen, drei Rollen-Presentation-Templates, zwölf Audio-Originale, Schaltertor geschlossen. Audioaufzeichnung/temporäre Eingaben beendet. Labor und Gameplay-Daten unverändert. Roadmap/Arbeitsplan auf **B8: vollständige Spielsitzung** aktualisiert; Wombat/finale hochwertige Modelle, hörbare Audioabnahme und 10–15-Minuten-Umfang weiterhin offen. B7 noch lokal, öffentlicher Play-Link bleibt auf der alten Touch-Fassung; kein Commit/Push in diesem Auftrag.
 
 ## B6 — zusammenhängendes Kurzkapitel lokal geliefert
 

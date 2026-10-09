@@ -1,6 +1,14 @@
 # Externe Assets — Herkunft und Lizenznachweise
 
-Stand: 4. Oktober 2026. Dieses Register betrifft zusätzlich importierte Modelle, Rigs, Animationen, Props, Texturen, Audio und VFX. Unity-/Paketabhängigkeiten stehen separat in `UnityProject/Packages/manifest.json` und behalten ihre jeweiligen Bedingungen.
+Stand: 8. Oktober 2026. Dieses Register betrifft zusätzlich importierte Modelle, Rigs, Animationen, Props, Texturen, Audio und VFX. Unity-/Paketabhängigkeiten stehen separat in `UnityProject/Packages/manifest.json` und behalten ihre jeweiligen Bedingungen.
+
+## B7 — ausgewählte Kenney-Audio-Grundlagen
+
+- **Kenney Impact Sounds 1.0:** [offizielle Produktseite](https://kenney.nl/assets/impact-sounds), CC0. Acht unveränderte Original-OGG unter `Assets/ThirdParty/Kenney/ImpactSounds/`: drei Beton-Schritte, mittlerer/schwerer Punch, mittleres Metall, schwere Platte und Glocke. Enthaltene `License.txt` erhalten; kommerzielle Nutzung und Weitergabe erlaubt. Archiv-SHA256 `029D734AF1582474EDF3A694D1B0CEBC97C1C152F2F39FA34D4C2BAFC5DE77F8`.
+- **Kenney Interface Sounds 1.0:** [offizielle Produktseite](https://kenney.nl/assets/interface-sounds), CC0. Vier unveränderte Original-OGG unter `Assets/ThirdParty/Kenney/InterfaceSounds/`: question_001, select_001, confirmation_002 und switch_001. Enthaltene `License.txt` erhalten. Archiv-SHA256 `F2193D072726D6758A5F7871B2DCC54DCCE0D5C35C6F0A62F92549B327C81232`.
+- Bezug/Lizenzprüfung am 8. Oktober 2026. Vollarchive nur lokal unter ignoriertem `art-source/third-party/b7/`; lediglich die zwölf verwendeten Clips und Lizenzen sind im Unity-Projekt. Unity-Import: mono, 22.050 Hz, ADPCM, DecompressOnLoad und Preload. Originale unverändert; Lautstärke/Pitch-Anpassung in den B7-Komponenten. Keine Käufe oder neuen Dienste.
+- Car-/Racing-Modelle bleiben dieselben M1-Quellen. B7 verwendet zusätzliche Instanzen dieser bestehenden Meshes sowie eigene Material-, Licht- und Volume-Ableitungen unter `Assets/Game/Environment/JunkyardChapter/`.
+- Die neue `Textures/ConcretePainted.png` ist ein per eingebautem ImageGen-Tool erzeugtes eigenes Projektasset. Herkunft, finaler Prompt und Importangaben: [SOURCE.md](UnityProject/Assets/Game/Environment/JunkyardChapter/Textures/SOURCE.md). Das frühere Poly-Haven-Original bleibt für M1/Labor erhalten; B7-Kapitelboden verwendet diese neue illustrative Farbtextur ohne fotografische Normalmap.
 
 ## M1 — kleine Junkyard-Umgebung
 

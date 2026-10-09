@@ -1,6 +1,6 @@
 # Konkreter Arbeitsplan — Junkyard-Kapitel und Präsentation
 
-Stand: 7. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Bereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss; nächster Entwicklungsbulk ist B7.
+Stand: 8. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Bereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss; B7 ergänzt lokal Bereichsgestaltung, gemalten Boden, warme Bärengesichter, Kamera/Marker und Audio; nächster Entwicklungsbulk ist B8.
 
 ## M1 — Testmap aufgewertet
 
@@ -54,7 +54,7 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 
 **Effekt:** Aus der Testarena ist erstmals eine eigene zusammenhängende Kapitel-Szene entstanden: neun Wellen/23 Gegner auf drei Bereichen, ein Schaltertor, Checkpoint-Retry und Vorarbeiter-Finale. Ablauf und Übergabe sind lokal integriert/geprüft; das vollständige automatische Combat-Spiel gewann in 101,7 s mit 58 HP. Details: [B6_JUNKYARD_CHAPTER.md](B6_JUNKYARD_CHAPTER.md). Damit zunächst ein Kurzkapitel. Das 10–15-Minuten-Ziel ist offen und braucht anhand von Spielerfeedback zusätzliche abwechslungsreiche Situationen, keine reine HP-Verlängerung. B4–B6 benötigen für den öffentlichen Play-Link einen neuen Build-/Veröffentlichungsschritt.
 
-## Als Nächstes: B7 — Präsentation gezielt ausarbeiten
+## B7 — Präsentation lokal geliefert
 
 1. **Kapitel spielen und konkrete Engstellen wählen:** Lesbarkeit der Gruppen, Kamera an Toren/Übergängen, störende Verdeckungen und gleichförmige Abschnitte am vorhandenen Kapitel beurteilen. Daten/Platzierung gezielt verbessern; keine neue KI-/Levelarchitektur.
 2. **Welt angleichen:** Vorhandene Props/Materialien zu konsistenter Schrotthof-Präsentation ausarbeiten. Bereichssilhouetten, gemalte Rost-/Schmutzdetails, warme Lichtinseln und Bodenkontakt verbessern. Bei einer konkreten Asset-Lücke eine kleine geeignete Auswahl statt breitem Neuimport.
@@ -62,7 +62,17 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 4. **Figurenentscheidung separat halten:** Mensch-gegen-Bären bleibt spielbare Basis. Wombat-/Cartoon-Look gezielt aus geeigneten Rigs/Modellen ableiten, sobald die konkrete Gestaltung entschieden ist.
 5. **Kurze Übergabe:** Eine dichte Spielsequenz mit Audio und Kamera beurteilen; konkrete Performanceprobleme messen. Der nächste Release kann dann erstmals B4–B6 außerhalb des Editors liefern. Menüs/Einführung/Pause folgen B8.
 
-**Effekt:** Das durchspielbare Kapitel erhält eine zusammenhängende visuelle/akustische Richtung. B7 ist noch nicht begonnen.
+**Effekt:** Das Kurzkapitel besitzt unterschiedliche Bereichssilhouetten und eine erste zusammenhängende illustrative Bild-/Audiofassung. B7 ist lokal integriert; Details und zwei gezielte Prüfergebnisse: [B7_PRESENTATION.md](B7_PRESENTATION.md). Finale Figuren-/Modelle, hörbare Audioabnahme, Geräte-/Performanceprofil und längerer abwechslungsreicher Umfang bleiben offen.
+
+## Als Nächstes: B8 — vollständige Spielsitzung
+
+1. **Start und Ergebnis:** Kleines Startmenü mit Spielen/Steuerung/Optionen; nach Sieg oder Niederlage klare Checkpoint-/Von-vorn-Aktionen. Die bestehende Kapitel-Szene und ihre Zustände verwenden.
+2. **Pause sauber integrieren:** Tastatur, Gamepad und Touch; Spielzeit/Kampf einfrieren, Menüs weiter bedienen und beim Fortsetzen Eingabepuffer/virtuelle gehaltene Controls bereinigen.
+3. **Kurze Einführung:** Wenige überspringbare Hinweise für Bewegung, Combo, Ausweichen und Schalter; Hinweise passend zur aktiven Tastatur-/Gamepad-/Touch-Bedienung.
+4. **HUD und Optionen:** Bereich/Welle/HP kompakt halten, Lautstärke und Bildschirm-/Kameradarstellung einstellen und speichern. Bestehendes Input System und Unity-UI verwenden.
+5. **Sitzungsnachweis:** Start → Kampf → Pause/Fortsetzen → Niederlage/Checkpoint → Abschluss durchspielen. Ein neuer Build muss die Kapitel-/Menü-Einstiegsszene verwenden; der bisherige Duell-Buildpfad startet noch das Labor. Veröffentlichungsworkflow weiterverwenden.
+
+**Effekt:** Die vorhandenen Kämpfe und Checkpoints bilden eine selbst erklärende Spielsitzung. B8 ist noch nicht begonnen. B9 stimmt danach Balance, Umfang und tatsächliche Performance ab und liefert die Demo. Das 10–15-Minuten-Ziel braucht weiterhin zusätzliche abwechslungsreiche Situationen statt bloß mehr HP.
 
 ## 1. Bestand und Entscheidung
 

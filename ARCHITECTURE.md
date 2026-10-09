@@ -1,6 +1,6 @@
-# Architektur — implementierter B6-Stand
+# Architektur — implementierter B7-Stand
 
-Stand: 7. Oktober 2026. S1–S3, B1-Polish, B2-Humanoid-Integration, B3a-Aktionen/Reaktionen und B3b-Knockdown/GetUp/Tod, B3c-Duell, Mobile Touch, B4-Schulterstoß, B5-Gegnerrollen und B6-Junkyard-Kapitel sind implementiert. Humanoid und Robot-Gegner bleiben Platzhalter für den späteren Wombat-/Cartoon-Look. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
+Stand: 8. Oktober 2026. S1–S3, B1-Polish, B2-Humanoid-Integration, B3a-Aktionen/Reaktionen und B3b-Knockdown/GetUp/Tod, B3c-Duell, Mobile Touch, B4-Schulterstoß, B5-Gegnerrollen, B6-Junkyard-Kapitel und B7-Präsentation sind implementiert. Humanoid und Grundform-Bären bleiben die technische Figurenbasis; B7 trennt ihre Gesichts-/Körperfarben. Wombat und finale Modelle bleiben offen. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
 
 B2-Schritte 1/2 ergänzen CharacterImportLab mit regulärem Quaternius-Humanoid und vorhandenem PlayerMotor/LabInput. Schritt 3 ergänzt separat HumanoidCombatLab mit CombatController/Defense, bestehenden Robot-Gegnern und Feedback. HumanoidCombatBuilder erzeugt eigene AttackDefinitions, retimte Clips und je 161 Avatar-Kontaktpunkte im lokalen Facing-Raum; CombatController interpoliert sie ohne SampleAnimation auf dem sichtbaren Humanoid. AttackDefinition enthält gewünschte Phasendauern sowie Avatar-/Clipreferenz für die konkrete Bahn. Animator-Zeit bleibt die einzige laufende Phase; B1-Transformclips behalten ihren alten SampleAnimation-Pfad. Root Motion bleibt aus. Die ursprünglichen Combat-Szenen sind erhalten. Details in B2_COMBAT_INTEGRATION.md.
 
@@ -20,8 +20,11 @@ B2-Schritte 1/2 ergänzen CharacterImportLab mit regulärem Quaternius-Humanoid 
 | EngagementCoordinator | Eine rotierende Angriffsfreigabe für bis zu vier Gegner, Kamera-/Aufstehschutz, Wartepositionen, Körperkapsel-Bewegung und Encounter-Reset |
 | CombatFeedback / LabHud / ArenaCamera | Kontakt-Audio/VFX, Kapitel-/HP-/Phasenanzeige; im Kapitel scrollende Wege und rahmende Kampfkamera |
 | JunkyardChapter / ChapterDefinition / ChapterGate | Kleiner Ablauf für drei Bereiche/Wellen, sichtbare Tor-Interaktion, Checkpoint mit HP/Position und Neustart; vorhandene Combat-Komponenten weiterverwendet |
+| ChapterPresentation / EnemyPresentation | Beobachten Kapitel-/Motor-/KI-/Körperzustände für Schritt-/Signal-/Warnklänge, Torlampen, Presse, Bodenring, HP-Balken und Namenssichtbarkeit; keine neue Kampfzustandsmaschine |
 
 Animationsbrücke und Spieler-Trefferauflösung sind in CombatController integriert. Es gibt keine eigenständigen Klassen namens AnimationBridge oder HitResolver. Weitere Trennung erfolgt erst bei echtem Bedarf.
+
+B7 wird durch `ChapterPresentationBuilder` auf die gespeicherte Kapitel-Szene angewendet. Lokale Material-/Volume-Ableitungen und gemalter Boden unter `Environment/JunkyardChapter`; M1-Originale und Labor bleiben erhalten. Standard-URP-Lit/Particles-Unlit und ColorAdjustments/ACES/kleiner Bloom, keine eigene Renderpipeline. Optionale Kontaktclips in CombatFeedback erhalten den synthetischen Fallback. Die zwölf ausgewählten Kenney-Originale liegen mit CC0-Lizenzen unter ThirdParty. Details: [B7_PRESENTATION.md](B7_PRESENTATION.md).
 
 B4 ergänzt genau eine AttackDefinition mit chargeDistance. ShoulderChargeBuilder leitet den vorhandenen Sprint ab und benutzt den bestehenden Avatar-Bake mit RightUpperArm als Schulterkontakt. CombatController verteilt den begrenzten Weg auf kurze räumliche Schritte innerhalb Active; PlayerMotor meldet Wand-/Körperkollision oder Arenaclamp zurück. Erster gültiger Kontakt stoppt den Weg, vollständige Recovery bleibt. Keine zusätzliche Root Motion, Phasenuhr oder Schadensauflösung. PlayerDefense lässt den committed Stoß nicht ausweichen, Gegentreffer unterbrechen ihn regulär. MobileTouchControls speist E/RT/Charge über vorhandene OnScreenButton/Gamepad-Bindings.
 

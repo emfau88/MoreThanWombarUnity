@@ -1,0 +1,1 @@
+Unity actual stereo output; samples=49152 rate=48000 peak=0,5159528 rms=0,0853072635207259 clipped=0
