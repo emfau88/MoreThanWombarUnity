@@ -1,4 +1,4 @@
-name: Publish playable WebGL duel
+name: Publish playable WebGL game
 
 on:
   workflow_dispatch:

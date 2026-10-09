@@ -15,6 +15,7 @@ namespace WombatLab.Editor
     {
         const string Pending = "WombatLab.DuelBuild";
         const string ChapterBuild = "WombatLab.ChapterBuild";
+        const string Revision = "WombatLab.BuildRevision";
         static string Output => Path.GetFullPath(Path.Combine(Application.dataPath, SessionState.GetBool(ChapterBuild, false) ? "../../Builds/B8" : "../../Builds/B3c"));
         static DuelSliceBuilder() { EditorApplication.update += ResumeBuild; }
 
@@ -51,7 +52,7 @@ namespace WombatLab.Editor
         public static void ChapterWindows() => Start("Windows", true);
         [MenuItem("Wombat Lab/B8 Build Chapter WebGL")]
         public static void ChapterWebGL() => Start("WebGL", true);
-        public static string Start(string platform, bool chapterBuild = false)
+        public static string Start(string platform, bool chapterBuild = false, string revision = "")
         {
             if (platform != "Windows" && platform != "WebGL") throw new ArgumentException(platform);
             if (EditorApplication.isPlaying || EditorApplication.isCompiling || EditorUtility.scriptCompilationFailed || BuildPipeline.isBuildingPlayer)
@@ -60,6 +61,7 @@ namespace WombatLab.Editor
             var target = Target(platform); var group = BuildPipeline.GetBuildTargetGroup(target);
             if (!BuildPipeline.IsBuildTargetSupported(group, target)) throw new InvalidOperationException(platform + " module missing.");
             SessionState.SetBool(ChapterBuild, chapterBuild);
+            SessionState.SetString(Revision, revision);
             Directory.CreateDirectory(Output);
             Write(platform, new Result { status = "queued", platform = platform });
             SessionState.SetString(Pending, platform);
@@ -80,17 +82,20 @@ namespace WombatLab.Editor
         {
             string product = PlayerSettings.productName;
             var compression = PlayerSettings.WebGL.compressionFormat;
+            bool fallback = PlayerSettings.WebGL.decompressionFallback;
             var fullscreen = PlayerSettings.fullScreenMode;
             string template = PlayerSettings.WebGL.template;
             var started = DateTime.UtcNow;
-            var result = new Result { platform = platform, status = "building", utc = started.ToString("O") };
+            bool chapterBuild = SessionState.GetBool(ChapterBuild, false);
+            var result = new Result { platform = platform, status = "building", utc = started.ToString("O"),
+                commit = SessionState.GetString(Revision, ""), scene = chapterBuild ? JunkyardChapterBuilder.ScenePath : HumanoidCombatBuilder.ScenePath };
             Write(platform, result);
             try
             {
                 if (EditorUtility.scriptCompilationFailed) throw new InvalidOperationException("Script compilation failed.");
-                bool chapterBuild = SessionState.GetBool(ChapterBuild, false);
                 PlayerSettings.productName = chapterBuild ? "More Than Wombat — Schrotthof" : "More Than Wombat — Duell";
-                PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
+                PlayerSettings.WebGL.compressionFormat = chapterBuild ? WebGLCompressionFormat.Gzip : WebGLCompressionFormat.Disabled;
+                PlayerSettings.WebGL.decompressionFallback = chapterBuild || fallback;
                 PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
                 PlayerSettings.WebGL.template = "PROJECT:TouchDuel";
                 string location = platform == "Windows" ? Path.Combine(Output, platform, "MoreThanWombat.exe") : Path.Combine(Output, platform);
@@ -106,6 +111,7 @@ namespace WombatLab.Editor
             finally
             {
                 PlayerSettings.productName = product; PlayerSettings.WebGL.compressionFormat = compression;
+                PlayerSettings.WebGL.decompressionFallback = fallback;
                 PlayerSettings.fullScreenMode = fullscreen;
                 PlayerSettings.WebGL.template = template;
                 AssetDatabase.SaveAssets();
@@ -115,7 +121,7 @@ namespace WombatLab.Editor
         static void Write(string platform, Result result) => File.WriteAllText(Path.Combine(Output, platform + "BuildStatus.json"), JsonUtility.ToJson(result, true));
         [Serializable] public sealed class Result
         {
-            public string platform, status, utc;
+            public string platform, status, utc, commit, scene;
             public double seconds;
             public long bytes;
             public int errors, warnings;

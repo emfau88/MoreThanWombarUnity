@@ -1,6 +1,6 @@
-param([int]$Port = 8765, [switch]$Lan)
+param([int]$Port = 8765, [switch]$Lan, [ValidateSet('B3c','B8')][string]$Build = 'B3c')
 $ErrorActionPreference = 'Stop'
-$duelDirectory = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\Builds\B3c\WebGL'))
+$duelDirectory = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\Builds\$Build\WebGL"))
 if (-not (Test-Path -LiteralPath (Join-Path $duelDirectory 'index.html') -PathType Leaf)) {
     throw 'Create the WebGL duel build first: Unity menu Wombat Lab / B3c Build WebGL.'
 }
