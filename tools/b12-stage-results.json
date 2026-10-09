@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 79.65,
+      "summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "WombatLab.Tests.JunkyardChapterPlayTests.FullRouteFiniteReinforcementsAndFinale",
+          "Status": "Passed",
+          "Duration": 50.2751366,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.JunkyardChapterPlayTests.RetryReconstructsPendingEnemiesHealthEnergyAndGate",
+          "Status": "Passed",
+          "Duration": 29.2984311,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\madde\\Documents\\MoreThanWombarUnity\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

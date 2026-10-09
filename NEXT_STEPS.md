@@ -1,6 +1,37 @@
-# Konkreter Arbeitsplan — Junkyard-Kapitel und Präsentation
+# Konkreter Arbeitsplan — LF2-inspirierte Stage
 
-**Aktuelle Übergabe:** B4–B8 sind gepusht und als WebGL-Kapitel am öffentlichen Play-Link verfügbar. Veröffentlichung und kurzer Browsercheck sind erledigt; [Release-Nachweis](B8_WEBGL_RELEASE.md). Nächster Entwicklungsbulk bleibt B9 mit Spielerfeedback, Umfang und realer Geräte-/Leistungsmessung.
+**Aktuelle Übergabe:** B4–B8 sind am öffentlichen Play-Link verfügbar. **B9–B11 sind lokal implementiert:** Boden-AOE, MP/Durchbruch/Druckwelle, drei Gegnerrollen und dichter Gruppenkampf. Sechs unterschiedliche gezielte PlayMode-Fälle bestehen; Geräte-/Spielgefühlgrenzen und Spielanleitung: [B9_B11_LF2_COMBAT.md](B9_B11_LF2_COMBAT.md). Verbindlicher Ausbauplan: [LF2_STAGE_PLAN.md](LF2_STAGE_PLAN.md). Ziel bleibt ein vollständiger Charakter, eine Stage, ungefähr 30 Gegner aus höchstens drei Typen. B12 ergänzt lokal den vollständigen Ablauf mit fünf Begegnungen und genau 30 Gegnern; [Übergabe](B12_LF2_STAGE.md).
+
+## Als Nächstes: B13 — gemeinsame Präsentationspolitur
+
+1. Den menschlichen Kämpfer und die drei Bärenrollen im tatsächlichen Gruppenbild prüfen; Rollen über Haltung, Silhouette und Accessoires klarer machen. Kein neuer Rig-Bau.
+2. Die bestehende Stage an konkreten Sichtproblemen verbessern: Torpfosten, vordere Verdeckungen, Übergänge und Spawnzugänge. Bestehende Kenney-/Quaternius-Assets weiterverwenden.
+3. Smash, Durchbruch und Druckwelle hinsichtlich Bewegungslesbarkeit, Wirkung und Erholung abstimmen. Warnungen und AOE-Effekte auch bei mehreren Treffern unterscheidbar halten.
+4. Treffer-, Warn-, Schritt- und Umgebungston gemeinsam anhören und abstimmen. Einen kurzen integrierten Spielstand zur Beurteilung übergeben.
+
+B14 folgt mit menschlichem Spielgefühl und tatsächlichem Android-Gerätecheck; B15 mit finaler Übergabe/Veröffentlichung.
+
+## B12 — lokal integrierte 30-Gegner-Stage
+
+1. Drei bestehende Bereiche zu fünf Begegnungen mit 21 Raufbolden, fünf Werfern und vier schweren Gegnern umstellen; einer davon ist der Vorarbeiter.
+2. Begegnungen beim Vorankommen und endliche Verstärkungen statt dreimal derselben Drei-Wellen-Folge auslösen. Acht aktive Gegner bleiben bis zum Gerätefeedback der Standard.
+3. Ausreichend freie Kampfwege, sichtbare Spawnzugänge und klaren Weiterweg vorsehen; höchstens zwei Werfer gleichzeitig.
+4. Checkpoints inklusive HP/MP und ausstehender Gegner, Tor und eindeutigen Abschluss anpassen. Einen zusammenhängenden Durchlauf und gezielten Retry prüfen.
+
+Umsetzung und Nachweise: [B12_LF2_STAGE.md](B12_LF2_STAGE.md). Zwei gezielte Ablauf-/Retry-Fälle bestehen. Ein tatsächlicher automatischer Kampf erreichte 19 besiegte Gegner; menschliche Balance bleibt offen.
+
+## B9–B11 — umgesetzter Arbeitsumfang
+
+1. Bestehende Trefferregeln für Team, Schutz und genau einen Treffer pro Ziel gemeinsam für Nahkampf und Flächentreffer verwenden.
+2. Luft-Smash an den tatsächlichen Bodenaufprall binden; einmalige radiale Schadensauslösung, saubere Unterbrechung und Landungs-Recovery.
+3. Passenden Bodenimpuls, einzelne Gegnerreaktionen und gebündelten Ton ergänzen; kein mit der Gegnerzahl gestapelter Hitstop/Shake.
+4. Mit drei nahen und einem außerhalb stehenden Gegner sichtbar prüfen; gezielt Landung, Unterbrechung und Schutzfälle absichern.
+
+**B10** ergänzt MP, Durchbruch, Druckwelle, Anschlüsse und Touch-Bedienung. Menschlicher Kämpfer bleibt die Basis dieser Stage; abschließende Art-Politur folgt in B13. **B11** ergänzt drei Gegnercharaktere und ein dichtes Gruppenlabor. Details und Abschlusskriterien stehen im [Gesamtplan](LF2_STAGE_PLAN.md); tatsächliche Nachweise in der [B9–B11-Übergabe](B9_B11_LF2_COMBAT.md).
+
+## Historischer Arbeitsstand B1–B8
+
+Die folgenden Abschnitte dokumentieren frühere Aufgaben und Nachweise. Frühere nächste Schritte, Release-Hinweise und das 10–15-Minuten-Ziel sind durch die aktuelle Übergabe und den LF2-Stage-Plan ersetzt.
 
 Stand: 9. Oktober 2026. B1 und B2-Schritte 1–3 sind technisch geliefert. B3a/B3b, die Map-Aufwertung M1 und B3c sind integriert. B3c korrigiert den KI-Abstand und Angriffsschutz nach GetUp, stimmt Kontaktfeedback ab und liefert Windows-/WebGL-Spielstände. Acht gezielte PlayMode-Fälle bestehen; der Browserkampf wurde mit Tastatureingaben bis zum Sieg gespielt. Windows startet und rendert; sein physischer Tastaturcheck bleibt offen. Details: [B3C_DUEL_HANDOFF.md](B3C_DUEL_HANDOFF.md). Wombat-Look bleibt eine separate Entscheidung. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Bereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss; B7 ergänzt lokal Bereichsgestaltung, gemalten Boden, warme Bärengesichter, Kamera/Marker und Audio; B8 ergänzt lokal Menü/Pause/Einführung/Optionen/Ergebnis; nächster Entwicklungsbulk ist B9.
 
@@ -76,7 +107,7 @@ Zusatzauftrag vor B4: Mobile Touch für Android im Querformat ist integriert; dr
 
 **Effekt:** Start/Fortsetzen, Pause, drei überspringbare Einführungskarten, passende Steuerung, gespeicherte Lautstärke/Kamerablick/Nachführung/Touch/Hinweise und Niederlage-/Sieg-/Replay-Aktionen sind lokal integriert. Eingabepuffer und gehaltene virtuelle Controls werden an Menüübergängen bereinigt. Zwei gezielte Sitzungsfälle bestehen; vorhandener Kapitel-Ablauffall ergänzt Sieg/Replay. Der neue Buildpfad startet JunkyardChapter, die B3c-Buildmenüs behalten das Labor. Details: [B8_SESSION.md](B8_SESSION.md).
 
-## Als Nächstes: B9 — Balance, Performance und Kapitel-Demo
+## Frühere B9-Planung — durch den LF2-Stage-Plan ersetzt
 
 1. **Kurzes Spielerfeedback:** Kapitel mit Einführung spielen, konkrete Stellen für unfaire Gruppen, dominante Moves, leere Wege und Checkpoint-Frust sammeln. Der einfache Light-Bot wurde beim B8-Batchdurchlauf im zweiten Bereich besiegt; kein Anlass, pauschal HP/Schaden zu ändern.
 2. **Umfang entscheiden:** Das vorhandene Kurzkapitel gezielt abwechslungsreicher machen oder zunächst als kurze Demo ausliefern. Für 10–15 Minuten zusätzliche Situationen statt bloß HP-Verlängerung planen.

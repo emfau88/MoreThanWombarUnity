@@ -1,0 +1,14 @@
+{
+    "platform": "WebGL",
+    "status": "Succeeded",
+    "utc": "2026-10-09T14:41:15.2775728Z",
+    "commit": "B9-B11 landing fix",
+    "scene": "Assets/Game/Scenes/CrowdCombatLab.unity",
+    "seconds": 188.7391827,
+    "bytes": 21267258,
+    "errors": 0,
+    "warnings": 1,
+    "messages": [
+        "Pipeline: No RuntimePipelineConfig asset found (Project Settings > Pipeline > Runtime). Pipeline will be disabled in Player builds."
+    ]
+}

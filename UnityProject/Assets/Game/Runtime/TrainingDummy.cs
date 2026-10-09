@@ -25,6 +25,7 @@ namespace WombatLab
         Quaternion rigRestRotation, padRestRotation;
         float deathProgress;
         BodyRecovery body;
+        FighterTarget fighter;
 
         void Awake()
         {
@@ -40,6 +41,7 @@ namespace WombatLab
             baseColor = padRenderer.sharedMaterial.GetColor("_BaseColor");
             var brain = GetComponent<EnemyBrain>();
             body = GetComponent<BodyRecovery>();
+            fighter = GetComponent<FighterTarget>();
             fallenRig = brain != null ? brain.visual.Find("Rig") : null;
             enemyAnimator = brain != null ? brain.animator : null;
             if (fallenRig != null) { rigRestPosition = fallenRig.localPosition; rigRestRotation = fallenRig.localRotation; }
@@ -49,12 +51,13 @@ namespace WombatLab
             for (int i = 0; i < colliders.Length; i++) colliderEnabled[i] = colliders[i].enabled;
         }
 
-        public bool ReceiveHit(AttackDefinition attack, Vector3 direction)
+        public bool ReceiveHit(AttackDefinition attack, Vector3 direction, int damage = -1)
         {
             if (!Alive || body != null && body.Protected) return false;
-            Health = Mathf.Max(0, Health - attack.damage); HitCount++;
-            Hitstun = attack.hitstun; flash = .12f;
-            velocity = Vector3.ProjectOnPlane(direction, Vector3.up).normalized * attack.knockback * 6;
+            Health = Mathf.Max(0, Health - (damage >= 0 ? damage : attack.damage)); HitCount++;
+            bool heavy = fighter != null && fighter.Heavy;
+            Hitstun = attack.hitstun * (heavy && !attack.heavy ? .65f : 1); flash = .12f;
+            velocity = Vector3.ProjectOnPlane(direction, Vector3.up).normalized * attack.knockback * (heavy ? 3.5f : 6);
             GetComponent<EnemyBrain>()?.Interrupt();
             if (!Alive && body != null) body.Die();
             else if (attack.knocksDown && body != null) body.KnockDown();
@@ -70,7 +73,7 @@ namespace WombatLab
 
         void Update()
         {
-            float dt = clock != null && clock.Frozen ? 0 : Time.deltaTime;
+            float dt = fighter != null ? (fighter.Frozen ? 0 : Time.deltaTime) : clock != null && clock.Frozen ? 0 : Time.deltaTime;
             Hitstun = Mathf.Max(0, Hitstun - dt); flash = Mathf.Max(0, flash - dt);
             transform.position = MotorMath.ClampGround(transform.position + velocity * dt,
                 arenaMin, arenaMax);
@@ -94,6 +97,7 @@ namespace WombatLab
         public void ResetTraining()
         {
             Cache();
+            fighter?.ResetFreeze();
             GetComponent<AnimationReaction>()?.Clear();
             GetComponent<BodyRecovery>()?.ResetBody();
             Health = maxHealth; HitCount = 0; Hitstun = flash = 0;

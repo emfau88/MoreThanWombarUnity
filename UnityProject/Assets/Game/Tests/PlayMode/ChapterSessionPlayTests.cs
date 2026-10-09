@@ -40,6 +40,7 @@ namespace WombatLab.Tests
             player.SetTestInput(Vector2.right, run:true);
             while (session.chapter.Phase == ChapterPhase.Arrival) yield return null;
             player.SetTestInput(Vector2.zero);
+            while (session.chapter.encounter.LivingCount == 0) yield return null;
             combat.Queue(CombatIntent.Light); yield return new WaitForSeconds(.08f);
             var touch = player.GetComponent<MobileTouchControls>(); touch.SetVisible(true);
             var virtualPad = (Gamepad)touch.Stick.control.device;

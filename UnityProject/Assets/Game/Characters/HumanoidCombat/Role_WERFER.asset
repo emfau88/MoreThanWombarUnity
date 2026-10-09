@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcfc258e56cea54baba910302549ba4, type: 3}
+  m_Name: Role_WERFER
+  m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.EnemyRoleDefinition
+  role: 3
+  displayName: WERFER
+  attack: {fileID: 11400000, guid: 149d82011ba4d984fb0109010a1b1a7f, type: 2}
+  health: 44
+  damage: 9
+  moveSpeed: 1.9
+  telegraphSeconds: 0.85
+  recoverySeconds: 0.55
+  cooldownSeconds: 1.7
+  engagementDistance: 6.5
+  preferredDistance: 4
+  minimumAttackDistance: 2
+  color: {r: 0.73, g: 0.46, b: 0.85, a: 1}

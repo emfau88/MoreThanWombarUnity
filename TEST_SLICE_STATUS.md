@@ -2,6 +2,18 @@
 
 Stand: 9. Oktober 2026. Die folgenden älteren Abschnitte dokumentieren historische Nachweise.
 
+## B12 — 30-Gegner-Stage lokal integriert
+
+Fünf Begegnungen auf drei bestehenden Bereichen; genau 21 Raufbolde, fünf Werfer und vier schwere Gegner einschließlich Vorarbeiter. Endlicher angekündigter Nachschub, Positionsauslöser, acht aktive Gegner/zwei Werfer als Grenzen. **2/2 gezielte Ablauf-/Retry-Fälle bestanden in 79,65 s**, einschließlich Sieg erst nach allen Gegnern, Trigger-Rückkehr, Pause, HP/MP und Tor. Direkter Schaden dient dabei ausschließlich der Ablaufprüfung. [Rohbericht](tools/b12-stage-results.json).
+
+Tatsächlicher Eingabe-/Kontaktkampf mit unveränderten HP und KI: 19 Gegner besiegt, Niederlage im Sortierhof nach 61,5 s; kein behaupteter vollständiger Combat-Sieg. [Kampfbefund](tools/b12-combat-run.txt), [B12-Übergabe](B12_LF2_STAGE.md). Als Nächstes B13; öffentlicher Play-Link weiterhin B8.
+
+## B9–B11 — LF2-Kampf lokal umgesetzt
+
+Boden-AOE, MP und drei Spezialaktionen, drei Gegnerrollen sowie CrowdCombatLab mit acht beziehungsweise optional zehn Gegnern sind lokal integriert. Sechs unterschiedliche gezielte PlayMode-Fälle bestanden; die Browserprüfung fand eine Landung auf Gegnerköpfen, die korrigiert und gezielt nachgeprüft wurde. Der abschließende WebGL-Build ist erfolgreich. Kurze PC-Browserproben mit acht und zehn Gegnern zeigen Median/95. Perzentil von 4/5 ms Frameintervall. NEUSTART und WELLE wurden im normalen Browserplayer betätigt; WELLE senkt MP korrekt von 100 auf 74. Physischer Android-Test bleibt offen.
+
+Nachweise, Grenzen und Bedienung: [B9_B11_LF2_COMBAT.md](B9_B11_LF2_COMBAT.md). Öffentlich bleibt B8; als Nächstes folgt B12 mit dem Umbau zur 30-Gegner-Stage. Die nachfolgenden älteren Aussagen zum nächsten Bulk sind historische Einträge.
+
 ## B8 — Kapitel öffentlich veröffentlicht
 
 B4–B8 sind auf main gepusht und als `chapter-b8-2026-10-09` am [Play-Link](https://emfau88.github.io/MoreThanWombarUnity/) verfügbar. Kapitelbuild: 19.818.574 Bytes, 367,52 s, 0 Fehler/2 Warnungen. Hauptmenü, Einführung/Überspringen, Bewegung/erste Welle, Touch-Oberfläche, Pause/Optionen/Fortsetzen und Rückkehr zum Startmenü im tatsächlich veröffentlichten Player geprüft. Pages-Lauf erfolgreich; öffentliche Version entspricht Kapitel-Szene und Spielcommit. Keine weitere Vollsuite. [Release und Nachweisgrenzen](B8_WEBGL_RELEASE.md), `tools/b8-webgl-build.json`, `tools/b8-public-browser-results.json`. B9 bleibt für Spielerfeedback, Umfang und reale Geräte-/Leistungsmessung.

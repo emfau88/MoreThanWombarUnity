@@ -1,4 +1,23 @@
-# Architektur — implementierter B8-Stand
+# Architektur — B9–B12 lokal implementiert
+
+## Aktueller Ausbau
+
+Die vorhandenen Motor-, Animator-, Input- und Schadenempfänger bleiben die Basis. B9–B12 ergänzen folgende begrenzte Verantwortlichkeiten:
+
+| Baustein | Ergänzung |
+| --- | --- |
+| CombatController / AttackDefinition | MP, Landeschaden, Durchbruch und einmalige Projektilfreigabe in der Angriffsphase |
+| FighterTarget | Gemeinsamer Team-/Ziel-/Schadensadapter um PlayerDefense und TrainingDummy; lokaler Gegner-Hitstop |
+| CombatProjectile / SpecialEffects | Geordnete Projektilkontakte mit Wänden/Teams und begrenzte, reichweitengerechte Effekte |
+| PlayerMotor | Bodenlandung trotz Gegnerkörpern; temporäre Körper-Kollisionsfreigaben mit Cleanup |
+| EnemyBrain / EngagementCoordinator | Auswahl lebender gegnerischer Ziele, Werferverhalten und zwei Nahkampffreigaben pro Ziel; AppendEnemy ergänzt Nachschub ohne Reset der Überlebenden |
+| Lf2CombatBuilder / Lf2StageBuilder | Vorhandene Assets erweitern, CrowdCombatLab erzeugen und Kapitel mit fünf Begegnungen konfigurieren |
+| JunkyardChapter / ChapterWave | Positionsauslöser, endlicher Nachschubvorrat, Zugangswarnung und Checkpoint-Rekonstruktion des Bereichseinstiegs |
+| CrowdPerformanceProbe | Nur ausdrücklich aktivierte technische Belastungsprobe im separaten Crowd-Labor |
+
+Die Teamgrundlage liefert noch keinen KI-Begleiter. Aktuelle Details und Nachweise: [B9_B11_LF2_COMBAT.md](B9_B11_LF2_COMBAT.md), [B12_LF2_STAGE.md](B12_LF2_STAGE.md). Die folgende Tabelle beschreibt die historische Grundlage; die dortige einzelne Angriffsfreigabe und Vier-Gegner-Grenze werden im neuen Crowd-Labor und Kapitel durch den obigen Ausbau ersetzt.
+
+## Grundlage bis B8
 
 Stand: 9. Oktober 2026. S1–S3, B1-Polish, B2-Humanoid-Integration, B3a-Aktionen/Reaktionen und B3b-Knockdown/GetUp/Tod, B3c-Duell, Mobile Touch, B4-Schulterstoß, B5-Gegnerrollen, B6-Junkyard-Kapitel und B7-Präsentation sind implementiert. Humanoid und Grundform-Bären bleiben die technische Figurenbasis; B7 trennt ihre Gesichts-/Körperfarben. Wombat und finale Modelle bleiben offen. Die Produktionsrichtung steht in [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md), Regeln und Steuerung in [COMBAT_SYSTEM.md](COMBAT_SYSTEM.md).
 

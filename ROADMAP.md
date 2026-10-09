@@ -1,4 +1,4 @@
-# More Than Wombat — Roadmap mit neun Bulks
+# More Than Wombat — Roadmap zur ersten LF2-inspirierten Stage
 
 Stand: 9. Oktober 2026, B4–B8 integriert und gepusht; das B8-Kapitel ist über GitHub Pages veröffentlicht. Diese Fassung ersetzt die bisherige Vorwärtsplanung zu eigenem Modell-/Rig-Bau und spätem Einzelduell. Verbindliche Gestaltung/Arbeitsweise: [PRODUCTION_GUIDELINES.md](PRODUCTION_GUIDELINES.md). Konkrete nächste Aufgaben: [NEXT_STEPS.md](NEXT_STEPS.md). Tatsächliche Nachweise: [TEST_SLICE_STATUS.md](TEST_SLICE_STATUS.md).
 
@@ -6,21 +6,21 @@ Stand: 9. Oktober 2026, B4–B8 integriert und gepusht; das B8-Kapitel ist über
 
 Ein charakterstarker 3D-/2.5D-Brawler im illustrativen Cartoon-/Comic-Stil der 2D-Referenz: runde kräftige Figuren, expressive Gesichter, glatte Formen, gemalte Materialdetails und klar lesbare Treffer. Sichtbare Low-Poly-Facetten sind kein Stilziel.
 
-Zuerst ein vollständiges überzeugendes Duell mit einem Spieler und einem einfachen Gegner. Danach Ausbau zum ersten Junkyard-Kapitel mit etwa 10–15 Minuten Spielzeit als Designziel. Windows dient der direkten lokalen Übergabe; WebGL-Verträglichkeit wird bereits am kleinen Duell praktisch geprüft. Zusätzliche Plattformen/Touch-Steuerung sind daraus nicht automatisch beauftragt.
+Aktuelles Ziel: ein vollständiger spielbarer Charakter mit drei unterschiedlichen Spezialfähigkeiten und eine zusammenhängende Stage mit etwa 30 Gegnern aus höchstens drei Typen. Massengefühl, klare Mehrfachtreffer und Charaktertiefe nach Little-Fighter-2-Vorbild stehen im Mittelpunkt. Desktop und die bereits integrierte Android-Touch-Steuerung gehören zur Übergabe. Acht bis zehn gleichzeitig aktive Gegner sind zunächst ein zu prüfendes Designziel. Das frühere 10–15-Minuten-Ziel entfällt; die Stage wird nicht durch zusätzliche Wiederholungen gestreckt.
 
-Bestehendes Gameplay weiterentwickeln. Standardmodelle, Rigs, Animationen und Props zunächst aus geeigneten fertigen Grundlagen wählen. Individuelle Arbeit konzentriert sich auf Wombat-Identität, Bewegung, Kampfregeln, Reaktionen und Balance. Die neun Bulks sind unterschiedlich groß; keine Zeit- oder Aufwandsgarantie.
+Bestehendes Gameplay weiterentwickeln. Standardmodelle, Rigs, Animationen und Props zunächst aus geeigneten fertigen Grundlagen wählen. Individuelle Arbeit konzentriert sich auf Identität, Bewegung, Kampfregeln, Reaktionen und Balance. Verbindlicher Umfang, Gegnerverteilung, Abnahmekriterien und detaillierte nächste Aufgaben: [LF2_STAGE_PLAN.md](LF2_STAGE_PLAN.md). Die bisherige reine Balance-Planung ab B9 wird durch B9–B15 ersetzt. Ein KI-Verbündeter bleibt eine vorbereitete, gesonderte Erweiterung.
 
 ## Stand und nächster Schritt
 
 S0–S3 bilden das vorhandene Fundament. B1 ist technisch abgeschlossen: Startup-Drehgrenze korrigiert, fünf gezielte Polish-Fälle bestanden, aktuelle Spielposen kontrolliert und Combat-/Architekturbeschreibung aktualisiert. Nutzerfeedback zum Spielgefühl bleibt für weiteres Tuning willkommen. Ein eigener Blender-Entwurf wurde begonnen, ist aber noch nicht in Unity integriert. Dieser Pfad ist zurückgestellt, bis passende fertige Grundlagen geprüft sind.
 
-Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. B3b ergänzt lebendes Knockdown, GetUp, Aufstehschutz und Tod/Reset für beide Figuren; Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md). Die vorgezogene kleine Map-Aufwertung M1 und B3c sind integriert. Das technische Duell ist als Windows-/WebGL-Spielstand verfügbar; Browserkampf bis zum Sieg und Neustart sind nachgewiesen. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Kampfbereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss. B7 ergänzt lokal unterschiedliche Bereichssilhouetten, gemalten Boden, Kamera/Marker, warme Bärengesichter und zwölf CC0-Audiosignale. B8 ergänzt lokal Menü, Pause, Einführung, Optionen und Ergebnis; als Nächstes B9 für Balance, Performance und Demo; Laufzeit und Balance werden anhand von Spielerfeedback weiter abgestimmt. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
+Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei dokumentierte Kandidaten, regulären Humanoid-Import und ein separates spielbares HumanoidCombatLab mit konkreten Attack-Zeiten und retargeteten Kontaktbahnen. B3a ergänzt gehaltenes Rennen, einen Haken-Finisher, Overhand-Heavy, zweihändigen Luft-Smash und sichtbare Hit-/Stagger-Reaktionen für Spieler und Robot-Gegner. Details: [B3A_ACTIONS.md](B3A_ACTIONS.md). Wombat-Look bleibt offen; die stilistische B2-Abnahme ist damit nicht abgeschlossen. B3b ergänzt lebendes Knockdown, GetUp, Aufstehschutz und Tod/Reset für beide Figuren; Details in [B3B_BODY_RECOVERY.md](B3B_BODY_RECOVERY.md). Die vorgezogene kleine Map-Aufwertung M1 und B3c sind integriert. Das technische Duell ist als Windows-/WebGL-Spielstand verfügbar; Browserkampf bis zum Sieg und Neustart sind nachgewiesen. B4–B6 sind lokal integriert. JunkyardChapter liefert drei verbundene Kampfbereiche, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Abschluss. B7 ergänzt lokal unterschiedliche Bereichssilhouetten, gemalten Boden, Kamera/Marker, warme Bärengesichter und zwölf CC0-Audiosignale. B8 ergänzt Menü, Pause, Einführung, Optionen und Ergebnis und ist öffentlich spielbar. B9–B12 sind inzwischen lokal integriert: Kampfvertiefung und 30-Gegner-Ablauf gemäß LF2_STAGE_PLAN. Als Nächstes folgt B13 mit der gemeinsamen Präsentationspolitur. Laufzeit und Balance werden anhand von Spielerfeedback weiter abgestimmt. Die eigene JSON-Mesh-Pipeline bleibt zurückgestellt.
 
 ## Übersicht
 
 **Zusatzauftrag nach B3c:** Mobile Touch für Android im Querformat ist integriert: vorhandene Unity-Bildschirmcontrols, responsive WebGL-Ansicht und WLAN-Testanleitung. Drei gezielte Eingabeprüfungen bestehen. GitHub Pages veröffentlicht den fertigen WebGL-Spielstand über einen Release-Workflow; öffentlicher Play-Link im README. Ein physischer Android-Spieltest bleibt offen. B4–B8 sind integriert und als Kapitel am öffentlichen Play-Link verfügbar. [Release-Nachweis](B8_WEBGL_RELEASE.md). Details: [MOBILE_TOUCH.md](MOBILE_TOUCH.md).
 
-**Vorgezogen auf Nutzerwunsch und geliefert:** **M1 — kleine Testmap-Aufwertung** nach B3b. Betonboden, wenige fertige Junkyard-Props, Zaun/Werkstatt-Hintergrund und Licht sind integriert. B3c ergänzt inzwischen das abgestimmte Duell und Buildnachweise. Details: [M1_MAP_PREVIEW.md](M1_MAP_PREVIEW.md). Die neun Hauptbulks bleiben erhalten; M1 übernimmt einen begrenzten Präsentationsanteil aus B7, die Levelstrecke bleibt B6.
+**Vorgezogen auf Nutzerwunsch und geliefert:** **M1 — kleine Testmap-Aufwertung** nach B3b. Betonboden, wenige fertige Junkyard-Props, Zaun/Werkstatt-Hintergrund und Licht sind integriert. B3c ergänzt inzwischen das abgestimmte Duell und Buildnachweise. Details: [M1_MAP_PREVIEW.md](M1_MAP_PREVIEW.md). M1 übernahm einen begrenzten Präsentationsanteil aus B7, die damalige Levelstrecke blieb B6. Die neue Vorwärtsplanung umfasst B9–B15.
 
 | Bulk | Konkrete Maßnahmen | Ergebnis / Voraussetzung |
 | --- | --- | --- |
@@ -29,12 +29,22 @@ Mit „go b1“ wurde der B1-Abschluss erledigt. B2-Schritte 1–3 liefern drei 
 | B3 | B3a–B3c und M1 technisch geliefert: Duell-Tuning, Schutz/Feedback/HUD, Windows/WebGL, Browserkampf bis zum Sieg | Spielbarer technischer Character Slice; Wombat-Stil, Windows-Tastatur, hörbare Audioabnahme und Performanceprofil offen |
 | B4 | Lokal integriert: Schulterstoß aus Sprint-Ableitung, feste Richtung, Kontakt-/Wandstopp, verwundbare Erholung; Kick schafft mehr Platz; E/RT/Touch STOSS | Vier gezielte Stoß-Fälle bestehen; im öffentlichen Kapitel enthalten |
 | B5 | Lokal integriert: Standard/Agile/Heavy, feste Rush-Spur, 1–4 Gegner, rotierende Freigabe, Wartepositionen/Körperkollision und Offscreen-Regeln | Mischkampf auf vorhandenen Figuren/Clips; im öffentlichen Kapitel enthalten |
-| B6 | Lokal integriert: JunkyardChapter mit drei verbundenen Bereichen, neun Wellen/23 Gegnern, Schaltertor, Checkpoint-Retry und Vorarbeiter-Finale | Durchspielbares Kurzkapitel; automatischer Kampf 101,7 s, Ausbau zum 10–15-Minuten-Ziel offen |
+| B6 | Lokal integriert: JunkyardChapter mit drei verbundenen Bereichen, neun Wellen/23 Gegnern, Schaltertor, Checkpoint-Retry und Vorarbeiter-Finale | Durchspielbares Kurzkapitel; automatischer Kampf 101,7 s, kein Nachweis menschlicher Spielzeit |
 | B7 | Lokal integriert: Bereichssilhouetten, gemalter Boden, Material-/Licht-/Farbpass, höhere Kamera, Bodenring/HP/Torstatus, warme Bärengesichter und zwölf CC0-Signale | Erste gemeinsame illustrative Präsentation; finale Figuren-/Modelle und hörbare Audioabnahme offen |
 | B8 | Integriert und als WebGL-Kapitel veröffentlicht: Start/Fortsetzen, Pause für Tastatur/Gamepad/Touch, drei überspringbare Einführungskarten, kompakteres HUD, gespeicherte Lautstärke/Kamera/Touch/Hinweise, Checkpoint-/Replay-Ergebnis | Vollständige Sitzungsoberfläche online; physischer Android-/Gamepad- und Performance-Nachweis offen |
-| B9 | Balance, tatsächliche Performance, Windows-Demo und WebGL-Slice prüfen | Spielbare Demo mit konkreten Laufzeit-/Buildnachweisen |
+| B9 | Lokal integriert: Boden-Smash mit einmaligem AOE bei Landung, Hindernis-/Teamfilter, sichtbarer Radius und Einzelreaktionen | Mehrfachtreffer und Unterbrechung gezielt geprüft |
+| B10 | Lokal integriert: MP, Durchbruch, Druckwelle, bestehende Anschlüsse, neue Touch-Action und MP-Checkpoint | Drei Spezialaktionen auf menschlicher Charakterbasis; finale Art-Politur B13 |
+| B11 | Lokal integriert: Raufbold/Werfer/Schläger, zwei Nahkampffreigaben, Teams/Zielwahl und Acht-/Zehn-Gegner-Labor | Gezielte Kampfprüfungen bestanden; tatsächliches Android-/Spielgefühlfeedback offen |
+| B12 | Lokal integriert: fünf Begegnungen, drei Bereiche, genau 30 Gegner, endliche angekündigte Verstärkungen, Checkpoints und Finale | [Umsetzung und Nachweise](B12_LF2_STAGE.md) |
+| B13 | Geplant: Figuren, Kampfwege, Map, Audio und Effekte ausarbeiten | Konsistente illustrative Präsentation |
+| B14 | Geplant: Spielgefühl, MP/Schaden/Dichte und tatsächliche Geräteleistung abstimmen | Abgestimmte Desktop-/Android-Fassung mit dokumentierten Grenzen |
+| B15 | Geplant: finaler WebGL-/Windows-Kandidat und beauftragte Veröffentlichung | Vollständige Stage lokal und über den Play-Link |
 
 Jeder Bulk endet integriert und spielbar. Grundlegendes Feedback, Kamera und Bedienbarkeit wachsen ab dem Duell mit; B7/B8 arbeiten sie aus. Fertige Pakete werden nur für die tatsächlich benötigten Teile übernommen.
+
+## Historische Detailplanung B1–B8
+
+Die folgenden Detailabschnitte halten den damaligen Arbeitsablauf fest. Frühere Angaben zu „als Nächstes“, zum Duellfokus oder zu 10–15 Minuten sind historische Ziele. Für die weitere Entwicklung gelten ausschließlich die Übersicht oben und der [LF2-Stage-Plan](LF2_STAGE_PLAN.md).
 
 ## B1 — Combat-Polish abgeschlossen
 
@@ -146,16 +156,9 @@ Kapitelgestaltung, gemalter Boden, Kamera/Marker, Material-/Licht-/Volume-Ableit
 
 **Ergebnis:** Die vorhandene Kapitel-Szene besitzt Start-/Einführungs-/Pause-/Options-/Ergebnisoberfläche und benutzt weiterhin dieselben Kampf-/Checkpoint-Regeln. Zwei gezielte Sitzungsfälle und der bestehende Kapitel-Ablauffall mit Sieg/Replay bestehen. Ein einfacher tatsächlicher Combat-Bot wurde im zweiten Bereich besiegt; echte Niederlage und Retry erhalten Bereich/Tor/42 Einstieg-HP. Das ist keine menschliche Schwierigkeits- oder Geräteabnahme. Details: [B8_SESSION.md](B8_SESSION.md). Als Nächstes B9 für Balance/Umfang, tatsächliche Performance und Kapitel-Demo.
 
-## B9 — Balance, Performance und Demo
+## Aktuelle Vorwärtsplanung B9–B15
 
-- Wenige vollständige Durchläufe für häufige Kontaktprobleme, dominante Moves, Leerzeiten und frustrierende Checkpoints.
-- Schaden, HP, Gegnerdruck, Spawnfolge und Recovery gemeinsam abstimmen.
-- Ziel 60 FPS auf dem tatsächlichen Test-PC; Browserleistung separat messen. Schatten, Materialien, Textur-/Speicherbedarf und Effekte nach konkreten Befunden optimieren.
-- Windows-Demo und WebGL-Fassung prüfen, soweit die Toolchain verfügbar ist. Einschränkungen konkret dokumentieren.
-- Einmal vorhandene Regression für den Kandidaten und kurze tatsächliche Buildkontrolle; nach Änderungen nur betroffene Prüfungen wiederholen.
-- Build, kurze deutsche Anleitung, Lizenznachweise und wenige konkrete nächste Erweiterungen übergeben.
-
-**Ergebnis:** spielbare Demo und wiederverwendbare Produktionsbasis. Weitere Abschnitte, ein eigener Boss oder ein zweiter Charakter folgen aus dem Nutzerfeedback.
+Der [LF2-Stage-Plan](LF2_STAGE_PLAN.md) beschreibt den Ausbau. B9–B11 sind lokal implementiert; [Übergabe und Nachweise](B9_B11_LF2_COMBAT.md). B12 ergänzt lokal die 30-Gegner-Stage; [Übergabe](B12_LF2_STAGE.md). **Als Nächstes B13:** Präsentationspolitur. Präsentation, Balance und Übergabe folgen in B13–B15. Der öffentliche Play-Link bleibt bis zu einem neuen Release auf B8. Ein physischer Android-Check und menschliches Feedback zum dichteren Kampf sind weiterhin offen.
 
 ## Ausführung und Grenzen
 

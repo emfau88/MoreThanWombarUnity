@@ -10,6 +10,8 @@ namespace WombatLab
         public TrainingDummy dummy;
         public Text healthText;
         public RectTransform healthFill;
+        public Text energyText;
+        public RectTransform energyFill;
         public EngagementCoordinator encounter;
         public bool duelPresentation;
         public JunkyardChapter chapter;
@@ -20,6 +22,12 @@ namespace WombatLab
         {
             if (player == null || stateText == null || Time.unscaledTime < nextRefresh) return;
             nextRefresh = Time.unscaledTime + .1f;
+            if (energyText != null)
+            {
+                energyText.text = Time.time < combat.EnergyWarningUntil ? "ZU WENIG MP — COMBO AUFLADEN"
+                    : $"MP  {Mathf.FloorToInt(combat.Energy)} / {combat.maxEnergy:0}" + (combat.LastGroupHits > 1 && Time.time < combat.GroupMessageUntil ? $"  ·  {combat.LastGroupHits} TREFFER" : "");
+                if (energyFill != null) energyFill.anchorMax = new Vector2(combat.Energy / combat.maxEnergy, 1);
+            }
             var p = player.transform.position;
             string status = combat != null && combat.Attacking ? $"{combat.Attack.stateName} / {combat.Phase}" : player.State.ToUpperInvariant();
             var body = player.GetComponent<BodyRecovery>();

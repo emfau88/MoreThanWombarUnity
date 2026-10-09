@@ -1,0 +1,14 @@
+{
+    "platform": "WebGL",
+    "status": "Succeeded",
+    "utc": "2026-10-09T16:17:30.6455876Z",
+    "commit": "B12 final UI 30 enemy stage",
+    "scene": "Assets/Game/Scenes/JunkyardChapter.unity",
+    "seconds": 256.2773919,
+    "bytes": 19853081,
+    "errors": 0,
+    "warnings": 1,
+    "messages": [
+        "Pipeline: No RuntimePipelineConfig asset found (Project Settings > Pipeline > Runtime). Pipeline will be disabled in Player builds."
+    ]
+}

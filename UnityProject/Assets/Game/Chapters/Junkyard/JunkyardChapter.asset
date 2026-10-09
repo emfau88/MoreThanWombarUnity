@@ -17,68 +17,93 @@ MonoBehaviour:
   maximum: {x: 55, y: 2.35}
   waveBreak: 2.2
   areaHeal: 30
+  areaEnergy: 30
+  activeLimit: 8
+  throwerLimit: 2
+  spawnWarningSeconds: 1.1
+  spawnInterval: 0.25
   areas:
   - title: ANLIEFERUNG
     center: 0
     waves:
-    - enemies:
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: 2.7, y: 0, z: -0.45}
-    - enemies:
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: 2.7, y: 0, z: -0.45}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: -2, y: 0, z: 1.35}
-    - enemies:
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: 2.7, y: 0, z: -0.45}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: -2, y: 0, z: 1.35}
+    - title: Einstieg
+      triggerOffset: -4.8
+      enemies:
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+    - title: "Vorsto\xDF zum Tor"
+      triggerOffset: 1.5
+      enemies:
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
   - title: SORTIERHOF
     center: 24
     waves:
-    - enemies:
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: 2.7, y: 0, z: -0.45}
-      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
-        position: {x: -2, y: 0, z: 1.35}
-    - enemies:
-      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
-        position: {x: 2.7, y: 0, z: -0.45}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: -2, y: 0, z: 1.35}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: 4.6, y: 0, z: 1.1}
-    - enemies:
-      - role: {fileID: 11400000, guid: cd7f46fb51311a9429a653c53267d49d, type: 2}
-        position: {x: 2.7, y: 0, z: -0.45}
-      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
-        position: {x: -2, y: 0, z: 1.35}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: 4.6, y: 0, z: 1.1}
+    - title: Gemischter Hauptkampf
+      triggerOffset: -4.8
+      enemies:
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: 6de2d4f94693fda4a815983ca81e2b0f, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ce9df59321e89014dbc816c1f15b24bf, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: 6de2d4f94693fda4a815983ca81e2b0f, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+    - title: Durchgang
+      triggerOffset: 1.5
+      enemies:
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: 6de2d4f94693fda4a815983ca81e2b0f, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ce9df59321e89014dbc816c1f15b24bf, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
   - title: PRESSWERK
     center: 48
     waves:
-    - enemies:
-      - role: {fileID: 11400000, guid: cd7f46fb51311a9429a653c53267d49d, type: 2}
-        position: {x: 2.7, y: 0, z: -0.45}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: -2, y: 0, z: 1.35}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: 4.6, y: 0, z: 1.1}
-    - enemies:
-      - role: {fileID: 11400000, guid: cd7f46fb51311a9429a653c53267d49d, type: 2}
-        position: {x: 2.7, y: 0, z: -0.45}
-      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
-        position: {x: -2, y: 0, z: 1.35}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: 4.6, y: 0, z: 1.1}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: -3.7, y: 0, z: -1.2}
-    - enemies:
+    - title: Vorarbeiter und Gefolge
+      triggerOffset: -4.8
+      enemies:
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: 6de2d4f94693fda4a815983ca81e2b0f, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ce9df59321e89014dbc816c1f15b24bf, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: 6de2d4f94693fda4a815983ca81e2b0f, type: 2}
+        position: {x: 0, y: 0, z: 0}
+      - role: {fileID: 11400000, guid: ea5433866505a9d41b5962c7ff20c7ea, type: 2}
+        position: {x: 0, y: 0, z: 0}
       - role: {fileID: 11400000, guid: 3312dd3d90721b840a0b68a3d8b8b563, type: 2}
-        position: {x: 2.7, y: 0, z: -0.45}
-      - role: {fileID: 11400000, guid: 62b3772ffda20234dbed78a0d0e77d98, type: 2}
-        position: {x: -2, y: 0, z: 1.35}
-      - role: {fileID: 11400000, guid: 4295e7cbabf83e1458cd22106a8d32b7, type: 2}
-        position: {x: 4.6, y: 0, z: 1.1}
+        position: {x: 0, y: 0, z: 0}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace WombatLab
 {
@@ -27,6 +28,7 @@ namespace WombatLab
         string requestedAnimation;
         bool testInputEnabled;
         InputFrame testInput;
+        readonly List<Collider> airIgnored = new List<Collider>();
 
         void Awake()
         {
@@ -71,6 +73,7 @@ namespace WombatLab
                 coyoteRemaining = 0; bufferRemaining = 0;
             }
             else if (Grounded && VerticalVelocity < 0) VerticalVelocity = -2;
+            UpdateAirCollisions(!Grounded);
 
             var move = MotorMath.PlanarInput(frame.Move);
             bool running = frame.Run && definition.runSpeed > definition.moveSpeed && Grounded;
@@ -94,10 +97,11 @@ namespace WombatLab
                 if (wasAirborne && !jumping)
                 {
                     landingRemaining = definition.landingRecovery;
-                    if (combat != null && combat.Attacking && combat.Attack.airborne) combat.Cancel();
+                    if (combat != null && combat.Attacking && combat.Attack.airborne) combat.OnLanded();
                 }
             }
             if ((collision & CollisionFlags.Above) != 0 && VerticalVelocity > 0) VerticalVelocity = 0;
+            if (Grounded) UpdateAirCollisions(false);
 
             if (move.sqrMagnitude > .001f && (combat == null || !combat.Attacking || combat.MovementReleased))
                 visual.rotation = Quaternion.Slerp(visual.rotation, Quaternion.LookRotation(move),
@@ -119,6 +123,7 @@ namespace WombatLab
 
         public void ResetAt(Vector3 position, Quaternion facing)
         {
+            RestoreAirCollisions();
             combat?.ResetCombat();
             defense?.ResetDefense();
             reaction?.Clear();
@@ -136,6 +141,37 @@ namespace WombatLab
         public void ReleaseTestInput() { testInputEnabled = false; }
         public void ClearJumpBuffer() { bufferRemaining = coyoteRemaining = 0; }
         public void ResumeLocomotion() { requestedAnimation = null; }
+        void UpdateAirCollisions(bool airborne)
+        {
+            if (airborne)
+            {
+                // Fighter bodies must not become elevated "ground" for a landing smash.
+                // Hurtbox triggers remain active for air kicks and all damage queries.
+                foreach (var fighter in FighterTarget.Active)
+                {
+                    if (fighter.transform == transform || !fighter.Alive) continue;
+                    var collider = fighter.GetComponent<CapsuleCollider>();
+                    if (collider == null || airIgnored.Contains(collider) || Physics.GetIgnoreCollision(controller, collider)) continue;
+                    Physics.IgnoreCollision(controller, collider, true); airIgnored.Add(collider);
+                }
+                return;
+            }
+            for (int i = airIgnored.Count - 1; i >= 0; i--)
+            {
+                var collider = airIgnored[i];
+                if (collider == null) { airIgnored.RemoveAt(i); continue; }
+                // Restore once separated; re-enabling an overlapping capsule can pop the player upwards.
+                float gap = Vector3.ProjectOnPlane(collider.transform.position - transform.position, Vector3.up).magnitude;
+                if (collider.enabled && collider.gameObject.activeInHierarchy && gap < controller.radius + collider.bounds.extents.x + .08f) continue;
+                Physics.IgnoreCollision(controller, collider, false); airIgnored.RemoveAt(i);
+            }
+        }
+        void RestoreAirCollisions()
+        {
+            foreach (var collider in airIgnored) if (collider != null && controller != null) Physics.IgnoreCollision(controller, collider, false);
+            airIgnored.Clear();
+        }
+        void OnDisable() { RestoreAirCollisions(); }
         public bool MoveAttackStep(Vector3 delta)
         {
             var desired = MotorMath.ClampGround(transform.position + delta, definition.arenaMin, definition.arenaMax);

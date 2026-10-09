@@ -20,13 +20,22 @@ MonoBehaviour:
   airborne: 1
   knocksDown: 1
   forwardStep: 0
+  chargeDistance: 0
+  groundImpact: 1
+  breakthrough: 0
+  projectile: 0
+  energyCost: 22
+  impactRadius: 2.1
+  projectileSpeed: 9
+  projectileRange: 8
+  projectileTargets: 3
   moveRelease: 0.82
   hitChainStart: 0.48
-  damage: 26
+  damage: 34
   radius: 0.3
-  knockback: 0.48
+  knockback: 0.7
   hitstun: 0.3
-  hitstop: 0.055
+  hitstop: 0.065
   activeStart: 0.22
   activeEnd: 0.62
   chainStart: 0.58
@@ -34,7 +43,7 @@ MonoBehaviour:
   heavyCancelStart: 0.8
   startupSeconds: 0.13
   activeSeconds: 0.16
-  recoverySeconds: 0.27
+  recoverySeconds: 0.32
   contactAvatar: {fileID: 9000000, guid: ae57f0d0a23cc48448c38c6489cee2bb, type: 3}
   contactClip: {fileID: 7400000, guid: ee9d33f4f16288c4bbc2e7f0b403f970, type: 2}
   contactPoints:

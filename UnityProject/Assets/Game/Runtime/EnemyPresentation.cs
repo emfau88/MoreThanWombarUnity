@@ -33,6 +33,9 @@ namespace WombatLab
             enemy.roleLabel.gameObject.SetActive(alive);
             if (alive)
             {
+                bool warning = enemy.State == "TELEGRAPH";
+                enemy.roleLabel.GetComponent<MeshRenderer>().enabled = warning || enemy.player.ShowDebug;
+                health.enabled = healthBack.enabled = warning || enemy.target.Health < enemy.target.maxHealth;
                 // Camera-aligned labels and bars remain compact above the body.
                 if (Camera.main != null) enemy.roleLabel.rotation = Camera.main.transform.rotation;
                 healthBack.SetPosition(0, new Vector3(-.38f, -.17f, 0)); healthBack.SetPosition(1, new Vector3(.38f, -.17f, 0));
@@ -41,8 +44,9 @@ namespace WombatLab
                 if (enemy.State == "TELEGRAPH" && previous != enemy.State)
                 {
                     bool heavy = enemy.role.role == EnemyRole.Heavy;
-                    cues.pitch = heavy ? .85f : enemy.role.role == EnemyRole.Agile ? 1.2f : 1;
-                    cues.PlayOneShot(heavy ? heavyWarning : enemy.role.role == EnemyRole.Agile ? agileWarning : standardWarning);
+                    bool ranged = enemy.role.role == EnemyRole.Agile || enemy.role.role == EnemyRole.Thrower;
+                    cues.pitch = heavy ? .85f : ranged ? 1.2f : 1;
+                    cues.PlayOneShot(heavy ? heavyWarning : ranged ? agileWarning : standardWarning);
                 }
             }
             if (body.State != priorBody && (body.State == RecoveryState.Falling || body.State == RecoveryState.Dead))

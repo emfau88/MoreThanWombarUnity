@@ -11,6 +11,7 @@ namespace WombatLab
         AudioSource audioSource;
         AudioClip lightSound, heavySound;
         float remaining, duration, strength;
+        float lastSound = -1;
         MaterialPropertyBlock properties;
 
         void Awake()
@@ -44,7 +45,8 @@ namespace WombatLab
                 float angle = (i / 2) * Mathf.PI / 4;
                 spark.SetPosition(i, i % 2 == 0 ? Vector3.zero : new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * strength * 1.8f);
             }
-            audioSource.PlayOneShot(heavy ? heavySound : lightSound, heavy ? 1 : .78f);
+            if (Time.unscaledTime - lastSound > .065f)
+            { audioSource.PlayOneShot(heavy ? heavySound : lightSound, heavy ? 1 : .78f); lastSound = Time.unscaledTime; }
         }
         void LateUpdate()
         {

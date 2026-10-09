@@ -13,6 +13,10 @@ namespace WombatLab
         public float forwardStep = .18f;
         [Tooltip("Ground-only shoulder charge distance. Zero retains normal attack steps.")]
         public float chargeDistance;
+        [Header("Special ability")]
+        public bool groundImpact, breakthrough, projectile;
+        public float energyCost, impactRadius = 2.1f, projectileSpeed = 9, projectileRange = 8;
+        public int projectileTargets = 3;
         [Range(0, 1)] public float moveRelease = .82f;
         [Range(0, 1)] public float hitChainStart = .48f;
         public int damage = 10;
@@ -44,7 +48,7 @@ namespace WombatLab
             => AttackRules.WindowCrossed(previous, current, ActiveStart, ActiveEnd);
     }
 
-    public enum CombatIntent { None, Light, Heavy, Kick, Charge }
+    public enum CombatIntent { None, Light, Heavy, Kick, Charge, Wave }
 
     public static class AttackRules
     {

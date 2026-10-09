@@ -76,6 +76,7 @@ namespace WombatLab
             Label(baseDisc.transform, "Außen: Rennen", 16, new Vector2(0, 112), new Vector2(200, 28));
 
             Action("Heavy", "HEAVY", "buttonNorth", new Vector2(-266, 174), 88, new Color(.80f, .40f, .24f, .85f));
+            Action("Wave", "WELLE", "dpad/right", new Vector2(-370, 174), 88, new Color(.15f, .65f, .64f, .9f));
             Action("Kick", "KICK", "rightShoulder", new Vector2(-165, 190), 88, new Color(.32f, .44f, .53f, .85f));
             Action("Jump", "SPRUNG", "buttonSouth", new Vector2(-66, 172), 88, new Color(.32f, .44f, .53f, .85f));
             Action("Light", "COMBO", "buttonWest", new Vector2(-205, 69), 108, new Color(.25f, .72f, .61f, .90f));
@@ -98,7 +99,7 @@ namespace WombatLab
                 modeEncounter = encounter;
                 var mode = Button("Opponent count", "GEGNER: 1", controls.transform, new Vector2(0,1), new Vector2(255,-24), new Vector2(170,42), false);
                 opponentCountText = mode.GetComponentInChildren<Text>();
-                mode.onClick.AddListener(() => encounter.SetMode(encounter.Mode % Mathf.Min(4,encounter.enemies.Length) + 1));
+                mode.onClick.AddListener(() => encounter.SetMode(encounter.Mode % Mathf.Min(encounter.maxOpponents,encounter.enemies.Length) + 1));
             }
             var hint = Rect("Portrait hint", controls.transform); Stretch(hint);
             portraitHint = hint.gameObject;
@@ -150,7 +151,7 @@ namespace WombatLab
             if (keyboardHelp != null) keyboardHelp.gameObject.SetActive(!visible);
             if (header != null) foreach (var title in header.GetComponentsInChildren<Text>(true))
                 if (title != stateText) title.gameObject.SetActive(!visible);
-            if (stateText != null) stateText.fontSize = visible ? 22 : originalStateFont;
+            if (stateText != null) stateText.fontSize = visible ? (chapter != null ? 18 : 22) : originalStateFont;
             portraitHint.SetActive(visible && Screen.height > Screen.width);
         }
         void Update()

@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 19.49,
+      "summary": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "WombatLab.Tests.Lf2CombatPlayTests.CrowdUsesTwoMeleeAttackersAndThrowerCanBeSidestepped",
+          "Status": "Passed",
+          "Duration": 10.184923,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.Lf2CombatPlayTests.SmashHitsOnLandingOnceInRadiusAndIsCancelledByDamage",
+          "Status": "Passed",
+          "Duration": 2.8073624,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.Lf2CombatPlayTests.SpecialsRespectMpAndBreakthroughPassesLightButStopsAtHeavy",
+          "Status": "Passed",
+          "Duration": 1.9533404,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.Lf2CombatPlayTests.TouchWaveUsesSharedInputAndCheckpointRestoresMp",
+          "Status": "Passed",
+          "Duration": 1.7161452,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "WombatLab.Tests.Lf2CombatPlayTests.WavePiercesThreeTargetsButCannotPassWallOrDamageTeam",
+          "Status": "Passed",
+          "Duration": 2.7833922,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\madde\\Documents\\MoreThanWombarUnity\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

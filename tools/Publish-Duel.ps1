@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true)][ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9._-]+$')][string]$Tag,
-    [ValidateSet('B3c','B8')][string]$Build = 'B3c'
+    [ValidateSet('B3c','B8','B12')][string]$Build = 'B3c'
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path $PSScriptRoot -Parent
@@ -13,7 +13,7 @@ if ((Get-Item (Join-Path $webRoot 'index.html')).LastWriteTimeUtc -lt [DateTime]
 $pending = & git -C $projectRoot status --porcelain
 if ($LASTEXITCODE -ne 0 -or $pending) { throw 'Commit the game and publishing files before publishing.' }
 $revision = & git -C $projectRoot rev-parse HEAD
-if ($Build -eq 'B8' -and ($report.scene -ne 'Assets/Game/Scenes/JunkyardChapter.unity' -or $report.commit -ne $revision)) {
+if ($Build -in @('B8','B12') -and ($report.scene -ne 'Assets/Game/Scenes/JunkyardChapter.unity' -or $report.commit -ne $revision)) {
     throw 'Build the committed chapter revision before publishing; scene/revision mismatch.'
 }
 @{ commit = $revision; buildUtc = $report.utc; release = $Tag; scene = $report.scene; build = $Build } | ConvertTo-Json | Set-Content (Join-Path $webRoot 'version.json') -Encoding utf8
@@ -31,8 +31,8 @@ for ($offset = 0; $offset -lt $archiveBytes.Length; $offset += $partSize) {
     $partPaths += $partPath
 }
 $repo = 'emfau88/MoreThanWombarUnity'
-$gameTitle = if ($Build -eq 'B8') { 'Schrotthof-Kapitel' } else { 'Schrotthof-Duell' }
-$releaseNotes = if ($Build -eq 'B8') { 'Spielbares Junkyard-Kapitel mit Startmenü, drei unterschiedlichen Bereichen, neun Wellen, Pause, Einführung, Optionen und Audio. Touch, Tastatur und Gamepad; Android im Querformat.' } else { 'Spielbarer WebGL-Prototyp mit Touch-Steuerung, Tastatur und Gamepad. Android im Querformat.' }
+$gameTitle = if ($Build -in @('B8','B12')) { 'Schrotthof-Kapitel' } else { 'Schrotthof-Duell' }
+$releaseNotes = if ($Build -eq 'B12') { 'LF2-inspirierte Stage mit fünf Begegnungen und 30 Gegnern aus drei Rollen. Boden-AOE, Durchbruch, Druckwelle und MP; angekündigte Verstärkungen, Checkpoints und Finale. Startmenü, Pause und Touch-Steuerung für Android im Querformat. Physischer Android-Gerätecheck noch offen.' } elseif ($Build -eq 'B8') { 'Spielbares Junkyard-Kapitel mit Startmenü, drei unterschiedlichen Bereichen, neun Wellen, Pause, Einführung, Optionen und Audio. Touch, Tastatur und Gamepad; Android im Querformat.' } else { 'Spielbarer WebGL-Prototyp mit Touch-Steuerung, Tastatur und Gamepad. Android im Querformat.' }
 & gh release create $Tag @partPaths --repo $repo --target $revision --draft --title "$gameTitle / $Tag" --notes $releaseNotes
 if ($LASTEXITCODE -ne 0) { throw 'Release upload failed; inspect the draft before retrying.' }
 & gh release edit $Tag --repo $repo --draft=false

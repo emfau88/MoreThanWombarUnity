@@ -16,7 +16,9 @@ namespace WombatLab.Editor
         const string Pending = "WombatLab.DuelBuild";
         const string ChapterBuild = "WombatLab.ChapterBuild";
         const string Revision = "WombatLab.BuildRevision";
-        static string Output => Path.GetFullPath(Path.Combine(Application.dataPath, SessionState.GetBool(ChapterBuild, false) ? "../../Builds/B8" : "../../Builds/B3c"));
+        const string CrowdBuild = "WombatLab.CrowdBuild";
+        const string StageBuild = "WombatLab.StageBuild";
+        static string Output => Path.GetFullPath(Path.Combine(Application.dataPath, SessionState.GetBool(StageBuild, false) ? "../../Builds/B12" : SessionState.GetBool(CrowdBuild, false) ? "../../Builds/B11" : SessionState.GetBool(ChapterBuild, false) ? "../../Builds/B8" : "../../Builds/B3c"));
         static DuelSliceBuilder() { EditorApplication.update += ResumeBuild; }
 
         [MenuItem("Wombat Lab/B3c Apply Duel Tuning")]
@@ -52,7 +54,11 @@ namespace WombatLab.Editor
         public static void ChapterWindows() => Start("Windows", true);
         [MenuItem("Wombat Lab/B8 Build Chapter WebGL")]
         public static void ChapterWebGL() => Start("WebGL", true);
-        public static string Start(string platform, bool chapterBuild = false, string revision = "")
+        [MenuItem("Wombat Lab/B11 Build Crowd WebGL")]
+        public static void CrowdWebGL() => Start("WebGL", false, "", true);
+        [MenuItem("Wombat Lab/B12 Build Stage WebGL")]
+        public static void StageWebGL() => Start("WebGL", true, "B12 local stage", false, true);
+        public static string Start(string platform, bool chapterBuild = false, string revision = "", bool crowdBuild = false, bool stageBuild = false)
         {
             if (platform != "Windows" && platform != "WebGL") throw new ArgumentException(platform);
             if (EditorApplication.isPlaying || EditorApplication.isCompiling || EditorUtility.scriptCompilationFailed || BuildPipeline.isBuildingPlayer)
@@ -60,7 +66,9 @@ namespace WombatLab.Editor
             if (SessionState.GetString(Pending, "") != "") throw new InvalidOperationException("A duel build is already queued.");
             var target = Target(platform); var group = BuildPipeline.GetBuildTargetGroup(target);
             if (!BuildPipeline.IsBuildTargetSupported(group, target)) throw new InvalidOperationException(platform + " module missing.");
-            SessionState.SetBool(ChapterBuild, chapterBuild);
+            SessionState.SetBool(StageBuild, stageBuild);
+            SessionState.SetBool(ChapterBuild, chapterBuild || stageBuild);
+            SessionState.SetBool(CrowdBuild, crowdBuild);
             SessionState.SetString(Revision, revision);
             Directory.CreateDirectory(Output);
             Write(platform, new Result { status = "queued", platform = platform });
@@ -87,20 +95,21 @@ namespace WombatLab.Editor
             string template = PlayerSettings.WebGL.template;
             var started = DateTime.UtcNow;
             bool chapterBuild = SessionState.GetBool(ChapterBuild, false);
+            bool crowdBuild = SessionState.GetBool(CrowdBuild, false);
             var result = new Result { platform = platform, status = "building", utc = started.ToString("O"),
-                commit = SessionState.GetString(Revision, ""), scene = chapterBuild ? JunkyardChapterBuilder.ScenePath : HumanoidCombatBuilder.ScenePath };
+                commit = SessionState.GetString(Revision, ""), scene = crowdBuild ? Lf2CombatBuilder.CrowdScene : chapterBuild ? JunkyardChapterBuilder.ScenePath : HumanoidCombatBuilder.ScenePath };
             Write(platform, result);
             try
             {
                 if (EditorUtility.scriptCompilationFailed) throw new InvalidOperationException("Script compilation failed.");
-                PlayerSettings.productName = chapterBuild ? "More Than Wombat — Schrotthof" : "More Than Wombat — Duell";
-                PlayerSettings.WebGL.compressionFormat = chapterBuild ? WebGLCompressionFormat.Gzip : WebGLCompressionFormat.Disabled;
-                PlayerSettings.WebGL.decompressionFallback = chapterBuild || fallback;
+                PlayerSettings.productName = crowdBuild ? "More Than Wombat — Gruppenkampf" : chapterBuild ? "More Than Wombat — Schrotthof" : "More Than Wombat — Duell";
+                PlayerSettings.WebGL.compressionFormat = chapterBuild || crowdBuild ? WebGLCompressionFormat.Gzip : WebGLCompressionFormat.Disabled;
+                PlayerSettings.WebGL.decompressionFallback = chapterBuild || crowdBuild || fallback;
                 PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
                 PlayerSettings.WebGL.template = "PROJECT:TouchDuel";
                 string location = platform == "Windows" ? Path.Combine(Output, platform, "MoreThanWombat.exe") : Path.Combine(Output, platform);
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
-                    scenes = new[] { chapterBuild ? JunkyardChapterBuilder.ScenePath : HumanoidCombatBuilder.ScenePath }, locationPathName = location,
+                    scenes = new[] { result.scene }, locationPathName = location,
                     target = Target(platform), options = BuildOptions.None });
                 result.status = report.summary.result.ToString(); result.bytes = (long)report.summary.totalSize;
                 result.errors = report.summary.totalErrors; result.warnings = report.summary.totalWarnings;

@@ -17,6 +17,8 @@ namespace WombatLab.Editor
         static PlayerDefense defense;
         static double started;
         static float nextTap;
+        static float nextSpecial;
+        static bool airSmash;
         static int capturedArea=-1, capturedWave=-1;
         static bool capturedGate;
         static string prefix;
@@ -28,9 +30,9 @@ namespace WombatLab.Editor
             combat=player.GetComponent<CombatController>();defense=player.GetComponent<PlayerDefense>();
             if (chapter.session != null) chapter.session.StartRun(false); else chapter.RestartChapter();
             player.SetTestInput(Vector2.zero); started=EditorApplication.timeSinceStartup;
-            nextTap=0;capturedArea=capturedWave=-1;capturedGate=false;report.Clear();
+            nextTap=nextSpecial=0;airSmash=false;capturedArea=capturedWave=-1;capturedGate=false;report.Clear();
             report.AppendLine("Actual chapter run: standard input injection, unchanged HP/damage/AI, no direct damage or teleports.");
-            LabVisualReview.Capture(prefix+"-arrival");EditorApplication.update+=Tick;return "Actual nine-wave chapter run started.";
+            LabVisualReview.CaptureHud(prefix+"-arrival");EditorApplication.update+=Tick;return "Actual chapter combat run started.";
         }
         static void Tick()
         {
@@ -63,24 +65,36 @@ namespace WombatLab.Editor
                 {
                     capturedArea=chapter.AreaIndex;capturedWave=chapter.WaveIndex;
                     report.AppendLine("Area="+capturedArea+" wave="+capturedWave+" HP="+defense.Health+" position="+player.transform.position);
-                    LabVisualReview.Capture(prefix+"-area-"+(capturedArea+1)+"-wave-"+(capturedWave+1));
+                    LabVisualReview.CaptureHud(prefix+"-area-"+(capturedArea+1)+"-encounter-"+(capturedWave+1));
                 }
                 var enemies=chapter.encounter.enemies;
                 var target=enemies.Where(e=>e.target.Alive && !e.GetComponent<BodyRecovery>().Protected)
                     .OrderBy(e=>(e.transform.position-player.transform.position).sqrMagnitude).FirstOrDefault();
-                if(target==null){player.SetTestInput(Vector2.zero);return;}
+                if(target==null)
+                {
+                    bool advance = !enemies.Any(e => e.target.Alive) && chapter.PendingEnemies == 0;
+                    player.SetTestInput(advance ? Vector2.right : Vector2.zero); return;
+                }
                 var toward=Vector3.ProjectOnPlane(target.transform.position-player.transform.position,Vector3.up);
                 if(!combat.Attacking && toward.sqrMagnitude>.01f)player.visual.rotation=Quaternion.LookRotation(toward);
-                player.SetTestInput(toward.magnitude>1.12f?new Vector2(toward.x,toward.z).normalized:Vector2.zero);
-                if(Time.time>=nextTap){combat.Queue(CombatIntent.Light);nextTap=Time.time+.15f;}
+                var move = toward.magnitude > 1.12f ? new Vector2(toward.x,toward.z).normalized : Vector2.zero;
+                player.SetTestInput(move);
+                if (airSmash && !player.Grounded)
+                { combat.Queue(CombatIntent.Heavy); airSmash = false; }
+                else if (!combat.Attacking && Time.time >= nextSpecial && player.Grounded && combat.Energy >= 22 && toward.magnitude < 2.2f)
+                { player.SetTestInput(move, true); airSmash = true; nextSpecial = Time.time + 1.6f; }
+                else if (!combat.Attacking && Time.time >= nextSpecial && combat.Energy >= 26 && toward.magnitude > 2.5f)
+                { combat.Queue(CombatIntent.Wave); nextSpecial = Time.time + 1.4f; }
+                else if (!airSmash && Time.time >= nextTap)
+                { combat.Queue(CombatIntent.Light); nextTap = Time.time + .15f; }
             }
             catch(Exception e){report.AppendLine(e.ToString());Finish();}
         }
         static void Finish()
         {
-            report.AppendLine("End="+chapter.Phase+" completed="+chapter.CompletedAreas+" HP="+defense.Health
+            report.AppendLine("End="+chapter.Phase+" completed="+chapter.CompletedAreas+" defeated="+chapter.DefeatedEnemies+" HP="+defense.Health
                 +" elapsed="+(EditorApplication.timeSinceStartup-started).ToString("F1"));
-            LabVisualReview.Capture(defense.Alive ? prefix+"-run-end" : prefix+"-run-defeat");
+            LabVisualReview.CaptureHud(defense.Alive ? prefix+"-run-end" : prefix+"-run-defeat");
             File.WriteAllText(Path.Combine(Application.dataPath,"QA/"+prefix+"-run-report.txt"),report.ToString());
             player.ReleaseTestInput(); EditorApplication.update-=Tick;EditorApplication.isPaused=true;
         }

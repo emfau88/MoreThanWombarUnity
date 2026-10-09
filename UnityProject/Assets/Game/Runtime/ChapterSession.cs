@@ -145,22 +145,23 @@ namespace WombatLab
         string Scheme => input.TouchControls?.Visible == true ? "TOUCH" : gamepad ? "GAMEPAD" : "TASTATUR";
         string Movement => Scheme == "TOUCH" ? "Stick: bewegen · außen: rennen · SPRUNG: springen"
             : Scheme == "GAMEPAD" ? "Linker Stick: bewegen · LT: rennen · A: springen" : "WASD / Pfeile: bewegen · CTRL: rennen · SPACE: springen";
-        string Attacks => Scheme == "TOUCH" ? "COMBO: Schlagkette · HEAVY: niederwerfen · KICK: Platz schaffen · STOSS: Distanz schließen"
-            : Scheme == "GAMEPAD" ? "X: Combo · Y: Heavy · RB: Kick · RT: Schulterstoß" : "J: Combo · K: Heavy · L: Kick · E: Schulterstoß";
+        string Attacks => Scheme == "TOUCH" ? "COMBO / KICK / HEAVY · Luft + HEAVY: Smash (22 MP)\nSTOSS: Durchbruch (18 MP) · WELLE: Fernangriff (26 MP)"
+            : Scheme == "GAMEPAD" ? "X: Combo · Y: Heavy / Luft-Smash · RB: Kick\nRT: Durchbruch · Steuerkreuz rechts: Druckwelle"
+            : "J: Combo · K: Heavy / Luft-Smash · L: Kick\nE: Durchbruch · Q: Druckwelle";
         string Evade => Scheme == "TOUCH" ? "AUSWEICHEN: aus der Warnung heraus · TOR ÖFFNEN: nah am Schalter"
             : Scheme == "GAMEPAD" ? "B: ausweichen · LB: Schalter bedienen · Start: Pause" : "SHIFT: ausweichen · F: Schalter bedienen · ESC / P: Pause";
         void RefreshText()
         {
             if (!ready) return;
             eyebrow.text = "MORE THAN WOMBAT   /   SCHROTTHOF";
-            footer.text = "3 BEREICHE   ·   9 WELLEN   ·   " + Scheme;
+            footer.text = chapter.definition.areas.Length + " BEREICHE   ·   " + chapter.PlannedEnemies + " GEGNER   ·   " + Scheme;
             copy.fontSize = Page == SessionPage.Controls || Page == SessionPage.Intro ? 19 : 21;
             if (Page == SessionPage.Home)
             { title.text = "ÄRGER IM SCHROTTHOF"; subtitle.text = "Ein kurzer Brawler. Ein Hof voller Bären.";
-                copy.text = "Kämpfe dich durch Anlieferung und Sortierhof bis zum Presswerk.\n\nNutze Combo für Druck, Kick für Freiraum und Heavy zum Niederwerfen. Orange Warnungen geben dir Zeit zum Ausweichen.\n\nNach jedem Bereich wartet ein Checkpoint."; }
+                copy.text = "Kämpfe dich durch Anlieferung und Sortierhof bis zum Presswerk.\n\nBündle Gegner für den Boden-Smash, brich mit dem Stoß durch oder nutze die Druckwelle. Orange Warnungen geben dir Zeit zum Ausweichen.\n\nNach jedem Bereich wartet ein Checkpoint."; }
             else if (Page == SessionPage.Pause)
             { title.text = "KURZE VERSCHNAUFPAUSE"; subtitle.text = "Der Kampf wartet auf dich.";
-                copy.text = chapter.definition.areas[chapter.AreaIndex].title + "   ·   WELLE " + (chapter.WaveIndex + 1) + "\n\n" + defense.Health + " HP   ·   " + TimeLabel() + " Spielzeit\n\nSteuerung und Optionen kannst du hier jederzeit nachsehen."; }
+                copy.text = chapter.definition.areas[chapter.AreaIndex].title + "   ·   " + chapter.DefeatedEnemies + " / " + chapter.PlannedEnemies + " BESIEGT\n\n" + defense.Health + " HP   ·   " + TimeLabel() + " Spielzeit\n\nSteuerung und Optionen kannst du hier jederzeit nachsehen."; }
             else if (Page == SessionPage.Controls)
             { title.text = "SO KÄMPFST DU"; subtitle.text = Scheme + "   ·   Gemeinsam bewegen und angreifen";
                 copy.text = Movement + "\n\n" + Attacks + "\n\n" + Evade; }
@@ -176,7 +177,7 @@ namespace WombatLab
                 title.text = new[] { "REIN IN DEN HOF", "FINDE DEINEN RHYTHMUS", "BLEIB IN BEWEGUNG" }[introStep];
                 subtitle.text = "KURZE EINFÜHRUNG   " + (introStep + 1) + " / 3   ·   " + Scheme;
                 copy.text = introStep == 0 ? Movement + "\n\nLaufe nach rechts zur gelben Kampffläche. Der Kampf beginnt erst, wenn du sie betrittst."
-                    : introStep == 1 ? Attacks + "\n\nTippe Combo mehrfach für die Schlagkette. Heavy wirft nieder; Kick und Stoß helfen gegen Gruppen."
+                    : introStep == 1 ? Attacks + "\n\nSmash trifft im Kreis, Durchbruch eine Spur, Welle bis zu 3 Ziele. Spezialaktionen brauchen MP; Grundtreffer laden auf."
                     : Evade + "\n\nWeiche orange angekündigten Angriffen aus. Nach Bereich 1 öffnest du das Tor am gelben Schalter.\n\nBei Niederlage: AB CHECKPOINT für den aktuellen Abschnitt.";
                 primary.GetComponentInChildren<Text>().text = introStep == 2 ? "LOS GEHT’S" : "WEITER";
             }
@@ -184,7 +185,7 @@ namespace WombatLab
             {
                 bool won = chapter.Phase == ChapterPhase.Complete;
                 title.text = won ? "DER HOF GEHÖRT DIR!" : "DIE BÄREN HATTEN RECHT …";
-                subtitle.text = won ? "Vorarbeiter besiegt. Schrotthof geschafft." : "Ein neuer Versuch wartet am Checkpoint.";
+                subtitle.text = won ? chapter.PlannedEnemies + " Gegner besiegt. Schrotthof geschafft." : "Ein neuer Versuch wartet am Checkpoint.";
                 copy.text = chapter.CompletedAreas + " / 3 BEREICHE GESCHAFFT   ·   " + TimeLabel() + "\n\n"
                     + (won ? "Verbleibende HP: " + defense.Health + "\n\nLust auf eine zweite Runde?" : "Ab Checkpoint beginnt der aktuelle Abschnitt neu.\nGeschaffte Bereiche und das geöffnete Tor bleiben erhalten.");
             }
@@ -196,8 +197,8 @@ namespace WombatLab
             if (panel == null) return;
             panel.gameObject.SetActive(help && input.TouchControls?.Visible != true);
             var label = panel.GetComponentInChildren<Text>(true);
-            if (label != null) label.text = Scheme == "GAMEPAD" ? "X Combo  Y Heavy  RB Kick  RT Stoß  B Ausweichen  LB Schalter  START Pause"
-                : "J Combo  K Heavy  L Kick  E Stoß  SHIFT Ausweichen  F Schalter  ESC Pause";
+            if (label != null) label.text = Scheme == "GAMEPAD" ? "X Combo  Y Heavy/Luft-Smash  RT Stoß  D-Pad → Welle  B Ausweichen  LB Tor  START Pause"
+                : "J Combo  K Heavy/Luft-Smash  L Kick  E Stoß  Q Welle  SHIFT Ausweichen  F Tor  ESC Pause";
         }
         public void SetVolume(float value)
         { AudioListener.volume = Mathf.Clamp01(value); if (volume != null) volume.SetValueWithoutNotify(AudioListener.volume); PlayerPrefs.SetFloat(PrefPrefix + "Volume", AudioListener.volume); PlayerPrefs.Save(); }

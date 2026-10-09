@@ -15,9 +15,15 @@ B3c stimmt KI-Abstand, Aufstehschutz und Feedback ab und ergänzt ein deutsches 
 Eigenständige Windows-/WebGL-Spielstände sind vorhanden; der Browserkampf wurde bis zum Sieg gespielt.
 
 B4 ergänzt einen kurzen Schulterstoß auf E/RT/Touch STOSS und mehr Kick-Abstand.
-B5 ergänzt Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. B7 ergänzt unterschiedliche Bereichsgestaltung, gemalten Boden, Material-/Licht-/Kamerapass, warme Bärengesichter, kompakte HP-/Boden-/Tor-Marker und zwölf CC0-Audiosignale. B8 ergänzt Startmenü/Fortsetzen, Pause, Einführung, gespeicherte Optionen und Niederlage-/Sieg-/Replay-Anzeige. Nächster Bulk: B9 für Balance, Performance und Demo. Der Play-Link enthält jetzt das B8-Kapitel mit Hauptmenü, Anlieferung, Sortierhof und Presswerk. [Release-Nachweis](B8_WEBGL_RELEASE.md).
+B5 ergänzt Standard, Agile und Heavy sowie Mischkämpfe mit drei/vier Gegnern. B6 liefert eine eigene JunkyardChapter-Szene mit drei verbundenen Bereichen, neun Wellen, Torschalter, Checkpoints und Vorarbeiter-Finale. B7 ergänzt unterschiedliche Bereichsgestaltung, gemalten Boden, Material-/Licht-/Kamerapass, warme Bärengesichter, kompakte HP-/Boden-/Tor-Marker und zwölf CC0-Audiosignale. B8 ergänzt Startmenü/Fortsetzen, Pause, Einführung, gespeicherte Optionen und Niederlage-/Sieg-/Replay-Anzeige. **B9–B11 sind zusätzlich lokal integriert:** Boden-AOE, MP mit drei Spezialaktionen, Raufbold/Werfer/Schläger und ein Acht-/Zehn-Gegner-Labor. [Spielanleitung und Nachweise](B9_B11_LF2_COMBAT.md). **B12 ist ebenfalls lokal integriert:** fünf Begegnungen mit genau 30 Gegnern, angekündigten Verstärkungen und überarbeiteten Checkpoints. [Stage und Nachweise](B12_LF2_STAGE.md). Nächster Bulk ist B13: Präsentationspolitur. Diese lokalen Änderungen sind noch nicht im öffentlichen Play-Link enthalten. Der Play-Link enthält jetzt das B8-Kapitel mit Hauptmenü, Anlieferung, Sortierhof und Presswerk. [Release-Nachweis](B8_WEBGL_RELEASE.md).
 
 ## Prototyp spielen
+
+**Lokale B12-Stage:** `Assets/Game/Scenes/JunkyardChapter.unity` öffnen → Play → SPIELEN. Browserbuild mit `tools/Serve-Duel.ps1 -Build B12 -Port 8767` starten und [Stage lokal spielen](http://127.0.0.1:8767/).
+
+**Separates B9–B11-Kampflabor:** `Assets/Game/Scenes/CrowdCombatLab.unity` in Unity öffnen und Play starten: acht Gegner, `0` für zehn, `R` für Reset. Luft + K = AOE-Smash, E = Durchbruch, Q = Druckwelle. MP und neue Rollen sind auch in der Kapitel-Szene integriert. [Details](B9_B11_LF2_COMBAT.md).
+
+Lokaler Browserbuild: `tools/Serve-Duel.ps1 -Build B11 -Port 8766` und [Gruppenkampf öffnen](http://127.0.0.1:8766/). Für ein Handy im selben WLAN den Server mit `-Lan` starten und die IPv4-Adresse des PCs verwenden; das ist ein eigener Gerätecheck, kein bereits bestätigter Android-Nachweis.
 
 **[▶ Jetzt spielen — Schrotthof-Kapitel](https://emfau88.github.io/MoreThanWombarUnity/)**
 
@@ -38,7 +44,7 @@ klicken, damit sie die Tastatureingaben erhält.
 
 **Kapitel im Editor spielen:** Statt der Lab-Szene `Assets/Game/Scenes/JunkyardChapter.unity` öffnen, Play und **SPIELEN** wählen. ESC/P/Gamepad Start/PAUSE pausiert. F/Gamepad LB/Touch TOR ÖFFNEN bedient den nahen Schalter nach Bereich 1. R/Touch CHECKPOINT wiederholt den Abschnitt; Backspace/Select/Touch VON VORN startet das Kapitel neu. Nach Niederlage/Sieg erscheinen Retry/Replay und Startmenü. [B8: Sitzung, Einführung und Optionen](B8_SESSION.md), [B6: Ablauf und Checkpoints](B6_JUNKYARD_CHAPTER.md).
 
-Die gespeicherte Kapitel-Szene enthält auch B7. [B7: Gestaltung, Audio und Nachweise](B7_PRESENTATION.md). Bestehendes Modell/Rig des Menschen und der Bären erhalten; endgültiger Wombat-Stil und längeres Kapitel bleiben offen.
+Die gespeicherte Kapitel-Szene enthält auch B7. [B7: Gestaltung, Audio und Nachweise](B7_PRESENTATION.md). Bestehendes Modell/Rig des Menschen und der Bären erhalten; endgültiger Wombat-Stil bleibt offen. Der lokale B12-Ablauf umfasst die geplanten 30 Gegner.
 
 - WASD oder Pfeiltasten: auf der X/Z-Bodenfläche bewegen.
 - Ctrl / linker Gamepad-Trigger gehalten: Rennen am Boden. Loslassen: Gehen.
@@ -100,7 +106,7 @@ erweitert das überprüfte Duell um drei Bereiche und mehrere Gegnerrollen.
 B8 verbindet Startmenü und Kapitelabschluss; als Nächstes folgen Balance und Demo-Übergabe.
 
 Werkzeuganbindung, Bewegung und Combat-Polish sind umgesetzt; Nutzerfeedback
-dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. B6 ergänzt das durchspielbare Junkyard-Kapitel. B7 liefert Welt-/Kamerapräsentation und Audio. B8 liefert Startmenü, Pause, Intro und Optionen; das Kapitel ist jetzt als WebGL-Release öffentlich spielbar. Nächster Entwicklungsbulk ist B9 mit Balance, Performance und Kapitel-Demo; Wombat-Gestaltung bleibt separat offen.
+dient dem gezielten Tuning. B3a–B3c liefern Kernaktionen, Reaktionen, Fall/Aufstehen/Tod und das abgestimmte Duell samt Builds. B4 ergänzt Schulterstoß und mehr Kick-Abstand, B5 drei Gegnerrollen und Mischkampf. B6 ergänzt das durchspielbare Junkyard-Kapitel. B7 liefert Welt-/Kamerapräsentation und Audio. B8 liefert Startmenü, Pause, Intro und Optionen; das Kapitel ist jetzt als WebGL-Release öffentlich spielbar. B9–B11 ergänzen lokal AOE, MP, drei Spezialaktionen und dichteren Gruppenkampf. Nächster Entwicklungsbulk ist B12 gemäß [LF2-Stage-Plan](LF2_STAGE_PLAN.md). Für diese Stage bleibt der menschliche Kämpfer die Basis; die endgültige Wombat-Gestaltung bleibt offen.
 Keine Cloud-Dienste, kein Multiplayer, keine Asset-Käufe und keine Änderungen
 am Browsergame als implizite Arbeitsschritte.
 

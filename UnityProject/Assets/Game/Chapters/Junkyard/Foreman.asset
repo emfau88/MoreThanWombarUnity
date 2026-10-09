@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1dcfc258e56cea54baba910302549ba4, type: 3}
-  m_Name: VORARBEITER
+  m_Name: Foreman
   m_EditorClassIdentifier: WombatLab.Runtime::WombatLab.EnemyRoleDefinition
   role: 2
   displayName: VORARBEITER
   attack: {fileID: 11400000, guid: 5d4553487e170924a837b1c57a4da6c8, type: 2}
-  health: 100
+  health: 105
   damage: 20
   moveSpeed: 1.9
   telegraphSeconds: 0.7

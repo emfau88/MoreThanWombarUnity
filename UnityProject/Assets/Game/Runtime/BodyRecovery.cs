@@ -23,12 +23,14 @@ namespace WombatLab
         CharacterController capsule;
         Vector3 capsuleCenter;
         float capsuleHeight;
+        FighterTarget fighter;
 
         void Awake() { Cache(); ResetBody(); }
         void Cache()
         {
             if (colliders != null) return;
             capsule = GetComponent<CharacterController>();
+            fighter = GetComponent<FighterTarget>();
             if (capsule != null) { capsuleCenter = capsule.center; capsuleHeight = capsule.height; }
             colliders = GetComponentsInChildren<Collider>(true);
             colliderEnabled = new bool[colliders.Length];
@@ -54,7 +56,7 @@ namespace WombatLab
         void Update()
         {
             if (clock != null && clock.GameplayBlocked) return;
-            bool frozen = State != RecoveryState.Dead && clock != null && clock.Frozen;
+            bool frozen = State != RecoveryState.Dead && (capsule == null && fighter != null ? fighter.Frozen : clock != null && clock.Frozen);
             float dt = frozen ? 0 : Time.deltaTime;
             if (!Busy) { protection = Mathf.Max(0, protection - dt); return; }
             elapsed += dt;

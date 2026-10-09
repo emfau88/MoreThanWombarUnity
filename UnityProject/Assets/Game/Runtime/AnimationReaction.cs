@@ -12,6 +12,9 @@ namespace WombatLab
         public bool Active => remaining > 0;
         public string State { get; private set; }
         float remaining, speed;
+        FighterTarget fighter;
+        bool player;
+        void Awake() { fighter = GetComponent<FighterTarget>(); player = GetComponent<PlayerMotor>() != null; }
         public void Play(bool strong, float seconds)
         {
             var clip = strong ? staggerClip : hitClip;
@@ -23,7 +26,7 @@ namespace WombatLab
         void Update()
         {
             if (!Active) return;
-            bool frozen = clock != null && clock.Frozen;
+            bool frozen = !player && fighter != null ? fighter.Frozen : clock != null && clock.Frozen;
             animator.speed = frozen ? 0 : speed;
             remaining = Mathf.Max(0, remaining - (frozen ? 0 : Time.deltaTime));
             if (!Active) { animator.speed = 1; GetComponent<PlayerMotor>()?.ResumeLocomotion(); }

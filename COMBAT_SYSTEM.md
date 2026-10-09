@@ -1,4 +1,12 @@
-# Combat und Sparring — aktueller B8-Stand
+# Combat und Sparring — B9–B12 lokal
+
+## Aktueller Ausbau
+
+Der lokale Stand ergänzt MP (100 Maximum), Boden-Smash bei tatsächlicher Landung (22 MP), Durchbruch durch leichte Gegner (18 MP) und Druckwelle gegen bis zu drei Ziele (26 MP). Sprung + K, E und Q lösen die Aktionen aus; Touch und Gamepad sind angebunden. Mehrfachtreffer erhalten einzelne Trefferreaktionen und kompakte Effekte. CrowdCombatLab startet mit acht Gegnern aus Raufbold, Werfer und Schläger; zehn sind optional. Zwei Nahkämpfer können gleichzeitig angreifen. B12 nutzt diese Regeln in fünf Begegnungen mit genau 30 Gegnern und endlichem Nachschub; [Stage-Ablauf](B12_LF2_STAGE.md).
+
+Aktuelle Werte, Steuerung und Nachweise: [B9_B11_LF2_COMBAT.md](B9_B11_LF2_COMBAT.md). Die folgenden Abschnitte dokumentieren die bisherige Grundlage; insbesondere die frühere Stoßreichweite, Einzelkontakt-Regel und Vier-Gegner-Begrenzung gelten nicht für den neuen Crowd-Ausbau.
+
+## Bisherige Grundlage bis B8
 
 Stand: 9. Oktober 2026. Erhaltene B1-Regeln, B2-Humanoid-Anbindung, B3a-Aktionen, B3b-Körpererholung, B3c-Duell-Tuning, B4-Schulterstoß/B5-Gegnerrollen, B6-Kapitelablauf und B7-Präsentation. B7 verändert keine Kampfwerte, Kontaktzeiten, Wellen oder Checkpoint-Regeln; Kapitel ergänzt lesbarere Gesichtsfarben/HP-Marker und importierte Kontakt-/Warn-/Schritt-/Signalsounds. Figuren-Rigs bleiben erhalten, Wombat-Gestaltung bleibt offen. Siehe [NEXT_STEPS.md](NEXT_STEPS.md) und [B7_PRESENTATION.md](B7_PRESENTATION.md).
 

@@ -6,15 +6,15 @@ namespace WombatLab
     public readonly struct InputFrame
     {
         public readonly Vector2 Move;
-        public readonly bool Jump, Restart, Debug, Light, Heavy, Evade, Kick, Run, Charge, Interact, ChapterRestart;
-        public InputFrame(Vector2 move, bool jump = false, bool restart = false, bool debug = false, bool light = false, bool heavy = false, bool evade = false, bool kick = false, bool run = false, bool charge = false, bool interact = false, bool chapterRestart = false)
-        { Move = move; Jump = jump; Restart = restart; Debug = debug; Light = light; Heavy = heavy; Evade = evade; Kick = kick; Run = run; Charge = charge; Interact = interact; ChapterRestart = chapterRestart; }
+        public readonly bool Jump, Restart, Debug, Light, Heavy, Evade, Kick, Run, Charge, Interact, ChapterRestart, Wave;
+        public InputFrame(Vector2 move, bool jump = false, bool restart = false, bool debug = false, bool light = false, bool heavy = false, bool evade = false, bool kick = false, bool run = false, bool charge = false, bool interact = false, bool chapterRestart = false, bool wave = false)
+        { Move = move; Jump = jump; Restart = restart; Debug = debug; Light = light; Heavy = heavy; Evade = evade; Kick = kick; Run = run; Charge = charge; Interact = interact; ChapterRestart = chapterRestart; Wave = wave; }
     }
 
     public sealed class LabInput : MonoBehaviour
     {
         InputActionMap map;
-        InputAction move, jump, restart, debug, lightAction, heavyAction, evade, kick, run, charge, interact, chapterRestart;
+        InputAction move, jump, restart, debug, lightAction, heavyAction, evade, kick, run, charge, interact, chapterRestart, wave;
         public MobileTouchControls TouchControls { get; set; }
         public ChapterSession Session { get; set; }
         public bool GameplayBlocked => Session != null && Session.Blocked;
@@ -53,6 +53,8 @@ namespace WombatLab
             interact.AddBinding("<Keyboard>/f"); interact.AddBinding("<Gamepad>/leftShoulder");
             chapterRestart = map.AddAction("ChapterRestart", InputActionType.Button);
             chapterRestart.AddBinding("<Keyboard>/backspace"); chapterRestart.AddBinding("<Gamepad>/select");
+            wave = map.AddAction("Wave", InputActionType.Button);
+            wave.AddBinding("<Keyboard>/q"); wave.AddBinding("<Gamepad>/dpad/right");
         }
 
         void OnEnable() { map?.Enable(); }
@@ -65,7 +67,7 @@ namespace WombatLab
             {
                 bool held = move.ReadValue<Vector2>().sqrMagnitude > .01f || jump.IsPressed() || restart.IsPressed()
                     || lightAction.IsPressed() || heavyAction.IsPressed() || evade.IsPressed() || kick.IsPressed()
-                    || run.IsPressed() || charge.IsPressed() || interact.IsPressed() || chapterRestart.IsPressed()
+                    || run.IsPressed() || charge.IsPressed() || wave.IsPressed() || interact.IsPressed() || chapterRestart.IsPressed()
                     || Mouse.current?.leftButton.isPressed == true || Mouse.current?.rightButton.isPressed == true;
                 if (!held) awaitRelease = false;
                 return new InputFrame(Vector2.zero);
@@ -81,7 +83,7 @@ namespace WombatLab
                 heavyAction.WasPressedThisFrame() || (pointerAllowed && mouse != null && mouse.rightButton.wasPressedThisFrame),
                 evade.WasPressedThisFrame(), kick.WasPressedThisFrame(),
                 run.IsPressed() || (TouchControls != null && TouchControls.Running), charge.WasPressedThisFrame(),
-                interact.WasPressedThisFrame(), Session == null && chapterRestart.WasPressedThisFrame());
+                interact.WasPressedThisFrame(), Session == null && chapterRestart.WasPressedThisFrame(), wave.WasPressedThisFrame());
         }
     }
 }

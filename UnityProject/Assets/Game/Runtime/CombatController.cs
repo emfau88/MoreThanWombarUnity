@@ -8,7 +8,14 @@ namespace WombatLab
     public sealed class CombatController : MonoBehaviour
     {
         public AttackDefinition[] lights;
-        public AttackDefinition heavy, kick, airKick, airHeavy, shoulderCharge;
+        public AttackDefinition heavy, kick, airKick, airHeavy, shoulderCharge, pressureWave;
+        public float maxEnergy = 100, energyRegeneration = 5, basicHitEnergy = 6;
+        public float Energy { get; private set; }
+        public bool WaitingForImpact => Attacking && Attack.groundImpact && !impactLanded;
+        public int LastGroupHits { get; private set; }
+        public float GroupMessageUntil { get; private set; }
+        public float EnergyWarningUntil { get; private set; }
+        public void RestoreEnergy(float value) { Energy = Mathf.Clamp(value, 0, maxEnergy); }
         public Transform leftFist, rightFist, leftFoot, rightFoot, shoulder;
         public Transform ContactPoint => ChargeCommitted ? shoulder : Attack == null ? rightFist : Attack.foot
             ? (Attack.rightHand ? rightFoot : leftFoot) : (Attack.rightHand ? rightFist : leftFist);
@@ -31,7 +38,9 @@ namespace WombatLab
 
         readonly CombatBuffer buffer = new CombatBuffer();
         readonly HashSet<TrainingDummy> hitTargets = new HashSet<TrainingDummy>();
-        readonly Collider[] contacts = new Collider[32];
+        readonly HashSet<FighterTarget> fighterHits = new HashSet<FighterTarget>();
+        readonly List<Collider> chargeIgnored = new List<Collider>();
+        readonly Collider[] contacts = new Collider[128];
         PlayerMotor motor;
         LabInput input;
         PlayerDefense defense;
@@ -40,25 +49,27 @@ namespace WombatLab
         Vector3 previousRoot;
         Quaternion startFacing;
         Vector3 chargeDirection;
+        bool impactLanded, projectileFired, energyAwarded;
 
-        void Awake() { motor = GetComponent<PlayerMotor>(); input = GetComponent<LabInput>(); defense = GetComponent<PlayerDefense>(); }
+        void Awake() { motor = GetComponent<PlayerMotor>(); input = GetComponent<LabInput>(); defense = GetComponent<PlayerDefense>(); Energy = maxEnergy; }
         void Update()
         {
             if (GameplayBlocked) return;
+            if (!Attacking && (defense == null || defense.Alive)) RestoreEnergy(Energy + energyRegeneration * Time.deltaTime);
             var frame = input.Read();
             if (frame.Restart) { ResetCombat(); return; }
             if (defense != null && (defense.Evading || defense.Locked)) { buffer.Clear(); return; }
-            if (frame.Charge) Queue(CombatIntent.Charge); else if (frame.Heavy) Queue(CombatIntent.Heavy); else if (frame.Kick) Queue(CombatIntent.Kick); else if (frame.Light) Queue(CombatIntent.Light);
+            if (frame.Wave) Queue(CombatIntent.Wave); else if (frame.Charge) Queue(CombatIntent.Charge); else if (frame.Heavy) Queue(CombatIntent.Heavy); else if (frame.Kick) Queue(CombatIntent.Kick); else if (frame.Light) Queue(CombatIntent.Light);
             bool wasFrozen = Frozen;
             freezeRemaining = Mathf.Max(0, freezeRemaining - Time.unscaledDeltaTime);
-            motor.animator.speed = Frozen ? 0 : Attacking && Attack.HasAuthoredTiming ? Attack.clip.length / Attack.Duration : 1;
+            motor.animator.speed = Frozen || WaitingForImpact && Progress >= Attack.ActiveStart ? 0 : Attacking && Attack.HasAuthoredTiming ? Attack.clip.length / Attack.Duration : 1;
             buffer.Tick(wasFrozen ? 0 : Time.deltaTime);
             // A simultaneous Jump + attack starts after the motor takes off, not before it.
             if (!Frozen && !Attacking && !(frame.Jump && motor.Grounded) && buffer.Pending != CombatIntent.None)
             {
                 var intent = buffer.Consume();
-                if (intent == CombatIntent.Charge && !motor.Grounded) return;
-                Begin(intent == CombatIntent.Charge ? shoulderCharge : !motor.Grounded ? (intent == CombatIntent.Heavy ? airHeavy : airKick)
+                if ((intent == CombatIntent.Charge || intent == CombatIntent.Wave) && !motor.Grounded) return;
+                Begin(intent == CombatIntent.Wave ? pressureWave : intent == CombatIntent.Charge ? shoulderCharge : !motor.Grounded ? (intent == CombatIntent.Heavy ? airHeavy : airKick)
                     : intent == CombatIntent.Heavy ? heavy : intent == CombatIntent.Kick ? kick : lights[0],
                     intent == CombatIntent.Light && motor.Grounded ? 0 : -1);
             }
@@ -68,16 +79,20 @@ namespace WombatLab
         {
             // A shoulder charge neither chains out of another attack nor becomes an air kick.
             if (intent == CombatIntent.Charge && (shoulderCharge == null || Attacking || !motor.Grounded)) return;
+            if (intent == CombatIntent.Wave && (pressureWave == null || Attacking || !motor.Grounded)) return;
             buffer.Submit(intent);
         }
 
         void Begin(AttackDefinition attack, int index)
         {
             if (attack == null) return;
-            if (attack.clip.isHumanMotion && (!attack.HasHumanoidContact || attack.contactAvatar != motor.animator.avatar))
+            if (!attack.projectile && !attack.groundImpact && attack.clip.isHumanMotion && (!attack.HasHumanoidContact || attack.contactAvatar != motor.animator.avatar))
             { Debug.LogError("Humanoid attack needs a contact path baked for its current clip and avatar", this); return; }
+            if (Energy < attack.energyCost) { EnergyWarningUntil = Time.time + 1; return; }
+            RestoreEnergy(Energy - attack.energyCost);
             Attack = attack; lightIndex = index; AttackInstance++;
-            hitTargets.Clear(); previous = Progress = 0; HitboxOpen = false;
+            hitTargets.Clear(); fighterHits.Clear(); previous = Progress = 0; HitboxOpen = false;
+            impactLanded = projectileFired = energyAwarded = false;
             ChargeStopped = false;
             previousRoot = transform.position;
             // Begin and early startup share one turn budget, measured from
@@ -88,6 +103,17 @@ namespace WombatLab
                 motor.visual.rotation = attack.chargeDistance > 0 ? Quaternion.LookRotation(move)
                     : Quaternion.RotateTowards(motor.visual.rotation, Quaternion.LookRotation(move), 25);
             chargeDirection = motor.visual.forward;
+            if (attack.breakthrough)
+            {
+                var controller = GetComponent<CharacterController>();
+                foreach (var target in FighterTarget.Active)
+                {
+                    if (!target.Alive || target.Team == team || target.Heavy) continue;
+                    var collider = target.GetComponent<CapsuleCollider>();
+                    if (collider == null || Physics.GetIgnoreCollision(controller, collider)) continue;
+                    Physics.IgnoreCollision(controller, collider, true); chargeIgnored.Add(collider);
+                }
+            }
             motor.ClearJumpBuffer();
             motor.animator.Play(attack.stateName, 0, 0);
             motor.animator.Update(0);
@@ -100,6 +126,13 @@ namespace WombatLab
             var state = motor.animator.GetCurrentAnimatorStateInfo(0);
             if (!state.IsName(Attack.stateName)) { Cancel(); return; }
             Progress = Mathf.Clamp01(state.normalizedTime);
+            if (WaitingForImpact)
+            {
+                HitboxOpen = false;
+                if (Progress >= Attack.ActiveStart)
+                { Progress = Attack.ActiveStart; motor.animator.Play(Attack.stateName, 0, Progress); motor.animator.Update(0); motor.animator.speed = 0; }
+                previous = Progress; previousRoot = transform.position; return;
+            }
             if (!ChargeCommitted && !Attack.airborne && motor.Grounded)
             {
                 float stepFrom = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.08f, .40f, previous));
@@ -115,7 +148,12 @@ namespace WombatLab
             }
             HitboxOpen = Progress >= Attack.ActiveStart && Progress <= Attack.ActiveEnd;
             if (ChargeCommitted) TickCharge(previous, Progress);
-            else if (Attack.ActiveCrossed(previous, Progress)) SweepActivePoses(previous, Progress);
+            else if (Attack.projectile && !projectileFired && Progress >= Attack.ActiveStart)
+            {
+                projectileFired = true;
+                CombatProjectile.Launch(Attack, team, transform.position + Vector3.up * .9f + motor.visual.forward * .55f, motor.visual.forward, feedback);
+            }
+            else if (!Attack.groundImpact && !Attack.projectile && Attack.ActiveCrossed(previous, Progress)) SweepActivePoses(previous, Progress);
             if (ChargeStopped) HitboxOpen = false;
             previous = Progress;
             previousRoot = transform.position;
@@ -150,6 +188,7 @@ namespace WombatLab
                 SweepActivePoses(a, b);
                 if (blocked) ChargeStopped = true;
             }
+            if (Attack.breakthrough && distance > .01f) SpecialEffects.Trail(transform.position - chargeDirection * distance, transform.position);
         }
 
         void SweepActivePoses(float from, float to)
@@ -171,6 +210,16 @@ namespace WombatLab
                 int count = Physics.OverlapCapsuleNonAlloc(last, next, Attack.radius, contacts, 1 << 8, QueryTriggerInteraction.Collide);
                 for (int i = 0; i < count; i++)
                 {
+                    var fighter = contacts[i].GetComponentInParent<FighterTarget>();
+                    if (fighter != null)
+                    {
+                        Vector3 delta = Vector3.ProjectOnPlane(fighter.transform.position - transform.position, Vector3.up);
+                        if (Vector3.Dot(motor.visual.forward, delta.normalized) <= .15f) continue;
+                        if (!TryHit(fighter, motor.visual.forward)) continue;
+                        feedback?.Contact(next, Attack.heavy);
+                        if (ChargeCommitted && (!Attack.breakthrough || fighter.Heavy)) { ChargeStopped = true; break; }
+                        continue;
+                    }
                     var target = contacts[i].GetComponentInParent<TrainingDummy>();
                     if (target == null || hitTargets.Contains(target)) continue;
                     Vector3 toward = Vector3.ProjectOnPlane(target.transform.position - transform.position, Vector3.up).normalized;
@@ -190,6 +239,37 @@ namespace WombatLab
             if (Frozen) HitboxOpen = false;
         }
 
+        bool TryHit(FighterTarget target, Vector3 direction)
+        {
+            if (fighterHits.Contains(target) || !CombatHit.Opponent(team, target)) return false;
+            if (!CombatHit.ClearPath(transform.position + Vector3.up * .8f, target.AimPoint)) return false;
+            if (!target.Receive(Attack, direction)) return false;
+            fighterHits.Add(target);
+            var dummyTarget = target.GetComponent<TrainingDummy>(); if (dummyTarget != null) hitTargets.Add(dummyTarget);
+            SpecialEffects.Impact(target.AimPoint, true);
+            freezeRemaining = Mathf.Max(freezeRemaining, Attack.hitstop); motor.animator.speed = 0;
+            if (!energyAwarded && Attack.energyCost <= 0) { RestoreEnergy(Energy + basicHitEnergy); energyAwarded = true; }
+            LastGroupHits = fighterHits.Count; GroupMessageUntil = Time.time + .8f;
+            return true;
+        }
+
+        public void OnLanded()
+        {
+            if (!WaitingForImpact) { if (Attacking && Attack.airborne) Cancel(); return; }
+            impactLanded = true; Progress = previous = Attack.ActiveEnd;
+            Physics.SyncTransforms();
+            foreach (var target in FighterTarget.Active)
+            {
+                Vector3 delta = target.transform.position - transform.position;
+                if (Mathf.Abs(delta.y) > 1.2f || Vector3.ProjectOnPlane(delta, Vector3.up).sqrMagnitude > Attack.impactRadius * Attack.impactRadius) continue;
+                TryHit(target, delta.sqrMagnitude > .001f ? delta.normalized : motor.visual.forward);
+            }
+            SpecialEffects.Ring(transform.position, Attack.impactRadius);
+            feedback?.Contact(transform.position + Vector3.up * .12f, true);
+            motor.animator.Play(Attack.stateName, 0, Progress); motor.animator.Update(0);
+            motor.animator.speed = Frozen ? 0 : Attack.clip.length / Attack.Duration;
+        }
+
         Vector3 ContactAt(float phase, Transform contact)
         {
             // Humanoid paths were evaluated by Animator on this exact avatar.
@@ -201,12 +281,15 @@ namespace WombatLab
 
         public void Cancel()
         {
+            var controller = GetComponent<CharacterController>();
+            foreach (var collider in chargeIgnored) if (collider != null && controller != null) Physics.IgnoreCollision(controller, collider, false);
+            chargeIgnored.Clear(); fighterHits.Clear(); impactLanded = projectileFired = false;
             Attack = null; Progress = previous = 0; HitboxOpen = false;
             hitTargets.Clear(); freezeRemaining = 0; buffer.Clear();
             ChargeStopped = false; chargeDirection = Vector3.zero;
             if (motor != null && motor.animator != null) { motor.animator.speed = 1; motor.ResumeLocomotion(); }
         }
-        public void ResetCombat() { Cancel(); buffer.Clear(); dummy?.ResetTraining(); feedback?.Clear(); }
+        public void ResetCombat() { Cancel(); buffer.Clear(); Energy = maxEnergy; LastGroupHits = 0; GroupMessageUntil = EnergyWarningUntil = 0; CombatProjectile.ClearAll(); GetComponent<FighterTarget>()?.ResetFreeze(); dummy?.ResetTraining(); feedback?.Clear(); }
         void OnDisable() { Cancel(); buffer.Clear(); }
 
         void OnDrawGizmos()

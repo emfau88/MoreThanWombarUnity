@@ -1,0 +1,35 @@
+{
+  "build": "B9-B11 landing fix",
+  "url": "http://127.0.0.1:8766/",
+  "platform": "WebGLPlayer",
+  "hostCpu": "AMD Ryzen 7 6800H with Radeon Graphics",
+  "gpu": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "method": "3 seconds warmup, 15 seconds of Unity unscaled frame intervals with real AI and scripted movement/specials; temporary 5000 enemy HP keeps workload alive",
+  "memoryMetric": "Unity Profiler total allocated memory; excludes total browser and GPU memory",
+  "physicalAndroidTested": false,
+  "consoleErrorsObserved": 0,
+  "runs": [
+    {
+      "utc": "2026-10-09T14:45:24.819Z",
+      "enemies": 8,
+      "living": 8,
+      "samples": 3473,
+      "width": 1281,
+      "height": 721,
+      "medianMs": 4.0,
+      "p95Ms": 5.000006675720215,
+      "memoryMB": 60.62077713012695
+    },
+    {
+      "utc": "2026-10-09T14:46:46.594Z",
+      "enemies": 10,
+      "living": 10,
+      "samples": 3524,
+      "width": 1281,
+      "height": 721,
+      "medianMs": 4.0,
+      "p95Ms": 5.0,
+      "memoryMB": 60.788108825683597
+    }
+  ]
+}

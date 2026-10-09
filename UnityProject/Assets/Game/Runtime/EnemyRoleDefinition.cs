@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WombatLab
 {
-    public enum EnemyRole { Standard, Agile, Heavy }
+    public enum EnemyRole { Standard, Agile, Heavy, Thrower }
     [CreateAssetMenu(menuName = "Wombat Lab/Enemy Role")]
     public sealed class EnemyRoleDefinition : ScriptableObject
     {
