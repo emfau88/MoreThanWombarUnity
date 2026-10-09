@@ -38,6 +38,19 @@ jobs:
           test -f public/index.html
           test -d public/Build
           touch public/.nojekyll
+          # Keep an older browser/CDN loader from opening newer compressed assets.
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('public')
+          revision = json.loads((root / 'version.json').read_text(encoding='utf-8-sig'))['commit']
+          page = root / 'index.html'
+          html = page.read_text(encoding='utf-8-sig')
+          for asset in (root / 'Build').iterdir():
+              if asset.is_file():
+                  html = html.replace(f"Build/{asset.name}'", f"Build/{asset.name}?v={revision}'")
+          page.write_text(html, encoding='utf-8')
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
